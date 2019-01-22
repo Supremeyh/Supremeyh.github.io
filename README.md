@@ -1,4 +1,3 @@
-# Supremeyh.github.io
-this is my github blog
+# supremeyh.github.io
 
-[github.io](https://supremeyh.github.io/)
+this is my github blog  [sea blog zone](https://supremeyh.github.io/)
