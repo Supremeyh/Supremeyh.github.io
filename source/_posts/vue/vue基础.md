@@ -3,6 +3,7 @@ title: vue基础
 date: 2019-01-22 21:42:48
 categories: vue
 tags: ['vue', 'vue基础']
+comments: true
 ---
 
 ### 计算属性
