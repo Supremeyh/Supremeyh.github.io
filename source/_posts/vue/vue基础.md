@@ -5,8 +5,9 @@ categories: vue
 tags: ['vue', 'vue基础']
 ---
 
-## 常踩的坑
-* 不要在选项属性或回调上使用箭头函数，比如 created: () => console.log(this.a) 或 vm.$watch('a', newValue => this.myMethod())。因为箭头函数是和父级上下文绑定在一起的，this 不会是如你所预期的 Vue 实例，经常导致 Uncaught TypeError: Cannot read property of undefined 或 Uncaught TypeError: this.myMethod is not a function 之类的错误。 
+### 计算属性
+对于任何复杂逻辑，都应当使用计算属性。
+计算属性缓存 vs 方法： 计算属性是基于它们的依赖进行缓存的，减小性能开销。只在相关依赖发生改变时它们才会重新求值，相比之下，调用方法将总会再次执行函数。
+计算属性 vs 侦听属性：侦听器watch是一种更通用的方式来观察和响应实例上的数据变动，当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。 当你有一些数据需要随着其它数据变动而变动时，你很容易滥用 watch。然而，通常更好的做法是使用计算属性。
 
-* 生命周期
-![生命周期](/images/vue-lifecycle.png)
+
