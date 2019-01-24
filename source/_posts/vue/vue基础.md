@@ -1,8 +1,8 @@
 ---
-title: vue基础
+title: Vue基础
 date: 2019-01-22 21:42:48
-categories: vue
-tags: ['vue', 'vue基础']
+categories: Vue
+tags: ['Vue', 'Vue基础']
 comments: true
 ---
 
