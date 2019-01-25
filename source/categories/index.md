@@ -1,6 +1,7 @@
 ---
 title: All categories
-date: 2019-01-25 12:00:00
+date: 2019-01-25 13:02:12
+categories:
 type: "categories"
-comments: false
+comments: true
 ---
