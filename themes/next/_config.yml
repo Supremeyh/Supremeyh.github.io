@@ -814,6 +814,9 @@ images: images
 # Theme version
 version: 5.1.4
 
+# Clicklove
+clicklove: true
+
 # Fireworks 
 fireworks: false
 

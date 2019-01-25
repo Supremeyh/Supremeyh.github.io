@@ -90,7 +90,9 @@
   {% include '_third-party/exturl.swig' %}
 
   <!-- 页面点击出现小红心 -->
-  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  {% if theme.clicklove %}
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  {% endif %}
 
   <!-- 页面点击爆炸效果 -->
   {% if theme.fireworks %}
