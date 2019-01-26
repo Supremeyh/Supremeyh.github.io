@@ -4,6 +4,14 @@ date: 2019-01-22 21:42:48
 categories: Vue
 tags: ['Vue', 'Vue基础']
 ---
+## 父子组件间通信
+> 父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。props down, events up.
+
+## 路由
+* SPA缺点：不利于SEO; 
+* 浏览器前进后退会重新发送请求，没有合理利用缓存; 
+* 无法记住之前滚动的位置;
+
 
 ### 计算属性
 对于任何复杂逻辑，都应当使用计算属性。
@@ -12,3 +20,10 @@ tags: ['Vue', 'Vue基础']
 
 
   
+### vue选中某一项
+```
+<div v-for= "(item, index) in List">
+  <p @click="currentChecked=index" :class="{'current': currentChecked===index}"></p>
+</div>
+
+```
