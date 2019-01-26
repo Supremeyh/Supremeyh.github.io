@@ -3,7 +3,7 @@ title: Linux
 comments: true
 date: 2019-01-26 21:51:47
 categories: CS
-tags: ['CS']
+tags: ['CS', 'Linux']
 ---
 
 // 查看端口占用
