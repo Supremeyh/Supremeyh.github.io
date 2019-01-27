@@ -72,3 +72,228 @@ Nginx是一款轻量级的HTTP服务器，采用事件驱动的异步非阻塞�
 events 和 http 的指令是放在主上下文中，server 放在 http 中, location 放在 server 中。
 
 
+```
+Nginx的配置文件nginx.conf配置详解如下：
+ 
+user nginx nginx ;
+# Nginx用户及组：用户 组。
+ 
+worker_processes 8;
+# 工作进程：数目。根据硬件调整，通常等于CPU数量或者2倍于CPU。
+worker_cpu_affinity 00000001 00000010 00000100 00001000 00010000 00100000 01000000 10000000;
+ 
+error_log  logs/error.log;  
+error_log  logs/error.log  warn;  
+# 错误日志：存放路径.  参数[ debug | info | notice | warn | error | crit ] 。
+ 
+pid logs/nginx.pid;
+# pid（进程标识符）：存放路径。
+ 
+worker_rlimit_nofile 204800;
+# 指定进程可以打开的最大描述符：数目。
+ 
+events {
+  use epoll;
+  # 使用epoll的I/O 事件模型。nginx针对不同的操作系统，有不同的事件模型
+  
+  worker_connections 204800;
+  # 每个工作进程的最大连接数量。尽量大，理论上每台nginx服务器的最大连接数为。worker_processes*worker_connections
+
+  keepalive_timeout 60;
+  # keepalive超时时间。
+  
+  open_file_cache max=65535 inactive=60s;
+  # 这个将为打开文件指定缓存，默认是没有启用的，max指定缓存数量，建议和打开文件数一致，inactive是指经过多长时间文件没被请求后删除缓存。
+  
+  open_file_cache_valid 80s;
+  # 这个是指多长时间检查一次缓存的有效信息。
+  
+  open_file_cache_min_uses 1;
+  # open_file_cache指令中的inactive参数时间内文件的最少使用次数，如果超过这个数字，文件描述符一直是在缓存中打开的，如果有一个文件在inactive时间内一次没被使用，它将被移除。
+
+}
+ 
+ 
+#设定http服务器，利用它的反向代理功能提供负载均衡支持
+http {
+  include mime.types;
+  # 文件扩展名与文件类型映射表
+  
+  default_type application/octet-stream;
+  # 默认文件类型
+  
+  log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+  '$status $body_bytes_sent "$http_referer" '
+  '"$http_user_agent" "$http_x_forwarded_for"';
+  log_format log404 '$status [$time_local] $remote_addr $host$request_uri $sent_http_location';
+  # 日志格式设置。
+  # $remote_addr与$http_x_forwarded_for 反向代理服务器的iP地址；原有客户端的IP地址和原来客户端的请求的服务器地址
+  # $remote_user：用来记录客户端用户名称；
+  # $time_local： 用来记录访问时间与时区；
+  # $request： 用来记录请求的url与http协议；
+  # $status： 用来记录请求状态；成功是200，
+  # $body_bytes_sent ：记录发送给客户端文件主体内容大小；
+  # $http_referer：用来记录从那个页面链接访问过来的；
+  # $http_user_agent：记录客户浏览器的相关信息；
+
+  # Load modular configuration files from the /etc/nginx/conf.d directory.
+  include /etc/nginx/conf.d/*.conf;
+  map $http_upgrade $connection_upgrade {
+      default upgrade;
+      '' close;
+  }
+  
+  access_log  logs/host.access.log  main;
+  access_log  logs/host.access.404.log  log404;
+  # 用了log_format指令设置了日志格式之后，需要用access_log指令指定日志文件的存放路径；
+  
+  server_names_hash_bucket_size 128;
+  # 服务器名字的hash表大小
+  
+  client_header_buffer_size 4k;
+  # 客户端请求头部的缓冲区大小。这个可以根据你的系统分页大小来设置，一般系统分页都要大于1k。 分页大小可以用命令getconf PAGESIZE 取得。
+
+  client_max_body_size 5m;  
+  # 允许客户端请求最大字节数
+
+  client_body_buffer_size 128k; 
+  # 缓冲区代理缓存用户端请求最大字节数
+  
+  large_client_header_buffers 8 128k;
+  # 客户请求头缓冲大小。nginx默认会用client_header_buffer_size这个buffer来读取header值，如果header过大，它会使用large_client_header_buffers来读取。
+  
+  open_file_cache max=102400 inactive=20s;
+  # 指定缓存是否启用。
+  open_file_cache_valid 30s; 
+  open_file_cache_min_uses 2; 
+  open_file_cache_errors on;
+  
+
+  autoindex on;
+  # 开启目录列表访问，合适下载服务器，默认关闭
+  
+  sendfile on;
+  # 是否调用sendfile函数（zero copy方式）来输出文件，对于普通应用，必须设为on。如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime。
+  
+  tcp_nopush on;
+  # 防止网路阻塞
+
+  tcp_nodelay on;
+  # 防止网络阻塞
+
+  keepalive_timeout 120; 
+  # 长连接超时时间，单位是秒  
+
+  fastcgi_connect_timeout 300;
+  fastcgi_send_timeout 300;
+  fastcgi_read_timeout 300;
+  fastcgi_buffer_size 64k;
+  fastcgi_buffers 4 64k;
+  fastcgi_busy_buffers_size 128k;
+  fastcgi_temp_file_write_size 128k;
+  # FastCGI相关参数是为了改善网站的性能：减少资源占用，提高访问速度
+
+
+  gzip on; 
+  # 开启gzip压缩输出
+  gzip_min_length 1k; 
+  # 最小压缩文件大小
+  gzip_buffers 4 16k; 
+  # 压缩缓冲区
+  gzip_http_version 1.0;
+  # 压缩版本（默认1.1，前端如果是squid2.5请使用1.0）
+  gzip_comp_level 2; 
+  # 压缩等级
+  gzip_types text/plain application/x-javascript text/css application/xml;
+  # 压缩类型，默认就已经包含text/html
+  gzip_vary on;
+
+
+  proxy_connect_timeout 90; 
+  # 代理超时时间, nginx和后端服务器连接的超时时间, 发起握手等候响应超时时间
+  proxy_read_timeout 180;
+  # 代理接收超时，连接成功后等候后端服务器响应时间, 也可以说是后端服务器处理请求的时间
+  proxy_send_timeout 180;
+  # 代理发送超时，后端服务器数据回传时间，就是在规定时间之内后端服务器必须传完所有的数据
+  proxy_buffer_size 256k;
+  # 保存用户头信息的缓冲区大小
+  proxy_buffers 4 256k;
+  # 设置用于读取应答（来自被代理服务器）的缓冲区数目和大小，默认情况也为分页大小，根据操作系统的不同可能是4k或者8k
+  proxy_temp_file_write_size 256k;
+  # 设置在写入proxy_temp_path时数据的大小，预防一个工作进程在传递文件时阻塞太长
+  proxy_temp_path /data0/proxy_temp_dir;
+  # proxy_temp_path和proxy_cache_path指定的路径必须在同一分区
+  proxy_cache_path /data0/proxy_cache_dir levels=1:2 keys_zone=cache_one:200m inactive=1d max_size=30g;
+  #设置内存缓存空间大小为200MB，1天没有被访问的内容自动清除，硬盘缓存空间大小为30GB。
+  proxy_intercept_errors on;
+  # 表示使nginx阻止HTTP应答代码为400或者更高的应答
+
+
+  upstream proxy_svr {
+    server 127.0.0.1:8000 weight=1  max_fails=2 fail_timeout=30s;  
+    server 127.0.0.1:8001 weight=1  max_fails=2 fail_timeout=30s;  
+  }
+
+
+  # 默认配置
+  server {
+    listen       80;
+    server_name  localhost;
+    charset koi8-r;
+    access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+        index index.html
+    }
+
+  }
+
+  # 定义某个负载均衡服务器   
+  server {
+    listen   4545;  
+    server_name  127.0.0.1;  
+    keepalive_requests 120; # 单连接请求上限次数。  
+    location  ~*^.+$ {       # 请求的url过滤，正则匹配，~为区分大小写，~*为不区分大小写。
+      root path;  #根目录
+      index index.html;  # 设置默认页
+      proxy_pass  http://proxy_svr/movie;  # 请求转向mysvr 定义的服务器列表
+      deny 127.0.0.2;  # 拒绝的ip
+      allow 172.0.0.3; # 允许的ip           
+    } 
+  }
+
+  
+  # 设定查看Nginx状态的地址
+  location /NginxStatus {
+    stub_status on;
+    access_log on;
+    auth_basic "NginxStatus";
+    auth_basic_user_file conf/htpasswd;
+  }
+
+  # HTTPS配置
+  server {  
+    listen 443 ssl;  #ssl端口  
+    server_name  test.com;  
+    #指定PEM格式的证书文件   
+    ssl_certificate      /etc/nginx/test.pem;   
+    #指定PEM格式的私钥文件  
+    ssl_certificate_key  /etc/nginx/test.key;  
+
+  }
+
+
+}
+
+
+```
