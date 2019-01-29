@@ -6,13 +6,13 @@ tags: ['Vue', 'Vue基础']
 ---
 
 
-### computed 计算属性
+###  计算属性 computed
 对于任何复杂逻辑，都应当使用计算属性。
 计算属性缓存 vs 方法： 计算属性是基于它们的依赖进行缓存的，减小性能开销。只在相关依赖发生改变时它们才会重新求值，相比之下，调用方法将总会再次执行函数。
 计算属性 vs 侦听属性：侦听器watch是一种更通用的方式来观察和响应实例上的数据变动，当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的。使用 watch 选项允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。 当你有一些数据需要随着其它数据变动而变动时，你很容易滥用 watch。然而，通常更好的做法是使用计算属性。
 
 
-### v-if 条件渲染
+###  条件渲染 v-if
 * v-if vs v-show。v-if  是“真正”的条件渲染，会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建;也是惰性的，如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。因此，有更高的切换开销。  v-show 始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。
 * v-if 与 v-for 一起使用。当处于同一节点，v-for 具有比 v-if 更高的优先级，这意味着 v-if 将分别重复运行于每个 v-for 循环中。
 为了过滤一个列表中的项目 (比如 v-for="user in users" v-if="user.isActive")，应将 users 替换为一个计算属性 (比如 activeUsers)，让其返回过滤后的列表。 
@@ -20,7 +20,7 @@ tags: ['Vue', 'Vue基础']
 
 
 
-### 列表渲染
+### 列表渲染 v-for
 * v-for="(value, key, index) in object" 分别为 值，键，索引。在遍历对象时，是按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下是一致的。
 * 数组更新检测
 > 变异方法，会触发视图更新：push()、pop()、shift()、unshift()、splice()、sort()、reverse()
@@ -50,7 +50,7 @@ v-for 也可以取整数。在这种情况下，它将重复多次模板。v-for
 
 ```
 
-### 事件处理
+### 事件处理 event
 * 在内联语句处理器中访问原始的 DOM 事件,可以用特殊变量 $event 把它传入方法 @click="showMsg($event)"
 * 事件修饰符
 .stop 阻止单击事件继续传播，相当于event.stopPropagation() 阻止事件冒泡
@@ -84,7 +84,7 @@ v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML
 .left、.right、.middle，这些修饰符会限制处理函数仅响应特定的鼠标按钮。
 
 
-### 组件基础
+### 组件基础 component
 * 父子组件间通信
 父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。props down, events up.
 
@@ -168,7 +168,7 @@ Vue.component('my-component',{
 ```
 
 * 动态组件
-在不同组件之间进行动态切换,可以通过 Vue 的 <component> 元素加一个特殊的 is 特性来实现：
+在不同组件之间进行动态切换,可以通过 Vue 的 component 元素加一个特殊的 is 特性来实现：
 ```
 // 组件会在 `currentTab` 改变时改变 
 <component v-bind:is="currentTab"></component>
@@ -176,13 +176,13 @@ Vue.component('my-component',{
 ```
 
 * 解析 DOM 模板时的注意事项
-有些HTML元素，诸如 <ul>、<ol>、<table> 和 <select>，对于内部子元素有严格限制的。而有些元素诸如 <li>、<tr> 和 <option>，也只能出现在其它某些特定的元素内部。如
+有些HTML元素，诸如 ul、ol、table 和 select，对于内部子元素有严格限制的。而有些元素诸如 li、tr 和 option，也只能出现在其它某些特定的元素内部。如
 ```
 <table>
   <my-post></my-post>
 </table>
 ```
-这个自定义组件 <blog-post-row> 会被作为无效的内容提升到外部，并导致最终渲染结果出错。可以使用特殊的 is 特性：
+这个自定义组件 my-post 会被作为无效的内容提升到外部，并导致最终渲染结果出错。可以使用特殊的 is 特性：
 ```
 <table>
   <tr is="my-post"></tr>
