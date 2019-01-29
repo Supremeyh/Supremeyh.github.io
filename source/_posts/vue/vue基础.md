@@ -4,13 +4,6 @@ date: 2019-01-22 21:42:48
 categories: Vue
 tags: ['Vue', 'Vue基础']
 ---
-## 父子组件间通信
-> 父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。props down, events up.
-
-## 路由
-* SPA缺点：不利于SEO; 
-* 浏览器前进后退会重新发送请求，没有合理利用缓存; 
-* 无法记住之前滚动的位置;
 
 
 ### computed 计算属性
@@ -89,3 +82,117 @@ v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML
 
 * 鼠标按钮修饰符
 .left、.right、.middle，这些修饰符会限制处理函数仅响应特定的鼠标按钮。
+
+
+### 组件基础
+* 父子组件间通信
+父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。props down, events up.
+
+通过事件向父级组件发送消息, 子组件调用$emit方法，向父级组件触发一个事件，如 @click="$emit('boder-larger', 2)； 父组件监听事件这个事件，就像监听一个原生 DOM 事件一样，如 @boder-larger="postBorderSize += $event"。如果这个事件处理函数是一个方法，那么这个值将会作为第一个参数传入这个方法 onLargerFontSize(playload) {...}
+```
+<div id="app">
+    <blog-content 
+      v-for="post in posts" 
+      :key="post.id" 
+      :text="post.text" 
+      :style="{border: postBorderSize + 'px solid red',fontSize:postFontSize + 'px'}"
+      @boder-larger="postBorderSize += $event"
+      @font-larger="onLargerFontSize">
+    </blog-text>
+  </div>
+  <script>
+    Vue.component('blog-content', {
+      props: ['text'],
+      template: 
+      `<div>
+        <p>{{text}}</p>
+        <button @click="$emit('boder-larger', 2)">Border Larger</button>
+        <button @click="$emit('font-larger', 5)">Font Larger</button>
+      </div>`
+    })
+
+    var vm = new Vue({
+      data: {
+        posts: [
+          {id: 1, text: 'cnn'},
+          {id: 2, text: 'bbc'},
+          {id: 3, text: 'npr'},
+        ],
+        postBorderSize: 1,
+        postFontSize: 20
+      },
+      methods:{
+        onLargerFontSize(playload){
+          this.postFontSize += playload
+        }
+      }
+    }).$mount('#app)
+  </script>
+
+```
+
+* 在组件上使用-v-model
+```
+// 以下代码等价
+<input type="text" v-model='searchSth'>
+<input type="text" :value="searchSth" @input="searchSth=$event.target.value">
+
+// 在父组件中
+<custom-input :value="searchSth" @input="searchSth=$event"></custom-input>
+
+// 子组件input要点：将其 value 特性绑定到一个名叫value 的 prop 上； 在其input 事件被触发时，将新的值通过自定义的input事件抛出.
+Vue.component('custom-input',{
+  props: ['value'],
+  template: `<input :value="value"  @input="$emit('input', $event.target.value)" />`
+})
+
+// 之后，就可以使用v-model了
+<custom-input v-model="searchSth"></custom-input>
+
+```
+
+* 通过插槽 slot 分发内容
+```
+// 和 HTML 元素一样，我们经常需要向一个组件传递内容，像这样：
+<my-component> welcome my blog </my-component>
+
+Vue.component('my-component',{
+  props: ['value'],
+  template: 
+  `<div>
+    <p> hey man </p>
+    <slot></slot>
+  </div>`
+})
+
+```
+
+* 动态组件
+在不同组件之间进行动态切换,可以通过 Vue 的 <component> 元素加一个特殊的 is 特性来实现：
+```
+// 组件会在 `currentTab` 改变时改变 
+<component v-bind:is="currentTab"></component>
+
+```
+
+* 解析 DOM 模板时的注意事项
+有些HTML元素，诸如 <ul>、<ol>、<table> 和 <select>，对于内部子元素有严格限制的。而有些元素诸如 <li>、<tr> 和 <option>，也只能出现在其它某些特定的元素内部。如
+```
+<table>
+  <my-post></my-post>
+</table>
+```
+这个自定义组件 <blog-post-row> 会被作为无效的内容提升到外部，并导致最终渲染结果出错。可以使用特殊的 is 特性：
+```
+<table>
+  <tr is="my-post"></tr>
+</table>
+```
+但如果我们从以下来源使用模板的话，这条限制是不存在的：
+字符串 (例如：template: '...')、单文件组件 (.vue)、<script type="text/x-template">
+
+
+### 路由
+* SPA缺点：不利于SEO; 
+* 浏览器前进后退会重新发送请求，没有合理利用缓存; 
+* 无法记住之前滚动的位置;
