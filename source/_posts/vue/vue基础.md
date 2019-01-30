@@ -192,6 +192,40 @@ Vue.component('my-component',{
 字符串 (例如：template: '...')、单文件组件 (.vue)、<script type="text/x-template">
 
 
+* 组件名大小写
+在单文件组件和字符串模板中组件名应该总是 PascalCase 的，但是在 DOM 模板中总是 kebab-case 的。
+
+使用 kebab-case：当使用 kebab-case (短横线分隔命名) 定义一个组件时，你也必须在引用这个自定义元素时使用 kebab-case，例如 my-component-name。
+
+使用 PascalCase: 当使用 PascalCase (首字母大写命名) 定义一个组件时，你在引用这个自定义元素时两种命名法都可以使用。也就是说 my-component-name 和 MyComponentName 都是可接受的。但直接在 DOM (即非字符串的模板) 中使用时,由于 HTML 是大小写不敏感的,只有 kebab-case 是有效的。
+
+
+* Prop 名大小写
+在声明 prop 的时候，其命名应该始终使用 camelCase，而在模板和 JSX 中应该始终使用 kebab-case。 根据语言规范，在 JavaScript 中更自然的是 camelCase，而在 HTML 中则是 kebab-case。
+
+HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名，但如果使用字符串模板，那么这个限制就不存在了。
+
+
+包含该 prop 没有值的情况在内，都意味着true
+```
+<blog-post is-published></blog-post>
+```
+
+即便数组是静态的，我们仍然需要 v-bind 来告诉 Vue, 这是一个 JavaScript 表达式而不是一个字符串
+```
+<blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+```
+
+将一个对象的所有属性都作为 prop 传入，可以使用不带参数的 v-bind (取代 v-bind:prop-name)
+```
+// 以下两种等价
+<blog-post v-bind="post"></blog-post>
+
+<blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
+```
+
+
+
 ### 路由
 * SPA缺点：不利于SEO; 
 * 浏览器前进后退会重新发送请求，没有合理利用缓存; 
