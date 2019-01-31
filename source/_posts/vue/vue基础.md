@@ -219,10 +219,14 @@ HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写
 将一个对象的所有属性都作为 prop 传入，可以使用不带参数的 v-bind (取代 v-bind:prop-name)
 ```
 // 以下两种等价
-<blog-post v-bind="post"></blog-post>
+<blog-post v-bind="post"></blog-post> 
 
 <blog-post v-bind:id="post.id" v-bind:title="post.title"></blog-post>
 ```
+
+* 禁用特性继承 
+默认情况下父作用域的不被认作 props 的特性绑定 (attribute bindings) 将会“回退”且作为普通的 HTML 特性应用在子组件的根元素上。
+inheritAttrs 设置为false控制去掉vue对非prop特性默认行为, $attrs 存储非prop特性。
 
 
 
