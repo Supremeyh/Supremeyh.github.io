@@ -229,6 +229,12 @@ HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写
 inheritAttrs 设置为false控制去掉vue对非prop特性默认行为, $attrs 存储非prop特性。
 
 
+* 自定义事件
+不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或属性名，不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。
+因此事件名所以就没有理由使用 camelCase 或 PascalCase 了，并且 v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 v-on:myEvent 将会变成 v-on:myevent，导致 myEvent 不可能被监听到。
+因此，我们推荐你始终使用 kebab-case 的事件名。
+
+
 
 ### 路由
 * SPA缺点：不利于SEO; 
