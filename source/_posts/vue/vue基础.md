@@ -234,6 +234,12 @@ inheritAttrs 设置为false控制去掉vue对非prop特性默认行为, $attrs �
 因此事件名所以就没有理由使用 camelCase 或 PascalCase 了，并且 v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 v-on:myEvent 将会变成 v-on:myevent，导致 myEvent 不可能被监听到。
 因此，我们推荐你始终使用 kebab-case 的事件名。
 
+* keep-alive
+包裹动态组件时，主要用于保留组件状态或避免重新渲染，缓存不活动的组件实例，而不是销毁它们。和 transition 相似，keep-alive>是一个抽象组件：它自身不会渲染一个 DOM 元素，也不会出现在父组件链中。
+当组件在 keep-alive内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行。
+用在其一个直属的子组件被开关的情形。如果你在其中有 v-for 则不会工作。
+不会在函数式组件中正常工作，因为它们没有缓存实例。
+props: include、exclude、max
 
 
 ### 路由
