@@ -248,6 +248,46 @@ props: include、exclude、max
 依赖注入： provide 选项允许指定想要提供给后代组件的数据/方法；然后在任何后代组件里，都可以使用 inject 选项来接收指定的想要添加在这个实例上的属性。
 这对选项需要一起使用，以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间里始终生效。
 
+* 过渡 动画
+过渡的类名：v-enter、v-enter-active、v-enter-to、v-leave、v-leave-active、v-leave-to。 v-enter-active 和 v-leave-active 可以控制过渡的过程时间，延迟和曲线函数。
+
+自定义过渡的类名：enter-class、enter-active-class、enter-to-class、leave-class、leave-active-class、leave-to-class。优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 Animate.css 结合使用十分有用。
+
+显性的过渡持续时间：用 transition 组件上的 duration 属性定制一个显性的过渡持续时间 (以毫秒计)，如transition :duration="{ enter: 500, leave: 800 }"
+
+在属性中声明JavaScript-钩子：
+```
+<transition
+  v-on:before-enter="beforeEnter"
+  v-on:enter="enter"
+  v-on:after-enter="afterEnter"
+  v-on:enter-cancelled="enterCancelled"
+
+  v-on:before-leave="beforeLeave"
+  v-on:leave="leave"
+  v-on:after-leave="afterLeave"
+  v-on:leave-cancelled="leaveCancelled"
+>
+  <!-- ... -->
+</transition>
+
+
+methods: {
+  beforeEnter: function (el) {
+    // ...
+  },
+  // 当与 CSS 结合使用时 回调函数 done 是可选的
+  enter: function (el, done) {
+    // ...
+    done()
+  }
+
+}
+```
+当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
+推荐对于仅使用 JavaScript 过渡的元素添加 v-bind:css="false"，Vue 会跳过 CSS 的检测。这也可以避免过渡过程中 CSS 的影响。
+
+
 
 
 ### 路由
