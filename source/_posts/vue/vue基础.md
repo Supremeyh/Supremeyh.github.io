@@ -287,6 +287,14 @@ methods: {
 当只用 JavaScript 过渡的时候，在 enter 和 leave 中必须使用 done 进行回调。否则，它们将被同步调用，过渡会立即完成。
 推荐对于仅使用 JavaScript 过渡的元素添加 v-bind:css="false"，Vue 会跳过 CSS 的检测。这也可以避免过渡过程中 CSS 的影响。
 
+初始渲染的过渡：通过 appear 特性设置节点在初始渲染的过渡
+
+过渡模式：transition name="fade" mode="out-in" 
+in-out：新元素先进行过渡，完成之后当前元素过渡离开。 out-in：当前元素先进行过渡，完成之后新元素过渡进入。 
+
+多个组件的过渡：不需要使用 key 特性。相反，我们只需要使用动态组件 component v-bind:is="view"
+
+列表过渡：使用 transition-group 组件，不同于 transition，它会以一个真实元素呈现，默认为一个 span。你也可以通过 tag 特性更换为其他元素。过渡模式不可用，因为我们不再相互切换特有的元素。内部元素 总是需要 提供唯一的 key 属性值。 不仅可以进入和离开动画，还可以改变定位。要使用这个新功能只需了解新增的 v-move 特性，它会在元素的改变定位的过程中应用。可以通过 name 属性来自定义前缀，也可以通过 move-class 属性手动设置，v-move 对于设置过渡的切换时机和过渡曲线非常有用。
 
 
 
