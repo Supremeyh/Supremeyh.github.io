@@ -358,6 +358,29 @@ arg：传给指令的参数，可选。例如 v-my-directive:foo 中，参数为
 modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。
 
 
+### 渲染函数 & JSX
+Vue 推荐在绝大多数情况下使用 template 来创建HTML。然而在一些场景中，需要 JavaScript 的完全编程的能力，这时你可以用 render 函数，它比 template 更接近编译器。
+```
+Vue.component('anchored-heading', {
+  render: function (createElement) {
+    return createElement(
+      'h'+ this.level,
+      this.$slots.default
+    )
+  },
+  props:{
+    level:{
+      type: Number,
+      required: true
+    }
+  }
+})
+```
+
+* 虚拟 DOM
+Vue 通过建立一个虚拟 DOM 对真实 DOM 发生的变化保持追踪。
+createElement 到底会返回什么呢？其实不是一个实际的 DOM 元素。它更准确的名字可能是 createNodeDescription，因为它所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，及其子节点。我们把这样的节点描述为“虚拟节点 (Virtual Node)”，也常简写它为“VNode”。“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
+
 
 
 
