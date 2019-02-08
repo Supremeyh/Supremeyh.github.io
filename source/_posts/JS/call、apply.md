@@ -34,3 +34,19 @@ function sub(a,b) {
 
 add.call(sub,1,1);  //  2
  ```
+
+
+ * Array.prototype.slice.call() 能将具有length属性的对象转成数组
+ 将函数的实际参数转换成数组的方法：
+ let arrayLike = {
+    '0': 'a',
+    '1': 'b',
+    '2': 'c',
+    length: 3
+}
+
+ let args1 = Array.prototype.slice.call(arguments)
+ let args2 = [].slice.call(arrayLike)
+ let args3 = Array.from(arrayLike)
+
+
