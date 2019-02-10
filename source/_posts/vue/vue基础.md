@@ -498,6 +498,23 @@ render: function (createElement) {
 ```
 
 
+* 函数式组件
+functional 无状态 (没有响应式数据)，无实例 (没有 this 上下文)。没有管理或者监听任何传递给他的状态，也没有生命周期方法。它只是一个接收参数的函数。
+```
+Vue.component('my-functional-button', {
+  functional: true,
+  // Props 可选
+  props: { // ... },
+  // 为了弥补缺少的实例，提供第二个参数作为上下文
+  render: function (createElement, context) {
+    // 完全透明的传入任何特性、事件监听器、子结点等。
+    return createElement('button', context.data, context.children)
+  }
+})
+```
+
+
+
 ### 路由
 * SPA缺点：不利于SEO; 
 * 浏览器前进后退会重新发送请求，没有合理利用缓存; 
