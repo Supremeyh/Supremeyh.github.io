@@ -189,7 +189,7 @@ Vue.component('my-component',{
 </table>
 ```
 但如果我们从以下来源使用模板的话，这条限制是不存在的：
-字符串 (例如：template: '...')、单文件组件 (.vue)、<script type="text/x-template">
+字符串 (例如：template: '...')、单文件组件 (.vue)、script type="text/x-template"
 
 
 * 组件名大小写
@@ -551,8 +551,15 @@ MyPlugin.install = function (Vue, options) {
 
 ### 过滤器
 用于一些常见的文本格式化。过滤器可以用在两个地方：双花括号插值和 v-bind 表达式。过滤器应该被添加在 JavaScript 表达式的尾部，由“管道”符号指示：
-过滤器可以串联 ```{{ message | filterA | filterB }}```
-过滤器是 JavaScript 函数，因此可以接收参数：```{{ message | filterA('arg1', arg2) }} ``` ，此处接收三个参数，message 的值作为第一个参数，普通字符串 'arg1' 作为第二个参数，表达式 arg2 的值作为第三个参数。
+过滤器可以串联 
+```
+{{ message | filterA | filterB }}
+```
+过滤器是 JavaScript 函数，因此可以接收参数：
+```
+{{ message | filterA('arg1', arg2) }} 
+``` 
+此处接收三个参数，message 的值作为第一个参数，普通字符串 'arg1' 作为第二个参数，表达式 arg2 的值作为第三个参数。
 
 
 ### 路由
