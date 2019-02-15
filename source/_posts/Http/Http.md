@@ -118,11 +118,11 @@ Upgrade: protocols， Upgrade 头指定一项或多项协议名，按优先级�
 * 102 Processing 处理
 
 * 200 OK, 请求被正常处理
-* 201 Created 创建, 提示知道新文件的URL
-* 202 Accepted 已接受, 接受和处理、但处理未完成
-* 203 Non-Authoritative Information 非授权信息, 返回信息不确定或不完整
+* 201 Created 创建, 请求成功并且服务器创建了新的资源
+* 202 Accepted 已接受, 但尚未处理
+* 203 Non-Authoritative Information 非授权信息, 服务器已成功处理了请求，但返回的信息可能来自另一来源
 * 204 No Content 无内容,  请求收到，但返回信息为空
-* 205 Reset Content 重置内容, 服务器完成了请求，用户代理必须复位当前已经浏览过的文件
+* 205 Reset Content 重置内容, 服务器完成了请求，重置文档视图(例如，清除表单内容以输入新内容)
 * 206 Partial Content 部分内容, 服务器已经完成了部分用户的GET请求
 * 207 Multi-Status 多状态
 * 208 Already Reported 已报告
