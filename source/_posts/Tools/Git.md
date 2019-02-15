@@ -1,12 +1,14 @@
 ---
-title: Git
+title: 常用的Git命令
 comments: true
 date: 2019-01-26 21:20:50
 categories: Tools
 tags: ['Tools', 'Hexo']
 ---
 
-# 常用的Git命令
+### 查看日志
+* git log 
+* git reflog 
 
 ### 取回远程origin主机dev分支与本地sea分支合并
 * git pull origin dev:sea
