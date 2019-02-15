@@ -97,7 +97,7 @@ menu:
   archives: /archives/ || archive
   tags: /tags/ || tags
   categories: /categories/ || th
-  schedule: /schedule/ || calendar
+  # schedule: /schedule/ || calendar
   about: /about/ || user
   # sitemap: /sitemap.xml || sitemap
   # commonweal: /404/ || heartbeat
