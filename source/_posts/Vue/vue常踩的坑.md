@@ -1,5 +1,5 @@
 ---
-title: 常踩的坑 Trampling Pits
+title: vue常踩的坑 Trampling Pits
 date: 2019-01-23 11:15:04
 categories: Vue
 tags: ['Vue', '踩坑']
