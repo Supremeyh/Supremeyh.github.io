@@ -6,7 +6,9 @@ categories: Tools
 tags: ['Tools', 'Geek','Crack']
 ---
 
-* 百度网盘倍速播放
+### 百度网盘倍速播放
 ```
 videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(1.5)
 ```
+### github
+* 键盘快捷键一览表 shift+/
