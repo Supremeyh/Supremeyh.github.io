@@ -42,7 +42,7 @@ Array.apply(null, {0:'a', 1: 'b', 2: 'c', 3: 'd', length:5}))  // 赋值 ["a", "
 Array(4): [empty × 4] // 只占位
 
 
- * Array.prototype.slice.call() 能将具有length属性的对象转成数组
+ * Array.prototype.slice.call() 能将具有length属性的对象转成数组， 和Array.from()相同
  将函数的实际参数转换成数组的方法：
  let arrayLike = {
     '0': 'a',
