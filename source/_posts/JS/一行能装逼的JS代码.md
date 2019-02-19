@@ -110,19 +110,46 @@ var data = void 0
 var data = void(0)
 ```
 
-10、如何优雅的实现金钱格式化
+10、实现金钱格式化
 ```
-// 正则魔法
-var test1 = '1234567890'
-var format = test1.replace(/\B(?=(\d{3})+(?!\d))/g, ',')   // 1,234,567,890
+// 正则
+var money = '1234567890'
+money.replace(/\B(?=(\d{3})+(?!\d))/g, ',')   // 1,234,567,890
 
+// reduce
 function formatCash(str) {
     return str.split('').reverse().reduce((prev, next, index) => {
         return ((index % 3) ? next : (next + ',')) + prev
     })
 }
-console.log(formatCash('1234567890')) // 1,234,567,890
+formatCash(money) // 1,234,567,890
+
+//  numObj.toLocaleString([locales [, options]])  注意为 number类型
+(1234567890).toLocaleString('en', { style: 'decimal', currency: 'USD' })
 ```
+> Number.prototype.toLocaleString([locales [, options]])
+locales 参数用于指定格式化对象时使用的语言环境，默认为当前环境的语言，可以不传。
+style 表示格式化时使用的样式，默认值是 decimal 纯数字，也可为 percent 百分比显示与 currency 货币显示。
+style 设为 currency 时，必须同时指定currency 属性，否则报错。currency指定对应的货币，如 USD 、 EUR 与 CNY 等，不区分大小写。此外，还可以设置currencyDisplay指定货币符号的展示样式，默认值是 symbol即对应的符号，如 CNY 是 ￥。该属性的值也可以是 code 与 name.
+
+以下，控制有效数字位数以及整数、小数位数，都是四舍五入。
+minimumSignificantDigits：控制有效数字最少位数，设置后minimumIntegerDigits等属性会被忽略
+maximumSignificantDigits：控制有效数字最多位数，设置后minimumIntegerDigits等属性会被忽略
+useGrouping: true 有分隔符
+
+minimumIntegerDigits: 指定整数最少位数，不够则用0去凑，即自动补0
+minimumFractionDigits:  指定小数最少位数，不够则用0去凑，即自动补0
+maximumFractionDigits: 指定小数最多位数 
+
+如，(2333.3).toLocaleString('zh', { minimumFractionDigits: 2, minimumIntegerDigits:4, useGrouping: false });  //2333.30 
+
+> Date.prototype.toLocaleString([locales [, options]])
+hour12: true 使用十二小时制
+weekday 、 era均可以取值为 narrow尽量短 、 short缩写 或 long正常。
+year 、 month 、 day 、 hour 、 minute 、 second 与 timeZoneName，均可以取值为 numeric 与 2-digit ，是否仅用两位数字表示
+
+如，
+
 
 11、连等
 ```
@@ -178,4 +205,49 @@ parseInt(0.0000008) === 8
 let arr = [1, "1", 2, 1, 1, 3]
 let arr1 = [...new Set(arr)]  // [1, "1", 2, 3]  Set类似于数组，区别在于它所有的成员都是唯一的，不能有重复的值
 let arr2 = Array.from(new Set(arr)) // [1, "1", 2, 3]  Array.from方法可以将 Set 结构转为数组
+```
+
+17、用最短的代码实现一个长度为m(6)且值都n(8)的数组
+```
+Array(6).fill(8)
+```
+
+18、条件判断&&、||
+```
+var a = b && 1
+// 等价于
+if (b) {
+    a = 1
+} else {
+    a = b
+}
+
+var a = b || 1
+// 等价于
+if (b) {
+    a = b
+} else {
+    a = 1
+}
+```
+
+19、取出一个数组中的最大值和最小值
+```
+var numbers = [5, 458 , 120 , -215 , 228 , 400]
+var maxInNumbers = Math.max.apply(Math, numbers)
+var minInNumbers = Math.min.apply(Math, numbers)
+
+var maxInNumbers2 = Math.max(...[14, 3, 77])
+```
+
+20、Function构造函数
+Function构造函数接受的参数中，第一个是要传入的参数名，第二个是函数内的代码（用字符串来表示）。
+```
+var func = new Function('a', 'console.log(a)')
+func('js')
+```
+
+21、一行代码递归实现斐波那契数列
+```
+const fib = (f => f(f))(f => n => [1, 1][n] || f(f)(n - 1) + f(f)(n - 2))
 ```
