@@ -59,3 +59,29 @@ function example( arg1, arg2, arg3 ) {
   return Array.prototype.slice.call(arguments, 1);  // Returns [arg2, arg3] 
 }
 
+* [].push.apply(_args, [].slice.call(arguments));
+```
+// 柯里化(Currying)
+'use strict';
+
+function plus(num) {
+    var adder = function () {
+        var _args = [];
+        var _adder = function _adder() {
+            [].push.apply(_args, [].slice.call(arguments));
+            return _adder;
+        };
+
+        _adder.toString = function () {
+            return _args.reduce(function (a, b) {
+                return a + b;
+            });
+        }
+
+        return _adder;
+    }
+    return adder()(num);
+}
+
+module.exports = plus;
+```
