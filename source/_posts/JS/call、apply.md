@@ -55,4 +55,7 @@ Array(4): [empty × 4] // 只占位
  let args2 = [].slice.call(arrayLike)
  let args3 = Array.from(arrayLike)
 
+function example( arg1, arg2, arg3 ) { 
+  return Array.prototype.slice.call(arguments, 1);  // Returns [arg2, arg3] 
+}
 
