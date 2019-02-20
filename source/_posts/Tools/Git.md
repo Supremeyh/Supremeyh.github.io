@@ -60,4 +60,5 @@ git rm -r --cached .  //清空缓存
 * git push  推送自己的本地仓库到自己的origin远程仓库
 * 发出Pull Request
 
-
+### 插件
+* Octotree 侧栏目录树形
