@@ -44,7 +44,7 @@ watch里面监听了data里面的单一变量的变化，而computed可以监听
 v-for 也可以取整数。在这种情况下，它将重复多次模板。v-for="n in 10" 为1,2...10
 
 * vue选中某一项
-```
+```JavaScript
 <div v-for= "(item, index) in List">
   <p :class="{'current': currentChecked===index}" @click="currentChecked=index"></p>
 </div>
@@ -90,7 +90,7 @@ v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML
 父组件通过 prop 给子组件下发数据，子组件通过$emit触发事件给父组件发送消息，即 prop 向下传递，事件向上传递。props down, events up.
 
 通过事件向父级组件发送消息, 子组件调用$emit方法，向父级组件触发一个事件，如 @click="$emit('boder-larger', 2)； 父组件监听事件这个事件，就像监听一个原生 DOM 事件一样，如 @boder-larger="postBorderSize += $event"。如果这个事件处理函数是一个方法，那么这个值将会作为第一个参数传入这个方法 onLargerFontSize(playload) {...}
-```
+```JavaScript
 <div id="app">
     <blog-content 
       v-for="post in posts" 
@@ -133,7 +133,7 @@ v-on 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML
 ```
 
 * 在组件上使用-v-model
-```
+```JavaScript
 // 以下代码等价
 <input type="text" v-model='searchSth'>
 <input type="text" :value="searchSth" @input="searchSth=$event.target.value">
@@ -153,7 +153,7 @@ Vue.component('custom-input',{
 ```
 
 * 通过插槽 slot 分发内容
-```
+```JavaScript
 // 和 HTML 元素一样，我们经常需要向一个组件传递内容，像这样：
 <my-component> welcome my blog </my-component>
 
@@ -170,7 +170,7 @@ Vue.component('my-component',{
 
 * 动态组件
 在不同组件之间进行动态切换,可以通过 Vue 的 component 元素加一个特殊的 is 特性来实现：
-```
+```JavaScript
 // 组件会在 `currentTab` 改变时改变 
 <component v-bind:is="currentTab"></component>
 
@@ -178,13 +178,13 @@ Vue.component('my-component',{
 
 * 解析 DOM 模板时的注意事项
 有些HTML元素，诸如 ul、ol、table 和 select，对于内部子元素有严格限制的。而有些元素诸如 li、tr 和 option，也只能出现在其它某些特定的元素内部。如
-```
+```JavaScript
 <table>
   <my-post></my-post>
 </table>
 ```
 这个自定义组件 my-post 会被作为无效的内容提升到外部，并导致最终渲染结果出错。可以使用特殊的 is 特性：
-```
+```JavaScript
 <table>
   <tr is="my-post"></tr>
 </table>
@@ -208,17 +208,17 @@ HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写
 
 
 包含该 prop 没有值的情况在内，都意味着true
-```
+```JavaScript
 <blog-post is-published></blog-post>
 ```
 
 即便数组是静态的，我们仍然需要 v-bind 来告诉 Vue, 这是一个 JavaScript 表达式而不是一个字符串
-```
+```JavaScript
 <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
 ```
 
 将一个对象的所有属性都作为 prop 传入，可以使用不带参数的 v-bind (取代 v-bind:prop-name)
-```
+```JavaScript
 // 以下两种等价
 <blog-post v-bind="post"></blog-post> 
 
@@ -257,7 +257,7 @@ props: include、exclude、max
 显性的过渡持续时间：用 transition 组件上的 duration 属性定制一个显性的过渡持续时间 (以毫秒计)，如transition :duration="{ enter: 500, leave: 800 }"
 
 在属性中声明JavaScript-钩子：
-```
+```JavaScript
 <transition
   v-on:before-enter="beforeEnter"
   v-on:enter="enter"
@@ -306,7 +306,7 @@ Vue 的过渡系统提供了非常多简单的方法设置进入、离开和列�
 * 混入 mixins 
 一种分发 Vue 组件中可复用功能的非常灵活的方式。混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。
 同名钩子函数将混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
-```
+```JavaScript
 let vm = new Vue({
   data:{
     msg: 'hi',
@@ -320,7 +320,7 @@ Vue.mixin({}) 也可以全局注册混入对象。一旦使用全局混入对象
 
 * 自定义指令 directive
 除了核心功能默认内置的指令 (v-model 和 v-show)，Vue 也允许注册自定义指令。代码复用和抽象的主要形式是组件。然而，有的情况下，你仍然需要对普通 DOM 元素进行底层操作，这时候就会用到自定义指令。举个聚焦输入框的例子，如下：
-```
+```JavaScript
 // 全局指令
 Vue.directive('focus', {
   inserted: function (el) {
@@ -361,7 +361,7 @@ modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中
 
 ### 渲染函数 & JSX
 Vue 推荐在绝大多数情况下使用 template 来创建HTML。然而在一些场景中，需要 JavaScript 的完全编程的能力，这时你可以用 render 函数，它比 template 更接近编译器。
-```
+```JavaScript
 Vue.component('anchored-heading', {
   render: function (createElement) {
     return createElement(
@@ -383,7 +383,7 @@ Vue 通过建立一个虚拟 DOM 对真实 DOM 发生的变化保持追踪。
 createElement 到底会返回什么呢？其实不是一个实际的 DOM 元素。它更准确的名字可能是 createNodeDescription，因为它所包含的信息会告诉 Vue 页面上需要渲染什么样的节点，及其子节点。我们把这样的节点描述为“虚拟节点 (Virtual Node)”，也常简写它为“VNode”。“虚拟 DOM”是我们对由 Vue 组件树建立起来的整个 VNode 树的称呼。
 
 * createElement 参数
-```
+```JavaScript
 // @returns {VNode}
 createElement(
   // {String | Object | Function}  一个 HTML 标签字符串，组件选项对象，或者解析上述任何一种的一个 async 异步函数。必需参数。
@@ -407,7 +407,7 @@ createElement(
 )
 ```
 深入 data 对象
-```
+```JavaScript
 {
   // 和`v-bind:class`一样的 API，接收一个字符串、对象或字符串和对象组成的数组
   'class': {
@@ -467,7 +467,7 @@ createElement(
 
 插槽
 通过 this.$slots 访问静态插槽的内容，得到的是一个 VNodes 数组：
-```
+```JavaScript
 render: function (createElement) {
   // `<div><slot></slot></div>`
   return createElement('div', this.$slots.default)
@@ -479,7 +479,7 @@ render: function (createElement) {
 ```
 
 通过 this.$scopedSlots 访问作用域插槽，得到的是一个返回 VNodes 的函数：
-```
+```JavaScript
 props: ['message'],
 render: function (createElement) {
   // `<div><slot :text="message"></slot></div>`
@@ -501,7 +501,7 @@ render: function (createElement) {
 
 * 函数式组件
 functional 无状态 (没有响应式数据)，无实例 (没有 this 上下文)。没有管理或者监听任何传递给他的状态，也没有生命周期方法。它只是一个接收参数的函数。
-```
+```JavaScript
 Vue.component('my-functional-button', {
   functional: true,
   // Props 可选
@@ -520,7 +520,7 @@ Vue.component('my-functional-button', {
 种类：添加全局方法或者属性、添加全局资源：指令/过滤器/过渡等、通过全局 mixin 方法添加一些组件选项、一个库，提供自己的 API，同时提供上面提到的一个或多个功能
 使用插件：Vue.use(MyPlugin, { someOption: true })
 开发插件：Vue.js 的插件应该有一个公开方法 install。这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象：
-```
+```JavaScript
 MyPlugin.install = function (Vue, options) {
   // 1. 添加全局方法或属性
   Vue.myGlobalMethod = function () {
@@ -580,7 +580,7 @@ Vue 异步执行 DOM 更新。只要观察到数据变化，Vue 将开启一个�
 
 在组件内使用 vm.$nextTick() 实例方法特别方便，因为它不需要全局 Vue ，并且回调函数中的 this 将自动绑定到当前的 Vue 实例上。
 
-```
+```JavaScript
 methods: {
   updateMessage: function () {
     this.message = '更新完成'
@@ -592,7 +592,7 @@ methods: {
 }
 ```
 因为 $nextTick() 返回一个 Promise 对象，所以你可以使用新的 ES2016 async/await 语法完成相同的事情：
-```
+```JavaScript
 methods: {
   async updateMessage: function () {
     this.message = 'updated'

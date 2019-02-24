@@ -21,7 +21,7 @@ performance: 在浏览器开发工具的性能/时间线面板中启用对组件
 ### 全局 API
 * Vue.extend( options )
 使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。data 选项是特例，需要注意 - 在 Vue.extend() 中它必须是函数
-```
+```JavaScript
 // 创建构造器
 var Profile = Vue.extend({
   template: '<p>{{alias}}</p>',
@@ -87,7 +87,7 @@ methods 将被混入到 Vue 实例中。可以直接通过 VM 实例访问这些
 如果 Vue 实例在实例化时没有收到 el 选项，则它处于“未挂载”状态，没有关联的 DOM 元素。可以使用 vm.$mount() 手动地挂载一个未挂载的实例。
 如果没有提供 elementOrSelector 参数，模板将被渲染为文档之外的的元素，并且你必须使用原生 DOM API 把它插入文档中。
 这个方法返回实例自身，因而可以链式调用其它实例方法。
-```
+```JavaScript
 var MyComponent = Vue.extend({
   template: '<div>Hello!</div>'
 })
@@ -124,14 +124,14 @@ document.getElementById('app').appendChild(component.$el)
 
 * v-cloak
 这个指令保持在元素上直到关联实例结束编译。和 CSS 规则一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。
-```
+```JavaScript
 [v-cloak] { display: none } 
 ```
 
 ### 内置的组件
 * component
 渲染一个“元组件”为动态组件。依 is 的值，来决定哪个组件被渲染。
-```
+```JavaScript
 <!-- 动态组件由 vm 实例的属性值 `componentId` 控制 -->
 <component :is="componentId"></component>
 
@@ -141,7 +141,7 @@ document.getElementById('app').appendChild(component.$el)
 * transition-group
 transition-group 元素作为多个元素/组件的过渡效果。 渲染一个真实的 DOM 元素。默认渲染 span，可以通过 tag 属性配置哪个元素应该被渲染。
 注意，每个 transition-group 的子节点必须有 独立的 key ，动画才能正常工作
-```
+```JavaScript
 <transition-group tag="ul" name="slide">
   <li v-for="item in items" :key="item.id">
     {{ item.text }}
@@ -152,7 +152,7 @@ transition-group 元素作为多个元素/组件的过渡效果。 渲染一个�
 主要用于保留组件状态或避免重新渲染。
 用在其一个直属的子组件被开关的情形。如果你在其中有 v-for 则不会工作。如果有上述的多个条件性的子元素，keep-alive要求同时只有一个子元素被渲染。
 不会在函数式组件中正常工作，因为它们没有缓存实例。
-```
+```JavaScript
 <!-- 正则表达式 (使用 `v-bind`) -->
 <keep-alive :include="/a|b/">
   <component :is="view"></component>

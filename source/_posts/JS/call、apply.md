@@ -23,7 +23,7 @@ thisObj，可选的。在 func 函数运行时使用的 this 值。请注意，t
 argsArray,可选的。一个数组或者类数组对象，其中的数组元素将作为单独的参数传给 func 函数。如果该参数的值为 null 或  undefined，则表示不需要传入任何参数。从ECMAScript 5 开始可以使用类数组对象。
 
 
-```
+```JavaScript
 function add(a,b) {  
     alert(a+b);  
 }  
@@ -60,7 +60,7 @@ function example( arg1, arg2, arg3 ) {
 }
 
 * [].push.apply(_args, [].slice.call(arguments));
-```
+```JavaScript
 // 柯里化(Currying)
 'use strict';
 

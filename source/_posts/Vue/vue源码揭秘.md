@@ -17,7 +17,7 @@ Flow 在 Vue.js源码中的应用有时候我们想引用第三方库，或者�
 
 ### Vue.js 源码目录设计
 Vue.js 的源码都在 src 目录下，其目录结构如下。
-```
+```JavaScript
 src
 ├── compiler        # 编译相关。包括把模板解析成 ast 语法树，ast 语法树优化，代码生成等功能。
 ├── core            # 核心代码。 Vue.js 的灵魂。包括内置组件、全局 API 封装，Vue 实例化、观察者、虚拟 DOM、工具函数等等。
@@ -36,7 +36,7 @@ Runtime + Compiler: 如果没有对代码做预编译，但又使用了 Vue 的 
 
 ### 从入口开始
 以Runtime+compiler CommonJS build (CommonJS)为例，入口是 src/platforms/web/entry-runtime-with-compiler.js。 最终在源头src/core/instance/index.js找到Vue的定义，看到了Vue的庐山真面目，它实际上就是一个用 Function 实现的类，我们只能通过 new Vue 去实例化它。
-```
+```JavaScript
 function Vue (options) {
   if (process.env.NODE_ENV !== 'production' &&
     !(this instanceof Vue)
@@ -59,7 +59,7 @@ export default Vue
 
 initGlobalAPI
 在src/core/index.js发现，Vue.js 在整个初始化过程中，除了给它的原型 prototype 上扩展方法，还会给 Vue 这个对象本身扩展全局的静态方法，Vue 官网中关于全局 API 都可以在这里找到。它的定义在 src/core/global-api/index.js 中。
-```
+```JavaScript
 export function initGlobalAPI (Vue: GlobalAPI) {
   // config
   const configDef = {}
@@ -84,3 +84,72 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 这里就是在 Vue 上扩展的一些全局方法的定义，Vue 官网中关于全局 API 都可以在这里找到，这里不会介绍细节，会在之后的章节我们具体介绍到某个 API 的时候会详细介绍。有一点要注意的是，Vue.util 暴露的方法最好不要依赖，因为它可能经常会发生变化，是不稳定的。
 
 至此，直观的认识到，Vue本质上就是一个用 Function 实现的 Class，然后它的原型 prototype 以及它本身都扩展了一系列的方法和属性。
+
+
+### 数据驱动
+Vue.js 一个核心思想是数据驱动。所谓数据驱动，是指视图是由数据驱动生成的，我们对视图的修改，不会直接操作 DOM，而是通过修改数据。DOM 变成了数据的映射，我们所有的逻辑都是对数据的修改，而不用碰触 DOM。它相比传统的前端开发，大大简化了代码量。特别是当交互复杂的时候，让代码的逻辑变的非常清晰，利于维护。
+* new Vue 发生了什么
+在src/core/instance/init.js中，找到this._init(options)
+```JavaScript
+export function initMixin (Vue: Class<Component>) {
+  Vue.prototype._init = function (options?: Object) {
+    const vm: Component = this
+    // a uid
+    vm._uid = uid++
+
+    let startTag, endTag
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+      startTag = `vue-perf-start:${vm._uid}`
+      endTag = `vue-perf-end:${vm._uid}`
+      mark(startTag)
+    }
+
+    // a flag to avoid this being observed
+    vm._isVue = true
+    // merge options
+    if (options && options._isComponent) {
+      // optimize internal component instantiation
+      // since dynamic options merging is pretty slow, and none of the
+      // internal component options needs special treatment.
+      initInternalComponent(vm, options)
+    } else {
+      vm.$options = mergeOptions(
+        resolveConstructorOptions(vm.constructor),
+        options || {},
+        vm
+      )
+    }
+    /* istanbul ignore else */
+    if (process.env.NODE_ENV !== 'production') {
+      initProxy(vm)
+    } else {
+      vm._renderProxy = vm
+    }
+    // expose real self
+    vm._self = vm
+    initLifecycle(vm)
+    initEvents(vm)
+    initRender(vm)
+    callHook(vm, 'beforeCreate')
+    initInjections(vm) // resolve injections before data/props
+    initState(vm)
+    initProvide(vm) // resolve provide after data/props
+    callHook(vm, 'created')
+
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
+      vm._name = formatComponentName(vm, false)
+      mark(endTag)
+      measure(`vue ${vm._name} init`, startTag, endTag)
+    }
+
+    if (vm.$options.el) {
+      vm.$mount(vm.$options.el)
+    }
+  }
+}
+
+// ...
+```
+Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。

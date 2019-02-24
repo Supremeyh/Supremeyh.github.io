@@ -7,7 +7,7 @@ tags: ['Tools', 'Geek','Crack']
 ---
 
 ### 百度网盘倍速播放
-```
+```JavaScript
 videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(1.5)
 ```
 ### github

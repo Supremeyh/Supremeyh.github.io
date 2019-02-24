@@ -9,7 +9,7 @@ tags: ['Review']
 
 # 单线程JavaScript的异步机制与经典for循环
 
-```
+```JavaScript
 for (var i = 1; i <= 5; i++) {
   console.log(i);
 
@@ -29,7 +29,7 @@ for (var i = 1; i <= 5; i++) {
 
 修复：
 1、错误的闭包
-```
+```JavaScript
 for (var i = 1; i <= 5; i++) {
   (function() {
     setTimeout( function() {
@@ -41,7 +41,7 @@ for (var i = 1; i <= 5; i++) {
 依然全是 6。因为，新加上的 IIFE 作用域是”空的”，它并没有自己的变量。 执行栈清空后，线程从任务队列里读取回调函数，它们还是引用那个唯一的全局变量i
 
 2、正确的闭包
-```
+```JavaScript
 for (var i = 1; i <= 5; i++) {
   (function() {
     var j = i // 在闭包作用域中，通过添加自己的变量，每次迭代都捕获i的副本
@@ -52,7 +52,7 @@ for (var i = 1; i <= 5; i++) {
 }
 ```
 3、更简洁的闭包：
-```
+```JavaScript
 for (var i = 1; i <= 5; i++) {
   (function(j) {
     setTimeout( function() {
@@ -62,7 +62,7 @@ for (var i = 1; i <= 5; i++) {
 }
 ```
 3、ES6块作用域
-```
+```JavaScript
 for (var i = 1; i <= 5; i++) {
     let j = i
     setTimeout( function() {
@@ -72,7 +72,7 @@ for (var i = 1; i <= 5; i++) {
 }
 ```
 4、直接在for循环头部里，每次迭代都声明一次。随后的每个迭代都会使用上一个迭代结束时的值来初始化这个变量
-```
+```JavaScript
 for (let i = 1; i <= 5; i++) {
     setTimeout( function() {
       console.log(i);

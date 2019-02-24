@@ -11,7 +11,7 @@ tags: ['JS']
 
 * AMD: Asynchronous Module Definition 异步模块定义。预先加载，依赖前置。 RequireJS 在推广过程中对模块定义的规范化产出。使用了异步加载和回调的方式，模块的加载不影响它后面语句的运行，优先照顾浏览器的模块加载场景。所有依赖这个模块的语句，都定义在一个回调函数中，等到加载完成之后，这个回调函数才会运行，即依赖前置。提供定义模块及异步加载该模块依赖的机制，通过define方法去定义模块 define(id?, dependencies?factory)，require方法去加载模块。
   
-```
+```JavaScript
   define(['./a', './b'], function(a, b) { //依赖必须一开始就写好，a.js和b.js已经下载完成 a模块和b模块已经执行完，直接可用；
     a.doing()
     // blabla...
@@ -21,7 +21,7 @@ tags: ['JS']
 
 * CMD: Common Module Definition 通用模块定义。按需加载，依赖就近。 SeaJS 在推广过程中对模块定义的规范化产出。提供模块定义及按需执行模块。 AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同(都是异步加载模块)。 
 
-```
+```JavaScript
 define(function(require, exports, module) {
      var a = require("./a"); //等待a.js下载、执行完
      a.doing()

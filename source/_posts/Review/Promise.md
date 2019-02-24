@@ -10,7 +10,7 @@ tags: ['Review', 'Promise']
  # Promise 面试题
 
 ## 题目一
- ```
+ ```JavaScript
  const promise = new Promise((resolve, reject) => {
     console.log(1);
     resolve();
@@ -27,7 +27,7 @@ console.log(4)
  答案：1 2 4 3
 
  ## 题目二
- ```
+ ```JavaScript
  const promise = new Promise((resolve, reject) => {
     resolve('success1');
     reject('error');
@@ -45,7 +45,7 @@ Promise 只能 resolve 一次，剩下的调用都会被忽略。所以 第二�
 答案：then: success1
 
 ## 题目三
-```
+```JavaScript
 Promise.resolve(1)
   .then(2)
   .then(Promise.resolve(3))
@@ -55,12 +55,12 @@ Promise.resolve(1)
 答案：1
 
 ## 题目四
-```
+```JavaScript
 红灯三秒亮一次，绿灯一秒亮一次，黄灯两秒亮一次, 如何让这三个灯按照这个规律不断交替重复亮灯？（用Promse实现。
 ```
 解析：红灯三秒亮一次，绿灯一秒亮一次，黄灯2秒亮一次，意思就是3秒，执行一次 red 函数，2秒执行一次 green 函数，1秒执行一次 yellow 函数，不断交替重复亮灯，意思就是按照这个顺序一直执行这3个函数，这步可以就利用递归来实现。主要考查Promise的应用，JavaScript 异步运行机制（一次事件循环中，同步代码先入执行栈执行，异步代码分情况将其任务注册到任务队列中。只有执行栈清空，主线程才会从任务队列中读取任务，使其入栈执行。setTimeout相关的异步队列会挂起直到主进程空闲。如果使用类似 while(true)无限循环，会永久占据主线程，使得执行栈永远不清空，setTimeout的函数永远不会执行！），以及递归。
 答案：
-```
+```JavaScript
 三个亮灯函数
 function red() {
     console.log('red');
@@ -104,7 +104,7 @@ step()
 ```
 
 ## 题目五
-```
+```JavaScript
 实现 mergePromise 函数，把传进去的数组按顺序先后执行，并且把返回的数据先后放到数组 data 中。
 
 const timeout = ms => new Promise((resolve, reject) => {
@@ -147,7 +147,7 @@ mergePromise([ajax1, ajax2, ajax3]).then(data => {
 ```
 解析：对于异步函数来说，并不会按顺序执行完一个，再执行后一个。这道题就是考用 Promise 控制异步流程。
 答案：
-```
+```JavaScript
 // 保存数组中的函数执行后的结果
 var data = [];
 
@@ -169,7 +169,7 @@ return sequence;
 ```
 ## 题目六
 
-```
+```JavaScript
 以下代码最后输出什么？
 
 setTimeout(function() {
@@ -200,7 +200,7 @@ console.log('4');
 
 ## 题目七
 
-```
+```JavaScript
 以下代码最后输出什么？
 
 console.log('1');
@@ -249,7 +249,7 @@ javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，�
 
 ## 题目八
 
-```
+```JavaScript
 以下代码最后输出什么？
 
 const first = () => (new Promise((resolve, reject) => {
@@ -281,7 +281,7 @@ console.log(4);
 
 ## 题目九
 
-```
+```JavaScript
 有 8 个图片资源的 url，已经存储在数组 urls 中（即urls = ['http://example.com/1.jpg', ...., 'http://example.com/8.jpg']），而且已经有一个函数 function loadImg，输入一个 url 链接，返回一个 Promise，该 Promise 在图片下载完成的时候 resolve，下载失败则 reject。但是我们要求，任意时刻，同时下载的链接数量不可以超过 3 个。请写一段代码实现这个需求，要求尽可能快速地将所有图片下载完成。
 var urls = [
     'https://www.kkkk1000.com/images/getImgData/getImgDatadata.jpg', 'https://www.kkkk1000.com/images/getImgData/gray.gif', 'https://www.kkkk1000.com/images/getImgData/Particle.gif', 'https://www.kkkk1000.com/images/getImgData/arithmetic.png', 'https://www.kkkk1000.com/images/getImgData/arithmetic2.gif', 'https://www.kkkk1000.com/images/getImgData/getImgDataError.jpg', 'https://www.kkkk1000.com/images/getImgData/arithmetic.gif', 'https://www.kkkk1000.com/images/wxQrCode2.png'];
@@ -300,7 +300,7 @@ function loadImg(url) {
 ```
 解析：题目的意思是需要我们这么做，先并发请求 3 张图片，当一张图片加载完成后，又会继续发起一张图片的请求，让并发数保持在 3 个，直到需要加载的图片都全部发起请求。用 Promise 来实现就是，先并发请求3个图片资源，这样可以得到 3 个 Promise，组成一个数组，就叫promises 吧，然后不断的调用 Promise.race 来返回最快改变状态的 Promise，然后从数组（promises ）中删掉这个 Promise 对象，再加入一个新的 Promise，直到全部的 url 被取完，最后再使用 Promise.all 来处理一遍数组（promises ）中没有改变状态的 Promise。
 答案：
-```
+```JavaScript
 var urls = [
     'https://www.kkkk1000.com/images/getImgData/getImgDatadata.jpg', 'https://www.kkkk1000.com/images/getImgData/gray.gif', 'https://www.kkkk1000.com/images/getImgData/Particle.gif', 'https://www.kkkk1000.com/images/getImgData/arithmetic.png', 'https://www.kkkk1000.com/images/getImgData/arithmetic2.gif', 'https://www.kkkk1000.com/images/getImgData/getImgDataError.jpg', 'https://www.kkkk1000.com/images/getImgData/arithmetic.gif', 'https://www.kkkk1000.com/images/wxQrCode2.png'];
 
