@@ -3,7 +3,7 @@ title: vue源码揭秘
 comments: true
 date: 2019-02-17 22:52:59
 categories: Vue
-tags: ['Vue', 'Vue基础']
+tags: ['Vue', '高级']
 ---
 > Reactive, component-oriented view layer for modern web interfaces.
 

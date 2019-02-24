@@ -2,8 +2,8 @@
 title: vue API
 comments: true
 date: 2019-02-12 14:46:02
-categories: ['Vue', 'Vue基础']
-tags: ['Vue', 'Vue基础']
+categories: ['Vue', '基础']
+tags: ['Vue', '基础']
 ---
 
 ### 全局配置
