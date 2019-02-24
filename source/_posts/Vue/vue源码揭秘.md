@@ -36,6 +36,7 @@ Runtime + Compiler: 如果没有对代码做预编译，但又使用了 Vue 的 
 
 ### 从入口开始
 以Runtime+compiler CommonJS build (CommonJS)为例，入口是 src/platforms/web/entry-runtime-with-compiler.js。 最终在源头src/core/instance/index.js找到Vue的定义，看到了Vue的庐山真面目，它实际上就是一个用 Function 实现的类，我们只能通过 new Vue 去实例化它。
+// src/core/instance/index.js
 ```JavaScript
 function Vue (options) {
   if (process.env.NODE_ENV !== 'production' &&
@@ -53,12 +54,12 @@ lifecycleMixin(Vue)
 renderMixin(Vue)
 
 export default Vue
-}
 ```
 为何 Vue 不用 ES6 的 Class 去实现呢？我们往后看这里有很多如 initMixin 的函数调用，并把 Vue 当参数传入，它们的功能都是给 Vue 的 prototype 上扩展一些方法，Vue 按功能把这些扩展分散到多个模块中去实现，而不是在一个模块里实现所有，这种方式是用 Class 难以实现的。这么做的好处是非常方便代码的维护和管理，这种编程技巧也非常值得我们去学习。
 
 initGlobalAPI
 在src/core/index.js发现，Vue.js 在整个初始化过程中，除了给它的原型 prototype 上扩展方法，还会给 Vue 这个对象本身扩展全局的静态方法，Vue 官网中关于全局 API 都可以在这里找到。它的定义在 src/core/global-api/index.js 中。
+// src/core/global-api/index.js
 ```JavaScript
 export function initGlobalAPI (Vue: GlobalAPI) {
   // config
@@ -89,7 +90,8 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 ### 数据驱动
 Vue.js 一个核心思想是数据驱动。所谓数据驱动，是指视图是由数据驱动生成的，我们对视图的修改，不会直接操作 DOM，而是通过修改数据。DOM 变成了数据的映射，我们所有的逻辑都是对数据的修改，而不用碰触 DOM。它相比传统的前端开发，大大简化了代码量。特别是当交互复杂的时候，让代码的逻辑变的非常清晰，利于维护。
 * new Vue 发生了什么
-在src/core/instance/init.js中，找到this._init(options)
+沿着this._init(options)，找到
+// src/core/instance/init.js
 ```JavaScript
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
@@ -114,11 +116,7 @@ export function initMixin (Vue: Class<Component>) {
       // internal component options needs special treatment.
       initInternalComponent(vm, options)
     } else {
-      vm.$options = mergeOptions(
-        resolveConstructorOptions(vm.constructor),
-        options || {},
-        vm
-      )
+      vm.$options = mergeOptions(resolveConstructorOptions(vm.constructor), options || {}, vm)
     }
     /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
@@ -152,4 +150,87 @@ export function initMixin (Vue: Class<Component>) {
 
 // ...
 ```
-Vue 初始化主要就干了几件事情，合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。
+Vue 初始化主要就干了几件事情，利用mergeOptions合并配置，初始化生命周期，初始化事件中心，初始化渲染，初始化 data、props、computed、watcher 等等。
+其中， 对new Vue实例初始绑定的data，观察initState() 里面，执行了 initData(vm) 方法，他在vm.$options.data拿到定义的data，并赋值给vm._data ，判断是否在props和methods中已定义过，然后通过proxy(vm, '_data', key)代理，最终 observe(data, true)响应式处理。
+// src/core/instance/state.js
+```JavaScript
+export function proxy (target: Object, sourceKey: string, key: string) {
+  sharedPropertyDefinition.get = function proxyGetter () {
+    return this[sourceKey][key]
+  }
+  sharedPropertyDefinition.set = function proxySetter (val) {
+    this[sourceKey][key] = val
+  }
+  Object.defineProperty(target, key, sharedPropertyDefinition)
+}
+
+export function initState (vm: Component) {
+  vm._watchers = []
+  const opts = vm.$options
+  if (opts.props) initProps(vm, opts.props)
+  if (opts.methods) initMethods(vm, opts.methods)
+  if (opts.data) {
+    initData(vm)
+  } else {
+    observe(vm._data = {}, true /* asRootData */)
+  }
+  if (opts.computed) initComputed(vm, opts.computed)
+  if (opts.watch && opts.watch !== nativeWatch) {
+    initWatch(vm, opts.watch)
+  }
+}
+
+function initData (vm: Component) {
+  let data = vm.$options.data
+  data = vm._data = typeof data === 'function' ? getData(data, vm) : data || {}
+  if (!isPlainObject(data)) {
+    data = {}
+    process.env.NODE_ENV !== 'production' && warn(
+      'data functions should return an object:\n' +
+      'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
+      vm
+    )
+  }
+  // proxy data on instance
+  const keys = Object.keys(data)
+  const props = vm.$options.props
+  const methods = vm.$options.methods
+  let i = keys.length
+  while (i--) {
+    const key = keys[i]
+    if (process.env.NODE_ENV !== 'production') {
+      if (methods && hasOwn(methods, key)) {
+        warn(
+          `Method "${key}" has already been defined as a data property.`,
+          vm
+        )
+      }
+    }
+    if (props && hasOwn(props, key)) {
+      process.env.NODE_ENV !== 'production' && warn(
+        `The data property "${key}" is already declared as a prop. ` +
+        `Use prop default value instead.`,
+        vm
+      )
+    } else if (!isReserved(key)) {
+      proxy(vm, `_data`, key)
+    }
+  }
+  // observe data
+  observe(data, true /* asRootData */)
+}
+
+export function getData (data: Function, vm: Component): any {
+  // #7573 disable dep collection when invoking data getters
+  pushTarget()
+  try {
+    return data.call(vm, vm)
+  } catch (e) {
+    handleError(e, vm, `data()`)
+    return {}
+  } finally {
+    popTarget()
+  }
+}
+```
+这些处理完，初始化的最后，若检测到el，则调用 vm.$mount(vm.$options.el) 挂载vm，把模板渲染成最终的 DOM。
