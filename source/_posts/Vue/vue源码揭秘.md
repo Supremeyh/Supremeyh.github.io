@@ -595,6 +595,28 @@ vm._render 最终是通过执行 createElement 方法并返回的是 vnode，它
 
 每个 VNode 有 children，children 每个元素也是一个 VNode，这样就形成了一个 VNode Tree，它很好的描述了我们的 DOM Tree。
 
+对children 的规范化，由于 Virtual DOM 实际上是一个树状结构，每一个 VNode 可能会有若干个子节点，这些子节点应该也是 VNode 的类型。_createElement 接收的第 4 个参数 children 是任意类型的，因此我们需要把把children 变成了一个为 VNode类型的 Array。这里根据 normalizationType 的不同，调用了 normalizeChildren(children) 和 simpleNormalizeChildren(children) 方法。
+// src/core/vdom/helpers/normalize-children.js
+```JavaScript
+export function simpleNormalizeChildren (children: any) {
+  for (let i = 0; i < children.length; i++) {
+    if (Array.isArray(children[i])) {
+      return Array.prototype.concat.apply([], children)
+    }
+  }
+  return children
+}
+
+export function normalizeChildren (children: any): ?Array<VNode> {
+  return isPrimitive(children)
+    ? [createTextVNode(children)]
+    : Array.isArray(children)
+      ? normalizeArrayChildren(children)
+      : undefined
+}
+```
+
+
 * Virtual DOM
 浏览器中的 DOM 是很“昂贵"，设计的非常复杂。当我们频繁的去做 DOM 更新，会产生一定的性能问题。而 Virtual DOM 就是用一个原生的 JS 对象去描述一个 DOM 节点，所以它比创建一个 DOM 的代价要小很多。在 Vue.js 中，Virtual DOM 是用 VNode 这么一个 Class 去描述，它是定义在 src/core/vdom/vnode.js 中的。
 // src/core/vdom/vnode.js 
