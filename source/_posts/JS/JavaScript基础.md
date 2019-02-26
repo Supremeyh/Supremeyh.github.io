@@ -56,3 +56,95 @@ JavaScript 也是一种嵌入式（embedded）语言。它本身提供的核心�
 2017年06月：ECMAScript 2017。增加新的功能，如并发、原子操作、Object.values/Object.entries、字符串填充、promises、await/asyn等等。
 2017年11月，所有主流浏览器全部支持 WebAssembly，这意味着任何语言都可以编译成 JavaScript，在浏览器运行。
 
+
+### 基本语法
+* 语句 和 表达式
+JavaScript 程序的执行单位为行（line），也就是一行一行地执行。一般情况下，每一行就是一个语句。
+语句（statement）是为了完成某种任务而进行的操作，以分号结尾，一个分号就表示一个语句结束。var a = 2 + 3;
+表达式（expression），指一个为了得到返回值的计算式，不需要分号结尾，一旦在表达式后面添加分号，则引擎就将其视为语句。 2 + 3
+* 变量
+变量是对“值”的具名引用。变量就是为“值”起名，然后引用这个名字，就等同于引用这个值。变量的名字就是变量名。
+
+注意，JavaScript 的变量名区分大小写，A和a是两个不同的变量。
+
+* 变量提升
+JavaScript 引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升（hoisting）。
+```JavaScript
+// hoisting
+console.log(a);
+var a = 1;
+
+// 真正运行的是下面的代码
+var a;
+console.log(a);  // undefined
+a = 1;
+```
+* 标识符
+标识符（identifier）指的是用来识别各种值的合法名称。最常见的标识符就是变量名，以及后面要提到的函数名。JavaScript 语言的标识符对大小写敏感，所以a和A是两个不同的标识符。
+
+规则：第一个字符，可以是任意 Unicode 字母（包括英文字母和其他语言的字母），以及美元符号（$）和下划线（_）。第二个字符及后面的字符，除了 Unicode 字母、美元符号和下划线，还可以用数字0-9。
+
+中文是合法的标识符，可以用作变量名。  var 临时变量 = 1;
+
+JavaScript 有一些保留字，不能用作标识符：
+arguments、break、case、catch、class、const、continue、debugger、default、delete、do、else、enum、eval、export、extends、false、finally、for、function、if、implements、import、in、instanceof、interface、let、new、null、package、private、protected、public、return、static、super、switch、this、throw、true、try、typeof、var、void、while、with、yield。
+
+* 循环语句
+while 循环，只要条件为真，就不断循环执行代码块
+```JavaScript
+while (true) {
+  console.log('Hello, world');
+}
+```
+for 循环, 可以指定循环的起点、终点和终止条件, for语句的三个部分（initialize、test、increment），可以省略任何一个，也可以全部省略
+```JavaScript
+var x = 3;
+for (var i = 0; i < x; i++) {
+  console.log(i);
+}
+
+// 所有for循环，都可以改写成while循环
+var x = 3;
+var i = 0;
+while (i < x) {
+  console.log(i);
+  i++;
+}
+```
+do...while 循环，与while循环类似，唯一的区别就是先运行一次循环体，然后判断循环条件。至少运行一次，while语句后面的分号注意不要省略
+```JavaScript
+var x = 3;
+var i = 0;
+do {
+  console.log(i);
+  i++;
+} while(i < x);
+```
+break 语句和 continue 语句，都具有跳转作用，可以让代码不按既有的顺序执行
+break语句用于跳出代码块或循环。for循环也可以使用break语句跳出循环。
+continue语句用于立即终止本轮循环，返回循环结构的头部，开始下一轮循环。
+
+标签 label，语句的前面有标签，相当于定位符，用于跳转到程序的任意位置。标签可以是任意的标识符，但不能是保留字，语句部分可以是任意语句。通常与break语句和continue语句配合使用，跳出特定的循环。
+```JavaScript
+top:
+  for (var i = 0; i < 3; i++){
+    for (var j = 0; j < 3; j++){
+      if (i === 1 && j === 1) break top;
+      console.log('i=' + i + ', j=' + j);
+    }
+  }
+
+// i=0, j=0
+// i=0, j=1
+// i=0, j=2
+// i=1, j=0
+
+// 上面代码为一个双重循环区块，break命令后面加上了top标签（注意，top不用加引号），满足条件时，直接跳出双层循环。如果break语句后面不使用标签，则只能跳出内层循环，进入下一次的外层循环。
+```
+
+
+
+
+
+
+
