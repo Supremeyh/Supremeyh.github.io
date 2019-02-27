@@ -179,6 +179,252 @@ function f() {}
 typeof f // "function"
 ```
 
+* null, undefined 和布尔值
+null是一个表示“空”的对象，表示空值，即该处的值现在为空，转为数值时为0
+undefined是一个表示"未定义"的原始值，转为数值时为NaN
+```JavaScript
+Number(undefined) // NaN
+5 + undefined // NaN
+```
 
+布尔值代表“真”和“假”两个状态， true 和 false
+false: undefined、null、false、0、NaN、""或''（空字符串）
+true:  除上面六个值外。  注意，空数组（[]）和空对象（{}）对应的布尔值都是true
+```JavaScript
+if ([]) {
+  console.log('ok')  // ok
+}
+```
+以下运算符会返回布尔值: 前置逻辑运算符 (! Not)、 相等运算符（===，!==，==，!=）、 比较运算符（>，>=，<，<=）
+
+* 数值
+JavaScript内部，所有数字都是以64位浮点数形式储存，即使整数也是如此，就是说，JS语言的底层根本没有整数，所有数字都是小数（64位浮点数）。。
+```JavaScript
+1 === 1.0 // true  1与1.0是相同的，是同一个数。
+
+// 由于浮点数不是精确的值，所以涉及小数的比较和运算要特别小心
+0.1 + 0.2 === 0.30000000000000004
+0.2-0.1 === 0.1
+0.3-0.2 === 0.09999999999999998
+```
+JavaScript 浮点数的64个二进制位
+第1位：符号位，0表示正数，1表示负数
+第2位到第12位（共11位）：指数部分，大小范围就是0 - 2047(2的11次方减1)
+第13位到第64位（共52位）：小数部分（即有效数字）
+
+数值精度: 
+最多只能到53个二进制位，这意味着，绝对值小于2的53次方的整数，即-253到253，都可以精确表示。大于2的53次方的数值，都无法保持精度。
+由于2的53次方是一个16位的十进制数值，所以简单的法则就是，JavaScript 对15位的十进制数都可以精确处理。
+
+数值范围:
+JavaScript 能够表示的数值范围为(2^1024,2^-1023)，超出这个范围的数无法表示。
+如果一个数大于等于2的1024次方，那么就会发生“正向溢出”，即 JavaScript 无法表示这么大的数，这时就会返回Infinity
+如果一个数小于等于2的-1075次方（指数部分最小值-1023，再加上小数部分的52位），那么就会发生为“负向溢出”，这时会直接返回0。
+
+JavaScript 提供Number对象的MAX_VALUE和MIN_VALUE属性，返回可以表示的具体的最大值和最小值。
+Number.MAX_VALUE // 1.7976931348623157e+308
+Number.MIN_VALUE // 5e-324
+
+正零和负零:
+JavaScript 的64位浮点数之中，有一个二进制位是符号位。这意味着，任何一个数都有一个对应的负值，就连0也不例外。
+JavaScript 内部实际上存在2个0：一个是+0，一个是-0，区别就是64位浮点数表示法的符号位不同。它们是等价的。
+几乎所有场合，正零和负零都会被当作正常的0。唯一有区别的场合是，+0或-0当作分母，返回的值是不相等的。
+```JavaScript
+0 === +0  === -0  // true
++0  // 0
+-0  // 0
+(-0).toString() // '0'
+
+// 唯一有区别的场合是，+0或-0当作分母，返回的值是不相等的。因为除以正零得到+Infinity，除以负零得到-Infinity，这两者是不相等的
+(1 / +0) === (1 / -0) // false   
+``` 
+
+NaN:
+NaN是 JavaScript 的特殊值，表示“非数字”（Not a Number）
+```JavaScript
+// 主要出现在将字符串解析成数字出错的场合
+5 - 'x' // NaN
+
+// 一些数学函数的运算结果会出现NaN
+Math.acos(2) // NaN   
+
+// 0除以0也会得到NaN。
+0 / 0 // NaN
+
+// 需要注意的是，NaN不是独立的数据类型，而是一个特殊数值，它的数据类型依然属于Number，使用typeof运算符可以看得很清楚。
+typeof NaN // 'number'
+
+// NaN不等于任何值，包括它本身。
+NaN === NaN // false
+
+// 数组的indexOf方法内部使用的是严格相等运算符，所以该方法对NaN不成立。
+[NaN].indexOf(NaN) // -1
+
+// NaN在布尔运算时被当作false。
+Boolean(NaN) // false
+
+// NaN与任何数（包括它自己）的运算，得到的都是NaN。
+NaN + 666 // NaN
+}
+```
+
+Infinity:
+Infinity表示“无穷”，用来表示两种场景。一种是一个正的数值太大，或一个负的数值太小，无法表示；另一种是非0数值除以0，得到Infinity。
+```JavaScript
+Math.pow(2, 1024)  // Infinity
+
+0 / 0  // NaN
+1 / 0  // Infinity
+
+// Infinity有正负之分，Infinity表示正的无穷，-Infinity表示负的无穷。
+Infinity === -Infinity  // false
+1 / -0  // -Infinity
+-1 / -0  // Infinity
+
+// Infinity大于一切数值（除了NaN），-Infinity小于一切数值（除了NaN）。
+Infinity > 1000  // true
+-Infinity < -1000  // true
+
+// Infinity与NaN比较，总是返回false。
+Infinity > NaN // false
+
+// Infinity的四则运算，符合无穷的数学计算规则。
+5 * Infinity // Infinity
+5 - Infinity // -Infinity
+Infinity / 5 // Infinity
+5 / Infinity // 0
+
+// 0乘以Infinity，返回NaN；0除以Infinity，返回0；Infinity除以0，返回Infinity。
+0 * Infinity // NaN
+0 / Infinity // 0
+Infinity / 0 // Infinity
+
+// Infinity加上或乘以Infinity，返回的还是Infinity。
+Infinity + Infinity // Infinity
+Infinity * Infinity // Infinity
+
+// Infinity减去或除以Infinity，得到NaN。
+Infinity - Infinity // NaN
+Infinity / Infinity // NaN
+
+// Infinity与null计算时，null会转成0，等同于与0的计算。
+null * Infinity // NaN
+null / Infinity // 0
+Infinity / null // Infinity
+
+// Infinity与undefined计算，返回的都是NaN。
+Infinity / undefined // NaN
+```
+
+* 与数值相关的全局方法 
+parseInt()  用于将字符串转为整数, 返回值只有两种可能，要么是一个十进制整数，要么是NaN。
+```JavaScript
+// 基本用法
+parseInt('123') // 123
+
+parseInt('   81') // 81    如果字符串头部有空格，空格会被自动去除。
+parseInt(1.23) // 1   如果parseInt的参数不是字符串，则会先转为字符串再转换。
+
+parseInt('15px') // 15   字符串转为整数的时候，是一个个字符依次转换，如果遇到不能转为数字的字符，就不再进行下去，返回已经转好的部分。
+parseInt('abc') // NaN   如果字符串的第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN。
+
+parseInt('0x10') // 16  如果字符串以0x或0X开头，parseInt会将其按照十六进制数解析。
+parseInt('011') // 11  如果字符串以0开头，将其按照10进制解析。
+
+// 对于那些会自动转为科学计数法的数字，parseInt会将科学计数法的表示方法视为字符串，因此导致一些奇怪的结果。
+parseInt(0.0000008) // 8
+parseInt('8e-7') // 8
+
+// 进制转换
+// parseInt方法还可以接受第二个参数（2到36之间），表示被解析的值的进制，返回该值对应的十进制数。默认第二个参数为10，即默认是十进制转十进制
+parseInt('1000', 2) // 8     二进制、八进制的1000，分别等于十进制的8、和512
+parseInt('1000', 8) // 512
+
+// 如果第二个参数不是数值，会被自动转为一个整数。这个整数只有在2到36之间，才能得到有意义的结果，超出这个范围，则返回NaN。如果第二个参数是0、undefined和null，则直接忽略。
+parseInt('10', 37) // NaN
+parseInt('10', 0) // 10
+parseInt('10', null) // 10
+parseInt('10', undefined) // 10
+
+// 如果字符串包含对于指定进制无意义的字符，则从最高位开始，只返回可以转换的数值。如果最高位无法转换，则直接返回NaN。
+parseInt('1546', 2) // 1
+parseInt('546', 2) // NaN
+```
+
+parseFloat()：  用于将一个字符串转为浮点数
+```JavaScript
+parseFloat('3.14') // 3.14
+
+// 如果字符串符合科学计数法，则会进行相应的转换
+parseFloat('314e-2') // 3.14
+
+// 如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分
+parseFloat('3.14more non-digit characters') // 3.14
+
+// parseFloat方法会自动过滤字符串前导的空格
+parseFloat('\t\v\r12.34\n ') // 12.34
+
+// 如果参数不是字符串，或者字符串的第一个字符不能转化为浮点数，则返回NaN
+parseFloat([]) // NaN
+parseFloat('FF2') // NaN
+parseFloat('') // NaN    尤其值得注意，parseFloat会将空字符串转为NaN
+
+
+// 这些特点使得parseFloat的转换结果不同于Number函数
+parseFloat(true)  // NaN
+Number(true) // 1
+
+parseFloat(null) // NaN
+Number(null) // 0
+
+parseFloat('') // NaN
+Number('') // 0
+
+parseFloat('123.45#') // 123.45
+Number('123.45#') // NaN
+```
+
+isNaN():   可以用来判断一个值是否为NaN
+```JavaScript
+isNaN(NaN) // true
+isNaN(123) // false
+
+// 只对数值有效，如果传入其他值，会被先转成数值
+isNaN('Hello') // true
+// 相当于
+isNaN(Number('Hello')) // true
+
+// 出于同样的原因，对于对象和数组，isNaN也返回true
+isNaN({}) // true
+// 等同于
+isNaN(Number({})) // true
+
+// 但是，对于空数组和只有一个数值成员的数组，isNaN返回false ，因为这些数组能被Number函数转成数值
+isNaN([]) // false
+isNaN([123]) // false
+isNaN(['123']) // false
+
+// 因此，使用isNaN之前，最好判断一下数据类型
+function myIsNaN(value) {
+  return typeof value === 'number' && isNaN(value)
+}
+
+// 判断NaN更可靠的方法是，利用NaN为唯一不等于自身的值的这个特点，进行判断
+function myIsNaN(value) {
+  return value !== value
+}
+```
+
+isFinite():  返回一个布尔值，表示某个值是否为正常的数值
+```JavaScript
+// 除了Infinity、-Infinity、NaN和undefined这几个值会返回false，isFinite对于其他的数值都会返回true
+isFinite(Infinity) // false
+isFinite(-Infinity) // false
+isFinite(NaN) // false
+isFinite(undefined) // false
+
+isFinite(null) // true
+isFinite(-1) // true
+```
 
 
