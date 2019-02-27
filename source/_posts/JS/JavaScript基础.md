@@ -142,8 +142,42 @@ top:
 // 上面代码为一个双重循环区块，break命令后面加上了top标签（注意，top不用加引号），满足条件时，直接跳出双层循环。如果break语句后面不使用标签，则只能跳出内层循环，进入下一次的外层循环。
 ```
 
+### 数据类型
+* 七种数据类型
+共有七种: 数值 number、字符串 string、布尔值 boolean、undefined、uull、symbol 和 对象 object
+基本类型: number、string、boolean、undefined、uull、symbol。 按值访问，可以操作保存在变量中的实际的值，任何方法都无法改变一个基本类型的值，变量存放在栈区。
+引用类型, Object、Array和Function。 按引用访问，值是同时保存在栈内存和堆内存中的对象，比较是引用的比较即堆内存中的地址是否相同
+
+* typeof 运算符
+JavaScript 有三种方法，可以确定一个值到底是什么类型。typeof运算符、instanceof运算符、Object.prototype.toString方法。
+
+```JavaScript
+// 数值、字符串、布尔值分别返回number、string、boolean
+typeof 123 // "number"
+typeof '123' // "string"
+typeof false // "boolean"
+
+// undefined返回undefined
+typeof undefined // "undefined"  利用这一点，typeof可以用来检查一个没有声明的变量，而不报错 if (typeof v === "undefined") {}
+
+// 对象返回object
+typeof window // "object"
+typeof {} // "object"
+typeof [] // "object"   这表示在 JavaScript 内部，数组本质上只是一种特殊的对象
+
+// instanceof运算符可以区分数组和对象
+var o = {}, a = [];
+o instanceof Array // false
+a instanceof Array // true
+
+// null返回object
+typeof null // "object"   由于历史原因造成的,第一版没有null
 
 
+// 函数返回function。
+function f() {}
+typeof f // "function"
+```
 
 
 
