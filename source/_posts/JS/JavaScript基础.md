@@ -23,6 +23,7 @@ JavaScript 也是一种嵌入式（embedded）语言。它本身提供的核心�
 静态类型语言，是指数据类型的检查是在运行前（如编译阶段）做的。
 
 * JavaScript语言的历史
+
 1995年5月，Brendan Eich只用了10天，就设计完成了这种语言的第一版。
 
 1996年，样式表标准CSS第一版发布。
@@ -486,3 +487,186 @@ function b64Decode(str) {
 b64Encode('你好') // "JUU0JUJEJUEwJUU1JUE1JUJE"
 b64Decode('JUU0JUJEJUEwJUU1JUE1JUJE') // "你好"
 ```
+
+#### 对象
+对象就是一组“键值对”（key-value）成员的集合，是一种无序的复合数据集合。
+对象的所有键名都是字符串（ES6 又引入了 Symbol 值也可以作为键名），所以加不加引号都可以。
+如果键名是数值，会被自动转为字符串。如果键名不符合标识名的条件（比如第一个字符为数字，或者含有空格或运算符），且也不是数字，则必须加上引号，否则会报错。
+
+对象的每一个键名又称为“属性”（property），它的“键值”可以是任何数据类型。如果一个属性的值为函数，通常把这个属性称为“方法”，它可以像函数那样调用。
+属性可以动态创建，不必在对象声明时就指定。
+
+##### 对象的引用
+```JavaScript
+// 如果不同的变量名指向同一个对象，那么它们都是这个对象的引用，也就是说指向同一个内存地址。修改其中一个变量，会影响到其他所有变量。
+var o1 = {};
+var o2 = o1;
+o1.a = 1;
+o2.a // 1
+
+// 此时，如果取消某一个变量对于原对象的引用，不会影响到另一个变量
+var o1 = {};
+var o2 = o1;
+o1 = 1;
+o2 // {}
+
+// 但是，这种引用只局限于对象，如果两个变量指向同一个原始类型的值。那么，变量这时都是值的拷贝
+var x = 1;
+var y = x;
+x = 2;
+y // 1
+```
+##### 属性的操作
+* 读取对象的属性
+有两种方法，一种是使用点运算符，还有一种是使用方括号运算符。
+请注意，如果使用方括号运算符，键名必须放在引号里面，否则会被当作变量处理。方括号运算符内部还可以使用表达式。
+数字键可以不加引号，因为会自动转成字符串，但数值键名不能使用点运算符（因为会被当成小数点），只能使用方括号运算符。
+```JavaScript
+var foo = 'bar';
+
+var obj = {
+  foo: 1,
+  bar: 2
+};
+
+obj.foo   // 1  引用对象obj的foo属性时，如果使用点运算符，foo就是字符串
+obj[foo]  // 2  如果使用方括号运算符，但是不使用引号，那么foo就是一个变量，指向字符串bar
+```
+* 属性的查看
+Object.keys(obj): 返回对象自身的所有可枚举的属性名称的数组
+Object.values(obj):  返回给定对象自身可枚举值的数组
+Object.entries():  返回一个给定对象自身可枚举属性的键值对数组
+```JavaScript
+const obj = { foo: 'bar', baz: 42 }
+Object.keys(obj)    //  ['foo', 'baz']
+Object.values(obj)  //  ['bar', 42]
+Object.entries(object1)  // [[ 'foo', 'bar' ], [ 'baz', 42 ]]
+
+for (let key in obj) {
+   console.log('key:', key, 'value: ',obj[key])  
+   // key: foo  value: bar
+   // key: baz  value: 42
+}
+```
+
+* 属性的遍历
+for...in  遍历对象自身的和继承的可枚举的属性。 对象obj继承了toString属性，该属性不会被for...in循环遍历到，因为它默认是“不可遍历”的。
+
+* 属性是否存在：
+in 运算符，如'name' in obj，检查对象是否包含某个属性（注意，检查的是键名，不是键值），如果包含就返回true，否则返回false。它不能识别哪些属性是对象自身的，哪些属性是继承的。
+
+hasOwnProperty：是否为对象自身的属性。如 obj.hasOwnProperty('toString'))  false
+
+* 属性的删除
+delete: 删除对象本身的属性，无法删除继承的属性，删除成功后返回true。 注意，删除一个不存在的属性，delete不报错，而且返回true。只有一种情况，delete命令会返回false，那就是该属性存在，且不得删除。
+
+
+#### 数组
+数组（array）是按次序排列的一组值。每个值的位置都有编号（从0开始），整个数组用方括号表示。
+本质上，数组属于一种特殊的对象。typeof运算符会返回数组的类型是object。  
+JavaScript 使用一个32位整数，保存数组的元素个数。这意味着，数组成员最多只有 4294967295 个（2^32 - 1），length属性的最大值就是 4294967295。
+
+清空数组的一个有效方法，就是将length属性设为0。
+
+* in 运算符
+检查某个键名是否存在的运算符in，适用于对象，也适用于数组。
+
+* 数组的遍历
+可以考虑使用for循环、while循环，或者forEach。 不推荐使用for...in遍历数组。
+```JavaScript
+var arr = [ 'a', 'b', 'c' ]
+typeof arr // "object"
+
+
+'2' in arr // true  数组存在键名为2的键
+2 in arr  // true   由于键名都是字符串，所以数值2会自动转成字符串
+4 in arr // false
+
+
+var arr2 = [1, 2, 3];
+arr2.foo = true;
+
+// for循环
+for(var i = 0; i < arr2.length; i++) {
+  console.log(arr2[i]);
+}
+
+// while循环
+var i = 0;
+while (i < arr2.length) {
+  console.log(arr2[i]);
+  i++;
+}
+
+// 逆向遍历
+var len = arr2.length;
+while (len--) {
+  console.log(arr2[len]);  // 3 2 1   
+}
+
+// forEach
+arr2.forEach(function (val) {
+  console.log(val)
+})
+
+// for...in循环不仅可以遍历对象，也可以遍历数组，毕竟数组只是一种特殊对象。但是，for...in不仅会遍历数组所有的数字键，还会遍历非数字键
+for (var key in arr2) {
+  console.log(key);   // 0 1 2 foo
+}
+```
+* 数组的空位
+当数组的某个位置是空元素，即两个逗号之间没有任何值，我们称该数组存在空位（hole）。
+```JavaScript
+var a = [1, , 2,]
+
+// 数组的空位不影响length属性
+a.length // 3   
+
+// 使用delete命令删除一个数组成员，会形成空位，并且不会影响length属性
+delete a[2]  // true
+a[1] // undefined
+a.length // 3
+```
+length属性不过滤空位。所以，使用length属性进行数组遍历，一定要非常小心
+数组的某个位置是空位，与某个位置是undefined，是不一样的。
+如果是空位，使用数组的forEach方法、for...in结构、以及Object.keys方法进行遍历，空位都会被跳过。如果某个位置是undefined，遍历的时候就不会被跳过,输出undefined。
+
+* 类似数组的对象 array-like object
+如果一个对象的所有键名都是正整数或零，并且有length属性，那么这个对象就很像数组，语法上称为“类似数组的对象”
+但是，“类似数组的对象”并不是数组，因为它们不具备数组特有的方法。没有数组的push方法，使用该方法就会报错。length属性不是动态值，不会随着成员的变化而变。
+典型的“类似数组的对象”是函数的arguments对象，以及大多数 DOM 元素集，还有字符串。
+```JavaScript
+var obj = {
+  0: 'a',
+  1: 'b',
+  2: 'c',
+  length: 3
+}
+
+// 数组的slice方法可以将“类似数组的对象”变成真正的数组。
+var arr = Array.prototype.slice.call(arrayLike);
+
+// 除了转为真正的数组，“类似数组的对象”还有一个办法可以使用数组的方法，就是通过call()把数组的方法放到对象上面。
+function print(value, index) {
+  console.log(index + ' : ' + value);
+}
+
+var arr = Array.prototype.forEach.call(arrayLike, print)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
