@@ -647,12 +647,240 @@ var obj = {
 var arr = Array.prototype.slice.call(arrayLike);
 
 // 除了转为真正的数组，“类似数组的对象”还有一个办法可以使用数组的方法，就是通过call()把数组的方法放到对象上面。
+var arr = Array.prototype.forEach.call(arrayLike, print)
+
 function print(value, index) {
   console.log(index + ' : ' + value);
 }
-
-var arr = Array.prototype.forEach.call(arrayLike, print)
 ```
+
+#### 函数
+函数是一段可以反复调用的代码块。函数还能接受输入的参数，不同的参数会返回不同的值。
+
+##### 函数的声明 
+JavaScript 有三种声明函数的方法。
+```JavaScript
+// function 命令
+function print(s) {
+  console.log(s)
+}
+
+// 函数表达式   
+// 采用函数表达式声明函数时，function命令后面不带有函数名。如果加上函数名，该函数名只在函数体内部有效，在函数体外部无效
+var print = function(s) {
+  console.log(s)
+}; // 函数的表达式需要在语句的结尾加上分号，表示语句结束
+
+// Function 构造函数   
+// Function构造函数可以不使用new命令，返回结果完全一样
+// 最后一个参数是函数的“函数体”，其他参数都是add函数的参数。如果只有一个参数，该参数就是函数体。
+var add = new Function('x', 'y', 'return x + y');
+// 等同于
+function add(x, y) {
+  return x + y;
+}
+```
+函数的重复声明: 函数名视同变量名，函数名会提升。如果同一个函数被多次声明，后面的声明就会覆盖前面的声明。
+
+第一等公民: 函数与其他数据类型地位平等，所以在 JavaScript 语言中又称函数为第一等公民。
+
+* 函数的属性和方法
+name: 函数的name属性返回函数的名字
+```JavaScript
+function f1() {}
+f1.name // "f1"
+
+// 如果是通过变量赋值定义的函数，那么name属性返回变量名
+var f2 = function () {};
+f2.name // "f2"
+
+// 但是，上面这种情况，只有在变量的值是一个匿名函数时才是如此。如果变量的值是一个具名函数，那么name属性返回function关键字之后的那个函数名。
+var f3 = function myName() {};
+f3.name // 'myName'    返回了函数表达式的名字。注意，真正的函数名还是f3，而myName这个名字只在函数体内部可用。
+
+// name属性的一个用处，就是获取参数函数的名字
+var myFunc = function () {};
+function test(f) {
+  console.log(f.name);
+}
+test(myFunc) // myFunc  函数test内部通过name属性，就可以知道传入的参数是什么函数。
+```
+length： 函数的length属性返回函数预期传入的参数个数，即函数定义之中的参数个数。与实际传入的参数个数无关。
+
+toString(): 函数的toString方法返回一个字符串，内容是函数的源码。函数内部的注释也可以返回。利用这一点，可以变相实现多行字符串。
+```JavaScript
+var multiline = function (fn) {
+  var arr = fn.toString().split('\n');
+  return arr.slice(1, arr.length - 1).join('\n');
+};
+
+function f() {/*
+  这是一个
+  多行注释
+*/}
+
+multiline(f);
+// " 这是一个
+//   多行注释"
+```
+
+* 函数本身的作用域
+函数本身也是一个值，也有自己的作用域。它的作用域与变量一样，就是其声明时/定义时所在的作用域，与其运行时/调用时所在的作用域无关。
+```JavaScript
+var a = 1;
+var x = function () {
+  console.log(a);
+};
+
+function f() {
+  var a = 2;
+  x();
+}
+
+f() // 1   函数x是在函数f的外部声明的，所以它的作用域绑定外层，内部变量a不会到函数f体内取值，所以输出1，而不是2。
+```
+
+* 参数的传递方式
+```JavaScript
+// 参数如果是原始类型的值（数值、字符串、布尔值），传递方式是传值传递（passes by value）。这意味着，在函数体内修改参数值，不会影响到函数外部。
+var p1 = 2;
+function f(p1) {
+  p1 = 3;
+}
+f(p1);
+p1 // 2
+
+// 参数是复合类型的值（数组、对象、其他函数），传递方式是传址传递（pass by reference）。传入函数的原始值的地址，在函数内部修改参数，将会影响到原始值。
+var obj1 = { p2: 1 };
+function f(o) {
+  o.p2 = 2;
+}
+f(obj1);
+obj1.p2 // 2
+
+// 如果函数内部修改的，不是参数对象的某个属性，而是替换掉整个参数，这时不会影响到原始值
+var obj2 = [1, 2, 3];
+function f(o) {
+  o = [2, 3, 4];
+}
+f(obj2);
+obj2 // [1, 2, 3]  这是因为，形式参数（o）的值实际是参数obj的地址，重新对o赋值导致o指向另一个地址，保存在原地址上的值当然不受影响
+```
+
+* arguments 对象
+由于 JavaScript 允许函数有不定数目的参数，所以需要一种机制，可以在函数体内部读取所有参数。这就是arguments对象的由来。
+arguments对象包含了函数运行时的所有参数，arguments[0]就是第一个参数，arguments[1]就是第二个参数，以此类推。这个对象只有在函数体内部，才可以使用。
+通过arguments对象的length属性，可以判断函数调用时到底带几个参数。
+正常模式下，arguments对象可以在运行时修改。严格模式下，arguments对象与函数参数不具有联动关系。也就是说，修改arguments对象不会影响到实际的函数参数。
+
+需要注意的是，虽然arguments很像数组，但它是一个对象。数组专有的方法（比如slice和forEach），不能在arguments对象上直接使用。如果要让arguments对象使用数组方法，真正的解决方法是将arguments转为真正的数组。
+```JavaScript
+// slice方法
+var args = Array.prototype.slice.call(arguments);
+
+// 逐一填入新数组
+var args = [];
+for (var i = 0; i < arguments.length; i++) {
+  args.push(arguments[i]);
+}
+```
+
+* 闭包  closure
+理解闭包，首先必须理解变量作用域。前面提到，JavaScript 有两种作用域：全局作用域和函数作用域。函数内部可以直接读取全局变量。但是，函数外部无法读取函数内部声明的变量。
+
+如果出于种种原因，需要得到函数内的局部变量。正常情况下，这是办不到的，只有通过变通方法才能实现。那就是在函数的内部，再定义一个函数。
+
+这就是 JavaScript 语言特有的"链式作用域"结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。
+
+既然f2可以读取f1的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！
+```JavaScript
+function f1() {
+  var n = 999;
+  // 闭包就是函数f2，即能够读取其他函数内部变量的函数。
+  function f2() {  
+    console.log(n);
+  }
+  return f2; 
+}
+
+var result = f1();
+result(); // 999
+```
+由于在 JavaScript 语言中，只有函数内部的子函数才能读取内部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。闭包最大的特点，就是它可以“记住”诞生的环境，比如f2记住了它诞生的环境f1，所以从f2可以得到f1的内部变量。在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。
+
+闭包的最大用处有两个，一个是可以读取函数内部的变量，另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。闭包可以看作是函数内部作用域的一个接口，闭包使得内部变量记住上一次调用时的运算结果。始终在内存中，不会在调用结束后，被垃圾回收机制回收。
+
+闭包的另一个用处，是封装对象的私有属性和私有方法。
+```JavaScript
+function Person(name) {
+  var _age;
+  function setAge(n) {
+    _age = n;
+  }
+  function getAge() {
+    return _age;
+  }
+
+  return {
+    name: name,
+    getAge: getAge,
+    setAge: setAge
+  };
+}
+
+var p1 = Person('张三');
+p1.setAge(25);
+p1.getAge() // 25
+
+// 上面代码中，函数Person的内部变量_age，通过闭包getAge和setAge，变成了返回对象p1的私有变量。
+```
+注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。
+
+
+* 立即调用的函数表达式 IIFE （Immediately-Invoked Function Expression）
+在 JavaScript 中，圆括号()是一种运算符，跟在函数名之后，表示调用该函数。比如，print()就表示调用print函数。
+
+有时，我们需要在定义函数之后，立即调用该函数。这时，你不能在函数的定义之后加上圆括号，这会产生语法错误。
+```JavaScript
+function(){ /* code */ }();  // Uncaught SyntaxError: Unexpected token (
+// 产生这个错误的原因是，function这个关键字即可以当作语句，也可以当作表达式。
+// 语句
+function f() {}
+
+// 表达式
+var f = function f() {}
+```
+为了避免解析上的歧义，JavaScript 引擎规定，如果function关键字出现在行首，一律解释成语句。因此，JavaScript 引擎看到行首是function关键字之后，认为这一段都是函数的定义，不应该以圆括号结尾，所以就报错了。
+
+解决方法就是不要让function出现在行首，让引擎将其理解成一个表达式。最简单的处理，就是将其放在一个圆括号里面。
+```JavaScript
+// 下面两种写法都是以圆括号开头，引擎就会认为后面跟的是一个表示式，而不是函数定义语句，所以就避免了错误。这就叫做“立即调用的函数表达式”，简称 IIFE。
+(function(){ /* code */ }());
+
+(function(){ /* code */ })();
+// 注意，上面两种写法最后的分号都是必须的。如果省略分号，遇到连着两个 IIFE，可能就会报错。
+
+// 推而广之，任何让解释器以表达式来处理函数定义的方法，都能产生同样的效果，比如下面三种写法。
+!function () { /* code */ }();
+~function () { /* code */ }();
+-function () { /* code */ }();
++function () { /* code */ }();
+```
+通常情况下，只对匿名函数使用这种“立即执行的函数表达式”。它的目的有两个：一是不必为函数命名，避免了污染全局变量；二是 IIFE 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
