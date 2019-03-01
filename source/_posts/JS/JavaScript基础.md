@@ -1179,6 +1179,158 @@ q = a ? b : c ? d : e ? f : g;   // 相当于 q = a ? b : (c ? d : (e ? f : g));
 2 ** 3 ** 2   // 512   相当于 2 ** (3 ** 2)
 ```
 
+### 数据类型的转换
+JavaScript 是一种动态类型语言，变量没有类型限制，可以随时赋予任意值。
+#### 强制转换
+强制转换主要指使用Number()、String()和Boolean()三个函数，手动将各种类型的值，分别转换成数字、字符串或者布尔值。
+* Number()  可以将任意类型的值转化成数值。分两种情况，一种是参数是原始类型的值，另一种是参数是对象。
+```JavaScript
+// 原始类型值的转换规则如下:
+// 数值：转换后还是原来的值
+Number(324) // 324
+
+// 字符串：如果可以被解析为数值，则转换为相应的数值
+Number('324') // 324
+
+// 字符串：如果不可以被解析为数值，返回 NaN
+Number('324abc') // NaN
+
+// 空字符串转为0
+Number('') // 0
+
+// 布尔值：true 转成 1，false 转成 0
+Number(true) // 1
+Number(false) // 0
+
+// undefined：转成 NaN
+Number(undefined) // NaN
+
+// null：转成0
+Number(null) // 0
+
+// Number函数将字符串转为数值，要比parseInt函数严格很多。基本上，只要有一个字符无法转成数值，整个字符串就会被转为NaN。
+parseInt('42 cats') // 42   parseInt逐个解析字符
+Number('42 cats') // NaN    Number函数整体转换字符串的类型
+
+// parseInt和Number函数都会自动过滤一个字符串前导和后缀的空格。
+parseInt('\t\v\r12.34\n') // 12
+Number('\t\v\r12.34\n') // 12.34
+
+// 对象:
+// 第一步，调用对象自身的valueOf方法。如果返回原始类型的值，则直接对该值使用Number函数，不再进行后续步骤。
+// 第二步，如果valueOf方法返回的还是对象，则改为调用对象自身的toString方法。如果toString方法返回原始类型的值，则对该值使用Number函数，不再进行后续步骤。
+// 第三步，如果toString方法返回的是对象，就报错
+
+//  Number方法的参数是对象时，将返回NaN，除非是包含单个数值的数组。
+Number({a: 1}) // NaN
+Number([1, 2, 3]) // NaN
+Number([5]) // 5
+
+// 默认情况下，对象的valueOf方法返回对象本身，所以一般总是会调用toString方法，而toString方法返回对象的类型字符串（比如[object Object]）
+Number({}) // NaN
+
+// valueOf和toString方法，都是可以自定义的。valueOf方法先于toString方法执行
+Number({
+  valueOf: function () {
+    return 2;
+  },
+  toString: function () {
+    return 3;
+  }
+})
+```
+* String()  将任意类型的值转化成字符串  分两种情况，一种是参数是原始类型的值，另一种是参数是对象。
+```JavaScript
+// 原始类型值:
+// 数值：转为相应的字符串。
+// 字符串：转换后还是原来的值。
+// 布尔值：true转为字符串"true"，false转为字符串"false"。
+// undefined：转为字符串"undefined"。
+// null：转为字符串"null"
+String(123) // "123"
+String('abc') // "abc"
+String(true) // "true"
+String(undefined) // "undefined"
+String(null) // "null"
+
+// 对象:  
+// String方法背后的转换规则，与Number方法基本相同，只是互换了valueOf方法和toString方法的执行顺序。
+// 先调用对象自身的toString方法。如果返回原始类型的值，则对该值使用String函数，不再进行以下步骤。
+// 如果toString方法返回的是对象，再调用原对象的valueOf方法。如果valueOf方法返回原始类型的值，则对该值使用String函数，不再进行以下步骤。
+// 如果valueOf方法返回的是对象，就报错。
+
+// String方法的参数如果是对象，返回一个类型字符串；如果是数组，返回该数组的字符串形式。
+String({a: 1}) // "[object Object]"
+String([1, 2, 3]) // "1,2,3"
+
+// valueOf和toString方法，都是可以自定义的。toString方法先于valueOf方法执行
+```
+* Boolean()   将任意类型的值转为布尔值
+```JavaScript
+// 它的转换规则相对简单：除了undefined、null、-0或+0、NaN、''（空字符串）五个值的转换结果为false，其他的值全部为true。
+Boolean(undefined) // false
+Boolean(null) // false
+Boolean(0) // false
+Boolean(NaN) // false
+Boolean('') // false
+
+// 所有对象（包括空对象）的布尔值都是true，甚至连false对应的布尔对象new Boolean(false)也是true
+Boolean({}) // true
+Boolean([]) // true
+Boolean(new Boolean(false)) // true
+// 因为 JavaScript 语言设计的时候，出于性能的考虑，如果对象需要计算才能得到布尔值，对于obj1 && obj2这样的场景，可能会需要较多的计算。为了保证性能，就统一规定，对象的布尔值为true。
+```
+* 自动转换
+自动转换是以强制转换为基础的。遇到以下三种情况时，JavaScript 会自动转换数据类型，即转换是自动完成的，用户不可见。
+```JavaScript
+// 第一种情况，不同类型的数据互相运算。
+123 + 'abc' // "123abc"
+
+// 第二种情况，对非布尔值类型的数据求布尔值。
+if ('abc') {console.log('true');}  // true
+
+// 第三种情况，对非数值类型的值使用一元运算符（即+和-）。
++ {foo: 'bar'} // NaN
+- [1, 2, 3] // NaN
+
+// 自动转换的规则是这样的：预期什么类型的值，就调用该类型的转换函数。比如，某个位置预期为字符串，就调用String函数进行转换。如果该位置即可以是字符串，也可能是数值，那么默认转为数值。 由于自动转换具有不确定性，而且不易除错，建议在预期为布尔值、数值、字符串的地方，全部使用Boolean、Number和String函数进行显式转换。
+// 自动转换为布尔值
+// JavaScript 遇到预期为布尔值的地方（比如if语句的条件部分），就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用Boolean函数。
+// 除了 undefined、null、+0或-0、NaN、''（空字符串）五个值，其他都是自动转为true。
+if ('abc') {console.log('true');}  // true
+expression ? true : false
+!! expression
+
+// 自动转换为字符串
+// JavaScript 遇到预期为字符串的地方，就会将非字符串的值自动转为字符串。具体规则是，先将复合类型的值转为原始类型的值，再将原始类型的值转为字符串。
+// 字符串的自动转换，主要发生在字符串的加法运算时。当一个值为字符串，另一个值为非字符串，则后者转为字符串。
+'5' + 1 // '51'
+'5' + true // "5true"
+'5' + {} // "5[object Object]"
+'5' + [] // "5"
+'5' + function (){} // "5function (){}"
+'5' + undefined // "5undefined"
+'5' + null // "5null"
+
+// 自动转换为数值
+// JavaScript 遇到预期为数值的地方，就会将参数值自动转换为数值。系统内部会自动调用Number函数。
+// 除了加法运算符（+）有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值。
+'5' - '2' // 3
+true - 1  // 0
+'5' * []    // 0
+false / '5' // 0
+'abc' - 1   // NaN
+// null转为数值时为0，而undefined转为数值时为NaN
+null + 1 // 1
+undefined + 1 // NaN
+// 一元运算符也会把运算子转成数值。
++'abc' // NaN
+-'abc' // NaN
++true // 1
+-false // 0
+```
+
+
 
 
 
