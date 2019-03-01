@@ -879,3 +879,49 @@ export function appendChild (node: Node, child: Node) {
 new Vue --> init --> $mount --> compile --> render --> vnode --> patch --> DOM
 
 
+### 组件化
+Vue.js 另一个核心思想是组件化。所谓组件化，就是把页面拆分成多个组件 (component)，每个组件依赖的 CSS、JavaScript、模板、图片等资源放在一起开发和维护。组件是资源独立的，组件在系统内部可复用，组件和组件之间可以嵌套。
+* createComponent
+在分析 createElement 的实现的时候，它最终会调用 _createElement 方法，如果 tag 是一个普通的 html 标签，像上一章的例子那样是一个普通的 div，则会实例化一个普通 VNode 节点，否则通过 createComponent 方法创建一个组件 VNode。
+// src/core/vdom/create-component.js
+```JavaScript
+export function createComponent (
+  Ctor: Class<Component> | Function | Object | void,
+  data: ?VNodeData,
+  context: Component,
+  children: ?Array<VNode>,
+  tag?: string
+): VNode | Array<VNode> | void {
+  if (isUndef(Ctor)) {
+    return
+  }
+
+  const baseCtor = context.$options._base
+
+  // plain options object: turn it into a constructor
+  if (isObject(Ctor)) {
+    Ctor = baseCtor.extend(Ctor)
+  }
+
+  // install component management hooks onto the placeholder node
+  installComponentHooks(data)
+
+  // return a placeholder vnode
+  const name = Ctor.options.name || tag
+  const vnode = new VNode(
+    `vue-component-${Ctor.cid}${name ? `-${name}` : ''}`,
+    data, undefined, undefined, undefined, context,
+    { Ctor, propsData, listeners, tag, children },
+    asyncFactory
+  )
+
+  return vnode
+}
+```
+createComponent 的逻辑也会有一些复杂，但主要就 3 个关键步骤：构造子类构造函数，安装组件钩子函数和实例化 vnode。
+
+
+
+
+
+
