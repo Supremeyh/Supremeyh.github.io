@@ -1280,7 +1280,7 @@ Boolean([]) // true
 Boolean(new Boolean(false)) // true
 // 因为 JavaScript 语言设计的时候，出于性能的考虑，如果对象需要计算才能得到布尔值，对于obj1 && obj2这样的场景，可能会需要较多的计算。为了保证性能，就统一规定，对象的布尔值为true。
 ```
-* 自动转换
+#### 自动转换
 自动转换是以强制转换为基础的。遇到以下三种情况时，JavaScript 会自动转换数据类型，即转换是自动完成的，用户不可见。
 ```JavaScript
 // 第一种情况，不同类型的数据互相运算。
@@ -1330,10 +1330,90 @@ undefined + 1 // NaN
 -false // 0
 ```
 
+### 错误处理机制
+#### Error 实例对象
+JavaScript 解析或运行时，一旦发生错误，引擎就会抛出一个错误对象。JavaScript 原生提供Error构造函数，所有抛出的错误都是这个构造函数的实例。
+```JavaScript
+var err = new Error('出错了');
+err.message // "出错了"
 
+// message：错误提示信息。 必须有message属性
+// name：错误名称（非标准属性）
+// stack：错误的堆栈（非标准属性）
 
+function throwit() {
+  throw new Error('');
+}
+function catchit() {
+  try {
+    throwit();
+  } catch(e) {
+    console.log(e.stack); // print stack trace
+    // Error
+    //    at throwit (~/examples/throwcatch.js:9:11)
+    //    at catchit (~/examples/throwcatch.js:3:9)
+    //    at repl:1:5
+    // 上面代码中，错误堆栈的最内层是throwit函数，然后是catchit函数，最后是函数的运行环境
+  }
+}
 
+catchit()
+```
+#### 原生错误类型
+Error实例对象是最一般的错误类型，在它的基础上，JavaScript 还定义了其他6种错误对象。也就是说，存在Error的6个派生对象。
+* SyntaxError 对象   
+解析代码时发生的语法错误。当Javascript语言解析代码时,Javascript引擎发现了不符合语法规范的token或token顺序时抛出SyntaxError.
+new SyntaxError([message[, fileName[, lineNumber]]])
 
+* ReferenceError 对象  
+引用一个不存在的变量时发生的错误，或者将一个值分配给无法分配的对象，比如对函数的运行结果或者this赋值
+
+* RangeError 对象  
+一个值超出有效范围时发生的错误。主要有几种情况，一是数组长度为负数，二是Number对象的方法参数超出范围，以及函数堆栈超过最大值。
+
+* TypeError 对象
+TypeError对象是变量或参数不是预期类型时发生的错误。比如，对字符串、布尔值、数值等原始类型的值使用new命令，就会抛出这种错误，因为new命令的参数应该是一个构造函数。 调用对象不存在的方法，也会抛出TypeError错误，因为obj.unknownMethod的值是undefined，而不是一个函数。
+
+* URIError 对象
+URI 相关函数的参数不正确时抛出的错误，主要涉及encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()、escape()和unescape()这六个函数。
+
+* EvalError 对象
+eval函数没有被正确执行时，会抛出EvalError错误。该错误类型已经不再使用了，只是为了保证与以前代码兼容，才继续保留。
+
+* 自定义错误
+除了 JavaScript 原生提供的七种错误对象，还可以定义自己的错误对象。
+```JavaScript
+function UserError(message) {
+  this.message = message || '默认信息';
+  this.name = 'UserError';
+}
+
+UserError.prototype = new Error();
+UserError.prototype.constructor = UserError;
+// 上面代码自定义一个错误对象UserError，让它继承Error对象。然后，就可以生成这种自定义类型的错误了。
+new UserError('这是自定义的错误！');
+```
+* throw 语句
+手动中断程序执行，抛出一个错误。throw可以抛出任何类型的值。也就是说，它的参数可以是任何值。
+遇到throw语句，程序就中止了。引擎会接收到throw抛出的信息，可能是一个错误实例，也可能是其他类型的值。
+
+* try...catch...finally
+一旦发生错误，程序就中止执行了。JavaScript 提供了try...catch结构，允许对错误进行处理，选择是否往下执行。
+```JavaScript
+try {
+  throw new Error('出错了');
+} catch(e) {  // catch接受一个参数，表示try代码块抛出的值
+  // 捕获错误，处理错误。 catch代码块捕获错误之后，程序不会中断，会按照正常流程继续执行下去
+    if (e instanceof SyntaxError) {
+      console.log(e.message)
+    } else if (e instanceof RangeError) {
+      console.log(e.message)
+    }
+} finally {
+  // 允许在最后添加一个finally代码块，表示不管是否出现错误，都必需在最后运行的语句
+  console.log('完成了');
+}
+```
 
 
 
