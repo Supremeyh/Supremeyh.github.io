@@ -1415,6 +1415,46 @@ try {
 }
 ```
 
+### 编程风格
+“编程风格”（programming style）指的是编写代码的样式规则，要考虑如何尽量使代码清晰易读、减少出错，风格一致。
+主要涉及缩进、区块、圆括号、行尾的分号、全局变量、变量声明、相等和严格相等、语句的合并、自增和自减运算符等。
+* switch...case 结构 
+建议switch...case结构可以用对象结构代替。switch...case结构要求，在每一个case的最后一行必须是break语句，否则会接着运行下一个case。这样不仅容易忘记，还会造成代码的冗长。而且，switch...case不使用大括号，不利于代码形式的统一。此外，这种结构类似于goto语句，容易造成程序流程的混乱，使得代码结构混乱不堪，不符合面向对象编程的原则。
+```JavaScript
+function doAction(action) {
+  switch (action) {
+    case 'hack':
+      return 'hack';
+    case 'slash':
+      return 'slash';
+    case 'run':
+      return 'run';
+    default:
+      throw new Error('Invalid action.');
+  }
+}
+
+// 建议改写成对象结构
+function doAction(action) {
+  var actions = {
+    'hack': function () {
+      return 'hack';
+    },
+    'slash': function () {
+      return 'slash';
+    },
+    'run': function () {
+      return 'run';
+    }
+  };
+
+  if (typeof actions[action] !== 'function') {
+    throw new Error('Invalid action.');
+  }
+
+  return actions[action]();
+}
+```
 
 
 
