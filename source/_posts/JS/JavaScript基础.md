@@ -1644,10 +1644,156 @@ debugger语句主要用于除错，作用是设置断点。如果有正在运行
 Chrome 浏览器中，当代码运行到debugger语句时，就会暂停运行，自动打开脚本源码界面。
 
 
+###  标准库
+#### Object 对象
+JavaScript 原生提供Object对象,JavaScript 的所有其他对象都继承自Object对象，即那些对象都是Object的实例。
+
+Object对象的原生方法分成两类：Object本身的方法与Object的实例方法。
+
+```JavaScript
+// Object对象本身的方法,即直接定义在Object对象的方法。
+Object.print = function (o) { console.log(o) };
+
+// Object的实例方法，即定义在Object原型对象Object.prototype上的方法。它可以被Object实例直接使用
+// 凡是定义在Object.prototype对象上面的属性和方法，将被所有实例对象共享
+Object.prototype.print = function () {
+  console.log(this);
+};
+
+var obj = new Object();
+obj.print() // {}
+```
+##### Object() 工具方法
+Object本身是一个函数，可以当作工具方法使用，将任意值转为对象。这个方法常用于保证某个值一定是对象。
+```JavaScript
+// 如果参数为空（或者为undefined和null），Object()返回一个空对象。
+var obj = Object();
+// 等同于
+var obj = Object(undefined);    // 将undefined和null转为对象，结果得到了一个空对象obj
+var obj = Object(null);
+obj instanceof Object // true
+
+// 如果参数是原始类型的值，Object方法将其转为对应的包装对象的实例(原始类型值对应的包装对象)
+var obj = Object(1);
+obj instanceof Object // true
+obj instanceof Number // true
+
+// 如果Object方法的参数是一个对象，它总是返回该对象，即不用转换。
+var arr = [];
+var obj = Object(arr); // 返回原数组
+obj === arr // true
+
+// 利用这一点，可以写一个判断变量是否为对象的函数。
+function isObject(value) {
+  return value === Object(value);
+}
+
+isObject([]) // true
+isObject(true) // false
+```
+#####  new Object() 构造函数
+Object不仅可以当作工具函数使用，还可以当作构造函数使用，即前面可以使用new命令。
+```JavaScript
+// Object构造函数的首要用途，是直接通过它来生成新对象。
+var obj = new Object();
+// 等同于
+var obj = {}
+
+// 可以接受一个参数，如果该参数是一个对象，则直接返回这个对象；如果是一个原始类型的值，则返回该值对应的包装对象
+var o1 = {a: 1}; 
+var o2 = new Object(o1);
+o1 === o2 // true
+
+// Object构造函数的用法与工具方法虽然用法相似,但语义不同，Object(value)表示将value转成一个对象，new Object(value)则表示新生成一个对象，它的值是value
+```
+#####  Object 的静态方法
+* Object.keys()，Object.getOwnPropertyNames()
+由于 JavaScript 没有提供计算对象属性个数的方法，所以可以用这两个方法代替。如Object.keys(obj).length 
+Object.keys方法的参数是一个对象，返回一个数组。该数组的成员都是该对象自身的（而不是继承的）可枚举的属性名。
+Object.getOwnPropertyNames方法与Object.keys类似，也是接受一个对象作为参数，返回一个数组，包含了该对象自身的所有(含不可枚举)属性名。
+* 对象属性模型的相关方法
+Object.getOwnPropertyDescriptor()：获取某个属性的描述对象。
+Object.defineProperty()：通过描述对象，定义某个属性。
+Object.defineProperties()：通过描述对象，定义多个属性。
+* 控制对象状态的方法
+Object.preventExtensions()：防止对象扩展。
+Object.isExtensible()：判断对象是否可扩展。
+Object.seal()：禁止对象配置。
+Object.isSealed()：判断一个对象是否可配置。
+Object.freeze()：冻结一个对象。
+Object.isFrozen()：判断一个对象是否被冻结
+* 原型链相关方法
+Object.create()：该方法可以指定原型对象和属性，返回一个新的对象。
+Object.getPrototypeOf()：获取对象的Prototype对象。
+
+##### Object 的实例方法
+除了静态方法，还有不少方法定义在Object.prototype对象。它们称为实例方法，所有Object的实例对象都继承了这些方法。
+* Object.prototype.valueOf()：返回当前对象对应的值。默认情况下返回对象本身。自动类型转换时会默认调用这个方法
+```JavaScript
+var obj = new Object();
+1 + obj // "1[object Object]"    默认调用valueOf()方法，求出obj的值再与1相加。可自定义valueOf方法
+```
+* Object.prototype.toString()：返回当前对象对应的字符串形式。默认情况下返回类型字符串。
+```JavaScript
+// 对于一个对象调用toString方法，会返回字符串[object Object]，该字符串说明对象的类型
+var o1 = new Object();
+o1.toString() // "[object Object]"
+
+var o2 = {a:1};
+o2.toString() // "[object Object]"
+
+// 数组、字符串、函数、Date 对象都分别部署了自定义的toString方法，覆盖了Object.prototype.toString原始方法。
+[1, 2, 3].toString() // "1,2,3"
+'123'.toString() // "123"
+
+(function () {
+  return 123;
+}).toString()
+// "function () {
+//   return 123;
+// }"
+
+(new Date()).toString()  // "Sun Mar 03 2019 13:11:11 GMT+0800 (China Standard Time)"
 
 
+// Object.prototype.toString方法返回对象的类型字符串，是一个十分有用的判断数据类型的方法。 不使用可能被覆盖的obj.toString()自定义方法。
+Object.prototype.toString.call(value)
+// 不同数据类型的Object.prototype.toString方法返回值如下。
+数值：返回[object Number]。
+字符串：返回[object String]。
+布尔值：返回[object Boolean]。
+undefined：返回[object Undefined]。
+null：返回[object Null]。
+数组：返回[object Array]。
+arguments 对象：返回[object Arguments]。
+函数：返回[object Function]。
+Error 对象：返回[object Error]。
+Math 对象：返回[object Math]。
+Date 对象：返回[object Date]。
+RegExp 对象：返回[object RegExp]。
+其他对象：返回[object Object]。
 
+// 利用这个特性，可以写出一个比typeof运算符更准确的类型判断函数。
+var type = function (o){
+  var s = Object.prototype.toString.call(o);
+  return s.match(/\[object (.*?)\]/)[1].toLowerCase();
+};
 
+type({}); // "object"
+
+// 在上面这个type函数的基础上，还可以加上专门判断某种类型数据的方法。
+['Null', 'Undefined', 'Object', 'Array', 'String', 'Number', 'Boolean', 'Function', 'RegExp'].forEach(function (t) {
+  type['is' + t] = function (o) {
+    return type(o) === t.toLowerCase();
+  };
+});
+
+type.isRegExp(/abc/) // true
+```
+* Object.prototype.toLocaleString()：返回当前对象对应的本地字符串形式。
+* Object.prototype.hasOwnProperty()：判断某个属性是否为当前对象自身的属性，还是继承自原型对象的属性。
+* Object.prototype.isPrototypeOf()：判断当前对象是否为另一个对象的原型。
+* Object.prototype.propertyIsEnumerable()：判断某个属性是否可枚举。
 
 
 
