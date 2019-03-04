@@ -1921,6 +1921,394 @@ obj.bar.push('c');
 obj.bar // ["a", "b", "c"]   obj.bar属性指向一个数组，obj对象被冻结以后，这个指向无法改变，即无法指向其他值，但是所指向的数组是可以改变的。
 ```
 
+#### Array 对象
+Array是 JavaScript 的原生对象，同时也是一个构造函数，可以用它生成新的数组。
+##### 构造函数 new Array()
+```JavaScript
+var arr = new Array(2);   // [ empty x 2 ] 生成一个两个成员的数组，每个位置都是空值
+// 如果没有使用new，运行结果也是一样的。等同于
+var arr = Array(2);
+
+// Array构造函数有一个很大的缺陷，就是不同的参数，会导致它的行为不一致。
+// 无参数时，返回一个空数组
+new Array() // []
+// 单个正整数参数，表示返回的新数组的长度
+new Array(2) // [ empty x 2 ]
+// 非正整数的数值作为参数，会报错
+new Array(3.2) // RangeError: Invalid array length
+new Array(-3) // RangeError: Invalid array length
+// 单个非数值（比如字符串、布尔值、对象等）作为参数，则该参数是返回的新数组的成员
+new Array('abc') // ['abc']
+new Array([1]) // [Array[1]]
+// 多参数时，所有参数都是返回的新数组的成员
+new Array(1, 2) // [1, 2]
+new Array('a', 'b', 'c') // ['a', 'b', 'c']
+
+// 因此，不建议使用它生成新数组，直接使用数组字面量是更好的做法
+var arr = new Array(1, 2); // bad
+var arr = [1, 2];  // good
+
+// 如果参数是一个正整数，返回数组的成员都是空位。虽然读取的时候返回undefined，但实际上该位置没有任何值。虽然可以取到length属性，但是取不到键名。
+var a = new Array(2);  // [empty × 2]
+var b = [undefined, undefined];  // [undefined, undefined]
+```
+#####  静态方法
+Array.isArray() 方法返回一个布尔值，表示参数是否为数组。它可以弥补 typeof 运算符的不足。
+```JavaScript
+// typeof 运算符只能显示数组的类型是Object，而Array.isArray() 方法可以识别数组。
+var arr = [1, 2, 3];
+typeof arr // "object"
+Array.isArray(arr) // true
+```
+#####  实例方法
+* valueOf() 方法是一个所有对象都拥有的方法，表示对该对象求值。不同对象的valueOf方法不尽一致，数组的valueOf方法返回数组本身。
+* toString() 方法也是对象的通用方法，数组的toString方法返回数组的字符串形式。
+```JavaScript
+var arr = [1, 2, 3];
+arr.valueOf() // [1, 2, 3]
+
+
+var arr = [1, 2, 3];
+arr.toString() // "1,2,3"
+
+var arr = [1, 2, 3, [4, 5, 6]];
+arr.toString() // "1,2,3,4,5,6"
+```
+* push() 方法用于在数组的末端添加一个或多个元素，并返回添加新元素后的数组长度。注意，该方法会改变原数组。
+* pop() 方法用于删除数组的最后一个元素，并返回该元素。注意，该方法会改变原数组。
+```JavaScript
+// push和pop结合使用，就构成了 LIFO（Last-In-First-Out，后进先出）的栈结构（stack）。最新添加的项最早被移除。比如，箱子里的书，后放入的先取出。
+arr.push('d') // 4
+arr // ["a", "b", "c", "d"]
+
+arr.pop() // 'd'   
+arr  // ["a", "b", "c"]   'd'是最后进入数组的，但是最早离开数组
+
+// 对空数组使用pop方法，不会报错，而是返回undefined。
+[].pop() // undefined
+```
+* shift()方法用于删除数组的第一个元素，并返回该元素。注意，该方法会改变原数组。
+* unshift()方法用于在数组的第一个位置添加元素，并返回添加新元素后的数组长度。注意，该方法会改变原数组。
+```JavaScript
+var arr = ['a', 'b', 'c'];
+arr.shift()  // 'a'
+arr  // ['b', 'c']
+
+arr.unshift('x');  // 3
+arr  // ["x", "b", "c"]
+
+// unshift()方法可以接受多个参数，这些参数都会添加到目标数组头部。
+arr.unshift('1', '2')  // 5
+arr  // ["1", "2", "x", "b", "c"]
+
+// push和shift结合使用，就构成了 FIFO(Fist-In-First-Out,先进先出) 队列结构（queue）。即在数组的后端添加项，从数组的前端移除项。比如，火车站排队买票，先到的先买，买好的先走。
+```
+* join()方法以指定参数作为分隔符，将所有数组成员连接为一个字符串返回。如果不提供参数，默认用逗号分隔。
+```JavaScript
+var a = [1, 2, 3, 4];
+
+a.join() // "1,2,3,4"
+a.join(' ') // '1 2 3 4'
+a.join(' | ') // "1 | 2 | 3 | 4"
+
+// 如果数组成员是undefined或null或空位，会被转成空字符串。
+[undefined, , null].join('#')  // '##'
+
+// 通过call方法，这个方法也可以用于字符串或类似数组的对象。
+var obj = { 0: 'a', 1: 'b', length: 2 };
+Array.prototype.join.call(obj, '-')  // "a-b"
+Array.prototype.join.call('hello', '-')  // "h-e-l-l-o"
+```
+* concat() 方法用于多个数组的合并。它将新数组的成员，添加到原数组成员的后部，然后返回一个新数组，原数组不变。
+```JavaScript
+['hello'].concat(['world'], ['!'])   // ["hello", "world", "!"]
+[].concat({a: 1}, {b: 2})  // [{ a: 1 }, { b: 2 }]
+
+// 除了数组作为参数，concat也接受其他类型的值作为参数，添加到目标数组尾部。
+[1, 2, 3].concat(4, 5, 6)   // [1, 2, 3, 4, 5, 6]
+
+// 如果数组成员包括对象，concat方法返回当前数组的一个浅拷贝。所谓“浅拷贝”，指的是新数组拷贝的是对象的引用，改变原对象以后，新数组跟着改变。
+var obj = { a: 1 };
+var oldArray = [obj];
+var newArray = oldArray.concat();
+obj.a = 2;
+newArray[0].a // 2
+```
+* reverse() 方法用于颠倒排列数组元素，返回改变后的数组。注意，该方法将改变原数组。
+* slice() 方法用于提取目标数组的一部分，返回一个新数组，它是一个由 start和 end（不包括end）决定的原数组的浅拷贝。原始数组不会被改变。
+```JavaScript
+// 它的第一个参数为起始位置（从0开始），第二个参数为终止位置（不含）。如果省略第二个参数，则一直返回到原数组的最后一个成员。
+arr.slice(start,end)
+
+// 如果slice没有参数，实际上等于返回一个原数组的拷贝。
+// 如果slice方法的参数是负数，则表示倒数计算的位置。
+// 如果第一个参数大于等于数组长度，或者第二个参数小于第一个参数，则返回空数组。
+
+// slice方法的一个重要应用，是将类似数组的对象转为真正的数组。
+Array.prototype.slice.call({ 0: 'a', 1: 'b', length: 2 })  // ['a', 'b']
+Array.prototype.slice.call(document.querySelectorAll("div"));
+Array.prototype.slice.call(arguments);
+```
+* splice方法用于删除原数组的一部分成员，并可以在删除的位置添加新的数组成员，返回值是被删除的元素。注意，该方法会改变原数组。
+```JavaScript
+arr.splice(index,howmany,item1,.....,itemX)
+// index 必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+// howmany	必需。要删除的项目数量。如果设置为 0，则不会删除项目。
+// item1, ..., itemX	可选。向数组添加的新项目。
+
+// 下面代码从原数组2号位置，删除了两个数组成员，还插入了两个新成员。
+var a = ['a', 'b', 'c', 'd'];
+a.splice(2, 2, 1, 2) // ["c", "d"]
+a // ["a", "b", 1, 2]
+
+// 如果只是单纯地插入元素，splice方法的第二个参数可以设为0。
+var b = [1, 1, 1];
+b.splice(1, 0, 2) // []
+b // [1, 2, 1, 1]
+
+// 如果只提供第一个参数，等同于将原数组在指定位置拆分成两个数组。
+var c = [1, 2, 3, 4];
+c.splice(2) // [3, 4]
+c // [1, 2]
+```
+* sort() 方法对数组成员进行排序，默认是按照字典顺序排序。排序后，原数组将被改变。
+```JavaScript
+arr.sort([compareFunction])
+
+// sort方法不是按照大小排序，而是按照字典顺序。也就是说，数值会被先转成字符串，再按照字符串Unicode码点进行比较
+['d', 'c', 'b', 'a'].sort()  // ['a', 'b', 'c', 'd']
+[8, 7, 9].sort()  // [7, 8, 9]
+[10111, 1101, 111].sort()  // [10111, 1101, 111]
+
+// 如果让sort方法按照自定义方式排序，可以传入一个函数作为参数。接受两个参数，表示进行比较的两个数组成员。
+// 如果返回值小于 0 ，那么 a 会被排列到 b 之前；
+// 如果返回值等于 0 ，那么  a 和 b 的相对位置不变；
+// 如果返回值大于 0 ，那么 b 会被排列到 a 之前。
+
+// 要比较数字而非字符串，比较函数可以简单的以 a和b相减。a-b升序，b-a降序。
+[8, 7, 9].sort(function (a, b) {
+  //a-b升序，b-a降序
+  return a - b;
+})
+// [7, 8, 9]
+```
+* map() 方法将数组的所有成员依次传入参数函数，然后把每一次的执行结果组成一个新数组返回，原数组没有变化。
+```JavaScript
+var new_arr = array.map(function(currentValue, index, arr), thisValue)
+// map方法接受一个函数作为参数，创建一个新数组。该函数调用时，map方法向它传入三个参数：当前成员currentValue、当前位置index和数组本身arr。 
+// 此外还可以接受第二个参数thisValue用来绑定回调函数内部的this。如果省略了 thisValue，或者传入 null、undefined，那么回调函数的 this 为全局对象。
+var arr = [1, 2, 3];
+arr.map(function (ele) {
+  return ele + 1;
+});
+// [2, 3, 4]
+arr  // [1, 2, 3]
+
+
+// 下面代码通过map方法的第二个参数，将回调函数内部的this对象，指向arr数组。
+var arr2 = ['a', 'b', 'c'];
+[1, 2].map(function (e) {
+  return this[e];
+}, arr2)
+// ['b', 'c']
+
+// 如果数组有空位，map方法的回调函数在这个位置不会执行，会跳过数组的空位。map方法不会跳过undefined和null，但是会跳过空位。
+var f = function (n) { return 'a' };
+[1,undefined, null,,2].map(f) // ["a", "a", "a", empty, "a"]
+```
+* forEach() 方法 对数组的所有成员依次执行参数函数。和map很相似，
+```JavaScript
+array.forEach(function(currentValue, index, arr), thisValue)
+
+// 但是，forEach方法不像 map() 或者 reduce()，它总是返回undefined值，只用来操作数据，并且不可链式调用。这就是说，如果数组遍历的目的是为了得到返回值，那么使用map方法，否则使用forEach方法。
+['a', 'b', 'c'].forEach(function(ele) {
+  console.log(ele);
+});
+// a b c
+
+// forEach方法也可以接受第二个参数，绑定参数函数的this变量。注意，如果使用箭头函数，thisArg 参数会被忽略，因为箭头函数在词法上绑定了 this 值。
+// forEach方法也不会跳过undefined和null，但是会跳过空位。
+var out = [];
+[1, 2, ,3].forEach(function(elem) {
+  this.push(elem * elem);
+}, out);
+
+out // (5) [1, 4, 0, NaN, 9] 注意索引2被跳过了，因为在数组的这个位置是空位
+
+// 注意，forEach方法无法中断执行或跳出循环，总是会将所有成员遍历完，除了抛出一个异常。若你需要提前终止循环，你可以使用for、for...of、every、some、find、findIndex，他们可以对数组元素判断，以便确定是否需要继续遍历。或者也可以使用 filter() 提前过滤出需要遍历的部分，再用 forEach() 处理。
+```
+* filter() 方法用于过滤数组成员，满足条件的成员组成一个新数组返回。如果没有通过测试则返回空数组。
+```JavaScript
+var new_array = array.filter(function(currentValue, index, arr), thisArg])
+
+// 它的参数是一个函数，所有数组成员依次执行该函数，返回结果为true的成员组成一个新数组返回。该方法不会改变原数组。
+[1, 2, 3, 4, 5].filter(function (ele) {
+  return (ele > 3);
+})
+// [4, 5]
+
+// filter方法的参数函数可以接受三个参数：当前成员，当前位置和整个数组。
+[1, 2, 3, 4, 5].filter(function (ele, index, arr) {
+  return index % 2 === 0;
+});
+// [1, 3, 5]
+
+// filter方法还可以接受第二个参数，用来绑定参数函数内部的this变量。
+var obj = { MAX: 3 };
+var myFilter = function (item) {
+  if (item > this.MAX) return true;  // 过滤器myFilter内部有this变量，它可以被filter方法的第二个参数obj绑定
+};
+
+var arr = [2, 8, 3, 4, 1, 3, 2, 9];
+arr.filter(myFilter, obj) // [8, 4, 9]  
+```
+* some()、every()
+这两个方法类似“断言”（assert），返回一个布尔值，表示判断数组成员是否符合某种条件。被调用时不会改变数组。
+它们接受一个函数作为参数，所有数组成员依次执行该函数。该函数接受三个参数：当前成员、当前位置和整个数组，然后返回一个布尔值。
+some方法是只要一个成员的返回值是true，则整个some方法的返回值就是true，否则返回false。
+every方法是所有成员的返回值都是true，整个every方法才返回true，否则返回false。
+```JavaScript
+// 语法
+array.some(function(currentValue, index, arr), thisArg)
+
+// 示例
+var arr = [1, 2, 3, 4, 5];
+arr.some(function (elem, index, arr) {
+  return elem >= 3;
+});
+// true
+
+// 使用箭头函数测试数组元素的值 更简洁
+[2, 5, 8, 1, 4].some(x => x > 10);  // false
+
+// 判断数组元素中是否存在某个值
+var fruits = ['apple', 'banana', 'mango', 'guava'];
+function checkAvailability(arr, val) {
+  return arr.some(function(arrVal) {
+    return val === arrVal;
+  });
+}
+
+checkAvailability(fruits, 'banana'); // true
+
+// 注意，对于空数组，some方法返回false，every方法返回true，回调函数都不会执行。
+function isEven(x) { return x % 2 === 0 }
+
+[].some(isEven) // false
+[].every(isEven) // true
+```
+* reduce()、reduceRight() 依次处理数组的每个成员，最终累计为一个值。
+它们的差别是，reduce是从左到右处理（从第一个成员到最后一个成员），reduceRight则是从右到左（从最后一个成员到第一个成员），其他完全一样。
+```JavaScript
+// reduce为数组中的每一个元素依次执行callback函数，不包括数组中被删除或从未被赋值的元素，对于空数组是不会执行回调函数的。接受四个参数：
+array.reduce(function(accumulator, currentValue, currentIndex, arr), initialValue)
+
+// 求数组里所有值的和
+var sum = [1, 2, 3, 4, 5].reduce(function (acc, cur) {
+  console.log(acc, cur);
+  return acc + cur;
+}, 0)
+// 1 2
+// 3 3
+// 6 4
+// 10 5
+// 15  最后结果
+// 可以写成箭头函数的形式
+var total = [ 1, 2, 3, 4, 5 ].reduce(( acc, cur ) => acc + cur, 0);  // 15
+
+// 注意：如果没有提供initialValue，reduce 会从索引1的地方开始执行 callback 方法，跳过第一个索引。如果提供initialValue，从索引0开始。
+// 如果数组为空且没有提供initialValue，会抛出TypeError 。如果数组仅有一个元素（无论位置如何）并且没有提供initialValue， 或者有提供initialValue但是数组为空，那么此唯一值将被返回并且callback不会被执行。
+// 因此，提供初始值通常更安全。
+
+
+// 下面是一个reduceRight方法的例子。
+function subtract(prev, cur) {
+  return prev - cur;
+}
+[3, 2, 1].reduce(subtract)       // 0    reduce方法相当于3减去2再减去1
+[3, 2, 1].reduceRight(subtract)  // -4   reduceRight方法相当于1减去2再减去3
+
+
+// 由于这两个方法会遍历数组，所以实际上还可以用来做一些遍历相关的操作。比如，找出字符长度最长的数组成员。
+function findLongest(entries) {
+  return entries.reduce(function (longest, entry) {
+    return entry.length > longest.length ? entry : longest;
+  }, '');
+}
+findLongest(['aaa', 'bb', 'c']) // "aaa"
+
+// 将二维数组转化为一维
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
+    return a.concat(b);
+},[]);
+
+// 数组去重
+let arr = [1,2,1,2,3,5,4,5,3,4,4];
+let result = arr.sort().reduce((init, current)=>{
+    if(init.length===0 || init[init.length-1]!==current){
+        init.push(current);
+    }
+    return init;
+}, []);
+result //[1,2,3,4,5]
+
+// 计算数组中每个元素出现的次数
+var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+var countedNames = names.reduce(function (allNames, name) { 
+  if (name in allNames) {
+    allNames[name]++;
+  }
+  else {
+    allNames[name] = 1;
+  }
+  return allNames;
+}, {});
+countedNames  // { 'Alice': 2, 'Bob': 1, 'Tiff': 1, 'Bruce': 1 }
+```
+* indexOf()，lastIndexOf()
+indexOf方法返回给定元素在数组中第一次出现的位置，如果没有出现则返回-1。
+```JavaScript
+var a = ['a', 'b', 'c'];
+a.indexOf('b') // 1
+a.indexOf('y') // -1
+
+// indexOf方法还可以接受第二个参数，表示搜索的开始位置。
+['a', 'b', 'c'].indexOf('a', 1) // -1
+
+// lastIndexOf方法返回给定元素在数组中最后一次出现的位置，如果没有出现则返回-1。
+var a = [2, 5, 9, 2];
+a.lastIndexOf(2) // 3
+a.lastIndexOf(7) // -1
+
+// 注意，这两个方法不能用来搜索NaN的位置，即它们无法确定数组成员是否包含NaN。这是因为这两个方法内部，使用严格相等运算符（===）进行比较，而NaN是唯一一个不等于自身的值。
+[NaN].indexOf(NaN) // -1
+[NaN].lastIndexOf(NaN) // -1
+```
+* 链式使用
+上面这些数组方法之中，有不少返回的还是数组，所以可以链式使用。
+```JavaScript
+var users = [
+  {name: 'tom', email: 'tom@example.com'},
+  {name: 'peter', email: 'peter@example.com'}
+];
+
+users
+  .map(function (user) {
+    return user.email;
+  })
+  .filter(function (email) {
+    return /^t/.test(email);
+  })
+  .forEach(function (email) {
+    console.log(email);
+  });
+// "tom@example.com"
+```
+
+
+
+
+
 
 
 
