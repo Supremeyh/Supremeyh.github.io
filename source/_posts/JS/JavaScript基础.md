@@ -2565,3 +2565,65 @@ str.split(separator, limit)  用指定的分隔符分割成字符串数组，以
 // split方法还可以接受第二个参数，限定返回数组的最大成员数。
 'a|b|c'.split('|', 2) // ["a", "b"]
 ```
+
+#### Math 对象
+Math是 JavaScript 的原生对象，提供各种数学功能。该对象不是构造函数，不能生成实例，所有的属性和方法都必须在Math对象上调用。
+* 静态属性
+Math对象的静态属性，提供以下一些数学常数。这些属性都是只读的，不能修改。
+```JavaScript
+Math.E：常数e。  // 2.718281828459045
+Math.LN2：2 的自然对数。 // 0.6931471805599453
+Math.LN10：10 的自然对数。 // 2.302585092994046
+Math.LOG2E：以 2 为底的e的对数。 // 1.4426950408889634
+Math.LOG10E：以 10 为底的e的对数。 // 0.4342944819032518
+Math.PI：常数π。 // 3.141592653589793
+Math.SQRT1_2：0.5 的平方根。 // 0.7071067811865476
+Math.SQRT2：2 的平方根。 // 1.4142135623730951
+```
+* 静态方法
+Math对象提供以下一些静态方法。
+```JavaScript
+Math.abs()：绝对值
+
+Math.ceil()：向上取整，大于参数值的最小整数（天花板值）
+Math.floor()：向下取整，小于参数值的最大整数（地板值）
+// 实现一个总是返回数值的整数部分的函数
+function ToInteger(x) {
+  x = Number(x);
+  return x < 0 ? Math.ceil(x) : Math.floor(x);
+}
+
+Math.max()：最大值  // 如果参数为空, 返回-Infinity
+Math.min()：最小值  // 如果参数为空, 返回Infinity
+
+Math.pow()：指数运算。以第一个参数为底数、第二个参数为幂的指数值
+// Math.pow(2, 3) // 8  等同于 2 ** 3
+
+Math.sqrt()：平方根。如果参数是一个负值，则返回NaN
+Math.log()：自然对数
+Math.exp()：e的指数。返回常数e的参数次方
+Math.round()：四舍五入。
+// 注意，它对负数的处理（主要是对0.5的处理）。
+// Math.round(-1.1) // -1
+// Math.round(-1.5) // -1
+// Math.round(-1.6) // -2
+
+Math.random()：伪随机数，[0, 1)之间
+// 任意范围的随机数生成函数如下。
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+// 任意范围的随机整数生成函数如下。
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+* 三角函数方法
+```JavaScript
+Math.sin()：返回参数的正弦（参数为弧度值）
+Math.cos()：返回参数的余弦（参数为弧度值）
+Math.tan()：返回参数的正切（参数为弧度值）
+Math.asin()：返回参数的反正弦（返回值为弧度值）
+Math.acos()：返回参数的反余弦（返回值为弧度值）
+Math.atan()：返回参数的反正切（返回值为弧度值
+```
