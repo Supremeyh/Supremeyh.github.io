@@ -2384,4 +2384,72 @@ String.prototype.double = function () {
 ```
 
 #### Number 对象
+Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。
+##### 包装对象 和 工具函数
+```JavaScript
+// 作为构造函数时，它用于生成值为数值的对象。
+var n = new Number(1);  // Number {1}
+// 作为工具函数时，它可以将任何类型的值转为数值。
+Number(true) // 1
+```
+##### 静态属性
+Number对象拥有以下一些静态属性（即直接定义在Number对象上的属性，而不是定义在实例上的属性）。
+```JavaScript
+Number.POSITIVE_INFINITY：正的无限，指向Infinity。
+Number.NEGATIVE_INFINITY：负的无限，指向-Infinity。
+Number.NaN：表示非数值，指向NaN。
+Number.MIN_VALUE：表示最小的正数（即最接近0的正数，在64位浮点数体系中为5e-324），相应的，最接近0的负数为-Number.MIN_VALUE。
+Number.MAX_SAFE_INTEGER：表示能够精确表示的最大整数，即9007199254740991。
+Number.MIN_SAFE_INTEGER：表示能够精确表示的最小整数，即-9007199254740991。
+```
+##### 实例方法
+Number对象有4个实例方法，都跟将数值转换成指定格式有关。
+```JavaScript
+Number.prototype.toString()  将一个数值转为字符串形式。
+// toString方法可以接受一个参数，表示输出的进制。如果省略这个参数，默认将数值先转为十进制，再输出字符串。
+// toString方法只能将十进制的数，转为其他进制的字符串。如果要将其他进制的数，转回十进制，需要使用parseInt方法。
+(10).toString() // "10"
+(10).toString(2) // "1010"
+(10).toString(8) // "12"
+(10).toString(16) // "a"
+// 通过方括号运算符也可以调用toString方法。
+10['toString'](2) // "1010"
+
+
+Number.prototype.toFixed()  将一个数转为指定位数的小数，然后返回这个小数对应的字符串
+// 参数为小数位数，有效范围为0到20，超出这个范围将抛出 RangeError 错误
+(10).toFixed(2) // "10.00"
+10.005.toFixed(2) // "10.01"
+
+
+Number.prototype.toExponential()  将一个数转为科学计数法形式
+// 参数是小数点后有效数字的位数，范围为0到20，超出这个范围，会抛出一个 RangeError 错误
+(10).toExponential()  // "1e+1"
+(10).toExponential(1) // "1.0e+1"
+
+
+Number.prototype.toPrecision()  将一个数转为指定位数的有效数字
+// 参数为有效数字的位数，范围是1到21，超出这个范围会抛出 RangeError 错误
+(12.34).toPrecision(1) // "1e+1"
+(12.34).toPrecision(2) // "12"
+(12.34).toPrecision(3) // "12.3"
+// toPrecision方法用于四舍五入时不太可靠，跟浮点数不是精确储存有关。
+(12.15).toPrecision(3) // "12.2"
+(12.45).toPrecision(3) // "12.4"
+```
+##### 自定义方法
+与其他对象一样，Number.prototype对象上面可以自定义方法，被Number的实例继承。
+```JavaScript
+// 由于add方法返回的还是数值，所以可以链式运算
+Number.prototype.subtract = function (x) {
+  return this - x;
+};
+(8).add(2).subtract(4)  // 6
+
+// 注意，数值的自定义方法，只能定义在它的原型对象Number.prototype上面，数值本身是无法自定义属性的。
+var n = 1;
+n.x = 1;
+n.x // undefined
+// 上面代码中，n是一个原始类型的数值。直接在它上面新增一个属性x，不会报错，但毫无作用，总是返回undefined。这是因为一旦被调用属性，n就自动转为Number的实例对象，调用结束后，该对象自动销毁。所以，下一次调用n的属性时，实际取到的是另一个对象，属性x当然就读不出来。
+```
 
