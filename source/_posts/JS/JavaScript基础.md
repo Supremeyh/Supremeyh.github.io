@@ -2120,7 +2120,7 @@ var f = function (n) { return 'a' };
 ```JavaScript
 array.forEach(function(currentValue, index, arr), thisValue)
 
-// 但是，forEach方法不像 map() 或者 reduce()，它总是返回undefined值，只用来操作数据，并且不可链式调用。这就是说，如果数组遍历的目的是为了得到返回值，那么使用map方法，否则使用forEach方法。
+// 但是，forEach方法不像 map() 或者 reduce()，它总是返回undefined值，只用来操作数据，并且不可链式调用(在一个链的最后执行副作用)。这就是说，如果数组遍历的目的是为了得到返回值，那么使用map方法，否则使用forEach方法。
 ['a', 'b', 'c'].forEach(function(ele) {
   console.log(ele);
 });
@@ -2304,29 +2304,3 @@ users
   });
 // "tom@example.com"
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
