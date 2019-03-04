@@ -2385,14 +2385,14 @@ String.prototype.double = function () {
 
 #### Number 对象
 Number对象是数值对应的包装对象，可以作为构造函数使用，也可以作为工具函数使用。
-##### 包装对象 和 工具函数
+* 包装对象 和 工具函数
 ```JavaScript
 // 作为构造函数时，它用于生成值为数值的对象。
 var n = new Number(1);  // Number {1}
 // 作为工具函数时，它可以将任何类型的值转为数值。
 Number(true) // 1
 ```
-##### 静态属性
+* 静态属性
 Number对象拥有以下一些静态属性（即直接定义在Number对象上的属性，而不是定义在实例上的属性）。
 ```JavaScript
 Number.POSITIVE_INFINITY：正的无限，指向Infinity。
@@ -2402,7 +2402,7 @@ Number.MIN_VALUE：表示最小的正数（即最接近0的正数，在64位浮�
 Number.MAX_SAFE_INTEGER：表示能够精确表示的最大整数，即9007199254740991。
 Number.MIN_SAFE_INTEGER：表示能够精确表示的最小整数，即-9007199254740991。
 ```
-##### 实例方法
+* 实例方法
 Number对象有4个实例方法，都跟将数值转换成指定格式有关。
 ```JavaScript
 Number.prototype.toString()  将一个数值转为字符串形式。
@@ -2437,7 +2437,7 @@ Number.prototype.toPrecision()  将一个数转为指定位数的有效数字
 (12.15).toPrecision(3) // "12.2"
 (12.45).toPrecision(3) // "12.4"
 ```
-##### 自定义方法
+* 自定义方法
 与其他对象一样，Number.prototype对象上面可以自定义方法，被Number的实例继承。
 ```JavaScript
 // 由于add方法返回的还是数值，所以可以链式运算
@@ -2453,3 +2453,115 @@ n.x // undefined
 // 上面代码中，n是一个原始类型的数值。直接在它上面新增一个属性x，不会报错，但毫无作用，总是返回undefined。这是因为一旦被调用属性，n就自动转为Number的实例对象，调用结束后，该对象自动销毁。所以，下一次调用n的属性时，实际取到的是另一个对象，属性x当然就读不出来。
 ```
 
+#### String 对象
+String对象是 JavaScript 原生提供的三个包装对象之一，用来生成字符串对象。
+```JavaScript
+var s1 = 'abc';
+var s2 = new String('abc');   // String {"abc"}
+typeof s1 // "string"
+typeof s2 // "object"
+s2.valueOf() // "abc"   返回的就是它所对应的原始字符串
+
+// 字符串对象是一个类似数组的对象（很像数组，但不是数组）。有数值键（0、1、2）和length属性，所以可以像数组那样取值。
+new String('abc')  // String {0: "a", 1: "b", 2: "c", length: 3}
+(new String('abc'))[1] // "b"
+
+// 除了用作构造函数，String对象还可以当作工具方法使用，将任意类型的值转为字符串。
+String(true) // "true"
+String(5) // "5"
+```
+* 静态方法 (即定义在对象本身，而不是定义在对象实例的方法）
+String.fromCharCode()  该方法的参数是一个或多个数值，代表 Unicode 码点，返回值是这些码点组成的字符串。
+```JavaScript
+String.fromCharCode()   // ""    参数为空，就返回空字符串
+String.fromCharCode(97) // "a"   否则，返回参数对应的 Unicode 字符串。
+String.fromCharCode(104, 101, 108, 108, 111)  // "hello"
+
+// 注意，该方法不支持 Unicode 码点大于0xFFFF的字符，即传入的参数不能大于0xFFFF（即十进制的 65535）。因码点大于0xFFFF的字符占用四个字节，而 JavaScript 默认支持两个字节的字符。这种情况下，必须拆成两个字符表示。
+```
+* 实例属性
+String.prototype.length  字符串实例的length属性返回字符串的长度。 如'abc'.length // 3
+
+* 实例方法
+```JavaScript
+str.charAt()  返回指定位置的字符，参数是从0开始编号的位置
+var s = new String('abc');
+s.charAt(1) // "b"
+// 这个方法完全可以用数组下标替代。
+'abc'[1] // "b"
+// 如果参数为负数，或大于等于字符串的长度，charAt返回空字符串。
+'abc'.charAt(-1) // ""
+
+
+str.charCodeAt()  方法返回字符串指定位置的 Unicode 码点（十进制表示），相当于String.fromCharCode()的逆操作
+'abc'.charCodeAt(1) // 98
+// 如果没有任何参数，charCodeAt返回首字符的 Unicode 码点。如果参数为负数，或大于等于字符串的长度，charCodeAt返回NaN。
+
+
+str.concat()  用于连接两个字符串，返回一个新字符串，不改变原字符串。
+可以接受多个参数。如果参数不是字符串，concat方法会将其先转为字符串，然后再连接。
+'a'.concat('b', 'c') // "abc"
+// 作为对比，加号运算符在两个运算数都是数值时，不会转换类型
+''.concat(1, 2, 3) // "123"
+1 + 2 + 3  // 6
+
+
+str.slice(start,end)  从原字符串取出子字符串并返回，不改变原字符串。它的第一个参数是子字符串的开始位置，第二个参数是子字符串的结束位置（不含）
+'JavaScript'.slice(0, 4) // "Java"
+
+
+str.substring(start,stop)从原字符串取出子字符串并返回，不改变原字符串。第一个参数表示子字符串的开始位置，第二个位置表示结束位置（不含）。不建议使用。
+'JavaScript'.substring(0, 4) // "Java"
+// 如果第一个参数大于第二个参数，substring方法会自动更换两个参数的位置。 如果参数是负数，substring方法会自动将负数转为0。
+'JavaScript'.substring(4, -3) // "Java"
+
+
+str.substr(start,length)  从原字符串取出子字符串并返回，不改变原字符串，跟slice和substring方法的作用相同。第一个参数是子字符串的开始位置（从0开始），第二个参数是子字符串的长度。如果省略第二个参数，则表示子字符串一直到原字符串的结束。
+'JavaScript'.substr(4, 6) // "Script"
+// 如果第一个参数是负数，表示倒数计算的字符位置。如果第二个参数是负数，将被自动转为0，因此会返回空字符串。
+'JavaScript'.substr(-6) // "Script"
+'JavaScript'.substr(4, -1) // ""
+
+str.indexOf() indexOf方法用于确定一个字符串在另一个字符串中第一次出现的位置，返回结果是匹配开始的位置。如果返回-1，就表示不匹配。indexOf方法还可以接受第二个参数，表示从该位置开始向后匹配。
+
+str.lastIndexOf()  lastIndexOf方法的用法跟indexOf方法一致，主要的区别是lastIndexOf从尾部开始匹配，indexOf则是从头部开始匹配。第二个参数表示从该位置起向前匹配。
+
+
+str.trim()  trim方法用于去除字符串两端的空格，返回一个新字符串，不改变原字符串。
+// 该方法去除的不仅是空格，还包括制表符（\t、\v）、换行符（\n）和回车符（\r）。
+'  hello world  '.trim()   // "hello world"
+'\r\nabc \t'.trim() // 'abc'
+
+str.toLowerCase()  将一个字符串全部转为小写。返回一个新字符串，不改变原字符串
+
+str.toUpperCase()  将一个字符串全部转为大写。返回一个新字符串，不改变原字符串
+
+
+str.match(regexp)  用于确定原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。如果没有找到匹配，则返回null。
+'cat, bat, sat, fat'.match('at') // ["at"]
+'cat, bat, sat, fat'.match('xt') // null
+// 返回的数组还有index属性和input属性，分别表示匹配字符串开始的位置和原始字符串。
+var matches = 'cat, bat, sat, fat'.match('at');
+matches.index // 1
+matches.input // "cat, bat, sat, fat"
+
+
+str.search(regexp)  用法基本等同于match，但是返回值为匹配的第一个位置。如果没有找到匹配，则返回-1。
+'cat, bat, sat, fat'.search('at') // 1
+
+
+str.replace(regexp, replacement)  用于替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有g修饰符的正则表达式）
+'aaa'.replace('a', 'b') // "baa"
+
+
+str.split(separator, limit)  用指定的分隔符分割成字符串数组，以将字符串分隔为子字符串，以确定每个拆分的位置
+'a|b|c'.split('|') // ["a", "b", "c"]
+// 如果分割规则为空字符串，则返回数组的成员是原字符串的每一个字符。与 Array.join() 执行的操作相反。
+'a|b|c'.split('') // ["a", "|", "b", "|", "c"]   
+// 如果省略参数，则返回数组的唯一成员就是原字符串。
+'a|b|c'.split() // ["a|b|c"]
+// 如果满足分割规则的两个部分紧邻着（即两个分割符中间没有其他字符），则返回数组之中会有一个空字符串。
+'a||c'.split('|') // ['a', '', 'c']
+// split方法还可以接受第二个参数，限定返回数组的最大成员数。
+'a|b|c'.split('|', 2) // ["a", "b"]
+```
