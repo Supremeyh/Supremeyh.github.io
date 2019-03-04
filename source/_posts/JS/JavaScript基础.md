@@ -2341,6 +2341,15 @@ new Boolean(true).valueOf() // true
 new Number(123).valueOf()  // 123
 new String('abc').valueOf() // "abc"
 new Boolean(true).valueOf() // true
+
+// 对于一些特殊值，如null、undefined、false， Boolean对象前面加不加new，会得到完全相反的结果，必须小心。
+if (Boolean(false)) {   // false
+  console.log('true');  // 无输出
+} 
+
+if (new Boolean(false)) {  // Boolean {false}
+  console.log('true');    // true
+}
 ```
 * 原始类型与实例对象的自动转换 
 原始类型的值，可以自动当作包装对象调用，即调用包装对象的属性和方法。这时，JavaScript 引擎会自动将原始类型的值转为包装对象实例，在使用后立刻销毁实例。
@@ -2373,3 +2382,6 @@ String.prototype.double = function () {
 'abc'.double()  // abcabc
 // 但是，这种自定义方法和属性的机制，只能定义在包装对象的原型上，如果直接对原始类型的变量添加属性，则无效。
 ```
+
+#### Number 对象
+
