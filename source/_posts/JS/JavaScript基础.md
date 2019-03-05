@@ -2822,3 +2822,108 @@ split(separator, [limit])：按照正则规则分割字符串，返回一个由�
 + 加号，1次或多次，等同于{1,}
 ```
 
+#### JSON 对象
+JSON 格式（JavaScript Object Notation）是一种用于数据交换的文本格式，2001年由 Douglas Crockford 提出，目的是取代繁琐笨重的 XML 格式。JSON 格式书写简单，一目了然；符合 JavaScript 原生语法，可以由解释引擎直接处理，不用另外添加解析代码。
+
+JSON 对值的类型和格式有严格的规定。注意，null、空数组和空对象都是合法的 JSON 值。
+复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
+原始类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和null（不能使用NaN, Infinity, -Infinity和undefined）。
+字符串必须使用双引号表示，不能使用单引号。
+对象的键名必须放在双引号里面。
+数组或对象最后一个成员的后面，不能加逗号。
+
+JSON对象是 JavaScript 的原生对象，用来处理 JSON 格式数据。它有两个静态方法：JSON.stringify()和JSON.parse()。
+* JSON.stringify() 方法用于将一个值转为 JSON 字符串。该字符串符合 JSON 格式，并且可以被JSON.parse方法还原。
+```JavaScript
+// 对于原始类型的字符串，转换结果会带双引号。因为将来还原的时候，内层双引号可以让引擎知道，这是一个字符串，而不是其他类型的值。
+JSON.stringify('abc') // ""abc""
+JSON.stringify([1, "false", false])  // "[1,"false",false]"
+JSON.stringify({ name: "张三" })  // "{"name":"张三"}"
+// 如果对象的属性是undefined、函数或 XML 对象，该属性会被JSON.stringify过滤。
+var obj = {a: undefined, b: function () {}};
+JSON.stringify(obj) // "{}"
+// 如果数组的成员是undefined、函数或 XML 对象，则这些值被转成null。
+var arr = [undefined, function () {}];
+JSON.stringify(arr) // "[null,null]"
+// 正则对象会被转成空对象。
+JSON.stringify(/foo/) // "{}"
+// JSON.stringify方法会忽略对象enumerable为false的属性。
+var obj = {};
+Object.defineProperties(obj, {
+  'bar': {
+    value: 2,
+    enumerable: false
+  }
+});
+JSON.stringify(obj); // "{}"
+
+// JSON.stringify方法还可以接受一个数组，作为第二个参数，指定需要转成字符串的属性。
+var obj = {
+  'prop1': 'value1',
+  'prop2': 'value2',
+  'prop3': 'value3'
+};
+var selectedProperties = ['prop1', 'prop2'];
+JSON.stringify(obj, selectedProperties)  // "{"prop1":"value1","prop2":"value2"}"
+// 这个类似白名单的数组，只对对象的属性有效，对数组无效。
+JSON.stringify(['a', 'b'], ['0'])  // "["a","b"]"
+// 第二个参数还可以是一个函数，用来更改JSON.stringify的返回值。如果处理函数返回undefined或没有返回值，则该属性会被忽略。
+function f(key, value) {
+  if (typeof value === "number") {
+    value = 2 * value;
+  }
+  return value;
+}
+JSON.stringify({ a: 1, b: 2 }, f)  // '{"a": 2,"b": 4}'
+
+// 还可以接受第三个参数，用于增加返回的 JSON 字符串的可读性。如果是数字，表示每个属性前面添加的空格（最多不超过10个）；如果是字符串（不超过10个字符），则该字符串会添加在每行前面。
+JSON.stringify({ p1: 1, p2: 2 }, null, 2);   // "{  "p1": 1,  "p2": 2  }"
+
+
+// JSON.stringify发现参数对象有toJSON方法，就直接使用这个方法的返回值作为参数，而忽略原对象的其他参数。
+var user = {
+  firstName: '三',
+  lastName: '张',
+  get fullName(){
+    return this.lastName + this.firstName;
+  },
+  toJSON: function () {
+    return {
+      name: this.lastName + this.firstName
+    };
+  }
+};
+JSON.stringify(user)  // "{"name":"张三"}"   若没有 //toJSON方法，则为 "{"firstName":"三","lastName":"张","fullName":"张三"}"
+// Date对象就有一个自己的toJSON方法。
+var date = new Date('2015-03-05');
+date.toJSON() // "2015-03-05T00:00:00.000Z"
+JSON.stringify(date) // "2015-03-05T00:00:00.000Z"
+// toJSON方法的一个应用是，将正则对象自动转为字符串。因为JSON.stringify默认不能转换正则对象，但是设置了toJSON方法以后，就可以转换正则对象了。
+var obj = {reg: /foo/};
+JSON.stringify(obj) // "{"reg":{}}"   不设置 toJSON 方法时
+RegExp.prototype.toJSON = RegExp.prototype.toString;  
+JSON.stringify(/foo/)  // ""/foo/""   设置 toJSON 方法时
+```
+* JSON.parse()  
+```JavaScript
+// 方法用于将 JSON 字符串转换成对应的值
+JSON.parse('{}') // {}
+JSON.parse('{"name": "张三"}');  // {name: "张三"}
+// 如果传入的字符串不是有效的 JSON 格式，JSON.parse方法将报错。
+JSON.parse("'String'")  // Uncaught SyntaxError: Unexpected token ' in JSON   
+// 为了处理解析错误，可以将JSON.parse方法放在try...catch代码块中。
+try {
+  JSON.parse("'String'");
+} catch(e) {
+  console.log('parsing error');
+}
+
+// JSON.parse方法可以接受一个处理函数，作为第二个参数，用法与JSON.stringify方法类似。如，
+function f(key, value) {
+  if (key === 'a') {
+    return value + 10;
+  }
+  return value;
+}
+JSON.parse('{"a": 1, "b": 2}', f)  // {a: 11, b: 2}
+```
