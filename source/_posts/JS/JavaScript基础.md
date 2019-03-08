@@ -3987,3 +3987,142 @@ function copyObject(orig) {
 }
 ```
 
+#### 严格模式
+正常的运行模式外，JavaScript 还有第二种运行模式：严格模式（strict mode），这种模式采用更加严格的 JavaScript 语法。
+##### 设计目的
+早期的 JS 语言有很多设计不合理的地方，但是为了兼容以前的代码，又不能改变老的语法，只能不断添加新的语法。严格模式是从 ES5 进入标准的，主要目的有以下几个。
+明确禁止一些不合理、不严谨的语法，减少 JavaScript 语言的一些怪异行为。
+增加更多报错的场合，消除代码运行的一些不安全之处，保证代码运行的安全。
+提高编译器效率，增加运行速度。
+为未来新版本的 JavaScript 语法做好铺垫。
+总之，严格模式体现了 JavaScript 更合理、更安全、更严谨的发展方向。
+##### 启用方法
+进入严格模式的标志，是一行字符串。老版本的引擎会把它当作一行普通字符串，加以忽略。新版本的引擎就会进入严格模式。
+'use strict';
+
+严格模式可以用于整个脚本(放在脚本文件的第一行，严格地说，只要前面不是产生实际运行结果的语句，可以不在第一行，比如直接跟在一个空的分号后面，或者跟在注释后面)，也可以只用于单个函数(放在函数体的第一行)。
+
+有时，需要把不同的脚本合并在一个文件里面。如果一个脚本是严格模式，另一个脚本不是，它们的合并就可能出错。严格模式的脚本在前，则合并后的脚本都是严格模式；如果正常模式的脚本在前，则合并后的脚本都是正常模式。这两种情况下，合并后的结果都是不正确的。这时可以考虑把整个脚本文件放在一个立即执行的匿名函数之中。
+
+##### 显式报错
+```JavaScript 
+// 只读属性不可写
+// 严格模式下，设置字符串的length属性，会报错。因为length是只读属性，严格模式下不可写。正常模式下，改变length属性是无效的，但不会报错。
+'use strict';
+'abc'.length = 5;  // Uncaught TypeError: Cannot assign to read only property 'length' of string 'abc'
+// 严格模式下，对只读属性赋值，或者删除不可配置（non-configurable）属性都会报错。
+'use strict';
+var obj = Object.defineProperty({}, 'a', {
+  value: 37,
+  writable: false,
+  configurable: false
+});
+obj.a = 123;  // Uncaught TypeError: Cannot add property a, object is not extensible
+delete obj.a  // Uncaught TypeError: Cannot delete property 'a' of #<Object>
+
+// 只设置了取值器的属性不可写
+// 严格模式下，对一个只有取值器（getter）、没有存值器（setter）的属性赋值，会报错。
+'use strict';
+var obj = {
+  get v() { return 1; }
+};
+obj.v = 2;  // Uncaught TypeError: Cannot set property v of #<Object> which has only a getter
+
+// 禁止扩展的对象不可扩展
+// 严格模式下，对禁止扩展的对象添加新属性，会报错。
+'use strict';
+var obj = {};
+Object.preventExtensions(obj);
+obj.v = 1;  // // Uncaught TypeError: Cannot add property v, object is not extensible
+
+// eval、arguments 不可用作标识名
+'use strict';
+var eval = 17;
+function arguments() { } // Uncaught SyntaxError: Unexpected eval or arguments in strict mode
+
+// 函数不能有重名的参数
+// 正常模式下，如果函数有多个重名的参数，可以用arguments[i]读取。严格模式下，这属于语法错误。
+function f(a, a, b) {
+  'use strict';
+  return a + b;
+}
+// Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+
+// 禁止八进制的前缀0表示法
+// 正常模式下，整数的第一位如果是0，表示这是八进制数，比如0100等于十进制的64。严格模式禁止这种表示法，整数第一位为0，将报错。
+'use strict';
+var n = 0100; // Uncaught SyntaxError: Octal literals are not allowed in strict mode.
+```
+##### 增强的安全措施
+严格模式增强了安全保护，从语法上防止了一些不小心会出现的错误。
+```JavaScript
+// 全局变量显式声明
+// 正常模式中，如果一个变量没有声明就赋值，默认是全局变量。严格模式下，变量都必须先声明，然后再使用。
+'use strict';
+v = 1; // Uncaught ReferenceError: v is not defined
+
+// 禁止 this 关键字指向全局对象
+// 正常模式下，函数内部的this可能会指向全局对象，严格模式禁止这种用法，避免无意间创造全局变量。
+// 严格模式
+function f() {
+  'use strict';
+  console.log(this === undefined);  // 严格模式的函数体内部this是undefined
+}
+f() // true   
+
+// 这种限制对于构造函数尤其有用。使用构造函数时，有时忘了加new，这时this不再指向全局对象，而是报错。
+function f() {
+  'use strict';
+  this.a = 1;
+};
+f();// 报错，this 未定义
+// 严格模式下，函数直接调用时（不使用new调用），函数内部的this表示undefined（未定义），因此可以用call、apply和bind方法，将任意值绑定在this上面。正常模式下，this指向全局对象，如果绑定的值是非对象，将被自动转为对象再绑定上去，而null和undefined这两个无法转成对象的值，将被忽略。
+// 正常模式
+function fun() {
+  return this;
+}
+fun() // window
+fun.call(2) // Number {2}
+fun.call(true) // Boolean {true}
+fun.call(null) // window
+fun.call(undefined) // window
+
+// 严格模式
+'use strict';
+function fun() {
+  return this;
+}
+fun() //undefined
+fun.call(2) // 2
+fun.call(true) // true
+fun.call(null) // null
+fun.call(undefined) // undefined
+
+
+// 禁止使用 fn.callee、fn.caller
+// 禁止使用 arguments.callee、arguments.caller
+
+// 禁止删除变量
+// 严格模式下无法删除变量，如果使用delete命令删除一个变量，会报错。只有对象的属性，且属性的描述对象的configurable属性设置为true，才能被delete命令删除。
+'use strict';
+var x;
+delete x; // 语法错误
+
+var obj = Object.create(null, {
+  x: {
+    value: 1,
+    configurable: true
+  }
+});
+delete obj.x; // 删除成功
+```
+##### 静态绑定
+JavaScript 语言的一个特点，就是允许“动态绑定”，即某些属性和方法到底属于哪一个对象，不是在编译时确定的，而是在运行时（runtime）确定的。
+
+严格模式对动态绑定做了一些限制。某些情况下，只允许静态绑定。也就是说，属性和方法到底归属哪个对象，必须在编译阶段就确定。这样做有利于编译效率的提高，也使得代码更容易阅读，更少出现意外。
+
+具体来说，涉及以下几个方面: 
+* 禁止使用 with 语句
+* 创设 eval 作用域。
+正常模式下，eval语句的作用域，取决于它处于全局作用域，还是函数作用域。严格模式下，eval语句本身就是一个作用域，不再能够在其所运行的作用域创设新的变量了，也就是说，eval所生成的变量只能用于eval内部。
+* arguments 不再追踪参数的变化。
