@@ -4308,3 +4308,91 @@ function launcher() {
 launcher();
 // 这段代码需要三秒完成整个脚本，处在串行执行和并行执行之间。通过调节limit变量，达到效率和资源的最佳平衡。
 ```
+
+#### 定时器
+JavaScript 提供定时执行代码的功能，叫做定时器（timer），主要由setTimeout()和setInterval()这两个函数来完成。它们向任务队列添加定时任务。
+
+* setTimeout() 
+setTimeout函数用来指定某个函数或某段代码，在多少毫秒之后执行。它返回一个整数，表示定时器的编号，以后可以用来取消这个定时器。
+var timerId = setTimeout(func, delay);  第二个参数如果省略，则默认为0。还允许更多的参数。它们将依次传入推迟执行的函数（回调函数）
+
+注意，如果回调函数是对象的方法，那么setTimeout使得方法内部的this关键字指向全局环境，而不是定义时所在的那个对象。
+```JavaScript
+// 下面代码输出的是1，而不是2。因为当obj.y在1000毫秒后运行时，this所指向的已经不是obj了，而是全局环境。
+var x = 1;
+var obj = {
+  x: 2,
+  y: function () {
+    console.log(this.x);
+  }
+};
+
+setTimeout(obj.y, 1000) // 1
+// 为了防止出现这个问题，一种解决方法是将obj.y放入一个函数中。这使得obj.y在obj的作用域执行，而不是在全局作用域内执行，所以能够显示正确的值。
+setTimeout(function () { obj.y(); }, 1000);  // 2
+// 另一种解决方法是，使用bind方法，将obj.y这个方法绑定在obj上面。
+setTimeout(obj.y.bind(obj), 1000)
+```
+* setInterval()
+setInterval函数的用法与setTimeout完全一致，区别仅仅在于setInterval指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行。
+
+setInterval指定的是“开始执行”之间的间隔，并不考虑每次任务执行本身所消耗的时间。因此实际上，两次执行之间的间隔会小于指定的时间。比如，setInterval指定每 100ms 执行一次，每次执行需要 5ms，那么第一次执行结束后95毫秒，第二次执行就会开始。如果某次执行耗时特别长，比如需要105毫秒，那么它结束后，下一次执行就会立即开始。
+
+为了确保两次执行之间有固定的间隔，可以不用setInterval，而是每次执行结束后，使用setTimeout指定下一次执行的具体时间。
+```JavaScript
+// 下面代码可以确保，下一次执行总是在本次执行结束之后的2000毫秒开始。
+var i = 1;
+var timer = setTimeout(function f() {
+  // ...
+  timer = setTimeout(f, 2000);
+}, 2000);
+```
+* clearTimeout()，clearInterval() 
+setTimeout和setInterval函数，都返回一个整数值，表示计数器编号。将该整数传入clearTimeout和clearInterval函数，就可以取消对应的定时器。
+```JavaScript
+// 下面代码中，回调函数f不会再执行了，因为定时器被取消了。
+var id1 = setTimeout(f, 1000);
+clearTimeout(id1);
+
+// 消当前所有的setTimeout定时器。
+(function() {
+  // 每轮事件循环检查一次
+  var gid = setInterval(clearAllTimeouts, 0);
+
+  function clearAllTimeouts() {
+    var id = setTimeout(function() {}, 0);
+    while (id > 0) {
+      if (id !== gid) {
+        clearTimeout(id);
+      }
+      id--;
+    }
+  }
+})();
+// 上面代码中，先调用setTimeout，得到一个计算器编号，然后把编号比它小的计数器全部取消。
+```
+* debounce 防抖动
+```JavaScript
+function debounce(fn, delay){
+  var timer = null; // 声明计时器
+  return function() {
+    var context = this;
+    var args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
+
+$('textarea').on('keydown', debounce(ajaxAction, 2500));
+// 上面代码中，只要在2500毫秒之内，用户再次击键，就会取消上一次的定时器，然后再新建一个定时器。这样就保证了回调函数之间的调用间隔，至少是2500毫秒。
+```
+* 运行机制
+setTimeout和setInterval的运行机制，是将指定的代码移出本轮事件循环，等到下一轮事件循环，再检查是否到了指定时间。如果到了，就执行对应的代码；否则，就继续等待。
+
+* setTimeout(f, 0)
+等到当前脚本的同步任务，全部处理完以后，才会执行setTimeout指定的回调函数f。也就是说，setTimeout(f, 0)会在下一轮事件循环一开始就执行。尽可能早地执行f，但是并不能保证立刻就执行f。
+
+实际上，setTimeout(f, 0)不会真的在0毫秒之后运行，不同的浏览器有不同的实现。以 Edge 浏览器为例，会等到4毫秒之后运行。如果电脑正在使用电池供电，会等到16毫秒之后运行；如果网页不在当前 Tab 页，会推迟到1000毫秒（1秒）之后运行。这样是为了节省系统资源。
+
