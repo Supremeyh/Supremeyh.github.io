@@ -4396,3 +4396,50 @@ setTimeout和setInterval的运行机制，是将指定的代码移出本轮事�
 
 实际上，setTimeout(f, 0)不会真的在0毫秒之后运行，不同的浏览器有不同的实现。以 Edge 浏览器为例，会等到4毫秒之后运行。如果电脑正在使用电池供电，会等到16毫秒之后运行；如果网页不在当前 Tab 页，会推迟到1000毫秒（1秒）之后运行。这样是为了节省系统资源。
 
+#### Promise 对象
+Promise 对象是 JavaScript 的异步操作解决方案，为异步操作提供统一接口。它起到代理作用（proxy），充当异步操作与回调函数之间的中介，使得异步操作具备同步操作的接口，让异步操作写起来，就像在写同步操作的流程，而不必一层层地嵌套回调函数，让回调函数变成了规范的链式写法，程序流程可以看得很清楚。
+
+Promise 还有一个传统写法没有的好处：它的状态一旦改变，无论何时查询，都能得到这个状态。这意味着，无论何时为 Promise 实例添加回调函数，该函数都能正确执行。所以，你不用担心是否错过了某个事件或信号。如果是传统写法，通过监听事件来执行回调函数，一旦错过了事件，再添加回调函数是不会执行的。
+
+* Promise 对象的状态
+Promise 对象通过自身的状态，来控制异步操作。Promise 实例具有三种状态。异步操作未完成（pending）、异步操作成功（fulfilled）、异步操作失败（rejected）。fulfilled和rejected合在一起称为resolved（已定型）。这三种的状态的变化途径只有两种。从“未完成”到“成功” 和 从“未完成”到“失败”。一旦状态发生变化，就凝固了，不会再有新的状态变化。这也是 Promise 这个名字的由来，它的英语意思是“承诺”，一旦承诺成效，就不得再改变了。这也意味着，Promise 实例的状态变化只可能发生一次。
+
+* Promise 构造函数
+JavaScript 提供原生的Promise构造函数，用来生成 Promise 实例。
+```JavaScript
+var promise = new Promise(function (resolve, reject) {
+  // ...
+
+  if (/* 异步操作成功 */){
+    resolve(value);
+  } else { /* 异步操作失败 */
+    reject(new Error());
+  }
+});
+```
+* 微任务
+Promise 的回调函数属于异步任务，会在同步任务之后执行。
+
+但是，Promise 的回调函数不是正常的异步任务，而是微任务（microtask）。它们的区别在于，正常任务追加到下一轮事件循环，微任务追加到本轮事件循环。这意味着，微任务的执行时间一定早于正常任务。
+```JavaScript
+// 下面代码会先输出2，再输出1。因为console.log(2)是同步任务，而then的回调函数属于异步任务，一定晚于同步任务执行。
+new Promise(function (resolve, reject) {
+  resolve(1);
+}).then(console.log);
+
+console.log(2);
+// 2 1
+
+
+// 下面代码的输出结果是321。这说明then的回调函数的执行时间，早于setTimeout(fn, 0)。因为then是本轮事件循环执行，setTimeout(fn, 0)在下一轮事件循环开始时执行。
+setTimeout(function() {
+  console.log(1);
+}, 0);
+
+new Promise(function (resolve, reject) {
+  resolve(2);
+}).then(console.log);
+
+console.log(3);
+// 3  2  1
+```
