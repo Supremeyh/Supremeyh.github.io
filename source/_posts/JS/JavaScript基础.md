@@ -4532,7 +4532,7 @@ DOM 的事件操作（监听和触发），都定义在EventTarget接口。所�
 * target.addEventListener(type, listener[, useCapture]);
 type：事件名称，大小写敏感。
 listener：监听函数。事件发生时，会调用该监听函数。
-useCapture：布尔值，表示监听函数是否在捕获阶段（capture）触发（参见后文《事件的传播》部分），默认为false（监听函数只在冒泡阶段被触发）。该参数可选。
+useCapture：布尔值，表示监听函数是否在捕获阶段（capture）触发，默认为false（监听函数只在冒泡阶段被触发）。该参数可选。
 
 第三个参数除了布尔值useCapture，还可以是一个属性配置对象。该对象有以下属性。
 capture：布尔值，表示该事件是否在捕获阶段触发监听函数。
@@ -4592,6 +4592,29 @@ div.onclick = function (event) {
 优点: 同一个事件可以添加多个监听函数。能够指定在哪个阶段（捕获阶段还是冒泡阶段）触发监听函数。除了 DOM 节点，其他对象（比如window、XMLHttpRequest等）也有这个接口，它等于是整个 JavaScript 统一的监听函数接口。
 
 以上三种this 的指向，监听函数内部的this指向触发事件的那个元素节点。
+
+#### Event 对象
+事件发生以后，会产生一个事件对象，作为参数传给监听函数。浏览器原生提供一个Event对象，所有的事件都是这个对象的实例，或者说继承了Event.prototype对象。
+
+Event对象本身就是一个构造函数，可以用来生成新的实例。
+
+```JavaScript
+event = new Event(type, options);
+// Event构造函数接受两个参数。第一个参数type是字符串，表示事件的名称；第二个参数options是一个对象，表示事件对象的配置。该对象主要有下面两个属性。
+// bubbles：布尔值，可选，默认为false，表示事件对象是否冒泡。若不显示地设置为true，生成的事件就只能在“捕获阶段”触发监听函数。
+// cancelable：布尔值，可选，默认为false，表示事件是否可以被取消，即能否用Event.preventDefault()取消这个事件。
+
+var ev = new Event(
+  'look',
+  {
+    'bubbles': true,
+    'cancelable': false
+  }
+);
+document.dispatchEvent(ev);
+```
+
+
 
 
 
