@@ -4560,3 +4560,38 @@ var event = new Event('click');
 para.dispatchEvent(event);
 // 上面代码在当前节点触发了click事件。
 ```
+#### 事件模型
+##### 监听函数
+* HTML 的 on- 属性
+HTML 语言允许在元素的属性中，直接定义某些事件的监听代码。  
+```JavaScript
+// 元素的事件监听属性，都是on加上事件名，比如onload就是on + load，表示load事件的监听代码。
+<p onload="doSomething()"></p>
+// 注意，这些属性的值是将会执行的代码，而不是一个函数。一旦指定的事件发生，on-属性的值是原样传入 JavaScript 引擎执行。
+// 因此如果要执行函数，不要忘记加上一对圆括号。
+
+// 使用这个方法指定的监听代码，只会在冒泡阶段触发。
+
+// 缺点: 同一个事件只能定义一个监听函数，也就是说，如果定义两次onclick属性，后一次定义会覆盖前一次。因此，也不推荐使用。
+```
+* 元素节点的事件属性
+元素节点对象的事件属性，同样可以指定监听函数。使用这个方法指定的监听函数，也是只会在冒泡阶段触发。
+```JavaScript
+window.onload = doSomething;
+
+div.onclick = function (event) {
+  console.log('触发事件');
+};
+// 注意，这种方法与 HTML 的on-属性的差异是，它的值是函数名（doSomething），而不像后者，必须给出完整的监听代码（doSomething()）。
+
+// 缺点: 违反了 HTML 与 JavaScript 代码相分离的原则，将两者写在一起，不利于代码分工，因此不推荐使用。
+```
+* EventTarget.addEventListener() 
+所有 DOM 节点实例都有addEventListener方法，用来为该节点定义事件的监听函数。
+
+优点: 同一个事件可以添加多个监听函数。能够指定在哪个阶段（捕获阶段还是冒泡阶段）触发监听函数。除了 DOM 节点，其他对象（比如window、XMLHttpRequest等）也有这个接口，它等于是整个 JavaScript 统一的监听函数接口。
+
+以上三种this 的指向，监听函数内部的this指向触发事件的那个元素节点。
+
+
+
