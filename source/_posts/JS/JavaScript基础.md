@@ -4614,6 +4614,27 @@ var ev = new Event(
 document.dispatchEvent(ev);
 ```
 
+#### 鼠标事件
+鼠标事件指与鼠标相关的事件，继承了MouseEvent接口。具体的事件主要有以下一些。
+click：按下鼠标（通常是按下主按钮）时触发。
+dblclick：在同一个元素上双击鼠标时触发。
+mousedown：按下鼠标键时触发。
+mouseup：释放按下的鼠标键时触发。
+mousemove：当鼠标在一个节点内部移动时触发。当鼠标持续移动时，该事件会连续触发。
+mouseenter：鼠标进入一个节点时触发，进入子节点不会触发这个事件。
+mouseover：鼠标进入一个节点时触发，进入子节点会再一次触发这个事件。
+mouseout：鼠标离开一个节点时触发，离开父节点也会触发这个事件。
+mouseleave：鼠标离开一个节点时触发，离开父节点不会触发这个事件。
+contextmenu：按下鼠标右键时（上下文菜单出现前）触发，或者按下“上下文菜单键”时触发。
+wheel：滚动鼠标的滚轮时触发，该事件继承的是WheelEvent接口。
+
+click事件指的是，用户在同一个位置先完成mousedown动作，再完成mouseup动作。因此，触发顺序是，mousedown首先触发，mouseup接着触发，click最后触发。
+dblclick事件则会在mousedown、mouseup、click之后触发。
+mouseover事件和mouseenter事件，都是鼠标进入一个节点时触发。区别是，mouseenter事件只触发一次，而只要鼠标在节点内部移动，mouseover事件会在子节点上触发多次。
+mouseout事件和mouseleave事件，都是鼠标离开一个节点时触发。区别是，在父元素内部离开一个子元素时，mouseleave事件不会触发，而mouseout事件会触发。
+
+
+
 
 
 
