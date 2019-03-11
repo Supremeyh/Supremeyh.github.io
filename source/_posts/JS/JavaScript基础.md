@@ -4371,7 +4371,7 @@ clearTimeout(id1);
 })();
 // 上面代码中，先调用setTimeout，得到一个计算器编号，然后把编号比它小的计数器全部取消。
 ```
-* debounce 防抖动
+* debounce 防抖  要连续操作结束后再执行
 ```JavaScript
 function debounce(fn, delay){
   var timer = null; // 声明计时器
@@ -4388,6 +4388,20 @@ function debounce(fn, delay){
 $('textarea').on('keydown', debounce(ajaxAction, 2500));
 // 上面代码中，只要在2500毫秒之内，用户再次击键，就会取消上一次的定时器，然后再新建一个定时器。这样就保证了回调函数之间的调用间隔，至少是2500毫秒。
 ```
+
+* throttle 节流  确保一段时间内只执行一次
+```JavaScript 
+function throttle(fn, wait) {
+  var time = Date.now();
+  return function() {
+    if ((time + wait - Date.now()) < 0) {
+      fn();
+      time = Date.now();
+    }
+  }
+}
+```
+
 * 运行机制
 setTimeout和setInterval的运行机制，是将指定的代码移出本轮事件循环，等到下一轮事件循环，再检查是否到了指定时间。如果到了，就执行对应的代码；否则，就继续等待。
 
