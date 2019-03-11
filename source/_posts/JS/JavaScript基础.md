@@ -4523,3 +4523,40 @@ DocumentFragment：文档的片段
 * removeChild()  接受一个子节点作为参数，用于从当前节点移除该子节点。返回值是移除的子节点。
 
 * replaceChild() 将一个新的节点，替换当前节点的某一个子节点。
+
+
+### 事件
+#### EventTarget 接口
+DOM 的事件操作（监听和触发），都定义在EventTarget接口。所有节点对象都部署了这个接口，其他一些需要事件通信的浏览器内置对象（比如，XMLHttpRequest、AudioNode、AudioContext）也部署了这个接口。
+
+* target.addEventListener(type, listener[, useCapture]);
+type：事件名称，大小写敏感。
+listener：监听函数。事件发生时，会调用该监听函数。
+useCapture：布尔值，表示监听函数是否在捕获阶段（capture）触发（参见后文《事件的传播》部分），默认为false（监听函数只在冒泡阶段被触发）。该参数可选。
+
+第三个参数除了布尔值useCapture，还可以是一个属性配置对象。该对象有以下属性。
+capture：布尔值，表示该事件是否在捕获阶段触发监听函数。
+once：布尔值，表示监听函数是否只触发一次，然后就自动移除。
+passive：布尔值，表示监听函数不会调用事件的preventDefault方法。如果监听函数调用了，浏览器将忽略这个要求，并在监控台输出一行警告。
+```JavaScript
+var para = document.getElementById('para');
+para.addEventListener('click', function (e) {
+  console.log(this.nodeName)  // 监听函数内部的this，指向当前事件所在的那个对象 para。
+}, {once: true});
+```
+* target.removeEventListener(type, listener[, useCapture]); 移除addEventListener方法添加的事件监听函数
+removeEventListener方法的参数，与addEventListener方法完全一致。它的第一个参数“事件类型”，大小写敏感。
+
+注意，removeEventListener方法移除的监听函数，必须是addEventListener方法添加的那个监听函数，而且必须在同一个元素节点，否则无效。
+```JavaScript
+div.addEventListener('click', listener, false);
+div.removeEventListener('click', listener, false);
+```
+* target.dispatchEvent(event) 在当前节点上触发指定事件，从而触发监听函数的执行
+该方法返回一个布尔值，只要有一个监听函数调用了Event.preventDefault()，则返回值为false，否则为true。dispatchEvent方法的参数是一个Event对象的实例。
+```JavaScript
+para.addEventListener('click', hello, false);
+var event = new Event('click');
+para.dispatchEvent(event);
+// 上面代码在当前节点触发了click事件。
+```
