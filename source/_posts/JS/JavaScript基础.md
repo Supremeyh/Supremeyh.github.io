@@ -4443,3 +4443,83 @@ new Promise(function (resolve, reject) {
 console.log(3);
 // 3  2  1
 ```
+
+
+### DOM
+#### DOM 概述
+* DOM
+DOM 是 JavaScript 操作网页的接口，全称为“文档对象模型”（Document Object Model）。它的作用是将网页转为一个 JavaScript 对象，从而可以用脚本进行各种操作（比如增删内容）。
+
+浏览器会根据 DOM 模型，将结构化文档（比如 HTML 和 XML）解析成一系列的节点，再由这些节点组成一个树状结构（DOM Tree）。所有的节点和最终的树状结构，都有规范的对外接口。
+
+* 节点
+DOM 的最小组成单位叫做节点（node）。文档的树形结构（DOM 树），就是由各种不同类型的节点组成。每个节点可以看作是文档树的一片叶子。
+
+节点的类型有七种:
+Document：整个文档树的顶层节点
+DocumentType：doctype标签（比如 !DOCTYPE html）
+Element：网页的各种HTML标签（比如 body>、a等）
+Attribute：网页元素的属性（比如class="right"）
+Text：标签之间或标签包含的文本
+Comment：注释
+DocumentFragment：文档的片段
+
+浏览器提供一个原生的节点对象Node，上面这七种节点都继承了Node，因此具有一些共同的属性和方法。
+
+* 节点树
+一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是 DOM 树。它有一个顶层节点，下一层都是顶层节点的子节点，然后子节点又有自己的子节点，就这样层层衍生出一个金字塔结构，倒过来就像一棵树。
+
+浏览器原生提供document节点，代表整个文档。文档的第一层只有一个节点，就是 HTML 网页的第一个标签 html，它构成了树结构的根节点（root node），其他 HTML 标签节点都是它的下级节点。除了根节点，其他节点都有三种层级关系。父节点关系（parentNode）、子节点关系（childNodes）、同级节点关系（sibling）。
+
+#### Node 接口
+所有 DOM 节点对象都继承了 Node 接口，拥有一些共同的属性和方法。这是 DOM 操作的基础。
+
+* nodeType  返回一个整数值，表示节点的类型
+不同节点的nodeType属性值和对应的常量如下。
+文档节点（document）：9，对应常量Node.DOCUMENT_NODE
+元素节点（element）：1，对应常量Node.ELEMENT_NODE
+属性节点（attr）：2，对应常量Node.ATTRIBUTE_NODE
+文本节点（text）：3，对应常量Node.TEXT_NODE
+文档片断节点（DocumentFragment）：11，对应常量Node.DOCUMENT_FRAGMENT_NODE
+文档类型节点（DocumentType）：10，对应常量Node.DOCUMENT_TYPE_NODE
+注释节点（Comment）：8，对应常量Node.COMMENT_NODE
+
+* nodeName  返回节点的名称
+不同节点的nodeName属性值如下。
+文档节点（document）：#document
+元素节点（element）：大写的标签名
+属性节点（attr）：属性的名称
+文本节点（text）：#text
+文档片断节点（DocumentFragment）：#document-fragment
+文档类型节点（DocumentType）：文档的类型
+注释节点（Comment）：#comment
+ 
+* nodeValue  返回一个字符串，表示当前节点本身的文本值，可读写
+只有文本节点（text）、注释节点（comment）和属性节点（attr）有文本值，因此这三类节点的nodeValue可以返回结果，其他类型的节点一律返回null。同样的，也只有这三类节点可以设置nodeValue属性的值，其他类型的节点设置无效。
+
+* baseURI  属性返回一个字符串，表示当前网页的绝对路径。
+浏览器根据这个属性，计算网页上的相对路径的 URL。该属性为只读。该属性的值一般由当前网址的 URL（即window.location属性）决定，但是可以使用 HTML 的 base标签，改变该属性的值。
+
+* nextSibling 返回紧跟在当前节点后面的第一个同级节点。如果当前节点后面没有同级节点，则返回null
+
+* previousSibling  返回当前节点前面的、距离最近的一个同级节点。如果当前节点前面没有同级节点，则返回null
+
+* parentNode  返回当前节点的父节点。
+对于一个节点来说，它的父节点只可能是三种类型：元素节点（element）、文档节点（document）和文档片段节点（documentfragment）
+
+* childNodes  返回一个类似数组的对象（NodeList集合），成员包括当前节点的所有子节点
+
+* firstChild 返回当前节点的第一个子节点，如果当前节点没有子节点，则返回null。
+
+* lastChild 
+
+* appendChild() 方法接受一个节点对象作为参数，将其作为最后一个子节点，插入当前节点。该方法的返回值就是插入文档的子节点。
+
+* hasChildNodes() 
+注意，子节点包括所有类型的节点，并不仅仅是元素节点。哪怕节点只包含一个空格，hasChildNodes方法也会返回true。
+
+* insertBefore() 将某个节点插入父节点内部的指定位置。
+
+* removeChild()  接受一个子节点作为参数，用于从当前节点移除该子节点。返回值是移除的子节点。
+
+* replaceChild() 将一个新的节点，替换当前节点的某一个子节点。
