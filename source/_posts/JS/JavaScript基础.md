@@ -4648,8 +4648,189 @@ mouseover事件和mouseenter事件，都是鼠标进入一个节点时触发。�
 mouseout事件和mouseleave事件，都是鼠标离开一个节点时触发。区别是，在父元素内部离开一个子元素时，mouseleave事件不会触发，而mouseout事件会触发。
 
 
+### BOM
+#### 浏览器环境概述
+* script 元素的defer 属性
+为了解决脚本文件下载阻塞网页渲染的问题，一个方法是对 script元素加入defer属性。它的作用是延迟脚本的执行，等到 DOM 加载生成后，再执行脚本。
+
+有了defer属性，浏览器下载脚本文件的时候，不会阻塞页面渲染。下载的脚本文件在DOMContentLoaded事件触发前执行（即刚刚读取完 html标签），而且可以保证执行顺序就是它们在页面上出现的顺序。
+
+* script 元素的async 属性
+async属性的作用是，使用另一个进程下载脚本，下载时不会阻塞渲染。
+
+async属性可以保证脚本下载的同时，浏览器继续渲染。需要注意的是，一旦采用这个属性，就无法保证脚本的执行顺序。哪个脚本先下载结束，就先执行那个脚本。另外，使用async属性的脚本文件里面的代码，不应该使用document.write方法。
+
+一般来说，如果脚本之间没有依赖关系，就使用async属性，如果脚本之间有依赖关系，就使用defer属性。如果同时使用async和defer属性，后者不起作用，浏览器行为由async属性决定。
+
+* 渲染引擎
+渲染引擎的主要作用是，将网页代码渲染为用户视觉可以感知的平面文档。不同的浏览器有不同的渲染引擎。
+Firefox：Gecko 引擎
+Safari：WebKit 引擎
+Chrome：Blink 引擎
+IE: Trident 引擎
+Edge: EdgeHTML 引擎
+
+* 重流和重绘
+渲染树转换为网页布局，称为“布局流”（flow）；布局显示到页面的这个过程，称为“绘制”（paint）。它们都具有阻塞效应，并且会耗费很多时间和计算资源。
+
+页面生成以后，脚本操作和样式表操作，都会触发“重流”（reflow）和“重绘”（repaint）。用户的互动也会触发重流和重绘，比如设置了鼠标悬停（a:hover）效果、页面滚动、在输入框中输入文本、改变窗口大小等等。
+
+重流和重绘并不一定一起发生，重流必然导致重绘，重绘不一定需要重流。比如改变元素颜色，只会导致重绘，而不会导致重流；改变元素的布局，则会导致重绘和重流。
+
+#### XMLHttpRequest 对象
+AJAX（Asynchronous JavaScript and XML)。AJAX 通过原生的XMLHttpRequest对象发出 HTTP 请求，得到服务器返回的数据后，再进行处理。
+```JavaScript
+var xhr = new XMLHttpRequest();
+
+xhr.open('GET', '/endpoint', true);
+
+xhr.onreadystatechange = function(){
+  // 通信成功时，通信状态值为4
+  if (xhr.readyState === 4){
+    if ((xhr.status >= 200 && xhr.status < 300) || (xhr.status === 304)){
+      console.log(xhr.responseText);
+    } else {
+      console.error(xhr.statusText);
+    }
+  }
+};
+
+xhr.onerror = function (e) {
+  console.error(xhr.statusText);
+};
+
+xhr.send(null);
+```
+* XMLHttpRequest.readyState 返回一个整数，表示实例对象的当前状态。该属性只读。它可能返回以下值。
+0，表示 XMLHttpRequest 实例已经生成，但是实例的open()方法还没有被调用。
+1，表示open()方法已经调用，但是实例的send()方法还没有调用，仍然可以使用实例的setRequestHeader()方法，设定 HTTP 请求的头信息。
+2，表示实例的send()方法已经调用，并且服务器返回的头信息和状态码已经收到。
+3，表示正在接收服务器传来的数据体（body 部分）。这时，如果实例的responseType属性等于text或者空字符串，responseText属性就会包含已经收到的部分信息。
+4，表示服务器返回的数据已经完全接收，或者本次接收已经失败。
+
+* XMLHttpRequest.withCredentials
+属性是一个布尔值，表示跨域请求时，用户信息（比如 Cookie 和认证的 HTTP 头信息）是否会包含在请求之中，默认为false，即向example.com发出跨域请求时，不会发送example.com设置在本机上的 Cookie（如果有的话）。
+
+如果需要跨域 AJAX 请求发送 Cookie，需要withCredentials属性设为true。注意，同源的请求不需要设置这个属性。
+
+为了让这个属性生效，服务器必须显式返回Access-Control-Allow-Credentials: true 这个头信息。
+
+withCredentials属性打开的话，跨域请求不仅会发送 Cookie，还会设置远程主机指定的 Cookie。反之也成立，如果withCredentials属性没有打开，那么跨域的 AJAX 请求即使明确要求浏览器设置 Cookie，浏览器也会忽略。
+
+注意，脚本总是遵守同源政策，无法从document.cookie或者 HTTP 回应的头信息之中，读取跨域的 Cookie，withCredentials属性不影响这一点。
+
+* XMLHttpRequest.upload
+XMLHttpRequest 不仅可以发送请求，还可以发送文件，这就是 AJAX 文件上传。发送文件以后，通过XMLHttpRequest.upload属性可以得到一个对象，通过观察这个对象，可以得知上传的进展。主要方法就是监听这个对象的各种事件：loadstart、loadend、load、abort、error、progress、timeout。
+```JavaScript
+<progress min="0" max="100" value="0">0% complete</progress>
+
+function upload(blobOrFile) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/server', true);
+  xhr.onload = function (e) {};
+
+  var progressBar = document.querySelector('progress');
+  xhr.upload.onprogress = function (e) {
+    if (e.lengthComputable) {
+      progressBar.value = (e.loaded / e.total) * 100;
+      // 兼容不支持 <progress> 元素的老式浏览器
+      progressBar.textContent = progressBar.value;
+    }
+  };
+
+  xhr.send(blobOrFile);
+}
+
+upload(new Blob(['hello world'], {type: 'text/plain'}));
+```
+* XMLHttpRequest.open() 方法用于指定 HTTP 请求的参数，或者说初始化 XMLHttpRequest 实例对象。
+它一共可以接受五个参数。
+method：表示 HTTP 动词方法，比如GET、POST、PUT、DELETE、HEAD等。
+url: 表示请求发送目标 URL。
+async: 布尔值，表示请求是否为异步，默认为true。如果设为false，则send()方法只有等到收到服务器返回了结果，才会进行下一步操作。该参数可选。由于同步 AJAX 请求会造成浏览器失去响应，许多浏览器已经禁止在主线程使用，只允许 Worker 里面使用。所以，这个参数轻易不应该设为false。
+user：表示用于认证的用户名，默认为空字符串。该参数可选。
+password：表示用于认证的密码，默认为空字符串。该参数可选
+
+注意，如果对使用过open()方法的 AJAX 请求，再次使用这个方法，等同于调用abort()，即终止请求。
+
+* XMLHttpRequest.send() 方法用于实际发出 HTTP 请求。
+它的参数是可选的，如果不带参数，就表示 HTTP 请求只有一个 URL，没有数据体，典型例子就是 GET 请求；如果带有参数，就表示除了头信息，还带有包含具体数据的信息体，典型例子就是 POST 请求。send方法的参数就是发送的数据。多种格式的数据，都可以作为它的参数。
+```JavaScript
+// 下面是 GET 请求的例子。
+var xhr = new XMLHttpRequest();
+xhr.open('GET',
+  'http://www.example.com/?id=' + encodeURIComponent(id),
+  true
+);
+xhr.send(null);
 
 
+// 下面是发送 POST 请求的例子。
+var xhr = new XMLHttpRequest();
+var data = 'email='
+  + encodeURIComponent(email)
+  + '&password='
+  + encodeURIComponent(password);
 
+xhr.open('POST', 'http://www.example.com', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.send(data);
+
+
+// 下面是发送表单数据的例子。FormData对象可以用于构造表单数据。
+var formData = new FormData();
+formData.append('username', '张三');
+formData.append('email', 'zhangsan@example.com');
+formData.append('birthDate', 2019);
+
+var xhr = new XMLHttpRequest();
+xhr.open('POST', '/register');
+xhr.send(formData);
+// 上面代码中，FormData对象构造了表单数据，然后使用send()方法发送。它的效果与发送下面的表单数据是一样的。
+<form id='registration' name='registration' action='/register'>
+  <input type='text' name='username' value='张三'>
+  <input type='email' name='email' value='zhangsan@example.com'>
+  <input type='number' name='birthDate' value='1940'>
+  <input type='submit' onclick='return sendForm(this.form);'>
+</form>
+```
+注意，所有 XMLHttpRequest 的监听事件，都必须在send()方法调用之前设定。
+
+* XMLHttpRequest.setRequestHeader() 方法用于设置浏览器发送的 HTTP 请求的头信息。
+该方法必须在open()之后、send()之前调用。如果该方法多次调用，设定同一个字段，则每一次调用的值会被合并成一个单一的值发送。
+
+该方法接受两个参数。第一个参数是字符串，表示头信息的字段名，第二个参数是字段值。
+```JavaScript
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.setRequestHeader('Content-Length', JSON.stringify(data).length);
+xhr.send(JSON.stringify(data));
+```
+
+* XMLHttpRequest.overrideMimeType() 方法用来指定 MIME 类型，覆盖服务器返回的真正的 MIME 类型，从而让浏览器进行不一样的处理。
+举例来说，服务器返回的数据类型是text/xml，由于种种原因浏览器解析不成功报错，这时就拿不到数据了。为了拿到原始数据，我们可以把 MIME 类型改成text/plain，这样浏览器就不会去自动解析，从而我们就可以拿到原始文本了。
+
+修改服务器返回的数据类型，不是正常情况下应该采取的方法。如果希望服务器返回指定的数据类型，可以用responseType属性告诉服务器。只有在服务器无法返回某种数据类型时，才使用overrideMimeType()方法。
+
+* XMLHttpRequest.getResponseHeader()  方法返回 HTTP 头信息指定字段的值
+如果还没有收到服务器回应或者指定字段不存在，返回null。该方法的参数不区分大小写。如果有多个字段同名，它们的值会被连接为一个字符串，每个字段之间使用“逗号+空格”分隔。
+
+* XMLHttpRequest.getAllResponseHeaders() 方法返回一个字符串，表示服务器发来的所有 HTTP 头信息。
+格式为字符串，每个头信息之间使用CRLF分隔（回车+换行），如果没有收到服务器回应，该属性为null。如果发生网络错误，该属性为空字符串。
+```JavaScript
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'foo.txt', true);
+xhr.send();
+
+xhr.onreadystatechange = function () {
+  if (this.readyState === 4) {
+    var lastModified = xhr.getResponseHeader("Last-Modified");
+    var headers = xhr.getAllResponseHeaders();
+     console.log(headers)
+     
+  }
+}
+```
+* XMLHttpRequest.abort() 方法用来终止已经发出的 HTTP 请求。
+调用这个方法以后，readyState属性变为4，status属性变为0
 
 
