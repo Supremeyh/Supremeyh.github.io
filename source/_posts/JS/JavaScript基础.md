@@ -4833,4 +4833,124 @@ xhr.onreadystatechange = function () {
 * XMLHttpRequest.abort() 方法用来终止已经发出的 HTTP 请求。
 调用这个方法以后，readyState属性变为4，status属性变为0
 
+#### 同源限制
+##### 概述
+* 含义
+浏览器安全的基石是“同源政策”（same-origin policy）。
+
+1995年，同源政策由 Netscape 公司引入浏览器。目前，所有浏览器都实行这个政策。最初，它的含义是指，A 网页设置的 Cookie，B 网页不能打开，除非这两个网页“同源”。所谓“同源”指的是“三个相同”。协议相同、域名相同、端口相同。
+
+举例来说，http://www.example.com/dir/page.html这个网址，协议是http://，域名是www.example.com，端口是80（默认端口可以省略）。
+
+* 目的
+同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。同源政策是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。
+
+* 限制范围 
+随着互联网的发展，同源政策越来越严格。目前，如果非同源，共有三种行为受到限制。
+（1） 无法读取非同源网页的 Cookie、LocalStorage 和 IndexedDB。
+（2） 无法接触非同源网页的 DOM。
+（3） 无法向非同源地址发送 AJAX 请求（可以发送，但浏览器会拒绝接受响应）。
+
+##### Cookie
+Cookie 是服务器写入浏览器的一小段信息，只有同源的网页才能共享。如果两个网页一级域名相同，只是次级域名不同，浏览器允许通过设置document.domain共享 Cookie。
+
+举例来说，A 网页的网址是http://w1.example.com/a.html，B 网页的网址是http://w2.example.com/b.html，那么只要设置相同的document.domain，两个网页就可以共享 Cookie。因为浏览器通过document.domain属性来检查是否同源。
+
+注意，A 和 B 两个网页都需要设置document.domain属性，才能达到同源的目的。因为设置document.domain的同时，会把端口重置为null，因此如果只设置一个网页的document.domain，会导致两个网址的端口不同，还是达不到同源的目的。
+
+注意，这种方法只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexedDB 无法通过这种方法，规避同源政策，而要使用 PostMessage API。
+
+另外，服务器也可以在设置 Cookie 的时候，指定 Cookie 的所属域名为一级域名，比如.example.com。 Set-Cookie: key=value; domain=.example.com; path=/ 。这样的话，二级域名和三级域名不用做任何设置，都可以读取这个 Cookie。
+
+##### iframe 和多窗口通信
+iframe元素可以在当前网页之中，嵌入其他网页。每个iframe元素形成自己的窗口，即有自己的window对象。iframe窗口之中的脚本，可以获得父窗口和子窗口。但是，只有在同源的情况下，父窗口和子窗口才能通信；如果跨域，就无法拿到对方的 DOM。
+
+这种情况不仅适用于iframe窗口，还适用于window.open方法打开的窗口，只要跨域，父窗口与子窗口之间就无法通信。
+
+如果两个窗口一级域名相同，只是二级域名不同，那么设置上一节介绍的document.domain属性，就可以规避同源政策，拿到 DOM。
+
+对于完全不同源的网站，目前有两种方法，可以解决跨域窗口的通信问题。片段识别符（fragment identifier）和 跨文档通信API（Cross-document messaging）。
+
+* 片段识别符
+片段标识符（fragment identifier）指的是，URL 的#号后面的部分，比如http://example.com/x.html#fragment的#fragment。如果只是改变片段标识符，页面不会重新刷新。
+
+* window.postMessage()
+跨文档通信 API（Cross-document messaging）为window对象新增了一个window.postMessage方法，允许跨窗口通信，不论这两个窗口是否同源。举例来说，父窗口aaa.com向子窗口bbb.com发消息，调用postMessage方法就可以了。
+
+postMessage方法的第一个参数是具体的信息内容，第二个参数是接收消息的窗口的源（origin），即“协议 + 域名 + 端口”。也可以设为*，表示不限制域名，向所有窗口发送。
+
+```JavaScript
+// 父窗口打开一个子窗口
+var popup = window.open('http://bbb.com', 'title');
+// 父窗口向子窗口发消息
+popup.postMessage('Hello World!', 'http://bbb.com');
+
+// 子窗口向父窗口发消息
+window.opener.postMessage('Nice to see you', 'http://aaa.com');
+
+
+// 父窗口和子窗口都可以通过message事件，监听对方的消息。
+window.addEventListener('message', function (event) {
+  console.log(event.data);
+},false);
+// event.source：发送消息的窗口
+// event.origin: 消息发向的网址
+// event.data: 消息内容
+
+// event.origin属性可以过滤不是发给本窗口的消息。
+window.addEventListener('message', receiveMessage);
+function receiveMessage(event) {
+  if (event.origin !== 'http://aaa.com') return;
+  if (event.data === 'Hello World') {
+    event.source.postMessage('Hello', event.origin);
+  } else {
+    console.log(event.data);
+  }
+}
+```
+通过window.postMessage，读写其他窗口的 LocalStorage 也成为了可能。
+
+##### AJAX
+同源政策规定，AJAX 请求只能发给同源的网址，否则就报错。除了架设服务器代理（浏览器请求同源服务器，再由后者请求外部服务），有三种方法规避这个限制。
+
+* JSONP
+JSONP 是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，老式浏览器全部支持，服务端改造非常小。
+
+它的基本思想是，网页通过添加一个 script元素，向服务器请求 JSON 数据，这种做法不受同源政策限制；服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。
+```JavaScript
+// 首先，网页动态插入<script>元素，由它向跨源网址发出请求。
+function addScriptTag(src) {
+  var script = document.createElement('script');
+  script.setAttribute("type","text/javascript");
+  script.src = src;
+  document.body.appendChild(script);
+}
+
+window.onload = function () {
+  addScriptTag('http://example.com/ip?callback=foo');
+}
+
+function foo(data) {
+  console.log('Your public IP address is: ' + data.ip);
+};
+// 上面代码通过动态添加<script>元素，向服务器example.com发出请求。该请求的查询字符串有一个callback参数，用来指定回调函数的名字，这对于 JSONP 是必需的。服务器收到这个请求以后，会将数据放在回调函数的参数位置返回。
+foo({
+  "ip": "8.8.8.8"
+});
+// 由于<script>元素请求的脚本，直接作为代码运行。这时，只要浏览器定义了foo函数，该函数就会立即调用。作为参数的 JSON 数据被视为 JavaScript 对象，而不是字符串，因此避免了使用JSON.parse的步骤。
+```
+* WebSocket 
+WebSocket 是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议不实行同源政策，只要服务器支持，就可以通过它进行跨源通信。
+
+浏览器发出的 WebSocket 请求的头信息有一个字段是Origin，表示该请求的请求源（origin），即发自哪个域名。正是因为有了Origin这个字段，所以 WebSocket 才没有实行同源政策。因为服务器可以根据这个字段，判断是否许可本次通信。如果该域名在白名单内，服务器就会做出相应回应。
+
+* CORS
+CORS 是跨源资源分享（Cross-Origin Resource Sharing）的缩写。它是 W3C 标准，属于跨源 AJAX 请求的根本解决方法。相比 JSONP 只能发GET请求，CORS 允许任何类型的请求。
+
+
+
+
+
+
+
 
