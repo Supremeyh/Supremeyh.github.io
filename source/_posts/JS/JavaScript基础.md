@@ -5002,12 +5002,42 @@ Access-Control-Max-Age: 1728000  //单位为秒 即允许缓存该条回应17280
 ```
 一旦服务器通过了“预检”请求，以后每次浏览器正常的 CORS 请求，就都跟简单请求一样，会有一个Origin头信息字段。服务器的回应，也都会有一个Access-Control-Allow-Origin头信息字段，每次回应都必定包含的。
 
+#### Location 对象 和 URL 对象
+##### Location 对象 
+Location对象是浏览器提供的原生对象，提供 URL 相关的信息和操作方法。通过window.location和document.location属性，可以拿到这个对象。
+```JavaScript
+// 当前网址为 http://user:passwd@www.example.com:4097/path/a.html?x=111#part1
+document.location.href  整个 URL  // "http://user:passwd@www.example.com:4097/path/a.html?x=111#part1"
+document.location.protocol   当前 URL 的协议，包括冒号（:）  // "http:"
+document.location.host  主机，包括冒号（:）和端口（默认的80端口和443端口会省略）  // "www.example.com:4097"
+document.location.hostname  主机名，不包括端口   // "www.example.com"
+document.location.port  端口号   // "4097"
+document.location.pathname   URL 的路径部分，从根路径/开始   // "/path/a.html"
+document.location.search  查询字符串部分，从问号?开始。   // "?x=111"
+document.location.hash  片段字符串部分，从#开始。   // "#part1"
+document.location.username  域名前面的用户名   // "user"
+document.location.password  域名前面的密码   // "passwd"
+document.location.origin  URL 的协议、主机名和端口   只读，其他属性都可写 // "http://user:passwd@www.example.com:4097"
+```
+location.origin 只有改属性是只读的，其他属性都可写。
+Location.href属性是浏览器唯一允许跨域写入的属性，即非同源的窗口可以改写另一个窗口（比如子窗口与父窗口）的Location.href属性，导致后者的网址跳转。
+直接改写location，相当于写入href属性。
 
+##### URL 的编码和解码
+网页的 URL 只能包含合法的字符。合法字符分成两类。
+URL 元字符：分号（;），逗号（,），斜杠（/），问号（?），冒号（:），at（@），&，等号（=），加号（+），美元符号（$），井号（#）
+语义字符：a-z，A-Z，0-9，连词号（-），下划线（_），点（.），感叹号（!），波浪线（~），星号（*），单引号（'），圆括号（()）
+除了以上字符，其他字符出现在 URL 之中都必须转义，规则是根据操作系统的默认编码，将每个字节转为百分号（%）加上两个大写的十六进制字母。
 
-
-
-
-
+JavaScript 提供四个 URL 的编码/解码方法。
+* encodeURI()
+用于转码整个 URL。它的参数是一个字符串，代表整个 URL。它会将元字符和语义字符之外的字符，都进行转义。
+* encodeURIComponent()
+用于转码 URL 的组成部分，会转码除了语义字符之外的所有字符，即元字符也会被转码。所以，它不能用于转码整个 URL。它接受一个参数，就是 URL 的片段。
+* decodeURI()
+用于整个 URL 的解码。它是encodeURI()方法的逆运算。它接受一个参数，就是转码后的 URL。
+* decodeURIComponent()
+用于URL 片段的解码。它是encodeURIComponent()方法的逆运算。它接受一个参数，就是转码后的 URL 片段。
 
 
 
