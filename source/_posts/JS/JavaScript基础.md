@@ -5040,11 +5040,89 @@ JavaScript 提供四个 URL 的编码/解码方法。
 用于URL 片段的解码。它是encodeURIComponent()方法的逆运算。它接受一个参数，就是转码后的 URL 片段。
 
 
+#### ArrayBuffer 对象 和 Blob 对象
+* ArrayBuffer 对象
+ArrayBuffer 对象表示一段二进制数据，用来模拟内存里面的数据。通过这个对象，JavaScript 可以读写二进制数据。这个对象可以看作内存数据的表达。
+
+浏览器原生提供ArrayBuffer()构造函数，用来生成实例。它接受一个整数作为参数，表示这段二进制数据占用多少个字节。
+
+var buffer = new ArrayBuffer(8);  实例对象buffer占用8个字节。
+
+ArrayBuffer 对象有实例方法slice()，用来复制一部分内存
 
 
+* Blob 对象 
+Blob (Binary Large Object)二进制大型对象，表示一个二进制文件的数据内容，比如一个图片文件的内容就可以通过 Blob 对象读写。它通常用来读写文件。它与 ArrayBuffer 的区别在于，它用于操作二进制文件，而 ArrayBuffer 用于操作内存。
+```JavaScript
+// 浏览器原生提供Blob()构造函数，用来生成实例对象。
+new Blob(array [, options])
+// Blob构造函数接受两个参数。第一个参数是数组，成员是字符串或二进制对象，表示新生成的Blob实例对象的内容；第二个参数是可选的，是一个配置对象，目前只有一个属性type，它的值是一个字符串，表示数据的 MIME 类型，默认是空字符串。
 
 
+// Blob具有两个实例属性size和type，分别返回数据的大小和类型。
+var htmlFragment = ['<a id="a"><b id="b">hey!</b></a>'];
+var myBlob = new Blob(htmlFragment, {type : 'text/html'});
+myBlob.size // 32
+myBlob.type // "text/html"
 
+
+// Blob具有一个实例方法slice，用来拷贝原来的数据，返回的也是一个Blob实例。
+myBlob.slice(start，end, contentType)
+// 三个可选参数。起始的字节位置（默认为0）、结束的字节位置（默认为size属性的值，该位置本身将不包含在拷贝的数据之中）、新实例的数据类型（默认为空字符串）。
+
+
+// 下载文件
+// AJAX 请求时，如果指定responseType属性为blob，下载下来的就是一个 Blob 对象。
+function getBlob(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.onload = function () {
+    callback(xhr.response);
+  }
+  xhr.send(null);
+}
+// 上面代码中，xhr.response拿到的就是一个 Blob 对象。
+
+
+// 生成 URL 
+// 浏览器允许使用URL.createObjectURL()方法，针对 Blob 对象生成一个临时 URL，以便于某些 API 使用。这个 URL 以blob://开头，表明对应一个 Blob 对象，协议头后面是一个识别符，用来唯一对应内存里面的 Blob 对象。这一点与data://URL（URL 包含实际数据）和file://URL（本地文件系统里面的文件）都不一样。
+// 浏览器处理 Blob URL 就跟普通的 URL 一样，如果 Blob 对象不存在，返回404状态码；如果跨域请求，返回403状态码。Blob URL 只对 GET 请求有效，如果请求成功，返回200状态码。由于 Blob URL 就是普通 URL，因此可以下载。
+
+
+// 读取文件
+// 取得 Blob 对象以后，可以通过FileReader对象，读取 Blob 对象的内容，即文件内容。
+// FileReader 对象提供四个方法，处理 Blob 对象。Blob 对象作为参数传入这些方法，然后以指定的格式返回。
+FileReader.readAsText()：返回文本，需要指定文本编码，默认为 UTF-8。
+FileReader.readAsArrayBuffer()：返回 ArrayBuffer 对象。
+FileReader.readAsDataURL()：返回 Data URL。
+FileReader.readAsBinaryString()：返回原始的二进制字符串
+
+// 下面是FileReader.readAsArrayBuffer()方法的例子，用于读取二进制文件。
+<input type="file" onchange="typefile(this.files[0])"></input>
+
+function typefile(file) {
+  // 文件开头的四个字节，生成一个 Blob 对象
+  var slice = file.slice(0, 4);
+  var reader = new FileReader();
+  // 读取这四个字节
+  reader.readAsArrayBuffer(slice);
+  reader.onload = function (e) {
+    var buffer = reader.result;
+    // 将这四个字节的内容，视作一个32位整数
+    var view = new DataView(buffer);
+    var magic = view.getUint32(0, false);
+    // 根据文件的前四个字节，判断它的类型
+    switch(magic) {
+      case 0x89504E47: file.verified_type = 'image/png'; break;
+      case 0x47494638: file.verified_type = 'image/gif'; break;
+      case 0x25504446: file.verified_type = 'application/pdf'; break;
+      case 0x504b0304: file.verified_type = 'application/zip'; break;
+    }
+    console.log(file.name, file.verified_type);
+  };
+}
+```
 
 
 
