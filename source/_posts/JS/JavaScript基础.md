@@ -5346,3 +5346,37 @@ function remove() {
 
 remove();
 ```
+
+#### Web Worker
+JavaScript 语言采用的是单线程模型，也就是说，所有任务只能在一个线程上完成，一次只能做一件事。前面的任务没做完，后面的任务只能等着。随着电脑计算能力的增强，尤其是多核 CPU 的出现，单线程带来很大的不便，无法充分发挥计算机的计算能力。
+
+Web Worker 的作用，就是为 JavaScript 创造多线程环境，允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务可以交由 Worker 线程执行，主线程（通常负责 UI 交互）能够保持流畅，不会被阻塞或拖慢。
+
+Worker 线程一旦新建成功，就会始终运行，不会被主线程上的活动（比如用户点击按钮、提交表单）打断。这样有利于随时响应主线程的通信。但是，这也造成了 Worker 比较耗费资源，不应该过度使用，而且一旦使用完毕，就应该关闭。
+
+Web Worker 有以下几个使用注意点。
+（1）同源限制。分配给 Worker 线程运行的脚本文件，必须与主线程的脚本文件同源。
+（2）DOM 限制。Worker 线程所在的全局对象，与主线程不一样，无法读取主线程所在网页的 DOM 对象，也无法使用document、window、parent这些对象。但是，Worker 线程可以使用navigator对象和location对象。
+（3）全局对象限制。Worker 的全局对象WorkerGlobalScope，不同于网页的全局对象Window，很多接口拿不到。比如，理论上 Worker 线程不能使用console.log，因为标准里面没有提到 Worker 的全局对象存在console接口，只定义了Navigator接口和Location接口。不过，浏览器实际上支持 Worker 线程使用console.log，保险的做法还是不使用这个方法。
+（4）通信联系。Worker 线程和主线程不在同一个上下文环境，它们不能直接通信，必须通过消息完成。
+（5）脚本限制。Worker 线程不能执行alert()方法和confirm()方法，但可以使用 XMLHttpRequest 对象发出 AJAX 请求。
+（6）文件限制。Worker 线程无法读取本地文件，即不能打开本机的文件系统（file://），它所加载的脚本，必须来自网络。
+
+```JavaScript
+// 浏览器原生提供Worker()构造函数，用来供主线程生成 Worker 线程。
+var myWorker = new Worker(jsUrl, options);
+// Worker()构造函数，可以接受两个参数。第一个参数是脚本的网址（必须遵守同源政策），该参数是必需的，且只能加载 JS 脚本，否则会报错。第二个参数是配置对象，该对象可选。它的一个作用就是指定 Worker 的名称，用来区分多个 Worker 线程。
+
+
+// 主线程
+var myWorker = new Worker('worker.js', { name : 'myWorker' });
+// Worker 线程
+self.name // myWorker
+
+Worker()构造函数返回一个 Worker 线程对象，用来供主线程操作 Worker。Worker 线程对象的属性和方法如下。
+Worker.onerror：指定 error 事件的监听函数。
+Worker.onmessage：指定 message 事件的监听函数，发送过来的数据在Event.data属性中。
+Worker.onmessageerror：指定 messageerror 事件的监听函数。发送的数据无法序列化成字符串时，会触发这个事件。
+Worker.postMessage()：向 Worker 线程发送消息。
+Worker.terminate()：立即终止 Worker 线程
+```
