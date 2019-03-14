@@ -23,8 +23,13 @@ JavaScript 也是一种嵌入式（embedded）语言。它本身提供的核心�
 静态类型语言，是指数据类型的检查是在运行前（如编译阶段）做的。
 
 * JavaScript语言的历史
-
 1995年5月，Brendan Eich只用了10天，就设计完成了这种语言的第一版。
+基本语法：借鉴C语言和Java语言。
+数据结构：借鉴Java语言，包括将值分成原始值和对象两大类。
+函数的用法：借鉴Scheme语言和Awk语言，将函数当作第一等公民，并引入闭包。
+原型继承模型：借鉴Self语言（Smalltalk的一种变种）。
+正则表达式：借鉴Perl语言。
+字符串和数组处理：借鉴Python语言。
 
 1996年，样式表标准CSS第一版发布。
 1997年，DHTML（Dynamic HTML，动态HTML）发布，允许动态改变网页内容。这标志着DOM模式（Document Object Model，文档对象模型）正式应用。
