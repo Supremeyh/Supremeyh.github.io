@@ -13,3 +13,8 @@ cd /usr/local/bin/
 ln -s "/Applications/Visual Studio Code.app/Contents/MacOS/Electron" vscode
 ```
 即可通过 vscode /Users/sea/Desktop/OnGoing/HelloWorld/FullStack/Hexo 启动vscode，并打开Hexo目录。
+
+* 常用快捷键
+打开命令面板 Ctrl+Shift+P
+跳转到行  Ctrl+G 
+
