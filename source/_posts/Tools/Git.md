@@ -10,6 +10,10 @@ tags: ['Tools', 'Hexo']
 * git log 
 * git reflog 
 
+### 拷贝代码
+* git clone git@github.com:Supremeyh/Supremeyh.github.io.git  不指定分支 
+* git clone -b sea git@github.com:Supremeyh/Supremeyh.github.io.git 指定分支
+
 ### 取回远程origin主机dev分支与本地sea分支合并
 * git pull origin dev:sea
 
