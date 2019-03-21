@@ -57,13 +57,16 @@ function deepClone(source){
 由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露
 
 5. 介绍一下 JavaScript 原型，原型链
-每一个构造函数都拥有一个prototype属性，这个属性指向一个对象，也就是原型对象prototype；原型对象默认拥有一个constructor属性，指向它的那个构造函数；每个对象(实例)都拥有一个隐藏的属性__prototype__，指向它的原型对象。
+每一个构造函数都拥有一个prototype属性，这个属性指向一个对象，也就是原型对象prototype；原型对象默认拥有一个constructor属性，指向它的那个构造函数；每个对象(实例)都拥有一个隐藏的属性__prototype__，指向它的原型对象。Person.prototype构造函数的原型属性与p.__proto__ 实例对象的原型对象是一个东西，只是从不同的角度访问原型。
 
 JavaScript中所有的对象都是由它的原型对象继承而来。而原型对象自身也是一个对象，它也有自己的原型对象，这样层层上溯，就形成了一个类似链表的结构，这就是原型链
 所有原型链的终点都是Object函数的prototype属性。Objec.prototype指向的原型对象同样拥有原型，不过它的原型是null，而null则没有原型。
 
 6. JavaScript 如何实现继承
 * 原型链继承
+JavaScript语言不像面向对象的编程语言中有类的概念，所以也就没有类之间直接的继承，JavaScript中只有对象，使用函数模拟类，基于对象之间的原型链来实现继承关系，
+ES6的语法中新增了class关键字，但也只是语法糖，内部还是通过函数和原型链来对类和继承进行实现。
+
 最简单的继承实现方式。来自原型对象的所有属性被所有实例共享；创建子类实例时，无法向父类构造函数传参；为子类新增属性和方法，必须要在new语句之后执行，不能放到构造器中。
 ```JavaScript
 function Animal() {}
@@ -124,11 +127,11 @@ var foo = new Foo()
 
 // 创建了一个新的空对象
 var obj = new Object() 
- // 设置原型链。让这个obj对象的 __proto__指向函数的原型prototype 
-obj.__proto__ = Foo.prototype 
-// 让Foo中的this指向新创建的obj对象，并执行Foo的函数体。属性和方法被加入到 this 引用的对象中
+ // 设置原型链。将改空对象obj的 __proto__指向构造函数的原型
+obj.__proto__ = Foo.prototype   // 或者 Object.setPrototypeOf(obj, Foo.prototype)
+// 以该对象为上下文执行构造函数。 让Foo中的this指向新创建的obj对象，并执行Foo的函数体，属性和方法被加入到 this 引用的对象中
 var result = Foo.call(obj)  
-// 判断Foo的返回值类型。如果有 return 出来东西是引用类型(对象)的话就直接返回 return 的内容，没有的话就返回创建的这个对象
+// 判断Foo的返回值类型，返回。如果有 return 出来东西是引用类型(对象)的话就直接返回 return 的内容，没有的话就返回创建的这个对象
 return typeof result === 'object' ? result : obj  
 
 // 用代码表示
@@ -143,4 +146,20 @@ function NewFunc(func){
   }
   return ret
 }
+```
+
+8. Object.create() 如何实现的
+```JavaScript
+// object.create(proto, properties) 使用指定的原型对象及额外的属性去创建一个新的对象
+Object.create = function (obj, properties)  {
+  var F = function () {}
+  F.prototype = obj
+  if (properties) {
+     Object.defineProperties(F, properties)
+  }
+  return new F()
+}
+
+Object.create({}, {a: {value: 1}})  // {a: 1}
+// Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
