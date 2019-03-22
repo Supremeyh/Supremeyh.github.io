@@ -162,3 +162,17 @@ Object.create = function (obj, properties)  {
 Object.create({}, {a: {value: 1}})  // {a: 1}
 // Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
+
+9. ({}+{}).length
+* 2018最新Web前端经典面试试题及答案-史上最全前端面试题(含答案)， https://blog.csdn.net/xm1037782843/article/details/80708533
+* 2018最新Web前端经典面试试题及答案， https://blog.csdn.net/wdlhao/article/details/79079660
+```JavaScript
+解析：
+1、数+数 = 数（int float）
+2、数+null = 数
+3、数+其他数据类型 = string （强制转换成string 再相加）
+4、其他数据类型 + 其他数据类型 = string(强制转换成string 再相加)
+答案：({}+{}).length 等价于 ({}.toString() + {}.toString()).length，{}.toString()的值为[object Object]，所以最后结果为30。
+```
+
+
