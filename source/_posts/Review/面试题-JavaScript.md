@@ -175,4 +175,85 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 答案：({}+{}).length 等价于 ({}.toString() + {}.toString()).length，{}.toString()的值为[object Object]，所以最后结果为30。
 ```
 
+10. 内存泄露
+当创建对象和字符串等时，JavaScript就会分配内存，并在不再使用时自动释放内存，这种机制被称为垃圾收集GC。回收机制有标记清除和引用计数。
 
+内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。一般是堆区内存泄漏，栈区不会泄漏。
+
+四种常见的JavaScript内存泄漏
+```JavaScript
+// 1.意外的全局变量。当引用未声明的变量时，会在全局对象中创建一个新变量。在浏览器中，全局对象将是window
+function leak(){
+  'use strict';  // 解决方法一，开始处添加'use strict'启用严格模式
+  a = 233; // 报错
+  this.b  =  'bbb'; // 默认绑定this指向全局, 严格模式下this指向undefined
+}
+// 解决方法二，也可以手动释放全局变量的内存
+window.a = undefined
+delete window.b 
+
+
+// 2.被遗忘的定时器或回调。当不需要setInterval或者setTimeout时，定时器没有被clear，定时器的回调函数以及内部依赖的变量都不能被回收，造成内存泄漏。
+var someResource = getData()
+var timer = setInterval(function() {
+  var node = document.getElementById('Node')
+  if(node) {
+      node.innerHTML = JSON.stringify(someResource))
+  }
+  // node、someResource 存储了大量数据 无法回收
+}, 1000)
+clearInterval(timer)  // 在定时器完成工作的时候，手动清除定时器。
+
+
+// 3. 闭包。闭包可以维持函数内局部变量，使其得不到释放。
+// 将事件处理函数定义在外部，解除闭包,或者在定义事件处理函数的外部函数中，删除对dom的引用
+function bindEvent() { 
+  var ele = document.createElement('app')
+  ele.onclick=function(){ 
+    // ...
+    // 这个函数中 可以访问外部的变量ele 所以它引用了ele,而ele又引用了它，因此这个事件绑定将会造成内存泄露
+  } 
+  ele = null  // 解决方法一
+}
+
+// 解决方法二，把onclick的函数写在bindEvent外
+function bindEvent() { 
+  var ele = document.createElement("app"); 
+  ele.onclick = onclickHandler
+} 
+function onclickHandler(){ 
+  // ...
+}
+
+
+// 4.循环引用。函数将间接引用所有它能访问的对象。一个DOM对象被一个JS对象引用，同时又引用同一个或其它的JS对象。
+// 要想破坏循环引用，引用DOM元素的对象或DOM对象的引用需要被赋值为null。
+
+
+// 5.没有清理DOM元素引用
+// 有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。
+var elements = {
+  button: document.getElementById('button'),
+  image: document.getElementById('image'),
+  text: document.getElementById('text')
+};
+function doStuff() {
+  image.src = 'http://some.url/image';
+  button.click();
+  console.log(text.innerHTML);
+  // ...
+}
+function removeButton() {
+  document.body.removeChild(document.getElementById('button'));
+  // 此时，仍旧存在一个全局的 #button 的引用elements 字典。button 元素仍旧在内存中，不能被 GC 回收。
+}
+
+
+// 6. 子元素存在引用引起的内存泄漏
+// 此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 <td> 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 <td> 以外的其它节点。实际情况并非如此：此 <td> 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 <td> 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。
+
+
+// 7.console 控制台日志。过多的console，比如定时器的console会导致浏览器卡死。
+// 解决：合理利用console，线上项目尽量少的使用console
+console.log('233');
+```
