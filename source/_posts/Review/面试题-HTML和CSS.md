@@ -39,3 +39,23 @@ Firefox：Gecko
 Safari：Webkit内核
 Opera：以前是Presto内核，现改用Blink内核
 Chrome：Blink(基于webkit，Google与Opera Software共同开发)
+
+6. 一次完整的HTTP事务是怎样的一个过程？
+基本流程：
+a. 域名解析(浏览器自身的DNS缓存->操作系统->hosts文件->本地首选DNS服务器发起域名解析请求)
+
+b. 发起TCP的3次握手(防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。解决网络中存在延迟的重复分组的问题，同时防止服务器端的一直等待而浪费资源)
+
+第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；
+第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；
+第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。
+
+c. 建立TCP连接后发起http请求
+
+d. 服务器端响应http请求，浏览器得到html代码
+
+e. 浏览器解析html代码，并请求html代码中的资源
+
+f. 浏览器对页面进行渲染呈现给用户
+
+![TCP三次握手](/images/tcp-shakehands.jpeg)
