@@ -60,9 +60,17 @@ f. 浏览器对页面进行渲染呈现给用户
 ![TCP三次握手](/images/tcp-shakehands.jpeg)
 
 7. 常见Web攻击技术
-（1）XSS(Cross-Site Scripting 跨站脚本攻击)。
-含义：攻击者在网页中嵌入恶意脚本程序，运行非法的HTML标签或者JavaScript。
-解决方案：将输入的数据进行转义处理；设置 HTTP Header： "X-XSS-Protection: 1"
+（1）XSS(Cross-Site Scripting 跨站脚本攻击)。攻击者在网页中嵌入恶意脚本程序，使之在用户的浏览器上运行非法的HTML标签或者JavaScript。利用这些恶意脚本，攻击者可获取用户的敏感信息如 Cookie、SessionID 等，进而危害数据安全。根据存储区(恶意代码存放的位置)和 插入点(由谁取得恶意代码，并插入到网页上)分成三类。
+反射性XSS: 非持久型，攻击者构造出特殊的URL，其中包含恶意代码，用户打开带有恶意代码的 URL 时，网站服务端将恶意代码从 URL 中取出，拼接在 HTML 中返回给浏览器。由于需要用户主动打开恶意的URL才能生效，攻击者往往会结合多种手段诱导用户点击。常见于通过URL传递参数的功能，如在搜索和跳转。
+
+存储型XSS: 持久化型，攻击者将恶意代码提交到目标网站的数据库中，用户打开目标网站时，网站服务端将恶意代码从数据库取出，拼接在HTML中返回给浏览器，用户浏览器接收到响应后解析执行，混在其中的恶意代码也被执行。常见于带有用户保存数据的网站功能，如论坛、博客、留言板、网站的留言、评论、日志等交互处。
+
+DOM型XSS: 前端JS代码本身不够严谨，把不可信的数据当作代码执行了。完全在前端浏览器触发，无需服务端的参与，这是前端开发工程师的地盘。
+特别注意以下输入源进行转移document.URL、location.hash、location.research、document.referrer(此处应尤为注意，referrer属性虽然可用于避免CSRF，但可触发XSS攻击)、XHR返回值（跨域返回值）、form表单及各种input框。
+在使用 .innerHTML、.outerHTML、document.write() 时要特别小心，不要把不可信的数据作为HTML插到页面上，应尽量使用 .textContent、.setAttribute() 等。
+DOM 中的内联事件监听器，如 location、onclick、onerror、onload、onmouseover 等，a 标签的 href 属性，JavaScript 的 eval()、setTimeout()、setInterval() 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，务必避免。
+
+解决方案：不用DOM中的内联事件监听器；将输入的数据进行转义处理；使用成熟的 Vue/React框架；设置 HTTP Header："X-XSS-Protection: 1"； HTTP-only Cookie
 
 （2）SQL注入攻击。
 含义：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令，比如SELECT * FROM users WHERE 'username' = 'admin' and 'password' = '' OR 1=1' ，这句 sql 无论 username 和 password 是什么都会执行，从而将所有用户的信息取出来。
