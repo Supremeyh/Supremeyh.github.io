@@ -5,8 +5,24 @@ date: 2019-03-24 13:26:28
 categories: JS
 tags: ['JS', 'Algorithm']
 ---
+1. 斐波拉契数列
+递归: 有边界条件，防止无限递归; 函数自身调用
+```JavaScript
+function Fibonacci(n) {
+  if (n ===0 || n === 1)  return n
+  return Fibonacci(n-1) + Fibonacci(n-2)
+}
+```
 
-1. 快速排序 Quicksort
+2. 阶乘
+```JavaScript
+function Factorial(n) {
+  if (n===0 || n===1)  return 1
+  Factorial(n-1) * n
+}
+```
+
+3. 快速排序 Quicksort
 快速排序的思想很简单，整个排序过程只需要三步：
 （1）在数据集之中，选择一个元素作为"基准"（pivot）。
 （2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边。
@@ -30,7 +46,7 @@ function quickSort(arr) {
 }
 ```
 
-2. 二分法查找
+4. 二分法查找
 二分法查找，也称折半查找，是一种在有序数组中查找特定元素的搜索算法。查找过程可以分为以下步骤：
 （1）从有序数组的中间的元素开始搜索，如果该元素正好是目标元素（即要查找的元素），则搜索过程结束，否则进行下一步。
 （2）如果目标元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半区域查找，然后重复第一步的操作。
@@ -70,3 +86,4 @@ function binarySearch(arr, key) {
   }
 }
 ```
+
