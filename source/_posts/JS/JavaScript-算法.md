@@ -9,7 +9,7 @@ tags: ['JS', 'Algorithm']
 递归: 有边界条件，防止无限递归; 函数自身调用
 ```JavaScript
 function Fibonacci(n) {
-  if (n ===0 || n === 1)  return n
+  if (n===0 || n===1)  return n
   return Fibonacci(n-1) + Fibonacci(n-2)
 }
 ```
