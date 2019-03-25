@@ -305,3 +305,52 @@ function palin(str) {
   return true
 }
 ```
+
+12. 求 a[b] 的值。对象键名称只能是字符串。
+```JavaScript
+var a={}, b={key:'b'}, c={key:'c'} 
+a[b]=123
+a[c]=456
+
+console.log(a[b])  // 456
+// 因为键名称只能是字符串，b、c单做键会调用toString()方法，得到的都是[object Object]。a[b]和a[c]都等价于a["[object Object]"]。
+
+// 如果采用a.b和a.c的方式赋值，会把b和c这两个字符作为字段进行处理
+a.b = 123
+a.c = 456
+console.log(a) // {b: 123, c: 456}
+```
+
+13. this 指向
+```JavaScript
+var hero = {
+  _name: 'John Doe',
+  getSecretIdentity: function (){
+      return this._name
+  }
+}
+var stoleSecretIdentity = hero.getSecretIdentity
+
+console.log(stoleSecretIdentity())      // undefined
+console.log(hero.getSecretIdentity())   // "John Doe"
+
+
+// 将 getSecretIdentity 赋给 stoleSecretIdentity，等价于定义了 stoleSecretIdentity 函数：
+var stoleSecretIdentity =  function (){
+  return this._name
+}
+// stoleSecretIdentity 的上下文是全局环境，所以第一个输出 undefined。可通过 call 、apply 和 bind 等方式改变 stoleSecretIdentity 的this 指向。
+// 第二个是调用对象的方法，输出 "John Doe"。
+```
+
+14. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
+```JavaScript
+// 利用 深度优先搜索(Depth-First-Search) 实现
+function Traverse(ele, cb) {
+  cb(ele)
+  var list = ele.children
+  for (var i = 0; i < list.length; i++) {
+      Traverse(list[i], cb) 
+  }
+}
+```
