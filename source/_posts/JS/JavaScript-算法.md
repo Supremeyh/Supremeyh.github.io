@@ -29,3 +29,44 @@ function quickSort(arr) {
   return quickSort(left).concat(pivot, quickSort(right))
 }
 ```
+
+2. 二分法查找
+二分法查找，也称折半查找，是一种在有序数组中查找特定元素的搜索算法。查找过程可以分为以下步骤：
+（1）从有序数组的中间的元素开始搜索，如果该元素正好是目标元素（即要查找的元素），则搜索过程结束，否则进行下一步。
+（2）如果目标元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半区域查找，然后重复第一步的操作。
+（3）如果某一步数组为空，则表示找不到目标元素。
+```JavaScript
+// 递归算法
+// 二分查找法在算法家族大类中属于 分治法，分治法基本都可以用递归来实现的，二分查找法的递归JS实现如下：
+function binarySearch(arr, key, low, high) {
+  var low = low || 0, high = high || arr.length - 1
+  if (low > high) { return - 1 }
+
+  var mid = Math.floor((low + high) / 2)
+  if (arr[mid] === key) {
+    return mid
+  } else if (key> arr[mid]) {
+    return binarySearch(arr, key, mid+1, high)
+  } else {
+    return binarySearch(arr, key, low, mid-1)
+  }
+}
+
+// 非递归算法
+// 不过所有的递归都可以自行定义stack来解递归，所以二分查找法也可以不用递归实现，而且它的非递归实现甚至可以不用栈，因为二分的递归其实是尾递归，它不关心递归前的所有信息。
+function binarySearch(arr, key) {
+  var low = 0, high = arr.length - 1
+  while(low <= high) {
+    var mid = Math.floor((low + high) / 2)
+    if (key === arr[mid]) {
+      return mid
+    } else if (key > arr[mid]) {
+      low = mid + 1
+    } else if (key < arr[mid]) {
+      high = mid - 1
+    } else {
+      return -1
+    }
+  }
+}
+```
