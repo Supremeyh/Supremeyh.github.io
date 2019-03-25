@@ -257,3 +257,51 @@ function removeButton() {
 // 解决：合理利用console，线上项目尽量少的使用console
 console.log('233');
 ```
+11. 判断回文字符串
+```JavaScript
+// reverse
+function Palindromes(str) {
+  let reg = /[\W_]/g // \w 匹配所有字母和数字以及下划线； \W与之相反； [\W_] 表示匹配下划线或者所有非字母非数字中的任意一个；/g全局匹配
+  let newStr = str.replace(reg, '').toLowerCase()
+  let reverseStr = newStr.split('').reverse().join('')
+  return reverseStr === newStr // 与 newStr 对比
+}
+
+// for 循环
+// 写法一
+function Palindromes(str) {
+  let reg = /[\W_]/g
+  let newStr = str.replace(reg, '').toLowerCase()
+  for(let i = 0, len = Math.floor(newStr.length / 2); i < len; i++) {
+    if(newStr[i] !== newStr[newStr.length - 1 - i]) return false
+  }
+  return true
+}
+// 写法二
+function Palindromes(str) {
+  let reg = /[\W_]/g
+  let newStr = str.replace(reg, '').toLowerCase();
+  let len = newStr.length
+  for(let i = 0, j = len - 1; i < j; i++, j--) {
+    if(newStr[i] !== newStr[j]) return false
+  }
+  return true
+}
+
+// 递归
+function palin(str) {
+  let reg = /[\W_]/g
+  let newStr = str.replace(reg, '').toLowerCase()
+  let len = newStr.length
+  while(len >= 1) {
+    if(newStr[0] != newStr[len - 1]) {
+      // len = 0 // 为了终止while循环 否则会陷入死循环
+      return false
+    } else {
+      return palin(newStr.slice(1, len - 1)); 
+      // 截掉收尾字符 再次比较收尾字符是否相等，直到字符串剩下一个字符（奇数项）或者 0 个字符（偶数项）
+    }
+  }
+  return true
+}
+```
