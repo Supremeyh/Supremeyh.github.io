@@ -164,8 +164,6 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 ```
 
 9. ({}+{}).length
-* 2018最新Web前端经典面试试题及答案-史上最全前端面试题(含答案)， https://blog.csdn.net/xm1037782843/article/details/80708533
-* 2018最新Web前端经典面试试题及答案， https://blog.csdn.net/wdlhao/article/details/79079660
 ```JavaScript
 解析：
 1、数+数 = 数（int float）
