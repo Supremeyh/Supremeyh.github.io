@@ -177,7 +177,7 @@ BFC（Block Formatting Context）块级格式化上下文。具有 BFC 特性的
   overflow:hidden;
 }
 
-<!-- 父级标签定义伪类after -->
+<!-- 父级标签定义伪元素::after -->
 .float-div::after{
   display: block;
   content: '';
