@@ -94,3 +94,95 @@ DOM 中的内联事件监听器，如 location、onclick、onerror、onload、on
 解决方案：白名单,将合法的要重定向的url加到白名单中,非白名单上的域名重定向时拒之；重定向token,在合法的url上加上token,重定向时进行验证。
 
 （7）文件上传攻击。文件名攻击、文件后缀攻击、文件内容攻击。
+
+
+8. 什么是BFC
+BFC（Block Formatting Context）块级格式化上下文。具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。
+* 怎样才能形成BFC
+(1)body 根元素
+(2)display 为 inline-block、table-cells、flex
+(3)浮动元素：float 除 none 以外的值
+(4)绝对定位元素：position 为absolute、fixed (不为relative和static)
+(5)overflow 除了 visible 以外的值 (hidden、auto、scroll)
+
+* BFC布局规则
+(1)内部的Box会在垂直方向上一个接一个的放置
+(2)垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠。
+(3)每个元素的左外边缘（margin-left)，与包含块的左边相接触(对于从左往右的格式化，否则相反)，即使存在浮动也是如此。除非这个元素自己形成了一个新的BFC。
+(4)BFC的区域不会与float的元素区域重叠。
+(5)计算BFC的高度时，浮动子元素也参与计算。
+(6)BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面元素，反之亦然。
+
+* 应用
+(1)清除浮动。如子元素是float 浮动的，受浮动影响，父元素的高度塌陷。在父元素加上 overflow: hidden 使其形成BFC，则因计算高度时会计算float的子元素的高度，而达到清除浮动影响的效果。
+(2)两列自适应布局。
+```HTML
+<div>
+  <div class="left">left</div>
+  <div class="right">blablabla...</div>
+</div>
+
+.left {
+  float: left;  // 会导致right元素的一部分跑到了左侧元素下方
+  width: 100px;
+  height: 50px;
+  background-color: yellow;
+}
+.right {
+  background-color: pink;
+  // 触发right元素的BFC。因BFC的区域是独立的，不会与页面其他元素相互影响，且不会与float元素重叠，因此就可以形成两列自适应布局
+  overflow: hidden;
+}
+```
+(3)防止垂直margin合并。
+```HTML
+<div class="a">aaa</div>
+<!-- <div class="cap"> -->
+  <div class="b">bbbbbbbbbbbbbbbbbbbb</div>
+<!-- </div> -->
+
+.left{
+  width: 100px;
+  height: 100px;
+  background: red;
+  margin-bottom: 100px;
+}
+.right{
+  height: 100px;
+  background: yellow;
+  margin-top: 100px;
+}
+
+<!-- b元素外增加包裹一层父元素，设置 overflow: hidden 使其形成BFC -->
+.cap{
+  overflow: hidden; // 因为BFC内部是一个独立的容器，所以不会与外部相互影响，可以防止margin合并
+}
+```
+
+9. 清除浮动的几种方式
+```HTML
+<div class="float-div">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>
+<div class="clear-both"></div>
+<div class="normal-div">A</div>
+<!-- 父级标签overflow:hidden -->
+.float-div{
+  overflow:hidden;
+}
+
+<!-- 父级标签定义伪类after -->
+.float-div::after{
+  display: block;
+  content: '';
+  height: 0px;
+  clear: both;
+}
+
+<!-- 添加空div标签 clear:both -->
+.clear-both{
+  clear: both;
+}
+```
