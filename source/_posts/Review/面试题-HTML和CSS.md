@@ -168,6 +168,10 @@ BFC（Block Formatting Context）块级格式化上下文。具有 BFC 特性的
 </div>
 <div class="clear-both"></div>
 <div class="normal-div">A</div>
+
+<!-- 对父级设置高度 -->
+父级div手动定义height，就解决了父级div无法自动获取到高度的问题。只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题。
+
 <!-- 父级标签overflow:hidden -->
 .float-div{
   overflow:hidden;
@@ -181,7 +185,7 @@ BFC（Block Formatting Context）块级格式化上下文。具有 BFC 特性的
   clear: both;
 }
 
-<!-- 添加空div标签 clear:both -->
+<!-- 在浮动元素的最后加一个标签，添加空标签，让父级div能自动获取到高度 clear:both -->
 .clear-both{
   clear: both;
 }
