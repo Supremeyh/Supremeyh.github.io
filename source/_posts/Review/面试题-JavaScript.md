@@ -21,7 +21,21 @@ instanceof 检测的是原型,只能用来判断两个对象是否属于实例�
 * Object.prototype.toString  返回当前对象对应的字符串形式。默认情况下返回类型字符串
 如，Object.prototype.toString.call(true) ; // [object Boolean]
 
-3. 怎么实现对对象的拷贝(浅拷贝与深拷贝)
+
+3. 检测一个变量是否为 String 类型
+```JavaScript
+// typeof 并不能判断出所有的 String 变量，无法检测用 new String(str)生成的字符串
+// new String(str)：当 String() 和运算符 new 一起作为构造函数使用时，它返回一个新创建的 String 对象，存放的是字符串 str 或 str 的字符串表示。
+// String(str)：当不用 new 运算符调用 String() 时，它只把 str 转换成原始的字符串，并返回转换后的值。
+
+function isString(str) {
+  // null 和 undefined 没有 constructor 属性
+  if(str === null || str === undefined) { return false }
+  return (str.constructor === String)
+}
+```
+
+4. 怎么实现对对象的拷贝(浅拷贝与深拷贝)
 * 浅拷贝。 拷贝原对象的引用，复制引用（指针），而未复制真正的值，改变原对象以后，新对象跟着改变。
 var obj1 = obj2   赋值运算符= 
 Array.prototype.slice() 
@@ -50,19 +64,19 @@ function deepClone(source){
 }
 ```
 
-4. 什么是闭包，为什么要用它
+5. 什么是闭包，为什么要用它
 简单来说，闭包就是能够读取其他函数内部变量的函数
 由于 JavaScript 特殊的作用域，函数外部无法直接读取内部的变量，内部可以直接读取外部的变量，从而就产生了闭包的概念
 最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中
 由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露
 
-5. 介绍一下 JavaScript 原型，原型链
+6. 介绍一下 JavaScript 原型，原型链
 每一个构造函数都拥有一个prototype属性，这个属性指向一个对象，也就是原型对象prototype；原型对象默认拥有一个constructor属性，指向它的那个构造函数；每个对象(实例)都拥有一个隐藏的属性__prototype__，指向它的原型对象。Person.prototype构造函数的原型属性与p.__proto__ 实例对象的原型对象是一个东西，只是从不同的角度访问原型。
 
 JavaScript中所有的对象都是由它的原型对象继承而来。而原型对象自身也是一个对象，它也有自己的原型对象，这样层层上溯，就形成了一个类似链表的结构，这就是原型链
 所有原型链的终点都是Object函数的prototype属性。Objec.prototype指向的原型对象同样拥有原型，不过它的原型是null，而null则没有原型。
 
-6. JavaScript 如何实现继承
+7. JavaScript 如何实现继承
 JavaScript语言不像面向对象的编程语言中有类的概念，所以也就没有类之间直接的继承，JavaScript中只有对象，使用函数模拟类，基于对象之间的原型链来实现继承关系，
 ES6的语法中新增了class关键字，但也只是语法糖，内部还是通过函数和原型链来对类和继承进行实现。
 * 原型链继承
@@ -119,7 +133,7 @@ class Cat extends Animal {
 // 使用 extends 实现继承，必须添加 super 关键字定义子类的 constructor
 ```
 
-7. new 操作符具体干了什么
+8. new 操作符具体干了什么
 ```JavaScript
 var Foo = function () { }
 var foo = new Foo()  
@@ -147,7 +161,7 @@ function NewFunc(func){
 }
 ```
 
-8. Object.create() 如何实现的
+9. Object.create() 如何实现的
 ```JavaScript
 // object.create(proto, properties) 使用指定的原型对象及额外的属性去创建一个新的对象
 Object.create = function (obj, properties)  {
@@ -163,7 +177,7 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 // Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
 
-9. ({}+{}).length
+10. ({}+{}).length
 ```JavaScript
 解析：
 1、数+数 = 数（int float）
@@ -173,7 +187,7 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 答案：({}+{}).length 等价于 ({}.toString() + {}.toString()).length，{}.toString()的值为[object Object]，所以最后结果为30。
 ```
 
-10. 内存泄露
+11. 内存泄露
 当创建对象和字符串等时，JavaScript就会分配内存，并在不再使用时自动释放内存，这种机制被称为垃圾收集GC。回收机制有标记清除和引用计数。
 
 内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。一般是堆区内存泄漏，栈区不会泄漏。
@@ -255,7 +269,7 @@ function removeButton() {
 // 解决：合理利用console，线上项目尽量少的使用console
 console.log('233');
 ```
-11. 判断回文字符串
+12. 判断回文字符串
 ```JavaScript
 // reverse
 function Palindromes(str) {
@@ -304,7 +318,7 @@ function palin(str) {
 }
 ```
 
-12. 求 a[b] 的值。对象键名称只能是字符串。
+13. 求 a[b] 的值。对象键名称只能是字符串。
 ```JavaScript
 var a={}, b={key:'b'}, c={key:'c'} 
 a[b]=123
@@ -318,7 +332,7 @@ a.c = 456
 console.log(a) // {b: 123, c: 456}
 ```
 
-13. this 指向
+14. this 指向
 ```JavaScript
 var hero = {
   _name: 'John Doe',
@@ -340,7 +354,7 @@ var stoleSecretIdentity =  function (){
 // 第二个是调用对象的方法，输出 "John Doe"。
 ```
 
-14. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
+15. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
 ```JavaScript
 // 利用 深度优先搜索(Depth-First-Search) 实现
 function Traverse(ele, cb) {
