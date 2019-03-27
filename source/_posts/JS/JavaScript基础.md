@@ -1273,7 +1273,7 @@ String([1, 2, 3]) // "1,2,3"
 ```
 * Boolean()   将任意类型的值转为布尔值
 ```JavaScript
-// 它的转换规则相对简单：除了undefined、null、-0或+0、NaN、''（空字符串）五个值的转换结果为false，其他的值全部为true。
+// 它的转换规则相对简单：除了 "", 0, NaN, null, undefined, false 几个值的转换结果为false，其他的值全部为true。
 Boolean(undefined) // false
 Boolean(null) // false
 Boolean(0) // false
@@ -1302,7 +1302,7 @@ if ('abc') {console.log('true');}  // true
 // 自动转换的规则是这样的：预期什么类型的值，就调用该类型的转换函数。比如，某个位置预期为字符串，就调用String函数进行转换。如果该位置即可以是字符串，也可能是数值，那么默认转为数值。 由于自动转换具有不确定性，而且不易除错，建议在预期为布尔值、数值、字符串的地方，全部使用Boolean、Number和String函数进行显式转换。
 // 自动转换为布尔值
 // JavaScript 遇到预期为布尔值的地方（比如if语句的条件部分），就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用Boolean函数。
-// 除了 undefined、null、+0或-0、NaN、''（空字符串）五个值，其他都是自动转为true。
+// 除了 "", 0, NaN, null, undefined, false 几个值，其他都是自动转为true。
 if ('abc') {console.log('true');}  // true
 expression ? true : false
 !! expression
