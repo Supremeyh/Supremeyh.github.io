@@ -41,7 +41,8 @@ if (typeof(x) == 'undefined') {
   console.log('对象不存在')
 }
 
-// 如果 x 不存在（未声明）则会出错。 null, undefined, 0, "", false 作为if的条件的时候，被认为是flase
+// JavaScript 遇到预期为布尔值的地方（比如if语句的条件部分），就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用Boolean函数。
+// 如果 x 不存在（未声明）则会出错。 "", 0, NaN, null, undefined, false 作为if的条件的时候，被认为是false
 if (x) { //... }
 ```
 
