@@ -376,3 +376,89 @@ function Traverse(ele, cb) {
   }
 }
 ```
+
+17. 判断字符串中出现次数最多的字符及出现的次数
+```JavaScript
+// 方法一：利用json数据个数“键”唯一的特性
+function getMostChart(str) {
+  //定义一个json对象用于保存str的每一项以及出现次数。
+  var json = {}
+  //遍历str,循环其中的每一个字符，将某个字符的值及出现的个数拿出来作为json的key和value
+  for(var i=0; i<str.length; i++){
+    //判断json中是否有当前str的值
+    if(!json[str.charAt(i)]) {
+      //如果不存在 就将当前值添加到json中去，并设置1
+      json[str.charAt(i)] = 1
+    } else {
+      //如果存在的话就让数组中已有的当前值的value值++
+      json[str.charAt(i)] ++
+    }
+  }
+
+  //存储出现次数最多的值和次数
+  var number = '', num = 0
+  //遍历json  使用打擂算法统计需要的值
+  for(var k in json) {
+    //如果当前项大于下一项
+    if (json[k]>num) {
+      //就让当前值更改为出现最多次数的值
+      num = json[k]
+      number = k
+    }
+  }
+
+  return {
+    number, num
+  }
+}
+
+
+// 利用数组reduce()方法 同时应用一个函数针对数组的两个值(从左到右)
+function getMostChart(str) {
+  //定义一个json对象用于保存str的每一项以及出现次数
+  var json = str.split('').reduce((acc, cur) => (acc[cur]++ || (acc[cur] = 1), acc), {})
+
+  //存储出现次数最多的值和次数
+  var number = '', num = 0
+  //遍历json  使用打擂算法统计需要的值
+  for(var k in json){
+    //如果当前项大于下一项
+    if (json[k]>num) {
+      //就让当前值更改为出现最多次数的值
+      num = json[k]
+      number = k
+    }
+  }
+
+  return {
+    number, num
+  }
+}
+
+
+// 利用正则表达式的replace对str的每一项进行检测
+function getMostChart(str){
+  var json = {}
+  str.replace(/(\w{1})/g,function($1) {
+    json[$1] ? json[$1]+=1 : json[$1] = 1
+  })
+  //存储出现次数最多的值和次数
+  var number = '', num = 0
+  //遍历json  使用打擂算法统计需要的值
+  for(var k in json){
+    //如果当前项大于下一项
+    if (json[k]>num) {
+      //就让当前值更改为出现最多次数的值
+      num = json[k]
+      number = k
+    }
+  }
+  return {
+    number, num
+  }
+}
+```
+
+18. 活动对象与变量对象什么区别
+变量对象Variable object: JS执行上下文中都有个对象，函数内部标示符、形参、变量声明等都保存在一个叫做变量对象中，但它是引擎实现上的，不可在JS环境中访问到。
+活动对象Activation Objec: 就是作用域链上正在被执行和引用的变量对象
