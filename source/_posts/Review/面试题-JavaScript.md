@@ -527,7 +527,8 @@ var obj = {
   fn
 }
 setTimeout(obj.fn) // 1
-// setTimeout的本质，相当于有一个setTimeout函数，接收两个参数：function setTimeout (fn, time) { fn() }
+// window.setTimeout()和window.setInterval() 里面的this默认是window对象
+
 
 
 // 第三种 o.call(obj)、o.apply(obj) 、o.bind(obj) 形式
@@ -556,16 +557,35 @@ console.log(b.a) // 2
 
 
 // 第五种 箭头函数 形式
+// 箭头函数的this，总是指向定义时所在的对象，而不是运行时所在的对象
 var a = 1
-var test = () => {
+var fn = () => {
   console.log(this.a)
 }
 var obj = {
   a: 2,
   test
 }
-obj.test()  // 1 
-// 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
+obj.fn()  // 1 
+// 箭头函数不会创建自己的this，箭头函数中的this在函数定义的时候就已经确定(继承自父执行上下文中的this)，而不是在执行函数的时候绑定。它this指向的是它的外层作用域this的指向。 箭头函数不能用call方法修改里面的this.
+var x = 11
+var obj= {
+  x: 22,
+  say: ()=>{
+    console.log(this.x)
+  }
+}
+obj.say() // 11
+// 箭头函数本身所在的对象为obj，而obj的父执行上下文就是window，因此这里的this.x实际上表示的是window.x 
+
+function foo() {
+  setTimeout( () => {
+    console.log("id:", this.id)
+  }, 100)
+}
+var id = 21   // 箭头函数运行时所在的环境
+foo.call({ id: 42 }) // 42   箭头函数定义时所在的环境
+// 箭头函数位于foo函数内部。只有foo函数运行(被调用)后，它才会按照定义生成，所以foo运行时所在的对象，恰好是箭头函数定义时所在的对象。
 ```
 
 
