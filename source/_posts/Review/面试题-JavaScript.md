@@ -462,3 +462,111 @@ function getMostChart(str){
 18. 活动对象与变量对象什么区别
 变量对象Variable object: JS执行上下文中都有个对象，函数内部标示符、形参、变量声明等都保存在一个叫做变量对象中，但它是引擎实现上的，不可在JS环境中访问到。
 活动对象Activation Objec: 就是作用域链上正在被执行和引用的变量对象
+
+19. this 指向
+* 普通函数（非箭头函数）被调用时（即运行时）才会确定该函数内this的指向。
+* 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
+* 要确定函数中this的指向，必须先找到该函数被调用的位置。
+* 本质上 this 就是 call 一个函数时，传入的第一个参数，其他形式都是它的语法糖，可按照 转换代码 将其转换为call形式 func.call(context, p1, p2)
+```JavaScript
+// 第一种 fn() 普通全局函数 形式
+var a = 1
+function fn () {
+  console.log(this.a)
+}
+fn()  // 1
+// 非严格模式下，直接不带任何引用形式去调用函数，则this会指向全局对象。因为没有其他影响去改变this，this默认就是指向全局对象（浏览器window，Node中是global）
+// 严格模式下，这个this其实是undefined的
+
+
+// 第二种 obj.fn() 作为对象属性被调用 形式
+var a = 1
+function fn () {
+  console.log(this.a)
+}
+var obj = {
+  a: 2,
+  fn
+}
+obj.fn()  // 2
+// 这种形式对比起第一种，很明显fn()已经是名花有主的了！看清楚，是谁呼唤的fn()？没错，就是obj，所以this的指向就不言而喻了。一句话，谁去调用这个函数的，这个函数中的this就绑定到谁身上。
+
+var a = 1
+function fn () {
+  console.log(this.a)
+}
+var obj = {
+  a: 2,
+  fn
+}
+var obj0 = {
+  a: 3,
+  obj 
+}
+obj0.obj.fn() // 2
+// 即使是这种串串烧的形式，结果也是一样的，test()中的this只对直属上司（直接调用者obj）负责
+
+var a = 1
+function fn () {
+    console.log(this.a)
+}
+var obj = {
+    a: 2,
+    fn
+}
+var testCopy = obj.fn
+testCopy() // 1 
+// 不管是不是在函数内部，只要是在全局环境下运行，this就是指顶层对象window。
+
+var a = 1
+function fn () {
+  console.log(this.a)
+}
+var obj = {
+  a: 2,
+  fn
+}
+setTimeout(obj.fn) // 1
+// setTimeout的本质，相当于有一个setTimeout函数，接收两个参数：function setTimeout (fn, time) { fn() }
+
+
+// 第三种 o.call(obj)、o.apply(obj) 、o.bind(obj) 形式
+var a = 1
+function fn () {
+  console.log(this.a)
+}
+var obj = {
+  a: 2,
+  fn
+}
+var testCopy = obj.fn
+testCopy.call(obj)  // 2
+// call方法可以改变this的指向，指定this指向对象obj，然后在对象obj的作用域中运行函数。
+// call方法的参数，应该是一个对象。如果参数为空、null和undefined，则默认传入全局对象。如果call方法的参数是一个原始值，那么这个原始值会自动转成对应的包装对象，然后传入call方法
+
+
+// 第四种 new fn() 构造函数 形式
+var a = 1
+function fn (a) {
+  this.a = a
+}
+var b = new fn(2)
+console.log(b.a) // 2
+// 构造函数中的this，指的是被new出来的实例对象
+
+
+// 第五种 箭头函数 形式
+var a = 1
+var test = () => {
+  console.log(this.a)
+}
+var obj = {
+  a: 2,
+  test
+}
+obj.test()  // 1 
+// 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
+```
+
+
+
