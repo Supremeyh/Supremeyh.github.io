@@ -467,7 +467,7 @@ function getMostChart(str){
 * 普通函数（非箭头函数）被调用时（即运行时）才会确定该函数内this的指向。
 * 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
 * 要确定函数中this的指向，必须先找到该函数被调用的位置。
-* 本质上 this 就是 call 一个函数时，传入的第一个参数，其他形式都是它的语法糖，可按照 转换代码 将其转换为call形式 func.call(context, p1, p2)
+* 可以理解成 this 就是 call 一个函数时，传入的第一个参数，其他形式都是它的语法糖，可按照 转换代码 将其转换为call形式 func.call(context, p1, p2)
 ```JavaScript
 // 第一种 fn() 普通全局函数 形式
 var a = 1
