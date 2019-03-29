@@ -190,3 +190,115 @@ BFC（Block Formatting Context）块级格式化上下文。具有 BFC 特性的
   clear: both;
 }
 ```
+10. flex 设为 1、auto、 none 的区别
+flex 是 flex-grow、flex-shrink、flex-basis 三个属性值的组合缩写。假设以上三个属性同样取默认值，则 flex 的默认值是 0 1 auto。
+
+flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
+flex-grow: number; /* default 0 */
+
+flex-shrink属性定义了项目的收缩比例，默认为1，即如果空间不足，该项目将缩小。如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。
+flex-shrink: number; /* default 1 */
+
+flex-basis属性定义了在分配多余空间之前，相对于父弹性盒容器的 项目占据的主轴空间  宽或者高（取决于主轴方向）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。
+flex-basis: length | auto; /* default auto */
+
+当flex 取默认值，则 flex 的默认值是 0 1 auto。不放大，空间不足则缩小，保持本来大小。
+
+当 flex 取值为 auto，则计算值为 1 1 auto。
+
+当 flex 取值为一个非负数字，则该数字为 flex-grow 值，flex-shrink 取 1，flex-basis 取 0%，即取 num, 1, 1, 0%
+```CSS
+.item { flex: 1; }
+/* 等同于 */
+.item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+```
+
+当 flex 取值为一个长度或百分比，则视为 flex-basis 值，flex-grow 取 1，flex-shrink 取 1，即取 1, 1, num px / num%
+
+当 flex 取值为两个非负数字，则分别视为 flex-grow 和 flex-shrink 的值，flex-basis 取 0%
+
+当 flex 取值为一个非负数字和一个长度或百分比，则分别视为 flex-grow 和 flex-basis 的值，flex-shrink 取 1
+
+当 flex 取值为 none，则计算值为 0 0 auto
+
+11. 请写出三栏布局，其中左栏、右栏宽度各为200px，中间自适应
+```HTML
+<div class="wrap">
+  <div class="left">left</div>
+  <div class="middle">middle</div>
+  <div class="right">right</div>
+</div>
+```
+
+```CSS
+* {
+  padding: 0;
+  margin: 0;
+}
+.left, .right, .middle{
+  min-height: 200px;
+}
+/* float  middle要放最后 */
+.left{
+  float: left;
+
+  width: 200px;
+  background: red;
+}
+.right{
+  float: right;
+
+  width: 200px;
+  background: yellow;
+}
+.middle{
+  background: blueviolet;
+}
+
+/* position   middle要放最后 */
+.left{
+  position: absolute;
+  left: 0;
+
+  width: 200px;
+  background: red;
+}
+.right{
+  position: absolute;
+  right: 0;
+
+  width: 200px;
+  background: yellow;
+}
+.middle{
+  position: absolute;
+  left: 200px;
+  right: 200px;
+
+  background: blueviolet;
+}
+
+/* flex  增加wrap元素，middle放中间 */
+.wrap{
+  display: flex;
+  /* flex-direction: row; */
+  /* justify-content: space-between; */
+}
+.left{
+  width: 200px;
+  background: red;
+}
+.right{
+  width: 200px;
+  background: yellow;
+}
+.middle{
+  flex: 1;
+
+  background: blueviolet;
+}
+```
