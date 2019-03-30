@@ -301,4 +301,42 @@ flex-basis: length | auto; /* default auto */
 
   background: blueviolet;
 }
+
+/* 表格布局 table */
+.wrap{
+  display: table;
+  width: 100%;
+  heigt: 200px;
+}
+.left, .right, .middle{
+  display: table-cell;
+}
+.left{
+  width: 200px;
+  background: red;
+}
+.right{
+  width: 200px;
+  background: yellow;
+}
+.middle{
+  background: blueviolet;
+}
+
+/* 网格布局 grid */
+.wrap{
+  display: grid;
+  width: 100%;
+  grid-template-rows: 200px;
+  grid-template-columns: 200px auto 200px;
+}
+.left{
+  background: red;
+}
+.right{
+  background: yellow;
+}
+.middle{
+  background: blueviolet;
+}
 ```
