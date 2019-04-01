@@ -602,6 +602,29 @@ function mul (x) {
 }
 // 函数是一等公民；函数可以有属性，并且能连接到它的构造方法；函数可以像一个变量一样存在内存中；函数可以当做参数传给其他函数；函数可以返回其他函数
 ```
+21. 命名式函数表达式
+声明提升: 包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。
+函数声明的提升优先于变量声明的提升；重复的var声明会被忽略掉，但是重复的function声明会覆盖掉前面的声明。
 
+函数表达式, 因只有解析器读取到函数表达式所在行的时候才会执行，函数只有在var语句声明之后才能被调用
+函数声明, 因函数声明提升，函数可以在function声明之前被调用
+```JavaScript
+var foo = function bar(){ return 12 }
+typeof bar()  //  bar is not defined
 
+// 可改为
+var bar = function(){ return 12; }
+typeof bar()  // number
+// 或者
+function bar(){ return 12; }
+typeof bar()  // number
 
+// 明确说明这个下问题
+var foo = function bar(){ 
+    // foo is visible here 
+    // bar is visible here
+    console.log(typeof bar) // Work here
+};
+// foo is visible here
+// bar is not defined here
+```
