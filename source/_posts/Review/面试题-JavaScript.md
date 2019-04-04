@@ -170,7 +170,7 @@ var foo = new Foo()
 
 // 创建了一个新的空对象
 var obj = new Object() 
- // 设置原型链。将改空对象obj的 __proto__指向构造函数的原型
+ // 设置原型链。将该空对象obj的 __proto__指向构造函数的原型
 obj.__proto__ = Foo.prototype   // 或者 Object.setPrototypeOf(obj, Foo.prototype)
 // 以该对象为上下文执行构造函数。 让Foo中的this指向新创建的obj对象，并执行Foo的函数体，属性和方法被加入到 this 引用的对象中
 var result = Foo.call(obj)  
@@ -646,4 +646,70 @@ var foo = function bar(){
 };
 // foo is visible here
 // bar is not defined here
+```
+
+22. forEach、for in、for of、Object.keys 的区别
+* forEach 数组的方法，遍历数组，按升序为数组中含有效值的每一项执行一次callback 函数，那些已删除或者未初始化的项将被跳过。
+三个形参分别代表当前的值、当前的索引、数组本身。
+总是返回undefined，不能使用continue、break退出循环，不能使用return返回到外层。并且不可链式调用，典型用例是在一个链的最后执行副作用。
+```JavaScript
+arr.forEach((currentValue, index, arr)=>{
+  // ...
+})
+```
+* for in  以随机顺序遍历对象及原型链上的可枚举属性(键名)
+只遍历可枚举属性
+会遍历自定义、原型链上的属性，若只遍历自身可用 hasOwnProperty() 判断
+遍历对象返回的属性名和遍历数组返回的index索引值都是字符串类型
+不推荐在数组中使用 for in 遍历
+```JavaScript
+for (let key in obj) {
+  if(obj.hasOwnProperty(key)) {
+    // console.log(obj[key])
+  }
+}
+```
+* for of  遍历可迭代对象自身的可迭代属性，并为每个不同属性值(键值)执行语句
+可用于包括 Array、Map、Set、String、arguments、DOM NodeList对象 类似数组的对象等 的 可迭代对象，不支持普通对象
+不会遍历到原型链上的属性
+可以由break, continue、throw 或return终止迭代器
+可搭配实例方法 entries()，同时输出数组的内容和索引；
+```JavaScript
+for (let val of obj) {
+  // console.log(val)
+}
+
+
+var obj = {name: 'June', age: 17, city: 'guangzhou'};
+for(let [key, value] of Object.entries(obj)) {
+  console.log(key, ':', value)
+  // name:June,age:17,city:guangzhou
+}
+
+
+// Object.entries(obj)：如果参数的数据结构具有键和值，则返回一个二元数组，数组的每个元素为参数的[key,value]数组，但Symbol 属性会被忽略
+Object.entries({ [Symbol()]: 123, name: 'June', age: 17})
+// [['name','June'], ['age', 17]]
+```
+
+* Object.keys  
+返回对象自身可枚举属性组成的数组
+不会遍历对象原型链上的属性以及 Symbol 属性
+对数组的遍历顺序和 for in 一致
+```JavaScript
+function Person() {
+  this.name = 'June'
+}
+Person.prototype.getName = function() {
+  return this.name
+}
+var person = new Person();
+Object.defineProperty(person, 'age', {
+  enumerable: true,
+  value: 17,
+  writable: true,
+  configurable: true
+})
+
+Object.keys(person)  // ['name', 'age']
 ```
