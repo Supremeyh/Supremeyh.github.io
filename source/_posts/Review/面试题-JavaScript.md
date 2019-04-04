@@ -668,6 +668,23 @@ for (let key in obj) {
     // console.log(obj[key])
   }
 }
+
+// 举例
+Array.prototype.getLength = function() {
+  return this.length
+}
+var arr = ['a', 'b', 'c']
+arr.name = 'June'
+Object.defineProperty(arr, 'age', {
+  enumerable: true,
+  value: 17,
+  writable: true,
+  configurable: true
+})
+
+for(var i in arr) {
+  console.log(i)  // 0, 1, 2, name, age, getLength
+}
 ```
 * for of  遍历可迭代对象自身的可迭代属性，并为每个不同属性值(键值)执行语句
 可用于包括 Array、Map、Set、String、arguments、DOM NodeList对象 类似数组的对象等 的 可迭代对象，不支持普通对象
@@ -679,11 +696,10 @@ for (let val of obj) {
   // console.log(val)
 }
 
-
+// 举例
 var obj = {name: 'June', age: 17, city: 'guangzhou'};
 for(let [key, value] of Object.entries(obj)) {
-  console.log(key, ':', value)
-  // name:June,age:17,city:guangzhou
+  console.log(key, ':', value)  // name:June, age:17, city:guangzhou
 }
 
 
@@ -697,6 +713,7 @@ Object.entries({ [Symbol()]: 123, name: 'June', age: 17})
 不会遍历对象原型链上的属性以及 Symbol 属性
 对数组的遍历顺序和 for in 一致
 ```JavaScript
+// 举例
 function Person() {
   this.name = 'June'
 }
