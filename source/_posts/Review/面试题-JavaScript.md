@@ -183,17 +183,7 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 // Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
 
-8. ({}+{}).length
-```JavaScript
-解析：
-1、数+数 = 数（int float）
-2、数+null = 数
-3、数+其他数据类型 = string （强制转换成string 再相加）
-4、其他数据类型 + 其他数据类型 = string(强制转换成string 再相加)
-答案：({}+{}).length 等价于 ({}.toString() + {}.toString()).length，{}.toString()的值为[object Object]，所以最后结果为30。
-```
-
-9. 判断回文字符串
+8. 判断回文字符串
 ```JavaScript
 // reverse
 function Palindromes(str) {
@@ -242,7 +232,7 @@ function palin(str) {
 }
 ```
 
-10. 求 a[b] 的值。对象键名称只能是字符串。
+9. 求 a[b] 的值。对象键名称只能是字符串。
 ```JavaScript
 var a={}, b={key:'b'}, c={key:'c'} 
 a[b]=123
@@ -256,7 +246,7 @@ a.c = 456
 console.log(a) // {b: 123, c: 456}
 ```
 
-11. this 指向
+10. this 指向
 ```JavaScript
 var hero = {
   _name: 'John Doe',
@@ -278,7 +268,7 @@ var stoleSecretIdentity =  function (){
 // 第二个是调用对象的方法，输出 "John Doe"。
 ```
 
-12. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
+11. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
 ```JavaScript
 // 利用 深度优先搜索(Depth-First-Search) 实现
 function Traverse(ele, cb) {
@@ -290,7 +280,7 @@ function Traverse(ele, cb) {
 }
 ```
 
-13. 判断字符串中出现次数最多的字符及出现的次数
+12. 判断字符串中出现次数最多的字符及出现的次数
 ```JavaScript
 // 方法一：利用json数据个数“键”唯一的特性
 function getMostChart(str) {
@@ -372,7 +362,7 @@ function getMostChart(str){
 }
 ```
 
-14. this 指向
+13. this 指向
 * 普通函数（非箭头函数）被调用时（即运行时）才会确定该函数内this的指向。
 * 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
 * 要确定函数中this的指向，必须先找到该函数被调用的位置。
@@ -497,7 +487,7 @@ foo.call({ id: 42 }) // 42   箭头函数定义时所在的环境
 // 箭头函数位于foo函数内部。只有foo函数运行(被调用)后，它才会按照定义生成，所以foo运行时所在的对象，恰好是箭头函数定义时所在的对象。
 ```
 
-15. 写一个mul函数，使用方法如下
+14. 写一个mul函数，使用方法如下
 console.log(mul(2)(3)(4)); // 24 
 console.log(mul(4)(3)(4)); // 48
 ```JavaScript
@@ -512,7 +502,7 @@ function mul (x) {
 // 函数是一等公民；函数可以有属性，并且能连接到它的构造方法；函数可以像一个变量一样存在内存中；函数可以当做参数传给其他函数；函数可以返回其他函数
 ```
 
-16. forEach、for in、for of、Object.keys 的区别
+15. forEach、for in、for of、Object.keys 的区别
 * forEach 数组的方法，遍历数组，按升序为数组中含有效值的每一项执行一次callback 函数，那些已删除或者未初始化的项将被跳过。
 三个形参分别代表当前的值、当前的索引、数组本身。
 总是返回undefined，不能使用continue、break退出循环，不能使用return返回到外层。并且不可链式调用，典型用例是在一个链的最后执行副作用。
