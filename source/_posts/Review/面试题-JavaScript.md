@@ -1,24 +1,12 @@
 ---
 title: 面试题 JavaScript
 comments: true
-date: 2019-03-19 22:19:20
+date: 2019-04-10 11:00:00
 categories: Review
 tags: ['Review', 'JS']
 ---
 
-1. JS有哪些数据类型
-* 分类
-原始数据类型：Boolean、Number、String、Null、Undefined、Symbol
-引用数据类型：Object
-* 区别：
-内存：基本数据类型，保存在栈内存。 引用数据类型，实际上是一个指针，这个指针也保存在栈中，但是这个指针指向的对象则保存在堆内存中
-
-访问方式：基本数据类型，按值访问，读写的是它们实际保存的值。 引用数据类型，按引用访问，读写它们时需要先从栈中读取堆内存地址，然后找到保存在堆内存中的值。
-
-复制：基本数据类型，从一个变量向另一个变量复制时，会在栈中创建一个新值，然后把值复制到为新变量分配的空间中。 引用数据类型，复制的是存储在栈中的指针，将指针复制到栈中为新变量分配的空间中，而这个指针副本和原指针指向的是同一个堆内存中的对象；复制操作后两个变量实际上将引用同一个对象，因此改变其中一个将影响到另外一个
-
-
-2. 怎么判断不同的JS数据类型
+1. 怎么判断不同的JS数据类型
 * typeof操作符：返回一个字符串，表示未经计算的操作数的类型。
 对于基本数据类型（除null外，被认为是一个空的对象引用），返回其本身的数据类型，函数对象返回 function ，其他对象均返回 Object。
 
@@ -41,7 +29,7 @@ instanceof (A,B) = {
 如，Object.prototype.toString.call(true) ; // [object Boolean]
 
 
-3. 检测一个变量是否为 String 类型
+2. 检测一个变量是否为 String 类型
 ```JavaScript
 // typeof 并不能判断出所有的 String 变量，无法检测用 new String(str)生成的字符串
 // new String(str)：当 String() 和运算符 new 一起作为构造函数使用时，它返回一个新创建的 String 对象，存放的是字符串 str 或 str 的字符串表示。
@@ -53,7 +41,7 @@ function isString(str) {
   return (str.constructor === String)
 }
 ```
-4. 如何判断Javascript对象是否存在
+3. 如何判断Javascript对象是否存在
 ```JavaScript
 // 适用于两种情况: x 从来没有出现过；x 只是用var声明了，但没有赋值
 if (typeof(x) == 'undefined') {
@@ -65,7 +53,7 @@ if (typeof(x) == 'undefined') {
 if (x) { //... }
 ```
 
-5. 怎么实现对对象的拷贝(浅拷贝与深拷贝)
+4. 怎么实现对对象的拷贝(浅拷贝与深拷贝)
 * 浅拷贝。 拷贝原对象的引用，复制引用（指针），而未复制真正的值，改变原对象以后，新对象跟着改变。
 var obj1 = obj2   赋值运算符= 
 Array.prototype.slice() 
@@ -94,19 +82,7 @@ function deepClone(source){
 }
 ```
 
-6. 什么是闭包，为什么要用它
-简单来说，闭包就是能够读取其他函数内部变量的函数
-由于 JavaScript 特殊的作用域，函数外部无法直接读取内部的变量，内部可以直接读取外部的变量，从而就产生了闭包的概念
-最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中
-由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露
-
-7. 介绍一下 JavaScript 原型，原型链
-每一个构造函数都拥有一个prototype属性，这个属性指向一个对象，也就是原型对象prototype；原型对象默认拥有一个constructor属性，指向它的那个构造函数；每个对象(实例)都拥有一个隐藏的属性__prototype__，指向它的原型对象。Person.prototype构造函数的原型属性与p.__proto__ 实例对象的原型对象是一个东西，只是从不同的角度访问原型。
-
-JavaScript中所有的对象都是由它的原型对象继承而来。而原型对象自身也是一个对象，它也有自己的原型对象，这样层层上溯，就形成了一个类似链表的结构，这就是原型链
-所有原型链的终点都是Object函数的prototype属性。Objec.prototype指向的原型对象同样拥有原型，不过它的原型是null，而null则没有原型。
-
-8. JavaScript 如何实现继承
+5. JavaScript 如何实现继承
 JavaScript语言不像面向对象的编程语言中有类的概念，所以也就没有类之间直接的继承，JavaScript中只有对象，使用函数模拟类，基于对象之间的原型链来实现继承关系，
 ES6的语法中新增了class关键字，但也只是语法糖，内部还是通过函数和原型链来对类和继承进行实现。
 * 原型链继承
@@ -163,7 +139,7 @@ class Cat extends Animal {
 // 使用 extends 实现继承，必须添加 super 关键字定义子类的 constructor
 ```
 
-9. new 操作符具体干了什么
+6. new 操作符具体干了什么
 ```JavaScript
 var Foo = function () { }
 var foo = new Foo()  
@@ -191,7 +167,7 @@ function NewFunc(func){
 }
 ```
 
-10. Object.create() 如何实现的
+7. Object.create() 如何实现的
 ```JavaScript
 // object.create(proto, properties) 使用指定的原型对象及额外的属性去创建一个新的对象
 Object.create = function (obj, properties)  {
@@ -207,7 +183,7 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 // Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
 
-11. ({}+{}).length
+8. ({}+{}).length
 ```JavaScript
 解析：
 1、数+数 = 数（int float）
@@ -217,89 +193,7 @@ Object.create({}, {a: {value: 1}})  // {a: 1}
 答案：({}+{}).length 等价于 ({}.toString() + {}.toString()).length，{}.toString()的值为[object Object]，所以最后结果为30。
 ```
 
-12. 内存泄露
-当创建对象和字符串等时，JavaScript就会分配内存，并在不再使用时自动释放内存，这种机制被称为垃圾收集GC。回收机制有标记清除和引用计数。
-
-内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。一般是堆区内存泄漏，栈区不会泄漏。
-
-四种常见的JavaScript内存泄漏
-```JavaScript
-// 1.意外的全局变量。当引用未声明的变量时，会在全局对象中创建一个新变量。在浏览器中，全局对象将是window
-function leak(){
-  'use strict';  // 解决方法一，开始处添加'use strict'启用严格模式
-  a = 233; // 报错
-  this.b  =  'bbb'; // 默认绑定this指向全局, 严格模式下this指向undefined
-}
-// 解决方法二，也可以手动释放全局变量的内存
-window.a = undefined
-delete window.b 
-
-
-// 2.被遗忘的定时器或回调。当不需要setInterval或者setTimeout时，定时器没有被clear，定时器的回调函数以及内部依赖的变量都不能被回收，造成内存泄漏。
-var someResource = getData()
-var timer = setInterval(function() {
-  var node = document.getElementById('Node')
-  if(node) {
-      node.innerHTML = JSON.stringify(someResource))
-  }
-  // node、someResource 存储了大量数据 无法回收
-}, 1000)
-clearInterval(timer)  // 在定时器完成工作的时候，手动清除定时器。
-
-
-// 3. 闭包。闭包可以维持函数内局部变量，使其得不到释放。
-// 将事件处理函数定义在外部，解除闭包,或者在定义事件处理函数的外部函数中，删除对dom的引用
-function bindEvent() { 
-  var ele = document.createElement('app')
-  ele.onclick=function(){ 
-    // ...
-    // 这个函数中 可以访问外部的变量ele 所以它引用了ele,而ele又引用了它，因此这个事件绑定将会造成内存泄露
-  } 
-  ele = null  // 解决方法一
-}
-
-// 解决方法二，把onclick的函数写在bindEvent外
-function bindEvent() { 
-  var ele = document.createElement("app"); 
-  ele.onclick = onclickHandler
-} 
-function onclickHandler(){ 
-  // ...
-}
-
-
-// 4.循环引用。函数将间接引用所有它能访问的对象。一个DOM对象被一个JS对象引用，同时又引用同一个或其它的JS对象。
-// 要想破坏循环引用，引用DOM元素的对象或DOM对象的引用需要被赋值为null。
-
-
-// 5.没有清理DOM元素引用
-// 有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。
-var elements = {
-  button: document.getElementById('button'),
-  image: document.getElementById('image'),
-  text: document.getElementById('text')
-};
-function doStuff() {
-  image.src = 'http://some.url/image';
-  button.click();
-  console.log(text.innerHTML);
-  // ...
-}
-function removeButton() {
-  document.body.removeChild(document.getElementById('button'));
-  // 此时，仍旧存在一个全局的 #button 的引用elements 字典。button 元素仍旧在内存中，不能被 GC 回收。
-}
-
-
-// 6. 子元素存在引用引起的内存泄漏
-// 此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 <td> 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 <td> 以外的其它节点。实际情况并非如此：此 <td> 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 <td> 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。
-
-
-// 7.console 控制台日志。过多的console，比如定时器的console会导致浏览器卡死。
-// 解决：合理利用console，线上项目尽量少的使用console
-console.log('233');
-```
-13. 判断回文字符串
+9. 判断回文字符串
 ```JavaScript
 // reverse
 function Palindromes(str) {
@@ -348,7 +242,7 @@ function palin(str) {
 }
 ```
 
-14. 求 a[b] 的值。对象键名称只能是字符串。
+10. 求 a[b] 的值。对象键名称只能是字符串。
 ```JavaScript
 var a={}, b={key:'b'}, c={key:'c'} 
 a[b]=123
@@ -362,7 +256,7 @@ a.c = 456
 console.log(a) // {b: 123, c: 456}
 ```
 
-15. this 指向
+11. this 指向
 ```JavaScript
 var hero = {
   _name: 'John Doe',
@@ -384,7 +278,7 @@ var stoleSecretIdentity =  function (){
 // 第二个是调用对象的方法，输出 "John Doe"。
 ```
 
-16. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
+12. 给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。
 ```JavaScript
 // 利用 深度优先搜索(Depth-First-Search) 实现
 function Traverse(ele, cb) {
@@ -396,7 +290,7 @@ function Traverse(ele, cb) {
 }
 ```
 
-17. 判断字符串中出现次数最多的字符及出现的次数
+13. 判断字符串中出现次数最多的字符及出现的次数
 ```JavaScript
 // 方法一：利用json数据个数“键”唯一的特性
 function getMostChart(str) {
@@ -478,11 +372,7 @@ function getMostChart(str){
 }
 ```
 
-18. 活动对象与变量对象什么区别
-变量对象Variable object: JS执行上下文中都有个对象，函数内部标示符、形参、变量声明等都保存在一个叫做变量对象中，但它是引擎实现上的，不可在JS环境中访问到。
-活动对象Activation Objec: 就是作用域链上正在被执行和引用的变量对象
-
-19. this 指向
+14. this 指向
 * 普通函数（非箭头函数）被调用时（即运行时）才会确定该函数内this的指向。
 * 箭头函数中的this在函数定义的时候就已经确定，它this指向的是它的外层作用域this的指向。
 * 要确定函数中this的指向，必须先找到该函数被调用的位置。
@@ -607,7 +497,7 @@ foo.call({ id: 42 }) // 42   箭头函数定义时所在的环境
 // 箭头函数位于foo函数内部。只有foo函数运行(被调用)后，它才会按照定义生成，所以foo运行时所在的对象，恰好是箭头函数定义时所在的对象。
 ```
 
-20. 写一个mul函数，使用方法如下
+15. 写一个mul函数，使用方法如下
 console.log(mul(2)(3)(4)); // 24 
 console.log(mul(4)(3)(4)); // 48
 ```JavaScript
@@ -621,34 +511,8 @@ function mul (x) {
 }
 // 函数是一等公民；函数可以有属性，并且能连接到它的构造方法；函数可以像一个变量一样存在内存中；函数可以当做参数传给其他函数；函数可以返回其他函数
 ```
-21. 命名式函数表达式
-声明提升: 包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。
-函数声明的提升优先于变量声明的提升；重复的var声明会被忽略掉，但是重复的function声明会覆盖掉前面的声明。
 
-函数表达式, 因只有解析器读取到函数表达式所在行的时候才会执行，函数只有在var语句声明之后才能被调用
-函数声明, 因函数声明提升，函数可以在function声明之前被调用
-```JavaScript
-var foo = function bar(){ return 12 }
-typeof bar()  //  bar is not defined
-
-// 可改为
-var bar = function(){ return 12; }
-typeof bar()  // number
-// 或者
-function bar(){ return 12; }
-typeof bar()  // number
-
-// 明确说明这个下问题
-var foo = function bar(){ 
-    // foo is visible here 
-    // bar is visible here
-    console.log(typeof bar) // Work here
-};
-// foo is visible here
-// bar is not defined here
-```
-
-22. forEach、for in、for of、Object.keys 的区别
+16. forEach、for in、for of、Object.keys 的区别
 * forEach 数组的方法，遍历数组，按升序为数组中含有效值的每一项执行一次callback 函数，那些已删除或者未初始化的项将被跳过。
 三个形参分别代表当前的值、当前的索引、数组本身。
 总是返回undefined，不能使用continue、break退出循环，不能使用return返回到外层。并且不可链式调用，典型用例是在一个链的最后执行副作用。
@@ -730,29 +594,3 @@ Object.defineProperty(person, 'age', {
 
 Object.keys(person)  // ['name', 'age']
 ```
-
-23. use strict严格模式 和 sloppy mode 稀松模式
-严格模式将问题直接转化为错误（如语法错误或运行时错误）, 简化了如何为给定名称的特定变量计算，简化了 eval 以及 arguments, 将写"安全“JavaScript的步骤变得更简单，以及改变了预测未来ECMAScript行为的方式。主要涉及一下几点：
-
-严格模式中意外创建全局变量被抛出错误替代
-严格模式会使引起静默失败的赋值操作(给不可写属性赋值、给只读属性赋值、给不可扩展对象的新属性赋值)抛出异常. 
-严格模式下, 试图删除不可删除的属性时会抛出异常(之前这种操作不会产生任何效果)
-严格模式要求一个对象内的所有属性名在对象内必须唯一，重名属性被认为是语法错误
-严格模式要求函数的参数名唯一，重名参数被认为是语法错误
-严格模式禁止八进制数字语法(零(0)开头的八进制语法,如0644)在ES6中支持为一个数字加"0o"的前缀来表示八进制数.
-严格模式禁止设置primitive值的属性，如(false.true = "")将抛出TypeError错误
-严格模式禁用 with.
-严格模式下的 eval 不再为上层范围(包围eval代码块的范围)引入新变量，仅为被运行的代码创建变量, 不会使得名称映射到外部变量或者其他局部变量
-严格模式禁止删除声明变量
-严格模式让eval和arguments变的简单。名称 eval 和 arguments 不能通过程序语法被绑定或赋值；
-参数的值不会随 arguments 对象的值的改变而变化；不再支持 arguments.callee
-在严格模式下通过this传递给一个函数的值不会被强制转换为一个对象
-为未来的ECMAScript版本铺平道路。新增保留的关键字 implements, interface, let, package, private, protected, public, static和yield
-
-优点：
-(1)使调试更加容易。那些被忽略或默默失败了的代码错误，会产生错误或抛出异常，因此尽早提醒你代码中的问题，你才能更快地指引到它们的源代码。
-(2)防止意外的全局变量。如果没有严格模式，将值分配给一个未声明的变量会自动创建该名称的全局变量。这是JavaScript中最常见的错误之一。在严格模式下，这样做的话会抛出错误。
-(3)消除 this 强制。如果没有严格模式，引用null或未定义的值到 this 值会自动强制到全局变量。在严格模式下，引用 null或未定义的 this 值会抛出错误。
-(4)不允许重复的属性名称或参数值。当检测到对象中重复命名的属性或检测到函数中重复命名的参数时,严格模式会抛出错误，因此捕捉几乎可以肯定是代码中的bug可以避免浪费大量的跟踪时间。
-(5)使 eval() 更安全。在严格模式和非严格模式下， eval() 的行为方式有所不同。最显而易见的是，在严格模式下，变量和声明在 eval() 语句内部的函数不会在包含范围内创建（它们会在非严格模式下的包含范围中被创建，这也是一个常见的问题源）。
-(6)在 delete 使用无效时抛出错误。 delete 操作符（用于从对象中删除属性）不能用在对象不可配置的属性上。当试图删除一个不可配置的属性时，非严格代码将默默地失败，而严格模式将在这样的情况下抛出异常。

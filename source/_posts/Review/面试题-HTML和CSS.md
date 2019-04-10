@@ -1,11 +1,10 @@
 ---
 title: 面试题 HTML和CSS
 comments: true
-date: 2019-03-22 10:07:06
+date: 2019-04-10 09:00:00
 categories: Review
 tags: ['Review', 'HTML', 'CSS']
 ---
-
 
 1. 什么是盒子模型
 在网页中，把HTML中的元素看做是一个矩形的盒子（盛装内容的的容器），每个容器都是由元素内容content、内边距（padding）、边框（border）和外边距（margin）组成。4个部分一起构成了css中元素的盒模型。

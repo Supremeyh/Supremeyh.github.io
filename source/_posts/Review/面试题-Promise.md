@@ -1,9 +1,9 @@
 ---
 title: 面试题 Promise 
 comments: true
-date: 2019-01-26 23:00:27
+date: 2019-04-10 13:00:00
 categories: Review
-tags: ['Review', 'Promise']
+tags: ['Review', 'JS', 'Promise']
 ---
 
 1. 题目一
