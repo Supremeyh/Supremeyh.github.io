@@ -584,3 +584,28 @@ Object.defineProperty(person, 'age', {
 
 Object.keys(person)  // ['name', 'age']
 ```
+
+16. 优先查找局部变量，再查找全局变量
+```JavaScript
+var name = 'World!';
+(function () {
+  // var name;  // 相当于
+  console.log( name);
+  if (typeof name === 'undefined') {
+    var name = 'Jack';
+    console.log('Goodbye ' + name);
+  } else {
+    console.log('Hello ' + name);
+  }
+})();
+// 函数会首先搜索函数内部的变量，因为var变量名提升，所以它能找到name，但此时代码还没有运行到赋值那一步，所以name是undefined。
+// 结果： Goodbye Jack
+
+
+var name = 'World!';
+(function () {
+  console.log( name);
+})();
+// js局部变量和全局变量，优先查找局部变量。当函数内部未找到此变量声明或定义时就会再去向外部寻找。
+// 结果：World!
+```
