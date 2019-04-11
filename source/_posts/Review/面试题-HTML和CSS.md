@@ -339,3 +339,41 @@ flex-basis: length | auto; /* default auto */
   background: blueviolet;
 }
 ```
+
+11. ie 低版本兼容解决方案
+* 强制使用高版本渲染模式
+仍然会有部分低版本用户无法正常渲染。治标不治本。
+```HTML
+强制使用Edge模式来解析网页代码
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+强制使用Chrome浏览器内核(如果安装了)
+<meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″/>
+```
+* css hack针对不同浏览器编不同的代码
+能够解决一些问题，不能使用浏览器的新特性。一般适用于不太复杂的页面。
+```HTML
+条件注释，很常用。
+<!--[if IE 6]>coding...<![endif]--> //ie6
+<!--[if lte IE 9]>coding...<![endif]--> //小于等于ie9
+
+属性前缀
+_background-color:#000; //ie6
+*background-color:#000; //ie6 ie7
+```
+* js/css兼容插件
+在利用下面hack方式下，针对低版本浏览器加载相应插件。能解决大部分的兼容性问题。需要额外加载JS/CSS文件。
+Html5shiv：使浏览器兼容HTML5标签语法。
+respond：A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
+bsie：在IE6上支持大部分bootstrap的特性。
+IE-CSS3/PIE：使ie6-9支持CSS3。
+
+* 终极方案：低版本提示升级
+判断浏览器版本，低版本的浏览器提示升级，或强制跳转到升级页面。
+
+为什么要强制提示升级的理由：
+低版本浏览器份额已经很小，逐渐减小；微软彻底放弃了ie品牌，力推Edge；为了兼容低版本的浏览器浪费大量的时间和精力；html5的新特性无法使用
+```JavaScript
+// 放在页面中或js文件中 都可以。  直接跳转
+(function(w){if(!("WebSocket"in w&&2===w.WebSocket.CLOSING)){w.location.replace("http://browsehappy.osfipin.com/");}}(window));
+```
