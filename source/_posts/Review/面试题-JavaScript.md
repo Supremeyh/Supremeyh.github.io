@@ -609,3 +609,40 @@ var name = 'World!';
 // js局部变量和全局变量，优先查找局部变量。当函数内部未找到此变量声明或定义时就会再去向外部寻找。
 // 结果：World!
 ```
+
+17. map() 和 parseInt() 
+```JavaScript
+["1", "2", "3"].map(parseInt);
+
+// 解析
+arr.map(function callback(currentValue[, index[, array]]) {
+  // ...
+}[, thisArg])
+
+// map接受两个参数, 一个回调函数 callback, 一个回调函数的this值。其中回调函数接受三个参数 currentValue, index, arrary
+
+parseInt(string, radix)
+// string 要被解析的字符串。 如果不是字符串会被转换，忽视空格符
+// 基数 radix(可选). 表示要解析的数字的基数。介于 2 ~ 36 之间
+// 如果省略 radix 参数或其值为 0，parseInt会根据string来判断数字的基数，默认以 10 为基础来解析
+// 如果 string 以 “0x” 或 “0X” 开头，parseInt() 会把 string 的其余部分解析为十六进制的整数
+// 如果 string 以 0 开头，parseInt() 将把它解析为十进制的整数
+// 如果 string 以 1-9 的数字开头，parseInt() 将把它解析为十进制的整数
+// 如果 radix 参数小于 2 或者大于 36，则 parseInt() 将返回 NaN
+// 当string无法转成radix进制数时会返回NaN。
+
+// map只传入了回调函数 parseInt, 回调函数的参数index索引值作了parseInt的基数radix，导致出现超范围的radix赋值和不合法的进制解析，因此返回NaN
+// 可以用重新定义parseInt，来检验
+var parseInt = function (string, radix) {
+  return string + '-' + radix;
+};
+['1','2','3'].map(parseInt);
+// 得到
+["1-0", "2-1", "3-2"]
+// 所以，本题即问
+// parseInt('1', 0);  // radix=0,以10为基数解析
+// parseInt('2', 1);  // radix=1<2,返回NaN
+// parseInt('3', 2);  // 3无法转成二进制
+
+// 结果: [1, NaN, NaN]
+```
