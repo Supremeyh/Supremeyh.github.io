@@ -37,7 +37,7 @@ Object.prototype.toString.call([])   => '[object Array]'
 
 
 3. 双等号 == 运算规则
-![双等号==运算规则](/images/==运算规则.jpg)
+![双等号==运算规则](/images/doubleequal-operationalrule.png)
 
 undefined == null，结果是true。且它俩与所有其他值比较的结果都是false
 String == Boolean，需要两个操作数同时转为Number
