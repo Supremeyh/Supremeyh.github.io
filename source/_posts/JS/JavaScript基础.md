@@ -64,6 +64,67 @@ JavaScript 也是一种嵌入式（embedded）语言。它本身提供的核心�
 2017年11月，所有主流浏览器全部支持 WebAssembly，这意味着任何语言都可以编译成 JavaScript，在浏览器运行。
 
 
+### ES6、ES7、ES8、ES9、ES10新特性一览
+* ES6新特性（2015） 2015年6月17日
+let、const
+class 类
+modules 模块化(import、export)
+arrow functions 箭头函数
+函数参数默认值
+模板字符串 ${}
+解构赋值。 通过解构赋值可以方便的交换两个变量的值。 如 var foo = ["one", "two", "three", "four"];  var [first, , , last] = foo;
+spread operator 延展操作符。 构造对象时,进行克隆或者属性拷贝，如let objClone = { ...obj }  浅拷贝
+对象属性简写
+Promise
+
+* ES7新特性（2016） 2016年06月
+array.prototype.includes() 方法，用来判断一个数组是否包含一个指定的值，包含则返回true，否则返回false
+** 指数运算符，它与 a ** b === Math.pow(a, b)
+
+* ES8新特性（2017） 2017年06月
+async/await 异步迭代器
+Object.values(obj), 返回obj自身属性的值，不包括继承的值
+Object.entries(obj), 返回obj对象自身可枚举属性的键值对的数组
+String padding:  String.padStart(targetLength,padString]) 和padEnd()，填充字符串达到当前长度
+Object.getOwnPropertyDescriptors(obj), 获取一个对象的所有自身属性的描述符,如果没有任何自身属性，则返回空对象
+ShareArrayBuffer 对象, 表示一个通用的、固定长度的原始二进制数据缓冲区，类似于 ArrayBuffer 对象，但 SharedArrayBuffer 不能被分离
+Atomics对象，对 SharedArrayBuffer 对象进行原子操作
+函数参数列表结尾允许逗号, 主要作用是方便使用git进行多人协作开发时修改同一个函数减少不必要的行变更。
+
+* ES9新特性（2018） 2018年6月	
+异步迭代, 在async/await的某些时刻，你可能尝试在同步循环中调用异步函数
+Promise.finally()
+Rest/Spread 属性
+正则表达式命名捕获组（Regular Expression Named Capture Groups）
+正则表达式反向断言（lookbehind）
+正则表达式dotAll模式
+正则表达式 Unicode 转义
+非转义序列的模板字符串
+
+* ES10新特性（2019）
+行分隔符（U + 2028）和段分隔符（U + 2029）符号现在允许在字符串文字中，与JSON匹配
+更加友好的 JSON.stringify
+Array.prototype.flat() 和flatMap()方法， 数组降维和去除数组的空项
+String.prototype.trimStart() 和 trimEnd()方法，分别去除字符串首尾空白字符
+Object.fromEntries(), 返回一个给定对象自身可枚举属性的键值对数组, 是 Object.entries() 的反转, 可以将 Map/Array 转化为 Object
+Symbol.prototype.description
+String.prototype.matchAll, 返回一个包含所有匹配正则表达式及分组捕获结果的迭代器
+Function.prototype.toString(), 返回精确字符，包括空格和注释
+简化try {} catch {},修改 catch 绑定
+
+BigInt 新的基本数据类型, 任意精度整数, 意味着变量可以定义2⁵³的数字了，不再有9007199254740992的最大限制。 
+至此，JS共有七种基本数据类型 String、Number、Boolean、Null、Undefined、Symbol、BigInt
+
+globalThis, 标准化全局对象，无视环境，直接获取当前的全局对象
+Dynamic import, 动态引入js
+```JavaScript
+element.addEventListener('click', async () => {
+  const module = await import(`./some.js`)
+  module.clickEvent()
+})
+```
+
+
 ### 基本语法
 * 语句 和 表达式
 JavaScript 程序的执行单位为行（line），也就是一行一行地执行。一般情况下，每一行就是一个语句。
