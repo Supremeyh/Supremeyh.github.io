@@ -646,28 +646,3 @@ var parseInt = function (string, radix) {
 
 // 结果: [1, NaN, NaN]
 ```
-
-18. 双等号 == 运算规则
-```JavaScript
-var a = [0];
-if ([0]) {
-  console.log(a == true);
-} else {
-  console.log("wut");
-}
-
-// 解析
-// Boolean() 它的转换规则相对简单：除了 "", 0, NaN, null, undefined, false 几个值的转换结果为false，其他的值全部为true。所有对象（包括空对象）的布尔值都是true。
-// if([0]) 等效于 if(Boolean([0]))。 Boolean([0]) === true
-
-// [0] => [0].valueOf() => [0] 不是基本类型=> [0].toSrting() => '0' => Number('0') => 0
-// true => 1
-// 0 !== 1
-```
-![双等号==运算规则](/images/doubleequal-operationalrule.png)
-undefined == null，结果是true。且它俩与所有其他值比较的结果都是false
-String == Boolean，需要两个操作数同时转为Number
-String/Boolean == Number，需要String/Boolean转为Number
-Object == Primitive，需要Object转为Primitive(具体通过valueOf和toString方法)
-
-参考: https://zhuanlan.zhihu.com/p/21650547
