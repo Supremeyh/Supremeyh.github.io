@@ -646,3 +646,15 @@ var parseInt = function (string, radix) {
 
 // 结果: [1, NaN, NaN]
 ```
+
+18. 函数的原型和它的prototype属性无关
+```JavaScript
+function f() {}
+var a = f.prototype
+var b = Object.getPrototypeOf(f)
+a === b
+
+// 用new创建f的实例的原型指向 f.prototype，即 f.prototype == Object.getPrototypeOf(new f())
+// Object.getPrototypeOf(f)是 f 函数的原型，即  Function.prototype === Object.getPrototypeOf(f)
+// 答案: false
+```
