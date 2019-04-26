@@ -681,4 +681,12 @@ a.call(null)
 // alert会调用toString()方法,结果为[object Window]。 若alert改为console,则为Window
 ```
 
-21. https://mp.weixin.qq.com/s/aLpEqDqAB3DkAQzo8duV5A   45
+21. delete 用删除对象属性
+```JavaScript
+(function(x){
+    delete x
+    return x
+})(1)
+
+// delete 用删除对象属性，不能删除函数中传递的参数
+```
