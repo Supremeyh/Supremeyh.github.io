@@ -658,3 +658,27 @@ a === b
 // Object.getPrototypeOf(f)是 f 函数的原型，即  Function.prototype === Object.getPrototypeOf(f)
 // 答案: false
 ```
+
+19. 函数声明优先级高于变量声明
+```JavaScript
+function a(x) {
+  return x * 2
+}
+var a
+console.log(a)
+
+// 函数声明优先级高于变量声明。js按从上到下执行，相当于先声明了一个函数a，再声明了一个变量a，但此变量没有赋值，因此不会覆盖，故打印出函数体a. 如果改为 var a = 1, 那么结果为1.
+```
+
+20. call() 参数为空、null或undefined，默认为全局变量。alert会调用toString()方法
+```JavaScript
+function a() {
+  alert(this)
+}
+a.call(null)
+
+// call() 参数为空、null或undefined，默认为全局变量。浏览器为window
+// alert会调用toString()方法,结果为[object Window]。 若alert改为console,则为Window
+```
+
+21. https://mp.weixin.qq.com/s/aLpEqDqAB3DkAQzo8duV5A   45
