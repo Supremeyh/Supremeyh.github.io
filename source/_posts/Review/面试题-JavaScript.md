@@ -463,7 +463,7 @@ var fn = () => {
 }
 var obj = {
   a: 2,
-  test
+  fn
 }
 obj.fn()  // 1 
 // 箭头函数不会创建自己的this，箭头函数中的this在函数定义的时候就已经确定(继承自父执行上下文中的this)，而不是在执行函数的时候绑定。它this指向的是它的外层作用域this的指向。 箭头函数不能用call方法修改里面的this.
@@ -486,6 +486,7 @@ var id = 21   // 箭头函数运行时所在的环境
 foo.call({ id: 42 }) // 42   箭头函数定义时所在的环境
 // 箭头函数位于foo函数内部。只有foo函数运行(被调用)后，它才会按照定义生成，所以foo运行时所在的对象，恰好是箭头函数定义时所在的对象。
 ```
+
 
 14. 写一个mul函数，使用方法如下
 console.log(mul(2)(3)(4)); // 24 
@@ -689,4 +690,22 @@ a.call(null)
 })(1)
 
 // delete 用删除对象属性，不能删除函数中传递的参数
+```
+
+22. 闭包
+```js
+var name = "The Window";
+　var object = {
+　　 name : "My Object",
+　　　getNameFunc: function(){
+　　　　return function(){
+　　　　　return this.name;
+　　　　};
+　　　},
+    getName:function(){
+      return this.name;
+    }
+　};
+console.log(object.getNameFunc()());  // The Window
+console.log(object.getName()());  // My Object
 ```
