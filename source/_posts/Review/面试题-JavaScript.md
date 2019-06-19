@@ -707,5 +707,9 @@ var name = "The Window";
     }
 　};
 console.log(object.getNameFunc()());  // The Window
-console.log(object.getName()());  // My Object
+console.log(object.getName());  // My Object
+
+// 并没有令Object调用包含this的匿名函数，而是让它调用了返回匿名函数的函数，然后将匿名函数暴露在全局环境下再调用，这时候调用匿名函数的就成了window，所以this指向window对象而不是Object
+
+// 闭包始终取得值都是其父级活动对象中的值，如果活动对象没有特别定义this的话，就始终往上找！别看在object对象内有一个name属性，但是它不在闭包父级得活动对象中，所以接着往上找直到window的name
 ```
