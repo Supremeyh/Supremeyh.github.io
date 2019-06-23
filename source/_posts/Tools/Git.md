@@ -77,5 +77,8 @@ git rm -r --cached .  //清空缓存
 * git push -u origin master  即使远程没有你要关联的分支，它也会自动创建一个出来，以实现关联
 
 
+### 批量删除分支
+git branch | grep 'branchName' | xargs git branch -D
+
 ### 插件
 * Octotree 侧栏目录树形
