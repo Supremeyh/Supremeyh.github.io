@@ -21,7 +21,8 @@ SSR服务端渲染
 首屏渲染性能优化
 
 ## 基础
-web 前端本质上是一种 GUI 软件，
+web 前端本质上是一种 GUI 软件
+
 ### 资源合并与压缩
 要点: 减少http请求数量、减少请求资源大小
 ####  http 清求的过程及潜在的性能优化点
@@ -46,7 +47,7 @@ Html、JavaScript 和 CSS 在浏览器端的加载机制、重绘与回流渲染
 LocalStorage、 Cookie、 IndexedDB、 sessionStorage PWA、 Service Worker
 
 ## 服务器
-### Vue-SSR
+### SSR
 基于Node.js结合Vue-SSR和PWA实战，讲解Vue-SSR和PWA的原理实现，核心解决Vue框架的首屏渲染问题
 
 
