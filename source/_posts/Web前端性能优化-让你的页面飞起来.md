@@ -31,7 +31,7 @@ web 前端本质上是一种 GUI 软件
 #### js压缩
 
 ### 构建层面
-在线网站或结合FIS3构建工具，自动化地进行资源的打包和压缩
+在线网站或结合 FIS3 构建工具，自动化地进行资源的打包和压缩
 
 ### 图片层面
 深入不同格式图片的编解码过程结合业务场景选择合适的图片格式：png、svg、webp
@@ -44,7 +44,7 @@ web 前端本质上是一种 GUI 软件
 Html、JavaScript 和 CSS 在浏览器端的加载机制、重绘与回流渲染树的生成
 
 ### 浏览器存储
-LocalStorage、 Cookie、 IndexedDB、 sessionStorage PWA、 Service Worker
+LocalStorage、Cookie、IndexedDB、sessionStorage PWA、 Service Worker
 
 ## 服务器
 ### SSR
