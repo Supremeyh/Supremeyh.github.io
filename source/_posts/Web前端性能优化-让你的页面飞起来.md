@@ -2,7 +2,7 @@
 title: Web前端性能优化 - 让你的页面飞起来
 comments: true
 date: 2019-06-24 20:30:00
-categories: 性能
+categories: 性能优化
 tags: ['web', '性能优化']
 ---
 
