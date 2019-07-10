@@ -136,6 +136,24 @@ png32 2^24色，支持透明
 7、canvas
 需要高性能的图片或动画，使用HTML5的canvas元素绘制图片，页面渲染性能较高。
 
+* css 和 js 的装载与执行
+HTML 渲染过程顺序执行、并发加载，每个域名并发度有限，因此设置几个 CDN 
+CSS head 引入，防止闪动
+CSS 和 js 都会阻塞 js 的执行，但不会阻塞外部资源的加载，因此可以预加载
+
+* 懒加载与预加载
+懒加载: 监听scroll事件，图片进入可视区域，再请求资源，为图片赋上src。
+预加载: 静态资源在使用之前提前请求，使用时可从缓存中加载
+```html
+1、 <img src="" style="display:none">
+2、使用 Image 对象
+var image = new Image();
+image.src = "http://test.png";
+3、XMLHttpRequest 能监听数据传输情况，但有跨域问题
+4、PreloadJS
+```
+
+
 ## 进阶
 ### 缓存
 缓存相关的浏览器和服务端能力
