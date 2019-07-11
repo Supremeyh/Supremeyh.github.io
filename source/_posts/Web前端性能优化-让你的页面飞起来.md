@@ -318,8 +318,8 @@ Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1
 如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存；
 有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形。
 
-if-modified-since: Thu, 11 Jul 2019 18:30:00 GMT , request header
 Last-Modified: Thu, 11 Jul 2019 18:30:00 GMT , response header
+if-modified-since: Thu, 11 Jul 2019 18:30:00 GMT , request header
 
 ####  etag / if-none-match
 etag 实体标签，文件内容的hash值，服务器生成的一个标记，用来标识返回值是否有变化。
@@ -331,7 +331,10 @@ etag是服务器自动生成或者由开发者生成的对应资源在服务器�
 etag: "33a64df551425fcc55e4d42a148795d9f25f89d4" , response header
 if-none-match: "33a64df551425fcc55e4d42a148795d9f25f89d4" , request header
 
+#### 缓存机制
+强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，返回200，重新返回资源和缓存标识，再存入浏览器缓存中；生效则返回304，继续使用缓存
 
+![缓存机制](/images/web-cachemechanism.jpg)
 
 ## 服务器
 ### SSR
