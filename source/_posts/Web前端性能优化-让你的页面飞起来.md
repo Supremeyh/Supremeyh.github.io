@@ -237,11 +237,45 @@ display=none，把元素隐藏起来，并且会改变页面布局，可以理�
 8、对于动画，可新建图层
 9、使用gpu加速，比如加上transform：translateZ(0); transform：translate3d(0,0,0)
 
-### 缓存
-缓存相关的浏览器和服务端能力
-
 ### 浏览器存储
 LocalStorage、Cookie、IndexedDB、sessionStorage PWA、 Service Worker
+
+#### cookie
+1、cookie的初衷：因为http请求无状态，所以需要cookie去维持客户端状态。
+2、cookie的生成方式：http response header中的set-cookie; js中可以通过document.cookie可以读写cookie
+3、使用: 用于浏览器端和服务器端的交互; 客户端自身数据的存储
+4、cookie存储数据能力被localStorage替代
+5、httponly，当前cookie不支持js读写
+6、cookie中在相关域名下面 cdn的流量损耗。cdn的域名和主站的域名要分开
+
+#### indexDB
+indexDB是一种低级API，用于客户端存储大量结构化数据。该api使用索引来实现对该数据的高性能搜索。虽然web storage对于存储少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法很有用。indexDB提供了一个解决方案。
+为应用创建离线版本。
+
+#### PWA
+PWA(progressive web apps)是一种web app新模型，并不是具体指某一种前沿的技术或者某一个单一的知识点，是一个渐进式的web app，是通过一系列新的web特性，配合优秀的ui交互设计，逐步的增强web app的用户体验。
+1、方向
+可靠：在没有网络的环境中也能提供基本的页面访问，而不会出现“未连接到互联网”的页面。
+快速：针对网页渲染及网络数据访问有较好优化。
+融入（engaging）：应用可以被增加到手机桌面，并且和普通应用一样有全屏、推送等特性。
+2、检测pwa、检测性能：lighthouse
+
+#### Service Worker
+service worker是一个脚本，浏览器独立于当前网页，将其在后台运行，为实现一些不依赖页面或者用户交互的特性打开了一扇大门。在未来这些特性包括推送消息，背景后台同步，geofencing（地理围栏定位），但它将推出的第一个首要特性，就是拦截和处理网络请求的能力，包括以编程方式来管理被缓存的响应。
+
+1、应用
+使用拦截和处理网络请求的能力，去实现一个离线应用
+使用service worker在后台运行同时能和页面通信的能力，去实现大规模后台数据的处理
+
+2、查看
+chrome://serviceworker-internals/、 chrome://inspect/#service-workers
+
+3、注意事项
+service workers只能在https下才能生成，本地调试能用localhost:80，不能用ip:80
+
+
+### 缓存
+缓存相关的浏览器和服务端能力
 
 ## 服务器
 ### SSR
