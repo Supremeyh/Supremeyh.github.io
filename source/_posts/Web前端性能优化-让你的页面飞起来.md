@@ -277,6 +277,62 @@ service workers只能在https下才能生成，本地调试能用localhost:80，
 ### 缓存
 缓存相关的浏览器和服务端能力
 
+#### expires
+缓存过期时间，用来指定资源到期的时间，是服务器端的具体的时间点。告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。HTTP 1.0协议中的。
+
+如果在Cache-Control响应头设置了 "max-age" 或者 "s-max-age" 指令，那么 Expires 头会被忽略。
+Expires: Thu, 11 Jul 2019 18:30:00 GMT
+Expires: 0 , 无效的日期，代表着过去的日期，即该资源已经过期
+
+#### Cache-Control 
+通用消息头字段，被用于在http请求和响应中，通过指定指令来实现缓存机制。缓存指令是单向的，这意味着在请求中设置的指令，不一定被包含在响应中。HTTP1.1协议中的。
+
+语法：指令不区分大小写，并且具有可选参数，可以用令牌或者带引号的字符串语法。多个指令以逗号分隔。
+
+指令：
+1、可缓存性
+public，表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存，即使是通常不可缓存的内容（例如，该响应没有max-age指令或Expires消息头）。
+private，表明响应只能被单个用户缓存，不能作为共享缓存（即代理服务器不能缓存它）。私有缓存可以缓存响应内容。
+no-cache，在发布缓存副本之前，强制要求缓存把请求提交给原始服务器进行验证，评估缓存响应的有效性。
+no-store，禁止一切缓存
+
+2、到期
+max-age= seconds，设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)。 200 (from memory cache)
+s-maxage= seconds，覆盖 max-age 或者 Expires 头，但是仅适用于共享缓存(比如各个代理)，私有缓存会忽略它。 304
+
+3、重新验证和重新加载
+must-revalidate，一旦资源过期（比如已经超过max-age），在成功向原始服务器验证之前，缓存不能用该资源响应后续请求。
+proxy-revalidate，与must-revalidate作用相同，但它仅适用于共享缓存（例如代理），并被私有缓存忽略。
+immutable，表示响应正文不会随时间而改变。资源（如果未过期）在服务器上不发生改变，因此客户端不应发送重新验证请求头来检查更新，即使用户显式地刷新页面。
+
+4、其他
+no-transform，不得对资源进行转换或转变。Content-Encoding、Content-Range、Content-Type等HTTP头不能由代理修改。
+only-if-cached，表明客户端只接受已缓存的响应，并且不要向原始服务器检查是否有更新的拷贝。
+
+
+#### last-modified / if-modified-since
+基于客户端和服务端协商的备用缓存机制，Last-Modified与Etag类似。不过Last-Modified表示响应资源在服务器最后修改时间而已。需要与cache-control共同使用。
+
+不足: 
+Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间；
+如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存；
+有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形。
+
+if-modified-since: Thu, 11 Jul 2019 18:30:00 GMT , request header
+Last-Modified: Thu, 11 Jul 2019 18:30:00 GMT , response header
+
+####  etag / if-none-match
+etag 实体标签，文件内容的hash值，服务器生成的一个标记，用来标识返回值是否有变化。
+需要与cache-control共同使用，优先级比last-modified/ if-modified-since更高
+etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。
+
+当第一次发起请求时，服务器生成并会返回一个Etag给前端，并在你第二次发起同一个请求时，客户端会同时发送一个If-None-Match，而它的值就是Etag的值（此处由发起请求的客户端来设置）。然后，服务器会比对这个客服端发送过来的Etag是否与服务器的相同，如果相同，就将If-None-Match的值设为false，返回状态为304，客户端继续使用本地缓存，不解析服务器返回的数据（这种场景服务器也不返回数据），如果不相同，就将If-None-Match的值设为true，返回状态为200，客户端重新解析服务器返回的数据。
+
+etag: "33a64df551425fcc55e4d42a148795d9f25f89d4" , response header
+if-none-match: "33a64df551425fcc55e4d42a148795d9f25f89d4" , request header
+
+
+
 ## 服务器
 ### SSR
 基于Node.js结合Vue-SSR和PWA实战，讲解Vue-SSR和PWA的原理实现，核心解决Vue框架的首屏渲染问题
