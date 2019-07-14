@@ -713,3 +713,24 @@ console.log(object.getName());  // My Object
 
 // 闭包始终取得值都是其父级活动对象中的值，如果活动对象没有特别定义this的话，就始终往上找！别看在object对象内有一个name属性，但是它不在闭包父级得活动对象中，所以接着往上找直到window的name
 ```
+23. 深拷贝递归
+```js
+function deepClone (source) {
+  var target
+  if (typeof source === 'object') {
+    target = Array.isArray(source) ? [] : {}
+    for (var key in source) {
+      if (source.hasOwnProperty(key)) {
+        if (typeof source[key] !== 'object') {
+          target[key] = source[key]
+        } else {
+          target[key] = deepClone(source[key])
+        }
+      }
+    }
+  } else {
+    target = source
+  }
+  return target
+}
+```
