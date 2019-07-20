@@ -735,7 +735,7 @@ function deepClone (source) {
 }
 ```
 24. get/set 与原型链
-如果对象 obj 没有 z 属性，并且原型链上有对应的 get/set 方法，当尝试给 obj 赋值时，会走原型上的  get/set 方法，而不会给当前 obj 对象添加新属性。
+如果对象 obj 没有 z 属性，并且原型链上有对应的 get/set 方法，当尝试给 obj 赋值时，会走原型上的 get/set 方法，而不会给当前 obj 对象添加新属性。
 ```js
 function foo() {}
 Object.defineProperty(foo.prototype,'z',{ get: function(){ return 1 } })
