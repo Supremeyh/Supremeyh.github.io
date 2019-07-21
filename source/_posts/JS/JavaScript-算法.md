@@ -87,3 +87,13 @@ function binarySearch(arr, key) {
 }
 ```
 
+5. 重复某字符串多次
+```js
+// 利用 数组的 join 方法
+function repeatStr(str, n) {
+  return new Array(n+1).join(str)
+}
+
+repeatStr('Hi', 3) // HiHiHi
+```
+
