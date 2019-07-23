@@ -377,3 +377,6 @@ IE-CSS3/PIE：使ie6-9支持CSS3。
 // 放在页面中或js文件中 都可以。  直接跳转
 (function(w){if(!("WebSocket"in w&&2===w.WebSocket.CLOSING)){w.location.replace("http://browsehappy.osfipin.com/");}}(window));
 ```
+
+12. CSS 样式优先级
+就近原则，内联样式 > ID 选择器 > 类选择器 = 属性选择器 = 伪类选择器 > 标签选择器 = 伪元素选择器
