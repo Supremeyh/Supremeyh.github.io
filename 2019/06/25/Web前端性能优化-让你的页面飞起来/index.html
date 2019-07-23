@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="web,性能优化,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。  资源合并压缩、图片格式及加载方式的优化CSS和JS的装载与执行重绘与回流浏览器存储PWA，缓存SSR服务端渲染构建层减少资源请求的大小和数量优化浏览器渲染提升动画体验显著提升网站二次访问体验首屏渲染">
+<meta name="keywords" content="web,性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端性能优化 - 让你的页面飞起来">
+<meta property="og:url" content="https://supremeyh.github.io/2019/06/25/Web前端性能优化-让你的页面飞起来/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。  资源合并压缩、图片格式及加载方式的优化CSS和JS的装载与执行重绘与回流浏览器存储PWA，缓存SSR服务端渲染构建层减少资源请求的大小和数量优化浏览器渲染提升动画体验显著提升网站二次访问体验首屏渲染">
+<meta property="og:locale" content="English">
+<meta property="og:image" content="https://supremeyh.github.io/images/performance-optimization.webp">
+<meta property="og:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
+<meta property="og:image" content="https://supremeyh.github.io/images/web-cachemechanism.jpg">
+<meta property="og:updated_time" content="2019-07-23T01:25:36.358Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端性能优化 - 让你的页面飞起来">
+<meta name="twitter:description" content="从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。  资源合并压缩、图片格式及加载方式的优化CSS和JS的装载与执行重绘与回流浏览器存储PWA，缓存SSR服务端渲染构建层减少资源请求的大小和数量优化浏览器渲染提升动画体验显著提升网站二次访问体验首屏渲染">
+<meta name="twitter:image" content="https://supremeyh.github.io/images/performance-optimization.webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/06/25/Web前端性能优化-让你的页面飞起来/">
+
+
+
+
+
+  <title>Web前端性能优化 - 让你的页面飞起来 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/06/25/Web前端性能优化-让你的页面飞起来/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端性能优化 - 让你的页面飞起来</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-25T04:30:00+08:00">
+                2019-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/性能优化/" itemprop="url" rel="index">
+                    <span itemprop="name">性能优化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。</p>
+</blockquote>
+<p>资源合并压缩、图片格式及加载方式的优化<br>CSS和JS的装载与执行<br>重绘与回流<br>浏览器存储<br>PWA，缓存<br>SSR服务端渲染<br>构建层减少资源请求的大小和数量<br>优化浏览器渲染提升动画体验<br>显著提升网站二次访问体验<br>首屏渲染性能优化<br><img src="/images/performance-optimization.webp" alt="总览"></p>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>web 前端本质上是一种 GUI 软件，采用 BS 架构，经历开发到发布到 CDN 或 webserver , 通过 浏览器 http 请求返回资源。</p>
+<h3 id="资源合并与压缩"><a href="#资源合并与压缩" class="headerlink" title="资源合并与压缩"></a>资源合并与压缩</h3><p>关键: 减少 http 请求数量、减少请求资源大小</p>
+<h4 id="http-清求的过程"><a href="#http-清求的过程" class="headerlink" title="http 清求的过程"></a>http 清求的过程</h4><p>深入理解 http  请求过程，是 前端性能优化的核心。</p>
+<p>用户在浏览器输入 url -&gt; DNS解析(浏览器未过期缓存、操作系统、hosts文件、首选DNS服务器等) -&gt; 与服务器建立连接，发起TCP的3次握手 –&gt; 发起http请求 –&gt; 服务器响应http请求，浏览器得到html代码 –&gt; 浏览器解析html代码，并请求html代码中的资源 –&gt; 浏览器对页面进行渲染呈现给用户</p>
+<h5 id="http-是什么"><a href="#http-是什么" class="headerlink" title="http 是什么"></a>http 是什么</h5><p>通俗来讲，他就是计算机通过网络进行通信的规则，是一个基于请求与响应，无状态的，应用层的协议，常基于TCP/IP协议传输数据。目前任何终端（手机，笔记本电脑。。）之间进行任何一种通信都必须按照Http协议进行，否则无法连接。</p>
+<h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><p><img src="/images/tcp-shakehands.jpeg" alt="TCP三次握手"><br>客户端的请求到达服务器，首先就是建立TCP连接。</p>
+<p>第一次握手：客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认；<br>第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。</p>
+<h5 id="为什么要三次握手"><a href="#为什么要三次握手" class="headerlink" title="为什么要三次握手"></a>为什么要三次握手</h5><p>防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。解决网络中存在延迟的重复分组的问题，同时防止服务器端的一直等待而浪费资源</p>
+<h5 id="TCP四次挥手"><a href="#TCP四次挥手" class="headerlink" title="TCP四次挥手"></a>TCP四次挥手</h5><p>当客户端和服务器通过三次握手建立了TCP连接以后，当数据传送完毕，肯定是要断开TCP连接的啊。那对于TCP的断开连接，这里就有了神秘的“四次分手”。</p>
+<p>第一次分手：主机1（可以使客户端，也可以是服务器端），设置Sequence Number，向主机2发送一个FIN报文段；此时，主机1进入FIN_WAIT_1状态；这表示主机1没有数据要发送给主机2了；<br>第二次分手：主机2收到了主机1发送的FIN报文段，向主机1回一个ACK报文段，Acknowledgment Number为Sequence Number加1；主机1进入FIN_WAIT_2状态；主机2告诉主机1，我“同意”你的关闭请求；<br>第三次分手：主机2向主机1发送FIN报文段，请求关闭连接，同时主机2进入LAST_ACK状态；<br>第四次分手：主机1收到主机2发送的FIN报文段，向主机2发送ACK报文段，然后主机1进入TIME_WAIT状态；主机2收到主机1的ACK报文段以后，就关闭连接；此时，主机1等待2MSL后依然没有收到回复，则证明Server端已正常关闭，那好，主机1也可以关闭连接了。</p>
+<h5 id="为什么要四次分手"><a href="#为什么要四次分手" class="headerlink" title="为什么要四次分手"></a>为什么要四次分手</h5><p>TCP协议是一种面向连接的、可靠的、基于字节流的运输层通信协议。TCP是全双工模式，这就意味着，当主机1发出FIN报文段时，只是表示主机1已经没有数据要发送了，主机1告诉主机2，它的数据已经全部发送完毕了；但是，这个时候主机1还是可以接受来自主机2的数据；当主机2返回ACK报文段时，表示它已经知道主机1没有数据发送了，但是主机2还是可以发送数据到主机1的；当主机2也发送了FIN报文段时，这个时候就表示主机2也没有数据要发送了，就会告诉主机1，我也没有数据要发送了，之后彼此就会愉快的中断这次TCP连接。</p>
+<h5 id="为什么HTTP协议要基于TCP来实现"><a href="#为什么HTTP协议要基于TCP来实现" class="headerlink" title="为什么HTTP协议要基于TCP来实现"></a>为什么HTTP协议要基于TCP来实现</h5><p>TCP是一个端到端的可靠的面向连接的协议，所以HTTP基于传输层TCP协议不用担心数据的传输的各种问题。</p>
+<h4 id="具体优化方法"><a href="#具体优化方法" class="headerlink" title="具体优化方法"></a>具体优化方法</h4><h5 id="内容优化"><a href="#内容优化" class="headerlink" title="内容优化"></a>内容优化</h5><p>(1)减少HTTP请求数:这条策略是最重要最有效的<br>(2)减少DNS查找<br>(3)避免重定向<br>(4)使用Ajax缓存<br>(5)延迟加载组件,预加载组件<br>(6)减少DOM元素数量:页面中存在大量DOM元素,会导致javascript遍历DOM的效率变慢。<br>(7)最小化iframe的数量：iframes 提供了一个简单的方式把一个网站的内容嵌入到另一个网站中。但其创建速度比其他包括js和css的DOM元素的创建慢了1-2个数量级。<br>(8)避免404：HTTP请求时间消耗是很大的，因此使用HTTP请求来获得一个没有用处的响应（例如404没有找到页面）是完全没有必要的，它只会降低用户体验而不会有一点好处。</p>
+<h5 id="html压缩"><a href="#html压缩" class="headerlink" title="html压缩"></a>html压缩</h5><p>压缩在文本文件中有意义，但在 html 中不显示的字符，如 空格、制表符、换行符，注释。</p>
+<p>可以使用在线网站、nodejs提供的 html-minifier、后端模板引擎渲染压缩</p>
+<h5 id="css-优化"><a href="#css-优化" class="headerlink" title="css 优化"></a>css 优化</h5><p>无效代码删除, CSS 代码语义合并<br>(1)将CSS代码放在HTML页面的顶部<br>(2)避免使用CSS表达式<br>(3)使用 link 来代替@import<br>(4)避免使用Filters</p>
+<h5 id="js-优化"><a href="#js-优化" class="headerlink" title="js 优化"></a>js 优化</h5><p>(1)将JavaScript脚本放在页面的底部。<br>(2)将JavaScript和CSS作为外部文件来引用：在实际应用中使用外部文件可以提高页面速度，因为JavaScript和CSS文件都能在浏览器中产生缓存。<br>(3)缩小JavaScript，无效字符删除、剔除注释、代码语义合并，可以使用 uglifyjs 压缩。<br>(4)删除重复的脚本<br>(5)最小化DOM的访问：使用JavaScript访问DOM元素比较慢。<br>(6)开发智能的事件处理程序<br>(7)javascript代码注意：谨慎使用with,避免使用eval Function函数,减少作用域链查找。</p>
+<h5 id="Cookie优化"><a href="#Cookie优化" class="headerlink" title="Cookie优化"></a>Cookie优化</h5><p>(1)减小Cookie大小<br>(2)针对Web组件使用域名无关的Cookie</p>
+<h5 id="服务器优化"><a href="#服务器优化" class="headerlink" title="服务器优化"></a>服务器优化</h5><p>(1)使用内容分发网络（CDN）：把网站内容分散到多个、处于不同地域位置的服务器上可以加快下载速度。<br>(2)GZIP压缩<br>(3)设置ETag：ETags（Entity tags，实体标签）是web服务器和浏览器用于判断浏览器缓存中的内容和服务器中的原始内容是否匹配的一种机制。<br>(4)提前刷新缓冲区<br>(5)对Ajax请求使用GET方法<br>(6)避免空的图像src</p>
+<h5 id="文件合并"><a href="#文件合并" class="headerlink" title="文件合并"></a>文件合并</h5><p>使用 keep-alive，公共库合并、不同页面的合并。减少丢包和网络请求延迟。但要适当使用，避免 首屏渲染问题</p>
+<h5 id="开启-gzip"><a href="#开启-gzip" class="headerlink" title="开启 gzip"></a>开启 gzip</h5><h5 id="构建层面"><a href="#构建层面" class="headerlink" title="构建层面"></a>构建层面</h5><p>在线网站或结合 webpack、fis3 等构建工具，自动化地进行资源的打包和压缩</p>
+<h5 id="图片相关的优化"><a href="#图片相关的优化" class="headerlink" title="图片相关的优化"></a>图片相关的优化</h5><p>雪碧图（csssprits），将多个小图整合成一张大图</p>
+<p>不同格式图片常用的业务场景<br>1、JPEG(Joint Photographic Experts Group) 有损压缩，压缩率高，占内存小，不支持透明<br>主要用于摄影作品或者写实作品（或是其他细节、色彩丰富的图片）或大的背景图；对多色彩表现较好；不适于文字较多的图片。在页面中使用的商品图片、采用人像或者实物素材制作的广告Banner等图像更适合采用JPG的图片格式保存。</p>
+<p>2、PNG(Portable Network Graphics 便携式网络图片) 无损压缩，体积大，图片质量高，支持透明<br>png8 2^8色，文件较小，支持透明<br>png24 2^24色，不支持透明<br>png32 2^24色，支持透明<br>主要用于小图标或颜色简单对比强烈的小的背景图。页面结构的基本视觉元素，如容器的背景、按钮、导航的背景等应该尽量用PNG格式进行存储，这样才能更好的保证设计品质。</p>
+<p>3、GIF(Graphics Interchange Format 图像互换格式) 无损耗性。最多支持256种色彩的图像.布尔透明，可以使全透明，也可是全不透明。支持动画。适合对颜色要求不高的图形（比如说图标、图表等）</p>
+<p>4、WEBP 体积小，同时支持有损和无损压缩的、使用直接色的、点阵图，压缩程度更好，在 ios webview 兼容性问题</p>
+<p>5、SVG(Scalable Vector Graphics) 矢量图，代码内嵌，相对较小，图片样式相对简单的场景</p>
+<p>6、base64 将图片转换为base64编码字符串inline到CSS或页面中，适用于图片小于2KB、页面引用图片不多的情况，减少了http请求，数据就是图片。</p>
+<p>7、canvas<br>需要高性能的图片或动画，使用HTML5的canvas元素绘制图片，页面渲染性能较高。</p>
+<h5 id="css-和-js-的装载与执行"><a href="#css-和-js-的装载与执行" class="headerlink" title="css 和 js 的装载与执行"></a>css 和 js 的装载与执行</h5><p>HTML 渲染过程顺序执行、并发加载，每个域名并发度有限2-6，因此设置几个 CDN，或 gzip 压缩 如果使用 HTTP2，可以避开限制<br>CSS head 引入，防止闪动<br>CSS 和 js 都会阻塞 js 的执行，但不会阻塞外部资源的加载，因此可以预加载</p>
+<h5 id="懒加载与预加载"><a href="#懒加载与预加载" class="headerlink" title="懒加载与预加载"></a>懒加载与预加载</h5><p>懒加载: 监听scroll事件，图片进入可视区域，再请求资源，为图片赋上src。<br>预加载: 静态资源在使用之前提前请求，使用时可从缓存中加载<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1、 <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"display:none"</span>&gt;</span></span><br><span class="line">2、使用 Image 对象</span><br><span class="line">var image = new Image();</span><br><span class="line">image.src = "http://test.png";</span><br><span class="line">3、XMLHttpRequest 能监听数据传输情况，但有跨域问题</span><br><span class="line">4、PreloadJS</span><br></pre></td></tr></table></figure></p>
+<h2 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h2><h3 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h3><p>Html、JavaScript 和 CSS 在浏览器端的加载机制、重绘与回流渲染树的生成</p>
+<h4 id="浏览器如何渲染网页"><a href="#浏览器如何渲染网页" class="headerlink" title="浏览器如何渲染网页"></a>浏览器如何渲染网页</h4><p>1、使用 HTML 创建文档对象模型（DOM）<br>浏览器从上到下读取标签，把他们分解成节点，从而创建 DOM 。<br>策略：样式在顶部，脚本在底部；最小化和压缩</p>
+<p>2、使用 CSS 创建 CSS 对象模型（CSSOM）<br>CSSOM 的构建会阻塞页面的渲染<br>策略：延迟加载 CSS； 只加载需要的样式</p>
+<p>3、基于 DOM 和 CSSOM 执行脚本（Scripts）<br>脚本只能等到先前的 CSS 节点构建完成。<br>策略：<br>异步加载脚本，添加 async 属性，可以通知浏览器不要阻塞其余页面的加载，下载脚本处于较低的优先级。一旦下载完成，就可以执行。使用于不影响 DOM 或 CSSOM 的脚本。<br>延迟加载脚本，defer 跟 async 非常相似，不会阻塞页面加载，但会等到 HTML 完成解析后再执行。</p>
+<p>4、合并 DOM 和 CSSOM 形成渲染树（Render Tree）<br>一旦所有节点已被解析，DOM 和 CSSOM 准备合并，浏览器便会构建渲染树。如果我们把节点想象成单词，那么对象模型就是句子，渲染树便是整个页面。</p>
+<p>5、使用渲染树布局（Layout）所有元素<br>布局阶段需要确定页面上所有元素的大小和位置。</p>
+<p>6、渲染（Paint）所有元素<br>最终的渲染阶段，会真正地光栅化屏幕上的像素，把页面呈现给用户。</p>
+<h4 id="回流与重绘"><a href="#回流与重绘" class="headerlink" title="回流与重绘"></a>回流与重绘</h4><p>频繁触发重绘与回流，会导致UI频繁渲染，最终导致js变慢<br>回流必将引起重绘，而重绘不一定会引起回流</p>
+<h5 id="回流"><a href="#回流" class="headerlink" title="回流"></a>回流</h5><p>当render tree中的一部分(或全部)因为元素的规模尺寸，布局，隐藏等改变而需要重新构建。这就称为回流(reflow)。当页面布局和几何属性改变时就需要回流</p>
+<p>盒子模型相关：width、height、padding、border、margin、display、border-width、min-height<br>定位属性及浮动：top、right、bottom、left、position、float、clear<br>节点内部文字结构，行内属性：text-align、overflow、line-height、vertical-align、font-weight、white-space、font-size</p>
+<h5 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h5><p>当render tree中的一些元素需要更新属性，而这些属性只是影响元素的外观，风格，而不会影响布局的，比如background-color。则就叫称为重绘。</p>
+<p>外观属性: color、border-style、border-radius、visibility、background、box-shadow、outline</p>
+<h5 id="避免重绘回流的两种方法"><a href="#避免重绘回流的两种方法" class="headerlink" title="避免重绘回流的两种方法"></a>避免重绘回流的两种方法</h5><p>1、属性替代：避免使用触发重绘、回流的css属性<br>2、新建图层：将频繁重绘回流的dom元素单独作为一个独立图层，那么这个dom元素的重绘和回流的影响只会在这个图层中</p>
+<h5 id="新建dom的过程"><a href="#新建dom的过程" class="headerlink" title="新建dom的过程"></a>新建dom的过程</h5><p>1、获取dom后分割为多个图层<br>2、对每个图层的节点计算样式结果（recalculate style-样式重计算）<br>3、为每个节点生成图形和位置（layout-回流和重布局）<br>4、将每个节点绘制填充到图层位图中（paint setup和paint-重绘）<br>5、图层作为纹理上传至gpu<br>6、符合多个图层到页面上生成最终屏幕图像（coposite layers-图层重组）</p>
+<h5 id="chrome创建图层的条件"><a href="#chrome创建图层的条件" class="headerlink" title="chrome创建图层的条件"></a>chrome创建图层的条件</h5><p>3D或透视变换（perspective transform）CSS属性，比如transform:translateZ(0);<br>使用加速视频解码的 video节点<br>拥有3D（WebGL）上下文或加速的2D上下文的 canvas 节点<br>混合插件（如Flash）<br>对自己的opacity做CSS动画或使用一个动画webkit变换的元素<br>拥有加速CSS过滤器的元素<br>元素有一个包含复合层的后代节点（一个元素拥有一个子元素，该子元素在自己的层里）<br>元素有一个z-index较低且包含一个复合层的兄弟元素（换句话说就是该元素在复合层上面渲染）<br>video, canvas, will change:transform, overflow-scrolling:touch</p>
+<h5 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h5><p>总体思路: 避免触发回流、重绘的 CSS 属性，或者 用 只触发重绘不回流；将回流。重绘的影响范围控制在单独的图层之内<br>1、translate 替换 top/left， 后者会触发回流但是translate不会<br>2、opacity 替换 visibility，visibility 会触发重绘但不会触发回流<br>opacity=0，该元素隐藏起来了，但不会改变页面布局，并且，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的<br>visibility=hidden，该元素隐藏起来了，不会改变页面布局，但是不会触发该元素已经绑定的事件<br>display=none，把元素隐藏起来，并且会改变页面布局，可以理解成在页面中把该元素删除掉一样</p>
+<p>3、不要一条一条修改dom样式，预先定义好class，然后修改dom的className<br>4、可以将dom离线操作，如先display:none(会有一次reflow)，但是接下来的操作都不会重绘，等离线操作结束后，再显示。<br>5、不要把dom节点的属性值放在循环里，当成循环的变量,在循环外面声明一个变量来中转。如offsetWidth/ offsetHeight，有强制刷新回流队列缓存，一定会触发回流<br>6、不要使用table，即使小改动，整个table也会回流<br>7、动画实现速度的选择，选择合适的动画的间隔时间<br>8、对于动画，可新建图层<br>9、使用gpu加速，比如加上transform：translateZ(0); transform：translate3d(0,0,0)</p>
+<h3 id="浏览器存储"><a href="#浏览器存储" class="headerlink" title="浏览器存储"></a>浏览器存储</h3><p>LocalStorage、Cookie、IndexedDB、sessionStorage PWA、 Service Worker</p>
+<h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><p>1、cookie的初衷：因为http请求无状态，所以需要cookie去维持客户端状态。<br>2、cookie的生成方式：http response header中的set-cookie; js中可以通过document.cookie可以读写cookie<br>3、使用: 用于浏览器端和服务器端的交互; 客户端自身数据的存储<br>4、cookie存储数据能力被localStorage替代<br>5、httponly，当前cookie不支持js读写<br>6、cookie中在相关域名下面 cdn的流量损耗。cdn的域名和主站的域名要分开</p>
+<h4 id="indexDB"><a href="#indexDB" class="headerlink" title="indexDB"></a>indexDB</h4><p>indexDB是一种低级API，用于客户端存储大量结构化数据。该api使用索引来实现对该数据的高性能搜索。虽然web storage对于存储少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法很有用。indexDB提供了一个解决方案。<br>为应用创建离线版本。</p>
+<h4 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h4><p>PWA(progressive web apps)是一种web app新模型，并不是具体指某一种前沿的技术或者某一个单一的知识点，是一个渐进式的web app，是通过一系列新的web特性，配合优秀的ui交互设计，逐步的增强web app的用户体验。<br>1、方向<br>可靠：在没有网络的环境中也能提供基本的页面访问，而不会出现“未连接到互联网”的页面。<br>快速：针对网页渲染及网络数据访问有较好优化。<br>融入（engaging）：应用可以被增加到手机桌面，并且和普通应用一样有全屏、推送等特性。<br>2、检测pwa、检测性能：lighthouse</p>
+<h4 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h4><p>service worker是一个脚本，浏览器独立于当前网页，将其在后台运行，为实现一些不依赖页面或者用户交互的特性打开了一扇大门。在未来这些特性包括推送消息，背景后台同步，geofencing（地理围栏定位），但它将推出的第一个首要特性，就是拦截和处理网络请求的能力，包括以编程方式来管理被缓存的响应。</p>
+<p>1、应用<br>使用拦截和处理网络请求的能力，去实现一个离线应用<br>使用service worker在后台运行同时能和页面通信的能力，去实现大规模后台数据的处理</p>
+<p>2、查看<br>chrome://serviceworker-internals/、 chrome://inspect/#service-workers</p>
+<p>3、注意事项<br>service workers只能在https下才能生成，本地调试能用localhost:80，不能用ip:80</p>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>缓存相关的浏览器和服务端能力</p>
+<h4 id="expires"><a href="#expires" class="headerlink" title="expires"></a>expires</h4><p>缓存过期时间，用来指定资源到期的时间，是服务器端的具体的时间点。告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。HTTP 1.0协议中的。</p>
+<p>如果在Cache-Control响应头设置了 “max-age” 或者 “s-max-age” 指令，那么 Expires 头会被忽略。<br>Expires: Thu, 11 Jul 2019 18:30:00 GMT<br>Expires: 0 , 无效的日期，代表着过去的日期，即该资源已经过期</p>
+<h4 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h4><p>通用消息头字段，被用于在http请求和响应中，通过指定指令来实现缓存机制。缓存指令是单向的，这意味着在请求中设置的指令，不一定被包含在响应中。HTTP1.1协议中的。</p>
+<p>语法：指令不区分大小写，并且具有可选参数，可以用令牌或者带引号的字符串语法。多个指令以逗号分隔。</p>
+<p>指令：<br>1、可缓存性<br>public，表明响应可以被任何对象（包括：发送请求的客户端，代理服务器，等等）缓存，即使是通常不可缓存的内容（例如，该响应没有max-age指令或Expires消息头）。<br>private，表明响应只能被单个用户缓存，不能作为共享缓存（即代理服务器不能缓存它）。私有缓存可以缓存响应内容。<br>no-cache，在发布缓存副本之前，强制要求缓存把请求提交给原始服务器进行验证，评估缓存响应的有效性。<br>no-store，禁止一切缓存</p>
+<p>2、到期<br>max-age= seconds，设置缓存存储的最大周期，超过这个时间缓存被认为过期(单位秒)。 200 (from memory cache)<br>s-maxage= seconds，覆盖 max-age 或者 Expires 头，但是仅适用于共享缓存(比如各个代理)，私有缓存会忽略它。 304</p>
+<p>3、重新验证和重新加载<br>must-revalidate，一旦资源过期（比如已经超过max-age），在成功向原始服务器验证之前，缓存不能用该资源响应后续请求。<br>proxy-revalidate，与must-revalidate作用相同，但它仅适用于共享缓存（例如代理），并被私有缓存忽略。<br>immutable，表示响应正文不会随时间而改变。资源（如果未过期）在服务器上不发生改变，因此客户端不应发送重新验证请求头来检查更新，即使用户显式地刷新页面。</p>
+<p>4、其他<br>no-transform，不得对资源进行转换或转变。Content-Encoding、Content-Range、Content-Type等HTTP头不能由代理修改。<br>only-if-cached，表明客户端只接受已缓存的响应，并且不要向原始服务器检查是否有更新的拷贝。</p>
+<h4 id="last-modified-if-modified-since"><a href="#last-modified-if-modified-since" class="headerlink" title="last-modified / if-modified-since"></a>last-modified / if-modified-since</h4><p>基于客户端和服务端协商的备用缓存机制，Last-Modified与Etag类似。不过Last-Modified表示响应资源在服务器最后修改时间而已。需要与cache-control共同使用。</p>
+<p>不足:<br>Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间；<br>如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存；<br>有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形。</p>
+<p>Last-Modified: Thu, 11 Jul 2019 18:30:00 GMT , response header<br>if-modified-since: Thu, 11 Jul 2019 18:30:00 GMT , request header</p>
+<h4 id="etag-if-none-match"><a href="#etag-if-none-match" class="headerlink" title="etag / if-none-match"></a>etag / if-none-match</h4><p>etag 实体标签，文件内容的hash值，服务器生成的一个标记，用来标识返回值是否有变化。<br>需要与cache-control共同使用，优先级比last-modified/ if-modified-since更高<br>etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。</p>
+<p>当第一次发起请求时，服务器生成并会返回一个Etag给前端，并在你第二次发起同一个请求时，客户端会同时发送一个If-None-Match，而它的值就是Etag的值（此处由发起请求的客户端来设置）。然后，服务器会比对这个客服端发送过来的Etag是否与服务器的相同，如果相同，就将If-None-Match的值设为false，返回状态为304，客户端继续使用本地缓存，不解析服务器返回的数据（这种场景服务器也不返回数据），如果不相同，就将If-None-Match的值设为true，返回状态为200，客户端重新解析服务器返回的数据。</p>
+<p>etag: “33a64df551425fcc55e4d42a148795d9f25f89d4” , response header<br>if-none-match: “33a64df551425fcc55e4d42a148795d9f25f89d4” , request header</p>
+<h4 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h4><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，返回200，重新返回资源和缓存标识，再存入浏览器缓存中；生效则返回304，继续使用缓存</p>
+<p><img src="/images/web-cachemechanism.jpg" alt="缓存机制"></p>
+<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p>Server Side Rendering 解决首屏渲染问题  服务端是 nodejs，客户端复杂运算可以放到服务端，减少前端运算成本。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/15/JS/设计模式二/" rel="next" title="设计模式">
+                <i class="fa fa-chevron-left"></i> 设计模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资源合并与压缩"><span class="nav-number">1.1.</span> <span class="nav-text">资源合并与压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#http-清求的过程"><span class="nav-number">1.1.1.</span> <span class="nav-text">http 清求的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#http-是什么"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">http 是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三次握手"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么要三次握手"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">为什么要三次握手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TCP四次挥手"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">TCP四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么要四次分手"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">为什么要四次分手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么HTTP协议要基于TCP来实现"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">为什么HTTP协议要基于TCP来实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#具体优化方法"><span class="nav-number">1.1.2.</span> <span class="nav-text">具体优化方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内容优化"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">内容优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#html压缩"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">html压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#css-优化"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">css 优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#js-优化"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">js 优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cookie优化"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">Cookie优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#服务器优化"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">服务器优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件合并"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">文件合并</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开启-gzip"><span class="nav-number">1.1.2.8.</span> <span class="nav-text">开启 gzip</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构建层面"><span class="nav-number">1.1.2.9.</span> <span class="nav-text">构建层面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#图片相关的优化"><span class="nav-number">1.1.2.10.</span> <span class="nav-text">图片相关的优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#css-和-js-的装载与执行"><span class="nav-number">1.1.2.11.</span> <span class="nav-text">css 和 js 的装载与执行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载与预加载"><span class="nav-number">1.1.2.12.</span> <span class="nav-text">懒加载与预加载</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶"><span class="nav-number">2.</span> <span class="nav-text">进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器渲染"><span class="nav-number">2.1.</span> <span class="nav-text">浏览器渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器如何渲染网页"><span class="nav-number">2.1.1.</span> <span class="nav-text">浏览器如何渲染网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回流与重绘"><span class="nav-number">2.1.2.</span> <span class="nav-text">回流与重绘</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回流"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">回流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重绘"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">重绘</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#避免重绘回流的两种方法"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">避免重绘回流的两种方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#新建dom的过程"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">新建dom的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#chrome创建图层的条件"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">chrome创建图层的条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优化点"><span class="nav-number">2.1.2.6.</span> <span class="nav-text">优化点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器存储"><span class="nav-number">2.2.</span> <span class="nav-text">浏览器存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cookie"><span class="nav-number">2.2.1.</span> <span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#indexDB"><span class="nav-number">2.2.2.</span> <span class="nav-text">indexDB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PWA"><span class="nav-number">2.2.3.</span> <span class="nav-text">PWA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Service-Worker"><span class="nav-number">2.2.4.</span> <span class="nav-text">Service Worker</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存"><span class="nav-number">2.3.</span> <span class="nav-text">缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#expires"><span class="nav-number">2.3.1.</span> <span class="nav-text">expires</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-Control"><span class="nav-number">2.3.2.</span> <span class="nav-text">Cache-Control</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#last-modified-if-modified-since"><span class="nav-number">2.3.3.</span> <span class="nav-text">last-modified / if-modified-since</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#etag-if-none-match"><span class="nav-number">2.3.4.</span> <span class="nav-text">etag / if-none-match</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存机制"><span class="nav-number">2.3.5.</span> <span class="nav-text">缓存机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器"><span class="nav-number">3.</span> <span class="nav-text">服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSR"><span class="nav-number">3.1.</span> <span class="nav-text">SSR</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+

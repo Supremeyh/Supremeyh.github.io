@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="created by sea, 2019.5.7  起步，初始化项目npx create-react-app sharedbikes 基础依赖安装npm i react-router-domnpm i axiosnpm i jsonpnpm i moment  antd 按需加载、自定义主题npm i antd npm i less less-loader  // 自定义主题需要用到 less">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 共享单车开发实战总结">
+<meta property="og:url" content="https://supremeyh.github.io/2019/05/07/React/React-共享单车开发实战总结/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="created by sea, 2019.5.7  起步，初始化项目npx create-react-app sharedbikes 基础依赖安装npm i react-router-domnpm i axiosnpm i jsonpnpm i moment  antd 按需加载、自定义主题npm i antd npm i less less-loader  // 自定义主题需要用到 less">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-07-23T01:25:36.345Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 共享单车开发实战总结">
+<meta name="twitter:description" content="created by sea, 2019.5.7  起步，初始化项目npx create-react-app sharedbikes 基础依赖安装npm i react-router-domnpm i axiosnpm i jsonpnpm i moment  antd 按需加载、自定义主题npm i antd npm i less less-loader  // 自定义主题需要用到 less">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/05/07/React/React-共享单车开发实战总结/">
+
+
+
+
+
+  <title>React 共享单车开发实战总结 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/05/07/React/React-共享单车开发实战总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React 共享单车开发实战总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-07T21:19:49+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>created by sea, 2019.5.7</p>
+</blockquote>
+<h3 id="起步，初始化项目"><a href="#起步，初始化项目" class="headerlink" title="起步，初始化项目"></a>起步，初始化项目</h3><p>npx create-react-app sharedbikes</p>
+<h3 id="基础依赖安装"><a href="#基础依赖安装" class="headerlink" title="基础依赖安装"></a>基础依赖安装</h3><p>npm i react-router-dom<br>npm i axios<br>npm i jsonp<br>npm i moment </p>
+<h3 id="antd-按需加载、自定义主题"><a href="#antd-按需加载、自定义主题" class="headerlink" title="antd 按需加载、自定义主题"></a>antd 按需加载、自定义主题</h3><p>npm i antd</p>
+<p>npm i less less-loader  // 自定义主题需要用到 less 变量覆盖功能</p>
+<p>npm i babel-plugin-import // 按需加载所需的css</p>
+<h4 id="全量加载、手动加载"><a href="#全量加载、手动加载" class="headerlink" title="全量加载、手动加载"></a>全量加载、手动加载</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全量加载 会加载全部CSS样式</span></span><br><span class="line"><span class="keyword">import</span> &#123;Button&#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'antd/dist/antd.css'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 手动按需加载</span></span><br><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">'antd/lib/button'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'antd/lib/button/style'</span>  <span class="comment">// 或者 antd/lib/button/style/css</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用react-app-rewired-插件"><a href="#使用react-app-rewired-插件" class="headerlink" title="使用react-app-rewired 插件"></a>使用react-app-rewired 插件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装 react-app-rewired 插件</span></span><br><span class="line">npm i react-app-rewired customize-cra</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改 package.json 文件</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">-   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">+   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">-   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">+   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">-   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">+   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根目录下新建 config-overrides.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; override, fixBabelImports, addLessLoader &#125; = <span class="built_in">require</span>(<span class="string">'customize-cra'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = override(</span><br><span class="line">  fixBabelImports(<span class="string">'import'</span>, &#123;</span><br><span class="line">    libraryName: <span class="string">'antd'</span>,</span><br><span class="line">    libraryDirectory: <span class="string">'es'</span>,</span><br><span class="line">    style: <span class="literal">true</span>,  <span class="comment">// 'css'为加载编译好的css样式文件, true 为less文件</span></span><br><span class="line">  &#125;),</span><br><span class="line">  <span class="comment">// 自定义主题</span></span><br><span class="line">  addLessLoader(&#123;</span><br><span class="line">    javascriptEnabled: <span class="literal">true</span>,</span><br><span class="line">    modifyVars: &#123; <span class="string">'@primary-color'</span>: <span class="string">'red'</span> &#125;,</span><br><span class="line">  &#125;),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 此后，无需引入样式文件，会自动引入相对应样式文件</span></span><br><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br></pre></td></tr></table></figure>
+<h4 id="暴露webpack配置文件"><a href="#暴露webpack配置文件" class="headerlink" title="暴露webpack配置文件"></a>暴露webpack配置文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暴露出config 和 scripts 两个文件夹。此操作是不可逆，因eject功能会被删除；运行此命令前需保存git,才可继续执行</span></span><br><span class="line">npm run eject</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置webpack支持less, 在/config/webpack.config.js 中，依照sass，增加less变量，和 module 中的oneOf数组添加 less相应 配置</span></span><br><span class="line"><span class="keyword">const</span> lessRegex = <span class="regexp">/\.less$/</span></span><br><span class="line"><span class="keyword">const</span> lessModuleRegex = <span class="regexp">/\.module\.less$/</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// less 降级到3.0以下,比如npm i less@2.7.3</span></span><br><span class="line"><span class="comment">// 在babel-loader的plugins配置中增加 ["import", &#123; "libraryName": "antd", "libraryDirectory": 'es', "style": true &#125;]</span></span><br><span class="line">&#123;</span><br><span class="line">  test: <span class="regexp">/\.(js|mjs|jsx|ts|tsx)$/</span>,</span><br><span class="line">  include: paths.appSrc,</span><br><span class="line">  loader: <span class="built_in">require</span>.resolve(<span class="string">'babel-loader'</span>),</span><br><span class="line">  options: &#123;</span><br><span class="line">    customize: <span class="built_in">require</span>.resolve(</span><br><span class="line">      <span class="string">'babel-preset-react-app/webpack-overrides'</span></span><br><span class="line">    ),</span><br><span class="line">    </span><br><span class="line">    plugins: [</span><br><span class="line">      [</span><br><span class="line">        <span class="built_in">require</span>.resolve(<span class="string">'babel-plugin-named-asset-import'</span>),</span><br><span class="line">        &#123;</span><br><span class="line">          loaderMap: &#123;</span><br><span class="line">            svg: &#123;</span><br><span class="line">              ReactComponent: <span class="string">'@svgr/webpack?-svgo,+ref![path]'</span>,</span><br><span class="line">            &#125;,</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 新增的配置 按需加载</span></span><br><span class="line">      [<span class="string">"import"</span>, &#123; </span><br><span class="line">        <span class="string">"libraryName"</span>: <span class="string">"antd"</span>, </span><br><span class="line">        <span class="string">"libraryDirectory"</span>: <span class="string">'es'</span>, </span><br><span class="line">        <span class="string">"style"</span>: <span class="literal">true</span>  <span class="comment">// 'css'为加载编译好的css样式文件, true 为less文件</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    ],</span><br><span class="line">    cacheDirectory: <span class="literal">true</span>,</span><br><span class="line">    cacheCompression: isEnvProduction,</span><br><span class="line">    compact: isEnvProduction,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后，修改 preProcessor 中loader 配置项</span></span><br><span class="line"><span class="keyword">if</span> (preProcessor) &#123;</span><br><span class="line">  <span class="comment">// loaders.push(&#123;</span></span><br><span class="line">  <span class="comment">//   loader: require.resolve(preProcessor),</span></span><br><span class="line">  <span class="comment">//   options: &#123;</span></span><br><span class="line">  <span class="comment">//     sourceMap: isEnvProduction &amp;&amp; shouldUseSourceMap,</span></span><br><span class="line">  <span class="comment">//   &#125;,</span></span><br><span class="line">  <span class="comment">// &#125;);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 修改为</span></span><br><span class="line">  <span class="keyword">let</span> loader = &#123;</span><br><span class="line">    loader: <span class="built_in">require</span>.resolve(preProcessor),</span><br><span class="line">    options: &#123;</span><br><span class="line">      sourceMap: shouldUseSourceMap,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(preProcessor === <span class="string">"less-loader"</span>) &#123;</span><br><span class="line">    loader.options.modifyVars = &#123;</span><br><span class="line">      <span class="string">'primary-color'</span>: <span class="string">'#f9c700'</span></span><br><span class="line">    &#125;</span><br><span class="line">    loader.options.javascriptEnabled = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  loaders.push(loader)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="项目架构-和-技术栈"><a href="#项目架构-和-技术栈" class="headerlink" title="项目架构 和 技术栈"></a>项目架构 和 技术栈</h3><p>核心框架库：React16、Router4.0、Redux<br>中间件和插件：Axios、Map、ECharts、AntD<br>公共机制：菜单、权限、Header、Footer、ETable、EForm、Loading、API、Axios</p>
+<h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ul>
+<li><p>编程式实现VS声明式实现<br>编程式实现：需要以具体代码表达在哪里（where）做什么（what）,如何实现（how）<br>声明式实现：只需要声明在哪里（where）做什么（what）,不需要关心如何实现（how）</p>
+</li>
+<li><p>calc() 计算方法动态计算长度值<br>calc(四则运算）：运算符前后都需要保留一个空格<br>width: calc(100% - 10px) //表示宽度属性是整个布局的100%减去50px的长度<br>calc(100vh)：vh的含义相当于1%，100vh即是100%</p>
+</li>
+<li><p>less<br>js文件中导入less文件，用import ‘xx’； less导入其他less，用 @import ‘xx’  引入，中间留空，用分号分割<br>import ‘./index.less’;<br>@import ‘./varable.less’;</p>
+</li>
+</ul>
+<p>定义变量，与scss有区别<br>@font18: 18px;  less<br>$font18: 18px;   scss</p>
+<ul>
+<li><p>CSS实现箭头图标<br>实现下三角样式：设定border-top为指定颜色，左右border为透明色(transparent)</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.title</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  &amp;::after&#123;</span><br><span class="line">    <span class="selector-tag">display</span>: <span class="selector-tag">block</span>;</span><br><span class="line">    <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">    content: '';</span><br><span class="line">    <span class="selector-tag">left</span>: 50%;</span><br><span class="line">    <span class="selector-tag">border-top</span>: 9<span class="selector-tag">px</span> <span class="selector-tag">solid</span> @<span class="keyword">colorWhite</span>;</span><br><span class="line">    <span class="selector-tag">border-left</span>: 12<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-tag">transparent</span>;</span><br><span class="line">    <span class="selector-tag">border-right</span>: 12<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-tag">transparent</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取 url 参数, this.props.match<br>比如 this.props.match.match.params.userId， 可拿到userId</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动态路由</span></span><br><span class="line">&lt;Route path=<span class="string">'/common/order/detail/:orderId'</span> component=&#123;OrderDetail&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>React监听事件方法绑定this</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 手动绑定this</span></span><br><span class="line"><span class="keyword">this</span>.handleClick = <span class="keyword">this</span>.handleClick.bind(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 箭头函数传参</span></span><br><span class="line">() =&gt; <span class="keyword">this</span>.handleClick(<span class="string">'add'</span>)</span><br><span class="line"><span class="comment">// 不能使用 this.handleClick('add') 会直接调用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义为箭头函数</span></span><br><span class="line">handleClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态传参</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/admin/ui/modal/index.js</span></span><br><span class="line">showMethod = <span class="function">(<span class="params">type</span>) =&gt;</span> &#123;</span><br><span class="line">  Modal[type](&#123;</span><br><span class="line">    title: <span class="string">'type'</span>,</span><br><span class="line">    content: <span class="string">'some type'</span>,</span><br><span class="line">    onOk() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(type)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;Button onClick=&#123;() =&gt; <span class="keyword">this</span>.showMethod(<span class="string">'confirm'</span>)&#125;&gt;show confirm&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">&lt;Button onClick=&#123;() =&gt; this.showMethod('info')&#125;&gt;show info&lt;/</span>Button&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>wrappedComponentRef 拿到dom<br>经过 Form.create 之后如果要拿到 ref，可以使用 wrappedComponentRef</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/user/index.js</span></span><br><span class="line"><span class="comment">// 定义 UserForm， 使用Form.create 包装成UserFormWrap</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserForm</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserFormWrap = Form.create(&#123;&#125;)(UserForm)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用 UserFormWrap，使用 wrappedComponentRef拿到UserFormWrap的dom</span></span><br><span class="line">&lt;UserFormWrap </span><br><span class="line">  type=&#123;<span class="keyword">this</span>.state.type&#125; </span><br><span class="line">  userInfo=&#123;<span class="keyword">this</span>.state.userInfo&#125; </span><br><span class="line">  wrappedComponentRef=&#123;(form) =&gt; <span class="keyword">this</span>.userForm= form&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 经过 Form.create 包装的组件将会自带 this.props.form 属性，提供了多个 API 操作表单，如getFieldDecorator实现表单数据双向绑定等</span></span><br><span class="line"><span class="comment">// 在方法中可使用this.userForm</span></span><br><span class="line"><span class="keyword">const</span> userInfo = <span class="keyword">this</span>.userForm.props.form.getFieldsValue()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Easy Mock中使用　　<br>Easy Mock中使用　　</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"list|10"</span>: [&#123;     <span class="comment">//生成10组数据</span></span><br><span class="line">    <span class="string">"id|+1"</span>: <span class="number">1</span>,    <span class="comment">//自增长</span></span><br><span class="line">    <span class="string">"userName"</span>: <span class="string">'@cname'</span>,   <span class="comment">//随机生成中文名</span></span><br><span class="line">    <span class="string">"sex|1-2"</span>: <span class="number">1</span>,    <span class="comment">//在1-2中随机选择</span></span><br><span class="line">  &#125;],</span><br><span class="line"></span><br><span class="line">  <span class="string">"cname"</span>: <span class="string">"@cname"</span>,  <span class="comment">//中文人名</span></span><br><span class="line">  <span class="string">"cfirst"</span>: <span class="string">"@cfirst"</span>,  <span class="comment">//姓名，姓</span></span><br><span class="line">  <span class="string">"id"</span>: <span class="string">"@id"</span>,  <span class="comment">//生成20 位数字</span></span><br><span class="line">  <span class="string">"title"</span>: <span class="string">"@ctitle"</span>,  <span class="comment">//中文title</span></span><br><span class="line">  <span class="string">"city"</span>: <span class="string">"@city"</span>,  <span class="comment">//中文城市</span></span><br><span class="line">  <span class="string">"ip"</span>: <span class="string">"@ip"</span>,  <span class="comment">//ip 地址</span></span><br><span class="line">  <span class="string">"email"</span>: <span class="string">"@email"</span>,  <span class="comment">//email</span></span><br><span class="line">  <span class="string">"url"</span>: <span class="string">"@url"</span>,  <span class="comment">//url</span></span><br><span class="line">  <span class="string">"cword"</span>: <span class="string">"@cword('123456')"</span>,  <span class="comment">//123456 从中选取一个字符</span></span><br><span class="line">  <span class="string">"csentence"</span>: <span class="string">"@csentence(1,5)"</span>,  <span class="comment">//文字文段</span></span><br><span class="line">  <span class="string">"csentence5"</span>: <span class="string">"@csentence(5)"</span>,  <span class="comment">//文字文段</span></span><br><span class="line">  <span class="string">"cparagraph"</span>: <span class="string">"@cparagraph(1,3)"</span>,  <span class="comment">//文字文段</span></span><br><span class="line">  <span class="string">"string"</span>: <span class="string">"@string(11)"</span>,  <span class="comment">//输出11 个字符长度的字符串</span></span><br><span class="line">  <span class="string">"float"</span>: <span class="string">"@float(0,10)"</span>,  <span class="comment">//0 到 10 的浮点数</span></span><br><span class="line">  <span class="string">"int"</span>: <span class="string">"@integer(10,50)"</span>,  <span class="comment">//1 到 50 之间的整数</span></span><br><span class="line">  <span class="string">"boolean"</span>: <span class="string">"@boolean"</span>,  <span class="comment">//boolean 类型 true,false</span></span><br><span class="line">  <span class="string">"boolean|1-2"</span>: <span class="literal">true</span>, <span class="comment">//boolean 类型 true,false</span></span><br><span class="line">  <span class="string">"array_sort_add|+1"</span>: [<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>], <span class="comment">//数组1，2，3轮询输出</span></span><br><span class="line">  <span class="string">"actionType|1"</span>: [<span class="string">'click_url'</span>, <span class="string">'open_resource_detail'</span>, <span class="string">'open_resource_search'</span>],</span><br><span class="line">  <span class="string">"payload"</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> returnClickUrl = &#123;</span><br><span class="line">      <span class="string">"linkUrl"</span>: <span class="string">"http://abc.com/efg"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> returnResourceDetail = &#123;</span><br><span class="line">      <span class="string">"resourceId"</span>: <span class="string">"606"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> returnResourceSearch = &#123;</span><br><span class="line">      <span class="string">"keyWords"</span>: <span class="string">""</span>,</span><br><span class="line">      <span class="string">"tagCategory"</span>: <span class="string">"1"</span>,</span><br><span class="line">      <span class="string">"tag"</span>: <span class="string">"1"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="keyword">this</span>.actionType == <span class="string">'click_url'</span> ? returnClickUrl : returnResourceSearch;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><h4 id="基础架构"><a href="#基础架构" class="headerlink" title="基础架构"></a>基础架构</h4><p>/index.js 项目入口<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'./config/router'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = (</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;Router /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Provider&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(App, document.getElementById('root'));</span></span><br></pre></td></tr></table></figure></p>
+<p>/config/router.js  路由。 重点是Swicth的应用，使得少了一层admin嵌套<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Route, Switch, Redirect &#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'../App'</span></span><br><span class="line"><span class="keyword">import</span> Login <span class="keyword">from</span> <span class="string">'../pages/login'</span></span><br><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'../pages/home'</span></span><br><span class="line"><span class="keyword">import</span> Admin <span class="keyword">from</span> <span class="string">'../admin'</span></span><br><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">'../pages/admin/ui/button'</span></span><br><span class="line"><span class="keyword">import</span> Modal <span class="keyword">from</span> <span class="string">'../pages/admin/ui/modal'</span></span><br><span class="line"><span class="keyword">import</span> Spin <span class="keyword">from</span> <span class="string">'../pages/admin/ui/spin'</span></span><br><span class="line"><span class="keyword">import</span> Gallery <span class="keyword">from</span> <span class="string">'../pages/admin/ui/gallery'</span></span><br><span class="line"><span class="keyword">import</span> Carousel <span class="keyword">from</span> <span class="string">'../pages/admin/ui/carousel'</span></span><br><span class="line"><span class="keyword">import</span> LoginForm <span class="keyword">from</span> <span class="string">'../pages/admin/form/login'</span></span><br><span class="line"><span class="keyword">import</span> Register <span class="keyword">from</span> <span class="string">'../pages/admin/form/register'</span></span><br><span class="line"><span class="keyword">import</span> Table <span class="keyword">from</span> <span class="string">'../pages/admin/table'</span></span><br><span class="line"><span class="keyword">import</span> City <span class="keyword">from</span> <span class="string">'../pages/city'</span></span><br><span class="line"><span class="keyword">import</span> Order <span class="keyword">from</span> <span class="string">'../pages/order'</span></span><br><span class="line"><span class="keyword">import</span> Common <span class="keyword">from</span> <span class="string">'../common'</span></span><br><span class="line"><span class="keyword">import</span> OrderDetail <span class="keyword">from</span> <span class="string">'../pages/order/detail'</span></span><br><span class="line"><span class="keyword">import</span> BikeMap <span class="keyword">from</span> <span class="string">'../pages/map/bikeMap'</span></span><br><span class="line"><span class="keyword">import</span> User <span class="keyword">from</span> <span class="string">'../pages/user'</span></span><br><span class="line"><span class="keyword">import</span> Bar <span class="keyword">from</span> <span class="string">'../pages/echarts/bar'</span></span><br><span class="line"><span class="keyword">import</span> Pie <span class="keyword">from</span> <span class="string">'../pages/echarts/pie'</span></span><br><span class="line"><span class="keyword">import</span> RichText <span class="keyword">from</span> <span class="string">'../pages/richText'</span></span><br><span class="line"><span class="keyword">import</span> Permission <span class="keyword">from</span> <span class="string">'../pages/permission'</span></span><br><span class="line"><span class="keyword">import</span> NotFound <span class="keyword">from</span> <span class="string">'../pages/notFound'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IRouter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Router&gt;</span><br><span class="line">        &lt;App&gt;</span><br><span class="line">          &lt;Switch&gt;</span><br><span class="line">            &lt;Route path=<span class="string">'/login'</span> component=&#123;Login&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">            &lt;Route path=<span class="string">'/common'</span> render=&#123;() =&gt; </span><br><span class="line">              &lt;Common&gt;</span><br><span class="line">                &lt;Route path=<span class="string">'/common/order/detail/:orderId'</span> component=&#123;OrderDetail&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">              &lt;<span class="regexp">/Common&gt;</span></span><br><span class="line"><span class="regexp">            &#125;&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Route&gt;</span><br><span class="line">            &lt;Route path=<span class="string">'/'</span> render=&#123; () =&gt; </span><br><span class="line">                &lt;Admin&gt;</span><br><span class="line">                  &lt;Switch&gt;</span><br><span class="line">                    &lt;Route path=<span class="string">'/home'</span> component=&#123;Home&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/ui/button'</span> component=&#123;Button&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/ui/modal'</span> component=&#123;Modal&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/ui/spin'</span> component=&#123;Spin&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/ui/gallery'</span> component=&#123;Gallery&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/ui/carousel'</span> component=&#123;Carousel&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/form/login'</span> component=&#123;LoginForm&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/form/register'</span> component=&#123;Register&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/table'</span> component=&#123;Table&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/city'</span> component=&#123;City&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/order'</span> component=&#123;Order&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/user'</span> component=&#123;User&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/bikemap'</span> component=&#123;BikeMap&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/bar'</span> component=&#123;Bar&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/pie'</span> component=&#123;Pie&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/richtext'</span> component=&#123;RichText&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Route path=<span class="string">'/permission'</span> component=&#123;Permission&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                    &lt;Redirect to=<span class="string">'/home'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Redirect</span>&gt;</span></span></span><br><span class="line">                    &lt;Route component=&#123;NotFound&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">                  &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>Admin&gt;</span><br><span class="line">              &#125;&gt;</span><br><span class="line">            &lt;<span class="regexp">/Route&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>Switch&gt;</span><br><span class="line">        &lt;<span class="regexp">/App&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Router&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> IRouter</span><br></pre></td></tr></table></figure></p>
+<p>config/menuConfig.js 菜单导航配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> menuConfig = [</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'首页'</span>,</span><br><span class="line">    key: <span class="string">'/home'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'UI'</span>,</span><br><span class="line">    key: <span class="string">'/ui'</span>,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'按钮'</span>,</span><br><span class="line">        key: <span class="string">'/ui/button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'弹框'</span>,</span><br><span class="line">        key: <span class="string">'/ui/modal'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'加载'</span>,</span><br><span class="line">        key: <span class="string">'/ui/spin'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'画廊'</span>,</span><br><span class="line">        key: <span class="string">'/ui/gallery'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'轮播图'</span>,</span><br><span class="line">        key: <span class="string">'/ui/carousel'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'Form'</span>,</span><br><span class="line">    key: <span class="string">'/form'</span>,</span><br><span class="line">    children: [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'登录'</span>,</span><br><span class="line">        key: <span class="string">'/form/login'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">'注册'</span>,</span><br><span class="line">        key: <span class="string">'/form/register'</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'Table'</span>,</span><br><span class="line">    key: <span class="string">'/table'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'城市管理'</span>,</span><br><span class="line">    key: <span class="string">'/city'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'订单管理'</span>,</span><br><span class="line">    key: <span class="string">'/order'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'用户管理'</span>,</span><br><span class="line">    key: <span class="string">'/user'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'车辆地图'</span>,</span><br><span class="line">    key: <span class="string">'/bikemap'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'柱形图'</span>,</span><br><span class="line">    key: <span class="string">'/bar'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'饼状图'</span>,</span><br><span class="line">    key: <span class="string">'/pie'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'富文本'</span>,</span><br><span class="line">    key: <span class="string">'/richtext'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    title: <span class="string">'权限设置'</span>,</span><br><span class="line">    key: <span class="string">'/permission'</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> menuConfig</span><br></pre></td></tr></table></figure></p>
+<p>/App.js 。 重点是其中的 {this.props.children}<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">        &#123;<span class="keyword">this</span>.props.children&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default App</span></span><br></pre></td></tr></table></figure></p>
+<p>/admin.js 。 后台系统layout布局，与一般登录、注册等页面不同<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Header <span class="keyword">from</span> <span class="string">'./components/Header'</span></span><br><span class="line"><span class="keyword">import</span> Footer <span class="keyword">from</span> <span class="string">'./components/Footer'</span></span><br><span class="line"><span class="keyword">import</span> NavLeft <span class="keyword">from</span> <span class="string">'./components/NavLeft'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Admin</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Row className=<span class="string">'container'</span>&gt;</span><br><span class="line">        &lt;Col className=<span class="string">'nav-left'</span> span=&#123;<span class="number">4</span>&#125;&gt;</span><br><span class="line">          &lt;NavLeft&gt;<span class="xml"><span class="tag">&lt;/<span class="name">NavLeft</span>&gt;</span></span></span><br><span class="line">        &lt;<span class="regexp">/Col&gt;</span></span><br><span class="line"><span class="regexp">        &lt;Col className='main' span=&#123;20&#125;&gt;</span></span><br><span class="line"><span class="regexp">          &lt;Header className='header'&gt;Header&lt;/</span>Header&gt;</span><br><span class="line">            &#123;<span class="keyword">this</span>.props.children&#125;</span><br><span class="line">          &lt;Footer className=<span class="string">'footer'</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Footer</span>&gt;</span></span></span><br><span class="line">        &lt;<span class="regexp">/Col&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Row&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Admin</span><br></pre></td></tr></table></figure></p>
+<p>/components/NavLeft/index.js  左侧菜单栏menu, 重点是递归获取菜单列表menu<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> menuConfig <span class="keyword">from</span> <span class="string">'../../config/menuConfig'</span></span><br><span class="line"><span class="keyword">import</span> &#123; NavLink &#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; switchMenuAction &#125; <span class="keyword">from</span> <span class="string">'../../store/actionCreators'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> SubMenu = Menu.SubMenu</span><br><span class="line"><span class="keyword">const</span> Item = Menu.Item</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavLeft</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  componentWillMount() &#123;</span><br><span class="line">    <span class="keyword">const</span> menuTree = <span class="keyword">this</span>.getMenu(menuConfig)</span><br><span class="line">    <span class="keyword">let</span> currentPath = <span class="built_in">window</span>.location.pathname</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      menuTree,</span><br><span class="line">      defaultSelectedKeys: [currentPath],</span><br><span class="line">      selectedKeys: [currentPath],</span><br><span class="line">      defaultOpenKeys: [currentPath]</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 递归获取菜单列表menu</span></span><br><span class="line">  getMenu = <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> data.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(item.children) &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          &lt;SubMenu title=&#123;item.title&#125; key=&#123;item.key&#125;&gt;</span><br><span class="line">            &#123; <span class="keyword">this</span>.getMenu(item.children) &#125;</span><br><span class="line">          &lt;<span class="regexp">/SubMenu&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">      &#125; else &#123;</span></span><br><span class="line"><span class="regexp">        return (</span></span><br><span class="line"><span class="regexp">          &lt;Item key=&#123;item.key&#125;&gt;</span></span><br><span class="line"><span class="regexp">            &lt;NavLink to=&#123;item.key&#125;&gt;&#123;item.title&#125;&lt;/</span>NavLink&gt;</span><br><span class="line">          &lt;<span class="regexp">/Item&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">      &#125;</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  handleClick = (item) =&gt; &#123;   </span></span><br><span class="line"><span class="regexp">    let name = item.item.props.children.props.children</span></span><br><span class="line"><span class="regexp">    this.setState(&#123;</span></span><br><span class="line"><span class="regexp">      selectedKeys: [item.key]</span></span><br><span class="line"><span class="regexp">    &#125;)</span></span><br><span class="line"><span class="regexp">    this.props.changeMenuName(name)</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  render() &#123;</span></span><br><span class="line"><span class="regexp">    const &#123; defaultSelectedKeys, selectedKeys, defaultOpenKeys &#125; = this.state</span></span><br><span class="line"><span class="regexp">    return (</span></span><br><span class="line"><span class="regexp">      &lt;Fragment&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div className='logo'&gt;</span></span><br><span class="line"><span class="regexp">          &lt;Icon className='logo-img' type="twitter" /</span>&gt;</span><br><span class="line">          &lt;h1&gt;Shared Bikes&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;Menu </span><br><span class="line">          mode=<span class="string">'inline'</span> </span><br><span class="line">          theme=<span class="string">'dark'</span> </span><br><span class="line">          selectedKeys=&#123;selectedKeys&#125; </span><br><span class="line">          defaultSelectedKeys=&#123;defaultSelectedKeys&#125; </span><br><span class="line">          defaultOpenKeys=&#123;defaultOpenKeys&#125; </span><br><span class="line">          onClick=&#123;<span class="keyword">this</span>.handleClick&#125;</span><br><span class="line">          style=&#123;&#123;<span class="attr">textAlign</span>: <span class="string">'left'</span>&#125;&#125;</span><br><span class="line">          &gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.state.menuTree&#125;</span><br><span class="line">        &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    changeMenuName(menuName) &#123;</span><br><span class="line">      <span class="keyword">const</span> action = switchMenuAction(menuName)</span><br><span class="line">      dispatch(action)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(<span class="literal">null</span>, mapDispatchToProps)(NavLeft)</span><br></pre></td></tr></table></figure></p>
+<h4 id="公共组件封装"><a href="#公共组件封装" class="headerlink" title="公共组件封装"></a>公共组件封装</h4><h5 id="request-请求封装"><a href="#request-请求封装" class="headerlink" title="request 请求封装"></a>request 请求封装</h5><p>对jsonp处理和对axios做了一层封装拦截<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// request/index.js</span></span><br><span class="line"><span class="keyword">import</span> JsonP <span class="keyword">from</span> <span class="string">'jsonp'</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Modal &#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br><span class="line"><span class="keyword">import</span> Utils <span class="keyword">from</span> <span class="string">'../util/util'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Axios = axios</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">request</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> jsonp(options) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      JsonP(options.url, &#123;</span><br><span class="line">        param: <span class="string">'callback'</span></span><br><span class="line">      &#125;, (err, response) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(err) reject(err)</span><br><span class="line">        resolve(response)</span><br><span class="line">      &#125;) </span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> requestList(that, url, params, cb) &#123;</span><br><span class="line">    <span class="keyword">this</span>.axios(&#123;</span><br><span class="line">      url,</span><br><span class="line">      params</span><br><span class="line">    &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(res &amp;&amp; res.result) &#123;</span><br><span class="line">        <span class="keyword">const</span> list = res.result.item_list</span><br><span class="line">        list.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">          item.key =item.id</span><br><span class="line">          <span class="keyword">return</span> item</span><br><span class="line">        &#125;)</span><br><span class="line">        that.setState(&#123;</span><br><span class="line">          list,</span><br><span class="line">          pagination: Utils.pagination(res.result, (current) =&gt; &#123;</span><br><span class="line">            that.params.page = current</span><br><span class="line">            cb()</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> axios(options, isMock=<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> baseUrl = <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span>(isMock===<span class="literal">true</span>) &#123;</span><br><span class="line">      baseUrl = <span class="string">'https://easy-mock.com/mock/5cc4000e429a6a46aa5d5112/sharedbikes/'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      baseUrl = <span class="string">'http://remote/host/'</span>  <span class="comment">// 线上生产部署地址</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      Axios(&#123;</span><br><span class="line">        baseURL: baseUrl,</span><br><span class="line">        url: options.url,</span><br><span class="line">        method: options.method || <span class="string">'get'</span>,</span><br><span class="line">        params: options.params || <span class="string">''</span>,</span><br><span class="line">        data: options.data || <span class="string">''</span>,</span><br><span class="line">        timeout: <span class="number">5000</span></span><br><span class="line">      &#125;)</span><br><span class="line">      .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(response.status===<span class="number">200</span>) &#123;</span><br><span class="line">          <span class="keyword">let</span> data = response.data</span><br><span class="line">          <span class="keyword">if</span>(data.code === <span class="number">2000</span>) &#123;</span><br><span class="line">            resolve(data)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Modal.info(&#123;</span><br><span class="line">              title: <span class="string">'提示'</span>,</span><br><span class="line">              content: data.msg || <span class="string">'出错了'</span></span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          reject(response.data)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> request</span><br></pre></td></tr></table></figure></p>
+<h5 id="request-请求调用"><a href="#request-请求调用" class="headerlink" title="request 请求调用"></a>request 请求调用</h5><p>封装好request后，可在业务页面简化调用。 如使用request中 requestList(that, url, params, cb) 方法，获取数据，可简化如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pages/user/index.js 为例</span></span><br><span class="line">getUserList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> _this = <span class="keyword">this</span></span><br><span class="line">  request.requestList(_this, <span class="string">'user_list'</span>, _this.params, <span class="keyword">this</span>.getUserList)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="keyword">this</span>.getUserList()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="utils-公用方法"><a href="#utils-公用方法" class="headerlink" title="utils 公用方法"></a>utils 公用方法</h5><p>主要是时间处理、分页、下拉项<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Select &#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Option = Select.Option</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Utils = &#123;</span><br><span class="line">  formatDate(time) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!time) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">let</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>(time)</span><br><span class="line">    <span class="keyword">let</span> month = date.getMonth() + <span class="number">1</span></span><br><span class="line">    <span class="keyword">let</span> day = date.getDate()</span><br><span class="line">    <span class="keyword">let</span> hour = date.getHours()</span><br><span class="line">    <span class="keyword">let</span> minute = date.getMinutes()</span><br><span class="line">    <span class="keyword">let</span> seconds = date.getSeconds()</span><br><span class="line">    month = <span class="keyword">this</span>.checkGreaterThanTen(month)</span><br><span class="line">    day = <span class="keyword">this</span>.checkGreaterThanTen(day)</span><br><span class="line">    hour = <span class="keyword">this</span>.checkGreaterThanTen(hour)</span><br><span class="line">    minute = <span class="keyword">this</span>.checkGreaterThanTen(minute)</span><br><span class="line">    seconds = <span class="keyword">this</span>.checkGreaterThanTen(seconds)</span><br><span class="line">    <span class="keyword">return</span> date.getFullYear() + <span class="string">'-'</span> + month + <span class="string">'-'</span> + day + <span class="string">' '</span> + hour+ <span class="string">':'</span> + minute + <span class="string">':'</span> + seconds</span><br><span class="line">  &#125;,</span><br><span class="line">  checkGreaterThanTen(num) &#123;</span><br><span class="line">    <span class="keyword">return</span> num = num &lt; <span class="number">10</span> ? <span class="string">'0'</span> + num : num</span><br><span class="line">  &#125;,</span><br><span class="line">  pagination(data, cb) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      onChange: <span class="function">(<span class="params">current</span>) =&gt;</span> &#123;</span><br><span class="line">        cb(current)</span><br><span class="line">      &#125;,</span><br><span class="line">      pageSize: data.page_size,</span><br><span class="line">      current: data.page,</span><br><span class="line">      total: data.total,</span><br><span class="line">      showTotal: <span class="function">(<span class="params">total</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`共<span class="subst">$&#123;total&#125;</span>页`</span></span><br><span class="line">      &#125;,</span><br><span class="line">      showQuickJumper: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getOptionList(data) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!data) <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">let</span> options = []</span><br><span class="line">    data.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> options.push(<span class="xml"><span class="tag">&lt;<span class="name">Option</span> <span class="attr">value</span>=<span class="string">&#123;item.id&#125;</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">Option</span>&gt;</span></span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> options</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Utils</span><br></pre></td></tr></table></figure></p>
+<h5 id="BaseForm-公共组件封装"><a href="#BaseForm-公共组件封装" class="headerlink" title="BaseForm 公共组件封装"></a>BaseForm 公共组件封装</h5><p>将顶部过滤表单提取出来，封装成公共组件，以便复用，也可简化业务，后期开发具体页面只需传递props<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BaseForm</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Input, Button, Select, Checkbox, Form, DatePicker &#125; <span class="keyword">from</span> <span class="string">'antd'</span></span><br><span class="line"><span class="keyword">import</span> Utils <span class="keyword">from</span> <span class="string">'../../util/util'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> FormItem = Form.Item</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseForm</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    orderInfo: [],</span><br><span class="line">    orderConfirmVisble: <span class="literal">false</span>,</span><br><span class="line">  &#125;</span><br><span class="line">  params = &#123;</span><br><span class="line">    page: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  initFormList = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; getFieldDecorator &#125; = <span class="keyword">this</span>.props.form</span><br><span class="line">    <span class="keyword">const</span> formList = <span class="keyword">this</span>.props.formList</span><br><span class="line">    <span class="keyword">const</span> formItemList = []</span><br><span class="line">    <span class="keyword">if</span>(formList &amp;&amp; formList.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">      formList.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> type = item.type</span><br><span class="line">        <span class="keyword">let</span> label = item.label</span><br><span class="line">        <span class="keyword">let</span> field = item.field</span><br><span class="line">        <span class="keyword">let</span> initialValue = item.initialValue</span><br><span class="line">        <span class="keyword">let</span> placeholder = item.placeholder</span><br><span class="line">        <span class="keyword">let</span> width = item.width</span><br><span class="line">        <span class="keyword">if</span>(type===<span class="string">'Input'</span>) &#123;</span><br><span class="line">          <span class="keyword">const</span> INPUT = (</span><br><span class="line">            &lt;FormItem</span><br><span class="line">              key=&#123;field&#125;</span><br><span class="line">              label=&#123;label&#125;</span><br><span class="line">              field=&#123;field&#125;&gt;</span><br><span class="line">              &#123;</span><br><span class="line">                getFieldDecorator(field,&#123;</span><br><span class="line">                  initialValue,</span><br><span class="line">                &#125;)(</span><br><span class="line">                  &lt;Input style=&#123;&#123;<span class="attr">width</span>: width&#125;&#125; type=<span class="string">'text'</span> placeholder=&#123;placeholder&#125; /&gt;</span><br><span class="line">                )</span><br><span class="line">              &#125;</span><br><span class="line">            &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">          )</span></span><br><span class="line"><span class="regexp">          formItemList.push(INPUT)</span></span><br><span class="line"><span class="regexp">        &#125; else if(type==='Select') &#123;</span></span><br><span class="line"><span class="regexp">          const SELECT = (</span></span><br><span class="line"><span class="regexp">            &lt;FormItem</span></span><br><span class="line"><span class="regexp">              key=&#123;field&#125;</span></span><br><span class="line"><span class="regexp">              label=&#123;label&#125;</span></span><br><span class="line"><span class="regexp">              field=&#123;field&#125;&gt;</span></span><br><span class="line"><span class="regexp">              &#123;</span></span><br><span class="line"><span class="regexp">                getFieldDecorator(field,&#123;</span></span><br><span class="line"><span class="regexp">                  initialValue,</span></span><br><span class="line"><span class="regexp">                &#125;)(</span></span><br><span class="line"><span class="regexp">                  &lt;Select</span></span><br><span class="line"><span class="regexp">                    style=&#123;&#123;width: width&#125;&#125;</span></span><br><span class="line"><span class="regexp">                    placeholder=&#123;placeholder&#125;&gt;</span></span><br><span class="line"><span class="regexp">                      &#123;</span></span><br><span class="line"><span class="regexp">                        Utils.getOptionList(item.list)</span></span><br><span class="line"><span class="regexp">                      &#125;</span></span><br><span class="line"><span class="regexp">                  &lt;/</span>Select&gt;</span><br><span class="line">                )</span><br><span class="line">              &#125;</span><br><span class="line">            &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">          )</span></span><br><span class="line"><span class="regexp">          formItemList.push(SELECT)</span></span><br><span class="line"><span class="regexp">        &#125; else if (type==='Checkbox') &#123;</span></span><br><span class="line"><span class="regexp">          const CKECKBOX = (</span></span><br><span class="line"><span class="regexp">            &lt;FormItem</span></span><br><span class="line"><span class="regexp">              key=&#123;field&#125;</span></span><br><span class="line"><span class="regexp">              label=&#123;label&#125;</span></span><br><span class="line"><span class="regexp">              field=&#123;field&#125;&gt;</span></span><br><span class="line"><span class="regexp">              &#123;</span></span><br><span class="line"><span class="regexp">                getFieldDecorator(field,&#123;</span></span><br><span class="line"><span class="regexp">                  valuePropName: 'checkbox',</span></span><br><span class="line"><span class="regexp">                  initialValue,</span></span><br><span class="line"><span class="regexp">                &#125;)(</span></span><br><span class="line"><span class="regexp">                  &lt;Checkbox style=&#123;&#123;width: width&#125;&#125; type='text' placeholder=&#123;placeholder&#125;&gt;</span></span><br><span class="line"><span class="regexp">                    &#123;label&#125; </span></span><br><span class="line"><span class="regexp">                  &lt;/</span>Checkbox&gt;</span><br><span class="line">                )</span><br><span class="line">              &#125;</span><br><span class="line">            &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">          )</span></span><br><span class="line"><span class="regexp">          formItemList.push(CKECKBOX)</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        if(type==='DatePicker') &#123;</span></span><br><span class="line"><span class="regexp">          const TIMEPICKER = (</span></span><br><span class="line"><span class="regexp">            &lt;Fragment key='DatePicker'&gt;</span></span><br><span class="line"><span class="regexp">              &lt;FormItem label="选择时间" key='start_time'&gt;</span></span><br><span class="line"><span class="regexp">              &#123;</span></span><br><span class="line"><span class="regexp">                getFieldDecorator('start_time')(</span></span><br><span class="line"><span class="regexp">                  &lt;DatePicker</span></span><br><span class="line"><span class="regexp">                    placeholder='开始时间'</span></span><br><span class="line"><span class="regexp">                    showTime</span></span><br><span class="line"><span class="regexp">                    format='YYYY-MM-DD HH:mm:ss'&gt;</span></span><br><span class="line"><span class="regexp">                  &lt;/</span>DatePicker&gt;</span><br><span class="line">                ) </span><br><span class="line">              &#125;</span><br><span class="line">              &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">              &lt;FormItem label="-" colon=&#123;false&#125; key='end_time'&gt;</span></span><br><span class="line"><span class="regexp">                &#123;</span></span><br><span class="line"><span class="regexp">                  getFieldDecorator('end_time')(</span></span><br><span class="line"><span class="regexp">                    &lt;DatePicker</span></span><br><span class="line"><span class="regexp">                      placeholder='结束时间'</span></span><br><span class="line"><span class="regexp">                      showTime</span></span><br><span class="line"><span class="regexp">                      format='YYYY-MM-DD HH:mm:ss'&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;/</span>DatePicker&gt;</span><br><span class="line">                  )</span><br><span class="line">                &#125;</span><br><span class="line">              &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>Fragment&gt;</span><br><span class="line">          )</span><br><span class="line">          formItemList.push(TIMEPICKER)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> formItemList</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleFilterSubmit = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> fieldsValue = <span class="keyword">this</span>.props.form.getFieldsValue()</span><br><span class="line">    <span class="keyword">this</span>.props.filterSubmit(fieldsValue)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  reset = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.props.form.resetFields()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Form layout=<span class="string">'inline'</span>&gt;</span><br><span class="line">        &lt;FormItem&gt;</span><br><span class="line">          &#123; <span class="keyword">this</span>.initFormList() &#125;</span><br><span class="line">        &lt;<span class="regexp">/FormItem&gt;</span></span><br><span class="line"><span class="regexp">        &lt;FormItem&gt;</span></span><br><span class="line"><span class="regexp">            &lt;Button type="primary" style=&#123;&#123;margin:'0 20px'&#125;&#125; onClick=&#123;this.handleFilterSubmit&#125;&gt;查询&lt;/</span>Button&gt;</span><br><span class="line">            &lt;Button onClick=&#123;<span class="keyword">this</span>.reset&#125;&gt;重置&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>FormItem&gt;</span><br><span class="line">      &lt;<span class="regexp">/Form&gt;</span></span><br><span class="line"><span class="regexp">    )</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Form.create(&#123;&#125;)(BaseForm)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 订单管理页面 pages/</span>order/index.js 中调用</span><br><span class="line"><span class="keyword">import</span> BaseForm <span class="keyword">from</span> <span class="string">'../../components/BaseForm'</span></span><br><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'../../request'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    list: [],</span><br><span class="line">    selectedRowKeys: <span class="string">''</span>,</span><br><span class="line">    selectedRowItem: &#123;&#125; </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  params = &#123;</span><br><span class="line">    page: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  formList = [</span><br><span class="line">    &#123;</span><br><span class="line">      type: <span class="string">'Select'</span>,</span><br><span class="line">      label: <span class="string">'城市'</span>,</span><br><span class="line">      field: <span class="string">'city_id'</span>,</span><br><span class="line">      width: <span class="number">100</span>,</span><br><span class="line">      placeholder: <span class="string">'全部'</span>,</span><br><span class="line">      initialValue: <span class="number">0</span>,</span><br><span class="line">      list: [&#123;<span class="attr">id</span>: <span class="number">0</span>, <span class="attr">name</span>: <span class="string">'全部'</span>&#125;, &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'北京'</span>&#125;, &#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">'上海'</span>&#125;, &#123;<span class="attr">id</span>: <span class="number">3</span>, <span class="attr">name</span>: <span class="string">'重庆'</span>&#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      type: <span class="string">'DatePicker'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 省略了其余部分</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">       &lt;div className=<span class="string">'order'</span>&gt;</span><br><span class="line">        &lt;Card&gt;</span><br><span class="line">          &lt;BaseForm formList=&#123;<span class="keyword">this</span>.formList&#125; filterSubmit=&#123;<span class="keyword">this</span>.handleFilter&#125; /&gt;</span><br><span class="line">        &lt;<span class="regexp">/Card&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Order</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用jsonp-跨域调用百度天气接口"><a href="#使用jsonp-跨域调用百度天气接口" class="headerlink" title="使用jsonp 跨域调用百度天气接口"></a>使用jsonp 跨域调用百度天气接口</h4><p>npm i jsonp –save<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'../../request'</span></span><br><span class="line"></span><br><span class="line">getWeather() &#123;</span><br><span class="line">  <span class="keyword">let</span> city = <span class="built_in">encodeURIComponent</span>(<span class="string">'北京'</span>)</span><br><span class="line">  <span class="comment">// let ak = 'gAInfsvkT2wrwhbWG7obgNvEP7bEW2kf'</span></span><br><span class="line">  <span class="keyword">let</span> ak = <span class="string">'3p49MVra6urFRGOT9s8UBWr2'</span></span><br><span class="line">  request.jsonp(&#123;</span><br><span class="line">    url: <span class="string">'http://api.map.baidu.com/telematics/v3/weather?location='</span>+city+<span class="string">'&amp;output=json&amp;ak='</span> + ak</span><br><span class="line">  &#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(res.status === <span class="string">'success'</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> data = res.results[<span class="number">0</span>].weather_data[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">this</span>.setState(<span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">          weather: data.weather,</span><br><span class="line">          dayPictureUrl: data.dayPictureUrl</span><br><span class="line">        &#125;))</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h4><p>可查看pages/user/index.js，较为全面的范例</p>
+<h4 id="在网页中嵌入百度地图"><a href="#在网页中嵌入百度地图" class="headerlink" title="在网页中嵌入百度地图"></a>在网页中嵌入百度地图</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /public/index.html  引入百度地图, 将其挂载到window上</span></span><br><span class="line"><span class="comment">// &lt;script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=你的密钥"&gt;&lt;/script&gt;</span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://api.map.baidu.com/api?v=2.0&amp;ak=gAInfsvkT2wrwhbWG7obgNvEP7bEW2kf"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过new window.BMap 使用百度地图</span></span><br><span class="line"><span class="keyword">var</span> map = <span class="keyword">new</span> <span class="built_in">window</span>.BMap.Map(<span class="string">'bikeMapContainer'</span>) <span class="comment">//创建地图实例</span></span><br><span class="line"><span class="keyword">var</span> point = <span class="keyword">new</span> <span class="built_in">window</span>.BMap.Point(<span class="number">116.300829</span>, <span class="number">39.915836</span>) <span class="comment">//创建点坐标（天安门坐标为例）</span></span><br><span class="line">map.centerAndZoom(point, <span class="number">17</span>) <span class="comment">//以指定点为中心并缩放 （17表示层级）</span></span><br><span class="line">map.enableScrollWheelZoom(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// this.addMapControl()</span></span><br><span class="line"><span class="comment">// this.drawBikeRoute(res.route_list)</span></span><br><span class="line"></span><br><span class="line">map.enableScrollWheelZoom(<span class="literal">true</span>)  <span class="comment">// 启用滚轮缩放方法</span></span><br><span class="line">map.addControl(<span class="keyword">new</span> BMap.NacigationControl())  <span class="comment">// 添加导航控件</span></span><br><span class="line">map.addControl(<span class="keyword">new</span> BMap.ScalControl())  <span class="comment">//添加缩放控件</span></span><br><span class="line">map.addControl(<span class="keyword">new</span> BMap.OverviewMapControl()) <span class="comment">// 添加概览图控</span></span><br><span class="line">map.addControl(<span class="keyword">new</span> BMap.MapTypeControl())  <span class="comment">// 添加地图类型控件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用覆盖物 小标记/小说明/小页签</span></span><br><span class="line"><span class="keyword">let</span> startMarker = <span class="keyword">new</span> <span class="built_in">window</span>.BMap.Marker(startPoint, &#123; <span class="attr">icon</span>: startIcon &#125;)</span><br><span class="line">map.addOverlay(startMarker)</span><br></pre></td></tr></table></figure>
+<h4 id="eCharts"><a href="#eCharts" class="headerlink" title="eCharts"></a>eCharts</h4><p>百度Echarts是一个基于Canvas的纯Javascript图表库，提供直观、生动、可交互、可个性化定制的数据可视化图表<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// npm i echarts echarts-for-react </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ReactEcharts组件中使用主题</span></span><br><span class="line"><span class="keyword">import</span> echartsTheme <span class="keyword">from</span> <span class="string">'./../echartTheme'</span></span><br><span class="line"></span><br><span class="line">componentWillMount()&#123;</span><br><span class="line">  echarts.registerTheme(<span class="string">'sharedbikes'</span>, echartTheme)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用echarts</span></span><br><span class="line"><span class="comment">// 方法一、加载全部echarts包（少用）</span></span><br><span class="line"><span class="keyword">import</span> echarts <span class="keyword">from</span> <span class="string">'echarts'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二、按需加载</span></span><br><span class="line"><span class="keyword">import</span> echarts <span class="keyword">from</span> <span class="string">'echarts/lib/echarts'</span></span><br><span class="line"><span class="comment">// 必需基础组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'echarts/lib/component/tooltip'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'echarts/lib/component/title'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'echarts/lib/component/legend'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'echarts/lib/component/markPoint'</span></span><br><span class="line"><span class="comment">// 导入矩形图</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'echarts/lib/chart/bar'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用并初始化ReactEcharts：组件化开发</span></span><br><span class="line"><span class="keyword">import</span> ReactEcharts <span class="keyword">from</span> <span class="string">'echarts-for-react'</span></span><br><span class="line"></span><br><span class="line">&lt;ReactEcharts</span><br><span class="line">  option=&#123;<span class="keyword">this</span>.getOption()&#125;</span><br><span class="line">  notMerge=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">  lazyUpdate=&#123;<span class="literal">true</span>&#125;</span><br><span class="line">  theme=&#123;<span class="string">"sharedbikes"</span>&#125;</span><br><span class="line">  style=&#123;&#123;<span class="attr">height</span>: <span class="number">500</span>&#125;&#125;</span><br><span class="line">/&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 柱形图option 示例</span></span><br><span class="line">getOption = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> option = &#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">      text: <span class="string">'用户骑行订单'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    color: [<span class="string">'#3398DB'</span>],</span><br><span class="line">    tooltip : &#123;</span><br><span class="line">        trigger: <span class="string">'axis'</span>,</span><br><span class="line">        axisPointer : &#123;            <span class="comment">// 坐标轴指示器，坐标轴触发有效</span></span><br><span class="line">            type : <span class="string">'line'</span>        <span class="comment">// 默认为直线，可选为：'line' | 'shadow'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    grid: &#123;</span><br><span class="line">        left: <span class="string">'3%'</span>,</span><br><span class="line">        right: <span class="string">'4%'</span>,</span><br><span class="line">        bottom: <span class="string">'3%'</span>,</span><br><span class="line">        containLabel: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis : [</span><br><span class="line">        &#123;</span><br><span class="line">            type : <span class="string">'category'</span>,</span><br><span class="line">            data : [<span class="string">'Mon'</span>, <span class="string">'Tue'</span>, <span class="string">'Wed'</span>, <span class="string">'Thu'</span>, <span class="string">'Fri'</span>, <span class="string">'Sat'</span>, <span class="string">'Sun'</span>],</span><br><span class="line">            axisTick: &#123;</span><br><span class="line">                alignWithLabel: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    yAxis : [</span><br><span class="line">        &#123;</span><br><span class="line">            type : <span class="string">'value'</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    series : [</span><br><span class="line">        &#123;</span><br><span class="line">            name:<span class="string">'直接访问'</span>,</span><br><span class="line">            type:<span class="string">'bar'</span>,</span><br><span class="line">            barWidth: <span class="string">'60%'</span>,</span><br><span class="line">            data:[<span class="number">10</span>, <span class="number">52</span>, <span class="number">200</span>, <span class="number">334</span>, <span class="number">390</span>, <span class="number">330</span>, <span class="number">220</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> option</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="权限系统"><a href="#权限系统" class="headerlink" title="权限系统"></a>权限系统</h3><p>权限菜单设计采用RBAC权限模型(Role-Based Access Control) 即基于角色的访问控制，主要通过角色和权限建立管理，再赋予用户不同的角色，来实现权限控制的目标。</p>
+<p>详细可查看 pages/permission/index.js 中 的实现</p>
+<h3 id="redux-状态管理"><a href="#redux-状态管理" class="headerlink" title="redux 状态管理"></a>redux 状态管理</h3><p>本项目用到后台管理系统主页面的左侧菜单栏和导航面包屑需要共享状态, 使用redux 和 react-redux 管理状态<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">npm i redux react-redux </span><br><span class="line"></span><br><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = (</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;Router /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Provider&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(App, document.getElementById('root'))</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ store/i</span>ndex.js</span><br><span class="line"><span class="keyword">import</span> &#123; createStore, compose &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducer'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, compose(</span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">))</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// components/NavLeft/index.js 触发修改menuName</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> &#123; switchMenuAction &#125; <span class="keyword">from</span> <span class="string">'../../store/actionCreators'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavLeft</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 切换菜单栏，修改</span></span><br><span class="line">  handleClick = <span class="function">(<span class="params">item</span>) =&gt;</span> &#123;   </span><br><span class="line">    <span class="keyword">let</span> name = item.item.props.children.props.children</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      selectedKeys: [item.key]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 通过 mapStateToProps 映射方法</span></span><br><span class="line">    <span class="keyword">this</span>.props.changeMenuName(name)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; defaultSelectedKeys, selectedKeys, defaultOpenKeys &#125; = <span class="keyword">this</span>.state</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Fragment&gt;</span><br><span class="line">        &lt;div className=<span class="string">'logo'</span>&gt;</span><br><span class="line">          &lt;Icon className=<span class="string">'logo-img'</span> type=<span class="string">"twitter"</span> /&gt;</span><br><span class="line">          &lt;h1&gt;Shared Bikes&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">        &lt;Menu </span><br><span class="line">          mode=<span class="string">'inline'</span> </span><br><span class="line">          theme=<span class="string">'dark'</span> </span><br><span class="line">          selectedKeys=&#123;selectedKeys&#125; </span><br><span class="line">          defaultSelectedKeys=&#123;defaultSelectedKeys&#125; </span><br><span class="line">          defaultOpenKeys=&#123;defaultOpenKeys&#125; </span><br><span class="line">          onClick=&#123;<span class="keyword">this</span>.handleClick&#125;</span><br><span class="line">          &gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.state.menuTree&#125;</span><br><span class="line">        &lt;<span class="regexp">/Menu&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>Fragment&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    changeMenuName(menuName) &#123;</span><br><span class="line">      <span class="keyword">const</span> action = switchMenuAction(menuName)</span><br><span class="line">      dispatch(action)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(<span class="literal">null</span>, mapDispatchToProps)(NavLeft)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// components/Header/index.js 获取使用menuName</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    menuName: state.menuName</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, <span class="literal">null</span>)(Header)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/15/React/React-简书开发实战总结/" rel="next" title="React 简书开发实战总结">
+                <i class="fa fa-chevron-left"></i> React 简书开发实战总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/25/Node/NodeJs从零开发Web-Server博客项目/" rel="prev" title="Node.js从零开发Web Server博客项目">
+                Node.js从零开发Web Server博客项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起步，初始化项目"><span class="nav-number">1.</span> <span class="nav-text">起步，初始化项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础依赖安装"><span class="nav-number">2.</span> <span class="nav-text">基础依赖安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#antd-按需加载、自定义主题"><span class="nav-number">3.</span> <span class="nav-text">antd 按需加载、自定义主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全量加载、手动加载"><span class="nav-number">3.1.</span> <span class="nav-text">全量加载、手动加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用react-app-rewired-插件"><span class="nav-number">3.2.</span> <span class="nav-text">使用react-app-rewired 插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暴露webpack配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">暴露webpack配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目架构-和-技术栈"><span class="nav-number">4.</span> <span class="nav-text">项目架构 和 技术栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基础知识"><span class="nav-number">5.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现"><span class="nav-number">6.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础架构"><span class="nav-number">6.1.</span> <span class="nav-text">基础架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公共组件封装"><span class="nav-number">6.2.</span> <span class="nav-text">公共组件封装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#request-请求封装"><span class="nav-number">6.2.1.</span> <span class="nav-text">request 请求封装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#request-请求调用"><span class="nav-number">6.2.2.</span> <span class="nav-text">request 请求调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#utils-公用方法"><span class="nav-number">6.2.3.</span> <span class="nav-text">utils 公用方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BaseForm-公共组件封装"><span class="nav-number">6.2.4.</span> <span class="nav-text">BaseForm 公共组件封装</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用jsonp-跨域调用百度天气接口"><span class="nav-number">6.3.</span> <span class="nav-text">使用jsonp 跨域调用百度天气接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整示例"><span class="nav-number">6.4.</span> <span class="nav-text">完整示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在网页中嵌入百度地图"><span class="nav-number">6.5.</span> <span class="nav-text">在网页中嵌入百度地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#eCharts"><span class="nav-number">6.6.</span> <span class="nav-text">eCharts</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限系统"><span class="nav-number">7.</span> <span class="nav-text">权限系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-状态管理"><span class="nav-number">8.</span> <span class="nav-text">redux 状态管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+
