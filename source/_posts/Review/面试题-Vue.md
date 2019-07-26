@@ -16,3 +16,10 @@ tags: tags: ['Review', 'Vue']
 6、创建一个emit.js文件，用于vue事件机制的管理。
 7、webpack：模块加载和vue-cli工程打包器。
 
+2. vue-cli 工程常用的 npm 命令有哪些
+npm install 
+npm run dev 
+npm run build 
+npm run build --report  用于查看 vue-cli 生产环境部署资源文件大小的 npm命令
+
+
