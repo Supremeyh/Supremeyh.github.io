@@ -223,3 +223,9 @@ Compile.prototype = {
 
 7. 对keep-alive 的了解
 keep-alive是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。在vue 2.1.0 版本之后，keep-alive新加入了两个属性: include(包含的组件缓存) 与 exclude(排除的组件不缓存，优先级大于include) 
+
+8. $route和$router的区别
+$route是路由信息对象，包括path，params，hash，query，fullPath，matched，name等路由信息参数。$router是路由实例对象，包括了路由的跳转方法，钩子函数等。
+
+9. vue中 key 值的作用
+跟踪每个节点的身份，从而重用和重新排序现有元素
