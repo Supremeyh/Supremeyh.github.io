@@ -99,11 +99,12 @@ Dep.prototype = {
   },
   notify: function() {
     this.subs.forEach(function(sub) {
-      sub.update();
+      sub.update();  // 通知所有的订阅者(Watcher)，触发订阅者的相应逻辑处理
     });
   }
 };
-Dep.target = null;
+
+Dep.target = null;  // 为Dep类设置一个静态属性,默认为null,工作时指向当前的Watcher
 ```
 
 2.实现一个订阅者 Watcher，可以收到属性的变化通知并执行相应的函数，从而更新视图。
@@ -231,7 +232,26 @@ Mvue.prototype = {
 }
 ```
 
-6. Vue、Angular 和 React的区别
+6. 双向绑定的方法有哪些
+基于数据劫持的双向绑定。Object.defineProperty；ES6的Proxy 代理；Object.observe 已废弃
+
+Angular基于脏检查的双向绑定。对常用的dom事件、xhr事件进行了封装，触发时会调用$digest cycle。在$digest流程中，Angular将遍历每个数据变量的watcher，比较它的新旧值。当新旧值不同时，触发listener函数，执行相关的操作。
+
+KnockoutJS基于观察者模式的双向绑定
+
+Ember基于数据模型的双向绑定
+
+7. Proxy与Object.defineProperty的优劣对比
+Proxy的优势:
+可以直接监听对象而非属性
+直接监听数组的变化
+有多达13种拦截方法,不限于apply、ownKeys、deleteProperty、has等等是Object.defineProperty不具备的
+Proxy返回的是一个新对象,我们可以只操作新的对象达到目的,而Object.defineProperty只能遍历对象属性直接修改
+Proxy作为新标准将受到浏览器厂商重点持续的性能优化，也就是传说中的新标准的性能红利
+
+Object.defineProperty的优势: 兼容性好,支持IE9
+
+8. Vue、Angular 和 React的区别
 1.与AngularJS的区别
 相同点：都支持指令：内置指令和自定义指令；都支持过滤器：内置过滤器和自定义过滤器；都支持双向数据绑定；都不支持低端浏览器。
 
@@ -243,11 +263,12 @@ Mvue.prototype = {
 不同点：React采用的Virtual DOM会对渲染出来的结果做脏检查；Vue 在模板中提供了指令，过滤器等，可以非常方便，快捷地操作Virtual DOM。
 
 
-7. 对keep-alive 的了解
+9. 对keep-alive 的了解
 keep-alive是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。在vue 2.1.0 版本之后，keep-alive新加入了两个属性: include(包含的组件缓存) 与 exclude(排除的组件不缓存，优先级大于include) 
 
-8. $route和$router的区别
+10. $route和$router的区别
 $route是路由信息对象，包括path，params，hash，query，fullPath，matched，name等路由信息参数。$router是路由实例对象，包括了路由的跳转方法，钩子函数等。
 
-9. vue中 key 值的作用
+11. vue中 key 值的作用
 跟踪每个节点的身份，从而重用和重新排序现有元素
+
