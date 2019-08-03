@@ -32,7 +32,7 @@ ViewModel 监听模型数据的改变和控制视图行为、处理用户交互�
 4. Vue的生命周期
 Vue 实例从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期，各个阶段有相对应的事件钩子。
 
-beforeCreate 初始化事件，进行数据的观测，this指向创建的实例。el、data、message 都为 undefined。常用于初始化非响应式变量
+beforeCreate 初始化事件，进行数据的观测，this指向创建的实例。el、data、message 都为 undefined。常用于初始化非响应式变量，loading事件
 created  完成数据观测，属性和方法的运算。el 为 undefined， data 已被初始化，message有值，数据已经和data属性进行绑定。用于简单的ajax请求，页面的初始化。
 beforeMount 会找到对应的template，并编译成render函数，相关的render函数首次被调用，编译模板，把data里面的数据和模板生成html。
 mounted 编译好的html内容替换el属性指向的DOM对象，模板中的html渲染到html页面中。$ref属性可以访问。常用于获取VNode信息和操作，ajax请求
@@ -45,9 +45,11 @@ created阶段的ajax请求与mounted请求的区别：前者页面视图未出�
 mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.$nextTick
 
 
-5. Vue实现数据双向绑定的原理 Object.defineProperty
+5. Vue实现数据双向绑定的原理
 * 概述
-采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty 来劫持各个属性的setter/getter，在数据变动时发布消息给订阅者，触发相应监听回调。当把一个普通 JS 对象传给 Vue 实例来作为它的 data 选项时，Vue 将遍历它的属性，用 Object.defineProperty 将它们转为 getter/setter。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。
+![双向绑定原理](/images/vue-twowaybind-principle.jpg)
+
+采用数据劫持结合发布-订阅模式的方式，通过Object.defineProperty 来劫持各个属性的setter/getter，在数据变动时发布消息给订阅者，触发相应监听回调。
 
 vue的数据双向绑定，将MVVM作为数据绑定的入口，整合Observer，Compile和Watcher三者，通过Observer来监听自己的model的数据变化，通过Compile来解析编译模板指令，最终利用watcher搭起observer和Compile之间的通信桥梁，达到数据变化 —>视图更新；视图交互变化 input —>数据 model 变更双向绑定效果。
 
@@ -110,10 +112,10 @@ Dep.target = null;  // 为Dep类设置一个静态属性,默认为null,工作时
 2.实现一个订阅者 Watcher，可以收到属性的变化通知并执行相应的函数，从而更新视图。
 主要有两步：把 Watcher 添加到 Dep 容器中，这里我们用到了 监听器的 get 函数；接收到通知，执行更新函数。
 ```js
-function Watcher(vm, prop, callback) {
+function Watcher(vm, prop, cb) {
   this.vm = vm;
   this.prop = prop;
-  this.callback = callback;
+  this.cb = cb;
   this.value = this.get();
 }
 
@@ -123,12 +125,12 @@ Watcher.prototype = {
     const oldVal = this.value;
     if (value !== oldVal) {
       this.value = value;
-      this.callback(value);
+      this.cb(value);
     }
   },
   get: function () {
-    Dep.target = this; //储存订阅器
-    const value = this.vm.$data[this.prop]; //因为属性被监听，这一步会执行监听器里的 get方法
+    Dep.target = this; // 储存订阅器
+    const value = this.vm.$data[this.prop]; // 因为属性被监听，这一步会执行监听器里的 get方法
     Dep.target = null;
     return value;
   }
@@ -199,7 +201,7 @@ Compile.prototype = {
 ```
 
 4.数据代理
-我们尝试去修改数据，也完全没问题，但是有个问题就是我们修改数据时时通过 vm.$data.name 去修改数据，而不是想 Vue 中直接用 vm.name 就可以去修改，那这个是怎么做到的呢？其实很简单，Vue 做了一步数据代理操作。
+我们尝试去修改数据，也完全没问题，但是有个问题就是我们修改数据时是通过 vm.$data.name 去修改数据，而不是想 Vue 中直接用 vm.name 就可以去修改，那这个是怎么做到的呢？其实很简单，Vue 做了一步数据代理操作。
 我们来改造下 Mvue 添加数据代理功能，我们也是利用 Object.defineProperty 方法进行一步中间的转换操作，间接的去访问。
 ```js
 function Mvue(options) {
@@ -230,6 +232,153 @@ Mvue.prototype = {
     });
   }
 }
+```
+
+5.实现方法二
+实现一个简单vue的双向绑定功能，包括v-bind, v-model, v-click三个指令
+```html
+<!DOCTYPE html>
+<head>
+  <title>myVue</title>
+</head>
+<style>
+  #app {
+    text-align: center;
+  }
+</style>
+<body>
+  <div id="app">
+    <form>
+      <input type="text"  v-model="number">
+      <button type="button" v-click="increment">增加</button>
+    </form>
+    <h3 v-bind="number"></h3>
+  </div>
+</body>
+
+<script>
+  function myVue(options) {
+    this._init(options);
+  }
+
+  myVue.prototype._init = function (options) {
+    this.$options = options;
+    this.$el = document.querySelector(options.el);
+    this.$data = options.data;
+    this.$methods = options.methods;
+
+    this._binding = {};
+    this._obverse(this.$data);
+    this._complie(this.$el);
+  }
+ 
+  myVue.prototype._obverse = function (obj) {
+    var value;
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        this._binding[key] = {
+          _directives: []
+        };
+        value = obj[key];
+        if (typeof value === 'object') {
+          this._obverse(value);
+        }
+        var binding = this._binding[key];
+        Object.defineProperty(this.$data, key, {
+          enumerable: true,
+          configurable: true,
+          get: function () {
+            console.log(`获取${value}`);
+            return value;
+          },
+          set: function (newVal) {
+            console.log(`更新${newVal}`);
+            if (value !== newVal) {
+              value = newVal;
+              binding._directives.forEach(function (item) {
+                item.update();
+              })
+            }
+          }
+        })
+      }
+    }
+  }
+
+  myVue.prototype._complie = function (root) {
+    var _this = this;
+    var nodes = root.children;
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+      if (node.children.length) {
+        this._complie(node);
+      }
+
+      if (node.hasAttribute('v-click')) {
+        node.onclick = (function () {
+          var attrVal = nodes[i].getAttribute('v-click');
+          return _this.$methods[attrVal].bind(_this.$data);
+        })();
+      }
+
+      if (node.hasAttribute('v-model') && (node.tagName == 'INPUT' || node.tagName == 'TEXTAREA')) {
+        node.addEventListener('input', (function(key) {
+          var attrVal = node.getAttribute('v-model');
+          _this._binding[attrVal]._directives.push(new Watcher(
+            'input',
+            node,
+            _this,
+            attrVal,
+            'value'
+          ))
+
+          return function() {
+            _this.$data[attrVal] =  nodes[key].value;
+          }
+        })(i));
+      } 
+
+      if (node.hasAttribute('v-bind')) {
+        var attrVal = node.getAttribute('v-bind');
+        _this._binding[attrVal]._directives.push(new Watcher(
+          'text',
+          node,
+          _this,
+          attrVal,
+          'innerHTML'
+        ))
+      }
+    }
+  }
+
+  function Watcher(name, el, vm, exp, attr) {
+    this.name = name;         //指令名称，例如文本节点，该值设为"text"
+    this.el = el;             //指令对应的DOM元素
+    this.vm = vm;             //指令所属myVue实例
+    this.exp = exp;           //指令对应的值，本例如"number"
+    this.attr = attr;         //绑定的属性值，本例为"innerHTML"
+
+    this.update();
+  }
+
+  Watcher.prototype.update = function () {
+    this.el[this.attr] = this.vm.$data[this.exp];
+  }
+
+  window.onload = function() {
+    var app = new myVue({
+      el:'#app',
+      data: {
+        number: 0
+      },
+      methods: {
+        increment: function() {
+          this.number ++;
+        },
+      }
+    })
+  }
+</script>
 ```
 
 6. 双向绑定的方法有哪些
