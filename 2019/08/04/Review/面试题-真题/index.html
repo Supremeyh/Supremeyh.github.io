@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Supremeyh">
 <meta property="og:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，width/height = content + padding + border标准模型，box-sizin">
 <meta property="og:locale" content="English">
-<meta property="og:updated_time" content="2019-08-03T15:26:15.582Z">
+<meta property="og:updated_time" content="2019-08-05T15:41:18.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题 真题">
 <meta name="twitter:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，width/height = content + padding + border标准模型，box-sizin">
@@ -404,13 +404,14 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一 sort</span></span><br><span class="line"><span class="keyword">let</span> largest = <span class="function">(<span class="params">arr, n</span>) =&gt;</span> arr.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a &lt; b).slice(<span class="number">0</span>, n);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法二 快速排序</span></span><br><span class="line"><span class="comment">//交换数组元素的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">swap</span>(<span class="params">arr, i, j</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">partation</span>(<span class="params">arr, start, end</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> pivot = arr[end]; <span class="comment">// 设置哨兵</span></span><br><span class="line">    <span class="keyword">var</span> i = start; <span class="comment">// 交换的次数+1 哨兵要在数组插入的位置</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = start; j &lt; end; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[j] &lt; pivot) &#123;</span><br><span class="line">            swap(arr, i, j);</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr, i, end);</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLeastNumbers</span>(<span class="params">input, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">if</span> (input.length &lt; <span class="number">0</span> || k &gt; input.length || k &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> end = input.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> p = partation(input, start, end);</span><br><span class="line">    <span class="keyword">while</span> (p !== (k - <span class="number">1</span>)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p &gt; (k - <span class="number">1</span>)) &#123;</span><br><span class="line">            end = p - <span class="number">1</span>;</span><br><span class="line">            p = partation(input, start, end);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            start = p + <span class="number">1</span>;</span><br><span class="line">            partation(input, start, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">        result.push(input[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>### </p>
-<ol>
+<h3 id="HQHT"><a href="#HQHT" class="headerlink" title="HQHT"></a>HQHT</h3><ol>
 <li><p>设置元素浮动 改元素的display<br>都为 block</p>
 </li>
 <li><p>JS延迟加载的几种方式<br>defer 页面加载和解析完毕之后，按照原本的顺序执行，同时会在 DOMContentLoaded 之前执行<br>async 脚本下载结束之后立刻执行，同时会在load 事件之前执行<br>动态创建DOM<br>jQuery的getScript()方法<br>setTimeout<br>放到页面底部让js最后引入</p>
 </li>
 <li><p>DOMContentLoaded 和 load 区别<br>HTML文档被加载和解析完成，此时会触发DOMContentLoaded事件<br>页面上所有的资源被加载以后才会触发load事件<br>因此，页面的load事件会在DOMContentLoaded被触发之后才触发</p>
+</li>
+<li><p>link 与 @import 的区别<br>link功能较多，可以定义 rss、定义 rel 等作用，@import只能用于加载 css<br>当解析到link时，页面会同步加载所引的 css， @import所引用的 css 会等到页面加载完才被加载<br>link可以使用 js 动态引入，@import不行<br>@import需要 IE5 以上才能使用</p>
 </li>
 </ol>
 
@@ -465,6 +466,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/07/个人简历/" rel="prev" title="个人简历">
+                个人简历 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -543,7 +548,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -554,7 +559,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -565,7 +570,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -638,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQHT"><span class="nav-number">2.</span> <span class="nav-text">HQHT</span></a></li></ol></div>
             
 
           </div>
