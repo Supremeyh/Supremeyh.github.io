@@ -81,7 +81,7 @@
 <meta property="og:site_name" content="Supremeyh">
 <meta property="og:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，width/height = content + padding + border标准模型，box-sizin">
 <meta property="og:locale" content="English">
-<meta property="og:updated_time" content="2019-08-05T15:41:18.733Z">
+<meta property="og:updated_time" content="2019-08-11T14:39:02.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题 真题">
 <meta name="twitter:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，width/height = content + padding + border标准模型，box-sizin">
@@ -414,6 +414,47 @@
 <li><p>link 与 @import 的区别<br>link功能较多，可以定义 rss、定义 rel 等作用，@import只能用于加载 css<br>当解析到link时，页面会同步加载所引的 css， @import所引用的 css 会等到页面加载完才被加载<br>link可以使用 js 动态引入，@import不行<br>@import需要 IE5 以上才能使用</p>
 </li>
 </ol>
+<h3 id="FZKJ-2019-8-7"><a href="#FZKJ-2019-8-7" class="headerlink" title="FZKJ  2019.8.7"></a>FZKJ  2019.8.7</h3><ol>
+<li><p>offsetWidth<br>clientWidth，可视区宽度   clientWidth = width+padding-scrollbar<br>offsetWidth，实际宽度  offsetWidth = width+padding+border+(竖直方向滚动条)<br>scrollWidth，实际内容宽度  scrollWidth = width+padding+(超出显示范围的滚动宽度),  无滚动时等于 clientWidth</p>
+</li>
+<li><p>头部底部固定，中间自适应铺满屏幕剩余高度，中间盒子里左盒子固定右盒子自适应宽度</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"head"</span>&gt;</span>顶部<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"one"</span>&gt;</span>左盒子 高度自适应 固定宽度200px<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"two"</span>&gt;</span>右盒子 高度自适应 宽度自适应铺满屏幕剩余高度<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"foot"</span>&gt;</span>底部<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>方法一、absolute 绝对定位<br>head、foot 绝对定位，且分别top、bottom为0，宽度100%自适应父容器<br>content 绝对定位，top值为head的高度，bottom值为foot的高度<br>one 左浮动，宽度固定； two 左边距为one宽度</p>
+<p>方法二：利用boxsizing改变盒子模型<br>先为 html 设定box-sizing为border-box，加上上下padding值。布局模块均采用position:relative定位。<br>头部采用负向margin向上平移（因为有了html padding）</p>
+<p>方法三、 flex</p>
+<ol start="3">
+<li>ES6中常用的新特性<br>1、块级作用域 const和let<br>2、模板字符串<br>3、箭头函数。 不需要 function 关键字创建函数；省略 return 关键字；没有自己的this，this指向固定，就是定义(生效)时所在的对象，而不是使用时所在的对象。<br>4、参数处理。参数默认/Spread/Rest。  迭代器中是一个 Spread 操作符；被用于函数传参时，是一个 Rest 操作符<br>5、元编程。 代理Proxy/反射Reflex<br>6、原有字面量加强  二进制和八进制字面量。 二进制使用 0b 或者 0B；数字前面添加 0o 或者0O 即可将其转换为八进制值<br>7、对象属性加强<br>8、对象和数组解构赋值。 如 const { name, age } = student<br>9、新增数据类型 Map/Set/Symbol<br>10、for…of 迭代<br>11、ES6中的类 Class。 extends/super/重写构造器<br>12、Module（模块）<br>13、Promise<br>14、尾递归优化</li>
+</ol>
+<h3 id="MGY-2019-8-8"><a href="#MGY-2019-8-8" class="headerlink" title="MGY  2019.8.8"></a>MGY  2019.8.8</h3><ol>
+<li>module.exports 和 exports 区别<br>module.exports 初始值为一个空对象 {}，如果module.exports初始时已经具备一些属性和方法，那么exports收集来的信息将被忽略<br>exports 是指向的 module.exports 的引用, 即 exports = module.exports<br>module.exports才是真正的接口，exports只不过是它的一个辅助工具。require() 返回的是 module.exports 而不是 exports<br>可以 exports.name= {}, 不能 exoprts = {}</li>
+</ol>
+<ol start="2">
+<li>模块化<br>AMD 异步模块定义。RequireJS预先加载，依赖前置。 浏览器第一，异步加载模块。<br>CMD 通用模块定义。SeaJS 按需加载，依赖就近。   AMD和CMD最大的区别是对依赖模块的执行时机处理不同，不是加载的时机或者方式不同(都是异步加载模块)。<br>UMD 先判断是否支持AMD，再检验CommonJS环境，否则认为当前环境为浏览器环境<br>CommonJS。  Node服务器端模块的规范，同步加载模块。 require/module.exports/exports。当引用同一个模块时，不会再次加载，而是获取缓存；可重新赋值。<br>ES6模块，动态只读引用。原始值发生变化，import加载的值也会发生变化；不允许修改引入变量的值。</li>
+</ol>
+<ol start="3">
+<li><p>前端构建工具<br>构建工具是一个把源代码转换成可执行代码的过程。包括下载依赖、代码转换、文件优化、代码分割、模块合并压缩、自动刷新、代码校验、单元测试、自动发布。<br>自动化构建是编写或使一大部分任务自动执行的一个动作，而这些任务则是软件开发者的日常。</p>
+</li>
+<li><p>webpack<br>webpack: 打包模块化js的工具。在webpack里，一切文件都是模块，通过 Loader 加载转换文件，通过 plugin 注入钩子，扩展 webpack，最后输出由多个模块组成的文件。<br>优点：专注于模块化，开箱即用一步到位；通过plugin拓展，完整好用又不失灵活；使用场景不局限于web开发；社区庞大活跃；良好的开发体验<br>缺点: 只能用于模块化开发</p>
+</li>
+</ol>
+<p>打包原理: 首先 minifest.js 会定义一个 webpackJsonp 方法，待其他打包后的文件（也可称为 chunk）调用。当调用 chunk 时，会先将该 chunk 中所有的 moreModules， 也就是每一个依赖的文件也可称为 module （如 test.js）存起来。之后通过 executeModules 判断这个文件是不是入口文件，决定是否执行第一次 <strong>webpack_require</strong> 。而 <strong>webpack_require</strong> 的作用，就是根据这个 module 所 require 的东西，不断递归调用 <strong>webpack_require</strong>，<strong>webpack_require</strong>函数返回值后供 require 使用。当然，模块是不会重复加载的，因为 installedModules 记录着 module 调用后的 exports 的值，只要命中缓存，就返回对应的值而不会再次调用 module。webpack 打包后的文件，就是通过一个个函数隔离 module 的作用域，以达到不互相污染的目的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// manifest.js</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">modules</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>[<span class="string">"webpackJsonp"</span>] = <span class="function"><span class="keyword">function</span> <span class="title">webpackJsonpCallback</span>(<span class="params">chunkIds, moreModules, executeModules</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> moduleId, result;</span><br><span class="line">    <span class="keyword">for</span> (moduleId <span class="keyword">in</span> moreModules) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.hasOwnProperty.call(moreModules, moduleId)) &#123;</span><br><span class="line">        modules[moduleId] = moreModules[moduleId];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (executeModules) &#123;</span><br><span class="line">      <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; executeModules.length; i++) &#123;</span><br><span class="line">        result = __webpack_require__(executeModules[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> installedModules = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">__webpack_require__</span>(<span class="params">moduleId</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (installedModules[moduleId]) &#123;</span><br><span class="line">      <span class="keyword">return</span> installedModules[moduleId].exports;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">module</span> = installedModules[moduleId] = &#123;</span><br><span class="line">      exports: &#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    modules[moduleId].call(<span class="built_in">module</span>.exports, <span class="built_in">module</span>, <span class="built_in">module</span>.exports, __webpack_require__);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)([]);</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>宏任务、微任务<br>宏任务: 主代码块(鼠标事件，键盘事件, ajax、script) &gt; setImmediate &gt; MessageChannel &gt; setTimeout / setInterval。<br>微任务: process.nextTick &gt; Promise &gt; MutationObserver</li>
+</ol>
+<ol start="5">
+<li>浏览器中的多线程<br>JavaScript引擎线程，用于解析JavaScript代码<br>GUI渲染线程，（它与javaScript线程是互斥的）<br>事件线程(onclick,onchange,…)<br>定时器线程(setTimeout, setInterval)<br>异步http线程(ajax)，负责数据请求<br>EventLoop轮询处理线程，事件被触发时该线程会把事件添加到待处理队列的队尾</li>
+</ol>
+<ol start="6">
+<li>缓存<br>缓存分为Nginx、Apache服务端侧（CDN缓存）和客户端侧（浏览器缓存）。<br>浏览器缓存分为强缓存和协商缓存。强缓存不发请求到服务器，协商缓存会发请求到服务器。</li>
+</ol>
+<p>设置缓存<br>HTML Meta标签控制缓存， 如 meta http-equiv=”pragma” content=”no-cache”   兼容性一般<br>HTTP头信息控制缓存<br>Expires（强），服务器缓存过期绝对时间，可能有误差不同步<br>Cache-control（强），客户端相对时间。 no-cache 缓存前需和服务器确认； no-store 禁止一切缓存<br>Last-Modified/If-Modified-Since（协商缓存）<br>Etag/If-None-Match（协商缓存）</p>
+<ol start="7">
+<li></li>
+<li>canvas<br>权限<br>PWA<br>ssr<br>http<br>https<br>移动端开发<br>微信小程序<br>微信公众号<br>常见兼容性问题</li>
+</ol>
+<h3 id="ZYKJ-2019-8-10"><a href="#ZYKJ-2019-8-10" class="headerlink" title="ZYKJ 2019.8.10"></a>ZYKJ 2019.8.10</h3><p>虚拟dom的实现<br>双向绑定<br>设计模式<br>进程、线程  <a href="https://blog.csdn.net/mxsgoden/article/details/8821936" target="_blank" rel="noopener">https://blog.csdn.net/mxsgoden/article/details/8821936</a></p>
 
       
     </div>
@@ -548,7 +589,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -643,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQHT"><span class="nav-number">2.</span> <span class="nav-text">HQHT</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQHT"><span class="nav-number">2.</span> <span class="nav-text">HQHT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FZKJ-2019-8-7"><span class="nav-number">3.</span> <span class="nav-text">FZKJ  2019.8.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MGY-2019-8-8"><span class="nav-number">4.</span> <span class="nav-text">MGY  2019.8.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZYKJ-2019-8-10"><span class="nav-number">5.</span> <span class="nav-text">ZYKJ 2019.8.10</span></a></li></ol></div>
             
 
           </div>

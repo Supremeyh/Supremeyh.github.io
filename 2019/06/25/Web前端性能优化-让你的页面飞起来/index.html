@@ -84,7 +84,7 @@
 <meta property="og:image" content="https://supremeyh.github.io/images/performance-optimization.webp">
 <meta property="og:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
 <meta property="og:image" content="https://supremeyh.github.io/images/web-cachemechanism.jpg">
-<meta property="og:updated_time" content="2019-07-23T01:25:36.358Z">
+<meta property="og:updated_time" content="2019-08-10T10:34:14.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端性能优化 - 让你的页面飞起来">
 <meta name="twitter:description" content="从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。  资源合并压缩、图片格式及加载方式的优化CSS和JS的装载与执行重绘与回流浏览器存储PWA，缓存SSR服务端渲染构建层减少资源请求的大小和数量优化浏览器渲染提升动画体验显著提升网站二次访问体验首屏渲染">
@@ -457,7 +457,7 @@
 <h4 id="etag-if-none-match"><a href="#etag-if-none-match" class="headerlink" title="etag / if-none-match"></a>etag / if-none-match</h4><p>etag 实体标签，文件内容的hash值，服务器生成的一个标记，用来标识返回值是否有变化。<br>需要与cache-control共同使用，优先级比last-modified/ if-modified-since更高<br>etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。</p>
 <p>当第一次发起请求时，服务器生成并会返回一个Etag给前端，并在你第二次发起同一个请求时，客户端会同时发送一个If-None-Match，而它的值就是Etag的值（此处由发起请求的客户端来设置）。然后，服务器会比对这个客服端发送过来的Etag是否与服务器的相同，如果相同，就将If-None-Match的值设为false，返回状态为304，客户端继续使用本地缓存，不解析服务器返回的数据（这种场景服务器也不返回数据），如果不相同，就将If-None-Match的值设为true，返回状态为200，客户端重新解析服务器返回的数据。</p>
 <p>etag: “33a64df551425fcc55e4d42a148795d9f25f89d4” , response header<br>if-none-match: “33a64df551425fcc55e4d42a148795d9f25f89d4” , request header</p>
-<h4 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h4><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，返回200，重新返回资源和缓存标识，再存入浏览器缓存中；生效则返回304，继续使用缓存</p>
+<h4 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h4><p>强制缓存优先于协商缓存进行，若强制缓存(Expires和Cache-Control)生效则直接使用缓存 200(from cache)，若不生效则进行协商缓存(Last-Modified / If-Modified-Since和Etag / If-None-Match)，协商缓存由服务器决定是否使用缓存，若协商缓存失效，那么代表该请求的缓存失效，返回200，重新返回资源和缓存标识，再存入浏览器缓存中；生效则返回304，继续使用缓存</p>
 <p><img src="/images/web-cachemechanism.jpg" alt="缓存机制"></p>
 <h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><h3 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h3><p>Server Side Rendering 解决首屏渲染问题  服务端是 nodejs，客户端复杂运算可以放到服务端，减少前端运算成本。</p>
 
@@ -594,7 +594,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
