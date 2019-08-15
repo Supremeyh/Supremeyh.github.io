@@ -69,7 +69,13 @@ DOM型XSS: 前端JS代码本身不够严谨，把不可信的数据当作代码�
 在使用 .innerHTML、.outerHTML、document.write() 时要特别小心，不要把不可信的数据作为HTML插到页面上，应尽量使用 .textContent、.setAttribute() 等。
 DOM 中的内联事件监听器，如 location、onclick、onerror、onload、onmouseover 等，a 标签的 href 属性，JavaScript 的 eval()、setTimeout()、setInterval() 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，务必避免。
 
-解决方案：不用DOM中的内联事件监听器；将输入的数据进行转义处理；使用成熟的 Vue/React框架；设置 HTTP Header："X-XSS-Protection: 1"； HTTP-only Cookie
+解决方案：
+不用DOM中的内联事件监听器；
+将输入的数据进行转义处理；
+使用成熟的 Vue/React框架；
+Set-Cookie: HttpOnly;
+设置 HTTP Header：X-XSS-Protection: 0 (禁止XSS过滤) / 1; mode=block (当检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面)
+
 
 （2）SQL注入攻击。
 含义：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令，比如SELECT * FROM users WHERE 'username' = 'admin' and 'password' = '' OR 1=1' ，这句 sql 无论 username 和 password 是什么都会执行，从而将所有用户的信息取出来。
@@ -77,7 +83,7 @@ DOM 中的内联事件监听器，如 location、onclick、onerror、onload、on
 
 （3）CSRF(Cross-Site Request Forgeries，跨站点请求伪造)。
 含义：借助本地cookie，伪装成受信任用户的名义发送恶意请求。
-解决方案：通过referer识别；采用token认证。
+解决方案：验证 HTTP Referer 判断请求的来源地址、token验证、自定义在HTTP头属性。
 
 （4）DDos攻击(Distributed Denial of Service Attack 分布式拒绝服务攻击)。
 含义：在短时间内发起大量请求，耗尽服务器的资源，无法响应正常的访问，造成网站实质下线。 
