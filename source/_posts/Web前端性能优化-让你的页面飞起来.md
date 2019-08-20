@@ -238,7 +238,7 @@ display=none，把元素隐藏起来，并且会改变页面布局，可以理�
 9、使用gpu加速，比如加上transform：translateZ(0); transform：translate3d(0,0,0)
 
 ### 浏览器存储
-LocalStorage、Cookie、IndexedDB、sessionStorage PWA、 Service Worker
+LocalStorage、Cookie、IndexedDB、sessionStorage、 PWA、 Service Worker
 
 #### cookie
 1、cookie的初衷：因为http请求无状态，所以需要cookie去维持客户端状态。
