@@ -82,7 +82,7 @@
 <meta property="og:description" content="什么是盒子模型在网页中，把HTML中的元素看做是一个矩形的盒子（盛装内容的的容器），每个容器都是由元素内容content、内边距（padding）、边框（border）和外边距（margin）组成。4个部分一起构成了css中元素的盒模型。  两种盒子模型w3c的盒子模型：padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、">
 <meta property="og:locale" content="English">
 <meta property="og:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
-<meta property="og:updated_time" content="2019-07-23T01:36:07.382Z">
+<meta property="og:updated_time" content="2019-08-15T15:11:59.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题 HTML和CSS">
 <meta name="twitter:description" content="什么是盒子模型在网页中，把HTML中的元素看做是一个矩形的盒子（盛装内容的的容器），每个容器都是由元素内容content、内边距（padding）、边框（border）和外边距（margin）组成。4个部分一起构成了css中元素的盒模型。  两种盒子模型w3c的盒子模型：padding和border不被包含在定义的width和height之内。对象的实际宽度等于设置的width值和border、">
@@ -409,9 +409,9 @@
 </ol>
 <p>存储型XSS: 持久化型，攻击者将恶意代码提交到目标网站的数据库中，用户打开目标网站时，网站服务端将恶意代码从数据库取出，拼接在HTML中返回给浏览器，用户浏览器接收到响应后解析执行，混在其中的恶意代码也被执行。常见于带有用户保存数据的网站功能，如论坛、博客、留言板、网站的留言、评论、日志等交互处。</p>
 <p>DOM型XSS: 前端JS代码本身不够严谨，把不可信的数据当作代码执行了。完全在前端浏览器触发，无需服务端的参与，这是前端开发工程师的地盘。<br>特别注意以下输入源进行转移document.URL、location.hash、location.research、document.referrer(此处应尤为注意，referrer属性虽然可用于避免CSRF，但可触发XSS攻击)、XHR返回值（跨域返回值）、form表单及各种input框。<br>在使用 .innerHTML、.outerHTML、document.write() 时要特别小心，不要把不可信的数据作为HTML插到页面上，应尽量使用 .textContent、.setAttribute() 等。<br>DOM 中的内联事件监听器，如 location、onclick、onerror、onload、onmouseover 等，a 标签的 href 属性，JavaScript 的 eval()、setTimeout()、setInterval() 等，都能把字符串作为代码运行。如果不可信的数据拼接到字符串中传递给这些 API，很容易产生安全隐患，务必避免。</p>
-<p>解决方案：不用DOM中的内联事件监听器；将输入的数据进行转义处理；使用成熟的 Vue/React框架；设置 HTTP Header：”X-XSS-Protection: 1”； HTTP-only Cookie</p>
+<p>解决方案：<br>不用DOM中的内联事件监听器；<br>将输入的数据进行转义处理；<br>使用成熟的 Vue/React框架；<br>Set-Cookie: HttpOnly;<br>设置 HTTP Header：X-XSS-Protection: 0 (禁止XSS过滤) / 1; mode=block (当检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面)</p>
 <p>（2）SQL注入攻击。<br>含义：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令，比如SELECT * FROM users WHERE ‘username’ = ‘admin’ and ‘password’ = ‘’ OR 1=1’ ，这句 sql 无论 username 和 password 是什么都会执行，从而将所有用户的信息取出来。<br>解决方案：特殊字符过滤，orm框架可以对参数进行转义；对sql语句进行预编译；关闭错误信息；客户端对数据进行加密；控制数据库的权限，比如只能select，不能insert。</p>
-<p>（3）CSRF(Cross-Site Request Forgeries，跨站点请求伪造)。<br>含义：借助本地cookie，伪装成受信任用户的名义发送恶意请求。<br>解决方案：通过referer识别；采用token认证。</p>
+<p>（3）CSRF(Cross-Site Request Forgeries，跨站点请求伪造)。<br>含义：借助本地cookie，伪装成受信任用户的名义发送恶意请求。<br>解决方案：验证 HTTP Referer 判断请求的来源地址、token验证、自定义在HTTP头属性。</p>
 <p>（4）DDos攻击(Distributed Denial of Service Attack 分布式拒绝服务攻击)。<br>含义：在短时间内发起大量请求，耗尽服务器的资源，无法响应正常的访问，造成网站实质下线。<br>攻击方式：Ping Flood攻击即利用ping命令不停的发送的数据包到服务器； SYN Flood攻击即利用tcp协议原理，伪造受害者的ip地址，一直保持与服务器的连接，导致受害者连接服务器的时候拒绝服务。<br>解决方案：备份网站，全静态网页，以备临时应对；请求过滤拦截(高防服务器、设置防火墙、黑名单)；带宽扩容；检测技术和清洗技术；CDN 加速。</p>
 <p>（5）Cookies攻击。<br>含义：通过document.cookie,立刻就可以看到当前站点的cookie。<br>解决方案：在cookie打上HttpOnly的标记，这样就无法通过JS来取得。</p>
 <p>（6）重定向攻击。<br>含义：钓鱼攻击者，通常会发送给受害者一个合法链接，当链接被点击时，用户被导向一个似是而非的非法网站，从而达到骗取用户信任、窃取用户资料的目的。<br>解决方案：白名单,将合法的要重定向的url加到白名单中,非白名单上的域名重定向时拒之；重定向token,在合法的url上加上token,重定向时进行验证。</p>
