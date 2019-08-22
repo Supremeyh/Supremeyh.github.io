@@ -1,5 +1,5 @@
 ---
-title: 面试题 JavaScript
+title: 你问我答 JavaScript
 comments: true
 date: 2019-04-10 11:00:00
 categories: Review
@@ -180,7 +180,7 @@ Object.create = function (obj, properties)  {
 }
 
 Object.create({}, {a: {value: 1}})  // {a: 1}
-// Object.cerate()必须接收一个对象参数；可以通过Object.create(null) 创建一个干净的对象，也就是没有原型
+// Object.cerate()必须接收一个对象参数；可以通过 Object.create(null) 创建一个干净的对象，也就是没有原型
 ```
 
 8. 判断回文字符串
