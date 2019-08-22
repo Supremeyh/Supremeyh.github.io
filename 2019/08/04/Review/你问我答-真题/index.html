@@ -76,15 +76,15 @@
 <meta name="description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，content = width + padding + border标准模型，box-sizing 为 con">
 <meta name="keywords" content="JS,Review">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面试题 真题">
-<meta property="og:url" content="https://supremeyh.github.io/2019/08/04/Review/面试题-真题/index.html">
+<meta property="og:title" content="你问我答 真题">
+<meta property="og:url" content="https://supremeyh.github.io/2019/08/04/Review/你问我答-真题/index.html">
 <meta property="og:site_name" content="Supremeyh">
 <meta property="og:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，content = width + padding + border标准模型，box-sizing 为 con">
 <meta property="og:locale" content="English">
 <meta property="og:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
-<meta property="og:updated_time" content="2019-08-20T04:46:38.448Z">
+<meta property="og:updated_time" content="2019-08-22T04:47:03.246Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面试题 真题">
+<meta name="twitter:title" content="你问我答 真题">
 <meta name="twitter:description" content="RL 什么是盒模型，盒模型都由什么组成页面渲染时，dom 元素所采用的 布局模型。可通过box-sizing进行设置。包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。IE模型，box-sizing 为 border-box，content = width + padding + border标准模型，box-sizing 为 con">
 <meta name="twitter:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
 
@@ -116,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="https://supremeyh.github.io/2019/08/04/Review/面试题-真题/">
+  <link rel="canonical" href="https://supremeyh.github.io/2019/08/04/Review/你问我答-真题/">
 
 
 
 
 
-  <title>面试题 真题 | Supremeyh</title>
+  <title>你问我答 真题 | Supremeyh</title>
   
 
 
@@ -291,7 +291,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/08/04/Review/面试题-真题/">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/08/04/Review/你问我答-真题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Supremeyh">
@@ -308,7 +308,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">面试题 真题</h1>
+          <h1 class="post-title" itemprop="name headline">你问我答 真题</h1>
         
 
         <div class="post-meta">
@@ -627,10 +627,48 @@
 </li>
 </ul>
 <ol start="32">
-<li>vue 插件</li>
+<li>js为何是单线程<br>操作 DOM 必然会涉及到资源的竞争<br>引用多线程是为了充分利用硬件资源，但是作为js执行环境的浏览器是客户端的一个进程， 不需要考虑充分利用其硬件资源；<br>多线程带来了编程的复杂性，需要加锁，加锁本身也是消耗性能的</li>
 </ol>
-<p>移动端开发<br>微信公众号</p>
+<ol start="33">
+<li>node 性能为何高<br>1、Nodejs与操作系统交互，我们在 Javascript中调用的方法，最终都会通过 process.binding 传递到 C/C++ 层面，最终由他们来执行真正的操作。Node.js 即这样与操作系统进行互动。<br>2、nodejs所谓的单线程，只是主线程是单线程，所有的网络请求或者异步任务都交给了内部的线程池去实现，本身只负责不断的往返调度，由事件循环不断驱动事件执行。<br>3、Nodejs之所以单线程可以处理高并发的原因，得益于libuv层的事件循环机制，和底层线程池实现。<br>4、Event loop就是主线程从主线程的事件队列里面不停循环的读取事件，驱动了所有的异步回调函数的执行，Event loop总共7个阶段，每个阶段都有一个任务队列，当所有阶段被顺序执行一次后，event loop 完成了一个 tick。</li>
+</ol>
+<ol start="34">
+<li>Webpack性能优化<br>1、缩小文件的搜索范围<br>resolve字段告诉webpack怎么去搜索文件，所以首先要重视resolve字段的配置<br>设置resolve.modules:[path.resolve(__dirname, ‘node_modules’)]避免层层查找。<br>设置resolve.mainFields:[‘main’]，设置尽量少的值可以减少入口文件的搜索步骤<br>合理配置resolve.extensions，减少文件查找<br>2、使用DllPlugin减少基础模块编译次数<br>把网页依赖的基础模块抽离出来打包到dll文件中，当需要导入的模块存在于某个dll中时，这个模块不再被打包，而是去dll中获取<br>3、使用HappyPack开启多进程Loader转换<br>4、使用ParallelUglifyPlugin，开启多进程压缩JS文件<br>5、压缩代码 JS、ES、CSS<br>6、使用Tree Shaking剔除JS死代码<br>配置loader时，通过test、exclude、include缩小搜索范围<br>module.noParse字段告诉Webpack不必解析哪些文件，可以用来排除对非模块化库文件的解析</li>
+</ol>
+<ol start="35">
+<li>new 和 Object.create()</li>
+</ol>
+<ul>
+<li><p>new </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Fn();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_new</span>(<span class="params">Fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> obj = &#123;&#125; <span class="comment">// new Object()  创建一个空对象</span></span><br><span class="line">  obj.__prototype__ = Fn.prototype  <span class="comment">// 设置原型链</span></span><br><span class="line">  <span class="keyword">var</span> ret = Fn.call(obj)  <span class="comment">// 让Fn的this指向obj，并执行Fn的函数体</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> ret === <span class="string">'Object'</span>) &#123;   <span class="comment">// 判断Fn的返回值类型，如果是引用类型，就返回这个引用类型的对象; 如果是值类型，返回obj</span></span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Objec.create()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.create(obj, props)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Objec.create = <span class="function"><span class="keyword">function</span>(<span class="params">obj, props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  Fn.prototype = obj</span><br><span class="line">  <span class="keyword">if</span>(props) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperties(Fn, props)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Fn()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="TX-2019-8-20"><a href="#TX-2019-8-20" class="headerlink" title="TX 2019.8.20"></a>TX 2019.8.20</h3><p>自我介绍<br>最近的项目<br>vue react 对比<br>virtual dom<br>vuex<br>小程序<br>双向绑定<br>csrf 产生 预防<br>性能优化<br>缓存 cache-control<br>代理服务器<br>css 动画<br>懒加载  图片<br>img的src为空或者#，都会发一次请求，浏览器会用当前路径发起一次请求。直接改为 img<br>vue3<br>flex<br>es6</p>
+<ol start="10">
+<li>Vue3 新特性<br>更快、更小、更易于维护、更多的原生支持、更易于开发使用<br>1、虚拟 DOM 重写，mounting和patching的速度提高100％<br>2、更多的编译时的提示来减少运行时的开销<br>3、组件快速路径+单个调用+子类型检测。 跳过不必要的条件分支、JS引擎更容易优化<br>4、优化插槽的生成。 确保实例正确的跟踪依赖关系、避免不必要的父子组件重新渲染<br>5、静态树提升<br>6、静态属性提升<br>7、内联的事件提升<br>8、基于Proxy的观察者机制，全语言覆盖+更好的性能</li>
+</ol>
 <h3 id="ZYKJ-2019-8-10"><a href="#ZYKJ-2019-8-10" class="headerlink" title="ZYKJ 2019.8.10"></a>ZYKJ 2019.8.10</h3><p>虚拟dom的实现<br>双向绑定</p>
+<p>前端JS/CSS基础足够扎实<br>HTTP/HTTPS/TCP 等网络协议相关的常见知识点，XSS/CSRF等网络安全常见的知识点要掌握<br>前端的性能优化<br>Webpack的原理，性能优化<br>Vue/React至少能解释其中一个的基本实现原理，能说出他们的主要区别<br>Redux/Vuex至少掌握其中一个的实现原理<br>常见的数据结构和算法，以及他们的时间复杂度，比如手写快排或者DFS<br>如果有后端开发经验、Weex/RN等更好<br>上面这些都是技术的，一般还会问一些团队建设以及业务理解等问题。</p>
+<h3 id="tcl-2019-8-21"><a href="#tcl-2019-8-21" class="headerlink" title="tcl  2019.8.21"></a>tcl  2019.8.21</h3><ol>
+<li><p>null instanceof Object、{a:1} instanceof null<br>false、 error(Right-hand side of ‘instanceof’ is not an object)</p>
+</li>
+<li><p>变量提升<br>函数及变量的声明都将被提升到函数的最顶部；变量可以在使用后声明，也就是变量可以先使用再声明。（变量赋值不会提升，有多个函数声明的时候，是由最后面的函数声明来替代前面的；函数提升的优先级大于变量提升的优先级，即函数提升在变量提升之上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'aa'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> name===<span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'bb'</span></span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'aa'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> name===<span class="string">'undefined'</span>) &#123;</span><br><span class="line">    name = <span class="string">'bb'</span></span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 改动</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'aa'</span>;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> name===<span class="string">'undefined'</span>) &#123;</span><br><span class="line">     name = <span class="string">'bb'</span></span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="comment">// aa</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>作用域</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 3 3 3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 改动</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;=<span class="number">3</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 4, 4, 4, 4</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 改动</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;<span class="number">3</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i)</span><br><span class="line">  &#125;, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 0, 1, 2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组非变异方法<br>变异方法:    push/pop/shift/unshift/sort/splice/reverse<br>非变异方法:  filter/concat/slice; map/find/forEach</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1 = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">var</span> a2 = [<span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">a1.concat(a2)</span><br><span class="line">a1.sort()</span><br><span class="line"><span class="built_in">console</span>.log(a1)  <span class="comment">// [1, 2, 3]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使得 a==1 &amp;&amp; a==2 &amp;&amp; a==3 为true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  i: <span class="number">1</span>,</span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> a.i++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法二</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">window</span>, <span class="string">'a'</span>, &#123;</span><br><span class="line">  i: <span class="number">1</span>,</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ++i;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h3><p>vue 插件<br>移动端开发<br>微信公众号</p>
 
       
     </div>
@@ -860,7 +898,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQHT"><span class="nav-number">2.</span> <span class="nav-text">HQHT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FZKJ-2019-8-7"><span class="nav-number">3.</span> <span class="nav-text">FZKJ  2019.8.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MGY-2019-8-8"><span class="nav-number">4.</span> <span class="nav-text">MGY  2019.8.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZYKJ-2019-8-10"><span class="nav-number">5.</span> <span class="nav-text">ZYKJ 2019.8.10</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RL"><span class="nav-number">1.</span> <span class="nav-text">RL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HQHT"><span class="nav-number">2.</span> <span class="nav-text">HQHT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FZKJ-2019-8-7"><span class="nav-number">3.</span> <span class="nav-text">FZKJ  2019.8.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MGY-2019-8-8"><span class="nav-number">4.</span> <span class="nav-text">MGY  2019.8.8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TX-2019-8-20"><span class="nav-number">5.</span> <span class="nav-text">TX 2019.8.20</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZYKJ-2019-8-10"><span class="nav-number">6.</span> <span class="nav-text">ZYKJ 2019.8.10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tcl-2019-8-21"><span class="nav-number">7.</span> <span class="nav-text">tcl  2019.8.21</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#todo"><span class="nav-number">8.</span> <span class="nav-text">todo</span></a></li></ol></div>
             
 
           </div>

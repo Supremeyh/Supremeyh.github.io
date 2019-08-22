@@ -84,7 +84,7 @@
 <meta property="og:image" content="https://supremeyh.github.io/images/performance-optimization.webp">
 <meta property="og:image" content="https://supremeyh.github.io/images/tcp-shakehands.jpeg">
 <meta property="og:image" content="https://supremeyh.github.io/images/web-cachemechanism.jpg">
-<meta property="og:updated_time" content="2019-08-10T10:34:14.159Z">
+<meta property="og:updated_time" content="2019-08-20T10:04:32.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端性能优化 - 让你的页面飞起来">
 <meta name="twitter:description" content="从构建、浏览器渲染、缓存、PWA、服务端优化等多方面，梳理前端性能优化的技术点、综合分析技术的原理，根据不同的业务场景选择合适的性能优化点进行应用，最终为你的网站带来显著的速度提升和整体性能提升。  资源合并压缩、图片格式及加载方式的优化CSS和JS的装载与执行重绘与回流浏览器存储PWA，缓存SSR服务端渲染构建层减少资源请求的大小和数量优化浏览器渲染提升动画体验显著提升网站二次访问体验首屏渲染">
@@ -434,7 +434,7 @@
 <h5 id="chrome创建图层的条件"><a href="#chrome创建图层的条件" class="headerlink" title="chrome创建图层的条件"></a>chrome创建图层的条件</h5><p>3D或透视变换（perspective transform）CSS属性，比如transform:translateZ(0);<br>使用加速视频解码的 video节点<br>拥有3D（WebGL）上下文或加速的2D上下文的 canvas 节点<br>混合插件（如Flash）<br>对自己的opacity做CSS动画或使用一个动画webkit变换的元素<br>拥有加速CSS过滤器的元素<br>元素有一个包含复合层的后代节点（一个元素拥有一个子元素，该子元素在自己的层里）<br>元素有一个z-index较低且包含一个复合层的兄弟元素（换句话说就是该元素在复合层上面渲染）<br>video, canvas, will change:transform, overflow-scrolling:touch</p>
 <h5 id="优化点"><a href="#优化点" class="headerlink" title="优化点"></a>优化点</h5><p>总体思路: 避免触发回流、重绘的 CSS 属性，或者 用 只触发重绘不回流；将回流。重绘的影响范围控制在单独的图层之内<br>1、translate 替换 top/left， 后者会触发回流但是translate不会<br>2、opacity 替换 visibility，visibility 会触发重绘但不会触发回流<br>opacity=0，该元素隐藏起来了，但不会改变页面布局，并且，如果该元素已经绑定一些事件，如click事件，那么点击该区域，也能触发点击事件的<br>visibility=hidden，该元素隐藏起来了，不会改变页面布局，但是不会触发该元素已经绑定的事件<br>display=none，把元素隐藏起来，并且会改变页面布局，可以理解成在页面中把该元素删除掉一样</p>
 <p>3、不要一条一条修改dom样式，预先定义好class，然后修改dom的className<br>4、可以将dom离线操作，如先display:none(会有一次reflow)，但是接下来的操作都不会重绘，等离线操作结束后，再显示。<br>5、不要把dom节点的属性值放在循环里，当成循环的变量,在循环外面声明一个变量来中转。如offsetWidth/ offsetHeight，有强制刷新回流队列缓存，一定会触发回流<br>6、不要使用table，即使小改动，整个table也会回流<br>7、动画实现速度的选择，选择合适的动画的间隔时间<br>8、对于动画，可新建图层<br>9、使用gpu加速，比如加上transform：translateZ(0); transform：translate3d(0,0,0)</p>
-<h3 id="浏览器存储"><a href="#浏览器存储" class="headerlink" title="浏览器存储"></a>浏览器存储</h3><p>LocalStorage、Cookie、IndexedDB、sessionStorage PWA、 Service Worker</p>
+<h3 id="浏览器存储"><a href="#浏览器存储" class="headerlink" title="浏览器存储"></a>浏览器存储</h3><p>LocalStorage、Cookie、IndexedDB、sessionStorage、 PWA、 Service Worker</p>
 <h4 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h4><p>1、cookie的初衷：因为http请求无状态，所以需要cookie去维持客户端状态。<br>2、cookie的生成方式：http response header中的set-cookie; js中可以通过document.cookie可以读写cookie<br>3、使用: 用于浏览器端和服务器端的交互; 客户端自身数据的存储<br>4、cookie存储数据能力被localStorage替代<br>5、httponly，当前cookie不支持js读写<br>6、cookie中在相关域名下面 cdn的流量损耗。cdn的域名和主站的域名要分开</p>
 <h4 id="indexDB"><a href="#indexDB" class="headerlink" title="indexDB"></a>indexDB</h4><p>indexDB是一种低级API，用于客户端存储大量结构化数据。该api使用索引来实现对该数据的高性能搜索。虽然web storage对于存储少量的数据很有用，但对于存储更大量的结构化数据来说，这种方法很有用。indexDB提供了一个解决方案。<br>为应用创建离线版本。</p>
 <h4 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h4><p>PWA(progressive web apps)是一种web app新模型，并不是具体指某一种前沿的技术或者某一个单一的知识点，是一个渐进式的web app，是通过一系列新的web特性，配合优秀的ui交互设计，逐步的增强web app的用户体验。<br>1、方向<br>可靠：在没有网络的环境中也能提供基本的页面访问，而不会出现“未连接到互联网”的页面。<br>快速：针对网页渲染及网络数据访问有较好优化。<br>融入（engaging）：应用可以被增加到手机桌面，并且和普通应用一样有全屏、推送等特性。<br>2、检测pwa、检测性能：lighthouse</p>
@@ -513,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/04/Review/面试题-真题/" rel="prev" title="面试题 真题">
-                面试题 真题 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/04/Review/你问我答-真题/" rel="prev" title="你问我答 真题">
+                你问我答 真题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
