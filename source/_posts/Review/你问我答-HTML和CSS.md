@@ -264,7 +264,7 @@ flex-basis: length | auto; /* default auto */
   background: blueviolet;
 }
 
-/* position   middle要放最后 */
+/* position   */
 .left{
   position: absolute;
   left: 0;
