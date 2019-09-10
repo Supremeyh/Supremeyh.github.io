@@ -15,6 +15,24 @@ tags: ['Tools', 'Hexo']
 原因：加载fonts.googleapis.com字体库导致
 方案：在NexT主题的_config.yml里面的host: 改为host: //fonts.lug.ustc.edu.cn 。 (中科大的源)
 
+* 设置内容隐藏不显示
+post 头部标识 hide: true
+
+修改主题配置项
+```js
+// Hexo\themes\next\layout\index.swig
+{% block content %}
+  <section id="posts" class="posts-expand">
+    {% for post in page.posts %}
+        {% if post.hide != true %}
+            {{ post_template.render(post, true) }}
+        {% endif %}
+    {% endfor %}
+  </section>
+
+  {% include '_partials/pagination.swig' %}
+{% endblock %}
+```
 
 
 
