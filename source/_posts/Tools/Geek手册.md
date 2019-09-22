@@ -20,3 +20,8 @@ videojs.getPlayers("video-player").html5player.tech_.setPlaybackRate(1.5)
 2.使用 Command+ shift + g 到目标路径 ~/Library/Preferences，覆盖目标文件;
 
 3.选中com.eusoft.eudict.plist文件，并锁定, 右键 Get Info -> Locked.
+
+
+### Mac 安全与隐私 允许任何来源下载应用
+开启任何来源: sudo spctl --master-disable
+关闭任何来源: sudo spctl --master-enable
