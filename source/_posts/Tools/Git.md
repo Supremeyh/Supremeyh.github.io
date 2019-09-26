@@ -77,8 +77,16 @@ git rm -r --cached .  //清空缓存
 * git push -u origin master  即使远程没有你要关联的分支，它也会自动创建一个出来，以实现关联
 
 
-### 批量删除分支
-git branch | grep 'branchName' | xargs git branch -D
+### 删除分支
+* git branch -d dev 删除本地分支
+
+* git branch -ｒ 查看远程分支
+* git push origin -d dev 删除远程分支
+* git push origin :dev   删除远程分支(推送一个空tag到远程tag)
+
+* git push origin -d tag tagName  删除远程tag
+
+* git branch | grep 'branchName' | xargs git branch -D  批量删除分支
 
 ### 插件
 * Octotree 侧栏目录树形
