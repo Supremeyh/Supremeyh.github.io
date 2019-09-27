@@ -9,34 +9,69 @@ tags: ['Tools', 'Hexo']
 ### 新建代码库
 * git init  在当前目录新建一个git代码库
 * git clone [url]  下载一个项目和它的整个代码历史
+* git clone git@github.com:Supremeyh/Supremeyh.github.io.git  不指定分支 
+* git clone -b sea git@github.com:Supremeyh/Supremeyh.github.io.git 指定分支
+
 
 ### 配置信息
 * git config --list  显示当前的git配置
 * git config [--global] user.name "[name]"   设置提交代码时的用户名
 * git config [--global] user.email "[email address]"  设置提交代码时的用户邮箱
 
+
 ### 查看日志
 * git log 
 * git reflog 
 
-### 拷贝代码
-* git clone git@github.com:Supremeyh/Supremeyh.github.io.git  不指定分支 
-* git clone -b sea git@github.com:Supremeyh/Supremeyh.github.io.git 指定分支
+
+### 分支
+* git branch  列出所有本地分支
+* git branch -r 列出所有远程分支
+* git branch -a 列出所有本地、远程分支
+* git branch sea  新建一个分支，但依然停留在当前分支
+* git checkout -b  sea  新建一个分支，并切换到该分支
+* git checkout  sea  换到指定分支，并更新工作区
+* git checkout  -  切换到上一个分支
+* git merge sea  合并指定分支到当前分支
+
+
+### 删除分支
+* git branch -d dev 删除本地分支
+* git push origin -d dev 删除远程分支
+* git push origin :dev   删除远程分支(推送一个空tag到远程tag)
+* git branch | grep 'branchName' | xargs git branch -D  批量删除分支
+
+
+### 标签
+* git tag  列出所有tag
+* git tag [tag]  新建一个tag在当前commit
+* git tag [tag] [commit]  新建一个tag在指定commit
+* git tag -d [tag] 删除本地tag
+* git push origin :refs/tags/[tagName]  删除远程tag
+* git push origin -d tag tagName  删除远程tag
+* git show [tag]  查看tag信息
+* git push [remote] [tag] 提交指定tag
+* git push [remote] --tags  提交所有tag
+
 
 ### 取回远程origin主机dev分支与本地sea分支合并
 * git pull origin dev:sea
+
 
 ### 放弃本地修改，代码强制拉取更新 
 * git fetch --all 
 * git reset --hard origin/master 
 * git pull //可以省略
 
+
 ### 设置远程url
 * git remote -v //查看url
 * git remote set-url origin [updated link]
 
+
 ### .gitignore不生效
 git rm -r --cached .  //清空缓存
+
 
 ### tag
 * git tag,  或 git show v1.0   // 显示tag信息
@@ -53,6 +88,7 @@ git rm -r --cached .  //清空缓存
 * ssh-add ~/.ssh/id_rsa  
 * cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
 * ssh -T git@github.com  验证key
+
 
 ### 修改远程仓库地址
 * git remote -v  查看
@@ -85,17 +121,6 @@ git rm -r --cached .  //清空缓存
 方法二（推荐）
 * git push -u origin master  即使远程没有你要关联的分支，它也会自动创建一个出来，以实现关联
 
-
-### 删除分支
-* git branch -d dev 删除本地分支
-
-* git branch -ｒ 查看远程分支
-* git push origin -d dev 删除远程分支
-* git push origin :dev   删除远程分支(推送一个空tag到远程tag)
-
-* git push origin -d tag tagName  删除远程tag
-
-* git branch | grep 'branchName' | xargs git branch -D  批量删除分支
 
 ### 插件
 * Octotree 侧栏目录树形
