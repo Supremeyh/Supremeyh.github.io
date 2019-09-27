@@ -6,6 +6,15 @@ categories: Tools
 tags: ['Tools', 'Hexo']
 ---
 
+### 新建代码库
+* git init  在当前目录新建一个git代码库
+* git clone [url]  下载一个项目和它的整个代码历史
+
+### 配置信息
+* git config --list  显示当前的git配置
+* git config [--global] user.name "[name]"   设置提交代码时的用户名
+* git config [--global] user.email "[email address]"  设置提交代码时的用户邮箱
+
 ### 查看日志
 * git log 
 * git reflog 
