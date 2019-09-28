@@ -2923,19 +2923,15 @@ AMD: Asynchronous Module Definition 异步模块定义。预先加载，依赖�
       
         
           
-          查看日志
-git log 
-git reflog 
-
-拷贝代码
+          新建代码库
+git init  在当前目录新建一个git代码库
+git clone [url]  下载一个项目和它的整个代码历史
 git clone git@github.com:Supremeyh/Supremeyh.github.io.git  不指定分支 
 git clone -b sea git@github.com:Supremeyh/Supremeyh.github.io.git 指定分支
 
-取回远程origin主机dev分支与本地sea分支合并
-git pull origin dev:sea
-
-放弃本地修改，代码强制拉取更新
-git fetch 
+配置信息
+git config –list  显示当前的git配置
+git config [
           ...
           <!--noindex-->
           <div class="post-button text-center">
