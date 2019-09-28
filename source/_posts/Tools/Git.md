@@ -19,9 +19,20 @@ tags: ['Tools', 'Hexo']
 * git config [--global] user.email "[email address]"  设置提交代码时的用户邮箱
 
 
-### 查看日志
-* git log 
-* git reflog 
+### 查看信息
+* git status 显示有变更的文件
+* git log 显示当前分支的版本历史
+* git log --stat 显示commit历史，以及每次commit发生变更的文件
+* git log -S [keyword] 搜索提交历史，根据关键词
+* git log --follow [file] 显示某个文件的版本历史，包括文件改名   eg: git log --follow package.json
+* git whatchanged [file]  显示某个文件的版本历史，包括文件改名
+* git log -p [file]  显示指定文件相关的每一次diff
+* git log -5 --pretty --oneline  显示过去5次提交
+* git shortlog -sn  显示所有提交过的用户，按提交次数排序
+* git blame [file]  显示指定文件是什么人在什么时间修改过
+* git diff 显示暂存区和工作区的差异
+* git reflog  显示当前分支的最近几次提交
+* git diff --shortstat "@{0 day ago}"  显示今天你写了多少行代码
 
 
 ### 分支
@@ -44,56 +55,29 @@ tags: ['Tools', 'Hexo']
 
 ### 标签
 * git tag  列出所有tag
+* git show [tag]  查看指定tag信息,  eg: git show v1.0
 * git tag [tag]  新建一个tag在当前commit
+* git tag -a v1.0  -m 'first version' // 创建tag
 * git tag [tag] [commit]  新建一个tag在指定commit
 * git tag -d [tag] 删除本地tag
 * git push origin :refs/tags/[tagName]  删除远程tag
 * git push origin -d tag tagName  删除远程tag
-* git show [tag]  查看tag信息
-* git push [remote] [tag] 提交指定tag
-* git push [remote] --tags  提交所有tag
+* git push [remote] [tag] 提交指定tag,  eg: git push origin v1.0 
+* git push [remote] --tags  提交所有tag, eg: git push origin --tags
 
 
-### 取回远程origin主机dev分支与本地sea分支合并
-* git pull origin dev:sea
-
-
-### 放弃本地修改，代码强制拉取更新 
-* git fetch --all 
-* git reset --hard origin/master 
-* git pull //可以省略
-
-
-### 设置远程url
-* git remote -v //查看url
-* git remote set-url origin [updated link]
-
-
-### .gitignore不生效
-git rm -r --cached .  //清空缓存
-
-
-### tag
-* git tag,  或 git show v1.0   // 显示tag信息
-* git tag -a v1.0  -m 'first version' // 创建tag
-* git push origin v1.0 , 或者 git push origin --tags // 共享tag
-* git tag -d v1.0 // 删除tag
-
-
-###  Permission denied (publickey).
-* cd ~/.ssh  ls  来查看是否有文件id_rsa以及文件id_rsa.pub
-* ssh-keygen -t rsa -C "supremeyh@126.com"   生成ssh key
-* ssh -v git@github.com
-* ssh-agent -s
-* ssh-add ~/.ssh/id_rsa  
-* cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
-* ssh -T git@github.com  验证key
-
-
-### 修改远程仓库地址
-* git remote -v  查看
-* git remote rm origin  删除
-* git remote add origin ssh://git@repository.git   新增
+### 远程同步
+* git remote -v  显示所有远程仓库
+* git remote show [remote] 显示某个远程仓库的信息
+* git remote add origin [url]   增加一个新的远程仓库，并命名
+* git remote set-url origin [updated link]  设置远程仓库地址
+* git remote rm origin  删除远程仓库地址
+* git fetch [remote]  下载远程仓库的所有变动
+* git pull [remote] [branch]  取回远程仓库的变化，并与本地分支合并
+* git pull origin dev:sea  取回远程origin主机dev分支与本地sea分支合并
+* git push [remote] [branch]  上传本地指定分支到远程仓库
+* git push [remote] --force  强行推送当前分支到远程仓库，即使有冲突
+* git push [remote] --all  推送所有分支到远程仓库
 
 
 ### 同步upstream 原始仓库
@@ -108,6 +92,30 @@ git rm -r --cached .  //清空缓存
 * git merge upstream/dev  把原始upstream/dev的改变合并到本地的dev分支
 * git push  推送自己的本地仓库到自己的origin远程仓库
 * 发出Pull Request
+
+
+### 放弃本地修改，代码强制拉取更新 
+* git fetch --all 
+* git reset --hard origin/master 
+* git pull //可以省略
+
+
+### 撤销
+
+
+### .gitignore不生效
+* git rm -r --cached .  //清空缓存
+
+
+###  Permission denied (publickey).
+* cd ~/.ssh  ls  来查看是否有文件id_rsa以及文件id_rsa.pub
+* ssh-keygen -t rsa -C "supremeyh@126.com"   生成ssh key
+* ssh -v git@github.com
+* ssh-agent -s
+* ssh-add ~/.ssh/id_rsa  
+* cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
+* ssh -T git@github.com  验证key
+
 
 
 ### 将本地的分支与远程仓库的分支进行关联
