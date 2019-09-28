@@ -108,8 +108,6 @@ tags: ['Tools', 'Hexo']
 * git reset --hard [commit_id] 完成撤销,同时将代码恢复到前一commit_id 对应的版本
 * git reset [commit_id] 完成Commit命令的撤销，但是不对代码修改进行撤销
 * git commit --amend   若commit注释写错了，只是想改一下注释，进入默认vim编辑器，修改注释完毕后保存即可
-* git stash  将撤销的代码暂存起来
-* git stash pop  重新应用缓存
 
 注:  git reset HEAD^  
 --mixed，默认参数，等同于 git reset --mixed HEAD^ 
@@ -123,6 +121,11 @@ HEAD^指上一个版本，也即HEAD~1
 * git log remotes/origin/分支名  查看版本号
 * git reset --hard <需要回退到的版本号（只需输入前几位）>   先在本地回退到需要的版本, 本地不需要回退可略过
 * git push origin branchName --force   提交到远端
+
+
+### 暂存
+* git stash 'some message' 将撤销的代码暂存起来。 暂时将未提交的变化移除，稍后再移入
+* git stash pop  重新应用缓存
 
 
 ### .gitignore不生效
