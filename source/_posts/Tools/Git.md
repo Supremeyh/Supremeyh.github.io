@@ -100,9 +100,29 @@ tags: ['Tools', 'Hexo']
 * git pull //可以省略
 
 
-### 撤销
-* git reset --soft HEAD^  撤销commit, 尝试回退一个版本
+### 撤销 commit
+* git log  找到你想撤销的commit_id
+* git reset HEAD^ 不删除工作空间改动代码，撤销commit，并且撤销git add .
+* git reset --soft HEAD^  不删除工作空间改动代码，撤销commit,不撤销git add，尝试回退一个版本
 * git reset --hard HEAD~2  尝试回退两个版本
+* git reset --hard [commit_id] 完成撤销,同时将代码恢复到前一commit_id 对应的版本
+* git reset [commit_id] 完成Commit命令的撤销，但是不对代码修改进行撤销
+* git commit --amend   若commit注释写错了，只是想改一下注释，进入默认vim编辑器，修改注释完毕后保存即可
+* git stash  将撤销的代码暂存起来
+* git stash pop  重新应用缓存
+
+注:  git reset HEAD^  
+--mixed，默认参数，等同于 git reset --mixed HEAD^ 
+--soft， 不删除工作空间改动代码，撤销commit，不撤销git add . 
+--hard， 删除工作空间改动代码，撤销commit，撤销git add . 。完成这个操作后，就恢复到了上一次的commit状态
+
+HEAD^指上一个版本，也即HEAD~1
+
+
+### 撤销 push到远端后的操作
+* git log remotes/origin/分支名  查看版本号
+* git reset --hard <需要回退到的版本号（只需输入前几位）>   先在本地回退到需要的版本, 本地不需要回退可略过
+* git push origin branchName --force   提交到远端
 
 
 ### .gitignore不生效
@@ -117,7 +137,6 @@ tags: ['Tools', 'Hexo']
 * ssh-add ~/.ssh/id_rsa  
 * cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
 * ssh -T git@github.com  验证key
-
 
 
 ### 将本地的分支与远程仓库的分支进行关联
