@@ -101,6 +101,8 @@ tags: ['Tools', 'Hexo']
 
 
 ### 撤销
+* git reset --soft HEAD^  撤销commit, 尝试回退一个版本
+* git reset --hard HEAD~2  尝试回退两个版本
 
 
 ### .gitignore不生效
