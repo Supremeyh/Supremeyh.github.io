@@ -128,11 +128,12 @@ HEAD^指上一个版本，也即HEAD~1
 * git stash pop  重新应用缓存
 
 
-### .gitignore不生效
+
+### FQA
+#### .gitignore不生效
 * git rm -r --cached .  //清空缓存
 
-
-###  Permission denied (publickey).
+####  Permission denied (publickey).
 * cd ~/.ssh  ls  来查看是否有文件id_rsa以及文件id_rsa.pub
 * ssh-keygen -t rsa -C "supremeyh@126.com"   生成ssh key
 * ssh -v git@github.com
@@ -142,7 +143,7 @@ HEAD^指上一个版本，也即HEAD~1
 * ssh -T git@github.com  验证key
 
 
-### 将本地的分支与远程仓库的分支进行关联
+#### 将本地的分支与远程仓库的分支进行关联
  The branch 'master' has no upstream branch.Would you like to publish this branch ？ 
  在vscode 通过 push 快捷操作时，出现弹框提示。问题的原因是没有将本地的分支与远程仓库的分支进行关联。 
 出现这种情况主要是由于远程仓库太多，且分支较多。在默认情况下，git push时一般会上传到origin下的master分支上，然而当repository和branch过多，而又没有设置关联时，git就会产生疑问，因为它无法判断你的push目标。 
