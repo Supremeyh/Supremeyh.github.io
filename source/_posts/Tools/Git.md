@@ -105,6 +105,7 @@ tags: ['Tools', 'Hexo']
 * git reset --hard HEAD~2  尝试回退两个版本
 
 
+
 ### .gitignore不生效
 * git rm -r --cached .  //清空缓存
 
