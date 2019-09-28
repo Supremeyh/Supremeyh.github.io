@@ -128,7 +128,6 @@ HEAD^指上一个版本，也即HEAD~1
 * git stash pop  重新应用缓存
 
 
-
 ### FQA
 #### .gitignore不生效
 * git rm -r --cached .  //清空缓存
