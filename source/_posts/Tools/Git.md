@@ -126,6 +126,7 @@ HEAD^指上一个版本，也即HEAD~1
 ### 暂存
 * git stash 'some message' 将撤销的代码暂存起来。 暂时将未提交的变化移除，稍后再移入
 * git stash pop  重新应用缓存
+* git stash list
 
 
 ### FQA
