@@ -133,7 +133,6 @@ HEAD^指上一个版本，也即HEAD~1
 * git stash clear 删除所有的stash
 
 
-
 ### FQA
 #### .gitignore不生效
 * git rm -r --cached .  //清空缓存
