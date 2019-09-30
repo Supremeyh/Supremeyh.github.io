@@ -124,8 +124,9 @@ HEAD^指上一个版本，也即HEAD~1
 
 
 ### 暂存
+* git stash 保存当前工作进度，把暂存区和工作区的改动保存起来 
+* git stash save 'some message' 将撤销的代码暂存起来，并加一些注释
 * git stash list 查看暂存区的所有暂存修改记录
-* git stash save 'some message' 将撤销的代码暂存起来
 * git stash pop  重新应用缓存
 
 
