@@ -124,10 +124,13 @@ HEAD^指上一个版本，也即HEAD~1
 
 
 ### 暂存
-* git stash 保存当前工作进度，把暂存区和工作区的改动保存起来 
-* git stash save 'some message' 将撤销的代码暂存起来，并加一些注释
+* git stash 暂时保存没有提交的工作
+* git stash save 'some message' 将没有提交代码暂存起来，并加一些注释
 * git stash list 查看暂存区的所有暂存修改记录
-* git stash pop  重新应用缓存
+* git stash pop  恢复最近一次stash的文件
+* git stash apply stash@{1}  恢复某个暂时保存的工作     
+* git stash drop  丢弃最近一次stash的文件
+* git stash clear 删除所有的stash
 
 
 
