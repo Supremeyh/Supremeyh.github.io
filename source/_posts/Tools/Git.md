@@ -3,7 +3,7 @@ title: 常用的Git命令
 comments: true
 date: 2019-01-26 21:20:50
 categories: Tools
-tags: ['Tools', 'Hexo']
+tags: ['Tools', 'Hexo', 'Git']
 ---
 
 ### 新建代码库
@@ -97,7 +97,7 @@ tags: ['Tools', 'Hexo']
 ### 放弃本地修改，代码强制拉取更新 
 * git fetch --all 
 * git reset --hard origin/master 
-* git pull //可以省略
+* git pull  // 可以省略
 
 
 ### 撤销 commit
@@ -135,7 +135,7 @@ HEAD^指上一个版本，也即HEAD~1
 
 ### FQA
 #### .gitignore不生效
-* git rm -r --cached .  //清空缓存
+* git rm -r --cached .   // 清空缓存
 
 ####  Permission denied (publickey).
 * cd ~/.ssh  ls  来查看是否有文件id_rsa以及文件id_rsa.pub
@@ -148,8 +148,8 @@ HEAD^指上一个版本，也即HEAD~1
 
 
 #### 将本地的分支与远程仓库的分支进行关联
- The branch 'master' has no upstream branch.Would you like to publish this branch ？ 
- 在vscode 通过 push 快捷操作时，出现弹框提示。问题的原因是没有将本地的分支与远程仓库的分支进行关联。 
+The branch 'master' has no upstream branch.Would you like to publish this branch ？ 
+在vscode 通过 push 快捷操作时，出现弹框提示。问题的原因是没有将本地的分支与远程仓库的分支进行关联。 
 出现这种情况主要是由于远程仓库太多，且分支较多。在默认情况下，git push时一般会上传到origin下的master分支上，然而当repository和branch过多，而又没有设置关联时，git就会产生疑问，因为它无法判断你的push目标。 
 * git branch -a  查看所有分支
 
