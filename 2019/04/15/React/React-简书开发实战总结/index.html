@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="React,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Created by sea, 2019.4.7  起步，准备工作新建项目、安装脚手架npx create-react-app jianshucd jianshunpm start 绑定git远程仓库git initgit remotegit remote add origin git@github.com:Supremeyh/jianshu.git 主要技术点index.js1234567//">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React 简书开发实战总结">
+<meta property="og:url" content="https://supremeyh.github.io/2019/04/15/React/React-简书开发实战总结/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="Created by sea, 2019.4.7  起步，准备工作新建项目、安装脚手架npx create-react-app jianshucd jianshunpm start 绑定git远程仓库git initgit remotegit remote add origin git@github.com:Supremeyh/jianshu.git 主要技术点index.js1234567//">
+<meta property="og:locale" content="English">
+<meta property="og:image" content="https://supremeyh.github.io/images/redux-flow.jpg">
+<meta property="og:updated_time" content="2019-07-23T01:25:36.349Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React 简书开发实战总结">
+<meta name="twitter:description" content="Created by sea, 2019.4.7  起步，准备工作新建项目、安装脚手架npx create-react-app jianshucd jianshunpm start 绑定git远程仓库git initgit remotegit remote add origin git@github.com:Supremeyh/jianshu.git 主要技术点index.js1234567//">
+<meta name="twitter:image" content="https://supremeyh.github.io/images/redux-flow.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/04/15/React/React-简书开发实战总结/">
+
+
+
+
+
+  <title>React 简书开发实战总结 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/04/15/React/React-简书开发实战总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React 简书开发实战总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-15T19:24:54+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Created by sea, 2019.4.7</p>
+</blockquote>
+<h2 id="起步，准备工作"><a href="#起步，准备工作" class="headerlink" title="起步，准备工作"></a>起步，准备工作</h2><h3 id="新建项目、安装脚手架"><a href="#新建项目、安装脚手架" class="headerlink" title="新建项目、安装脚手架"></a>新建项目、安装脚手架</h3><p>npx create-react-app jianshu<br>cd jianshu<br>npm start</p>
+<h3 id="绑定git远程仓库"><a href="#绑定git远程仓库" class="headerlink" title="绑定git远程仓库"></a>绑定git远程仓库</h3><p>git init<br>git remote<br>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Supremeyh/jianshu.git</p>
+<h3 id="主要技术点"><a href="#主要技术点" class="headerlink" title="主要技术点"></a>主要技术点</h3><h4 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</span><br><span class="line"><span class="keyword">import</span> TodoList <span class="keyword">from</span> <span class="string">'./TodoList'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rootElement = <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">TodoList</span> /&gt;</span>, rootElement)</span></span><br></pre></td></tr></table></figure>
+<h4 id="state"><a href="#state" class="headerlink" title="state"></a>state</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基本用法</span></span><br><span class="line"><span class="keyword">this</span>.setState(&#123;</span><br><span class="line">  inputVal: <span class="string">'sth...'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步state,还可接收回调</span></span><br><span class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> list = [...prevState.list]</span><br><span class="line">  list.splice(index, <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> &#123; list &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState, props</span>) =&gt;</span> (&#123;</span><br><span class="line">  list: [...prevState.list, &#123;<span class="attr">text</span>: prevState.inputVal, <span class="attr">id</span>: <span class="built_in">parseInt</span>(prevState.list.length)+<span class="number">1</span>&#125;],</span><br><span class="line">  inputVal: <span class="string">''</span></span><br><span class="line">&#125;), () =&gt; &#123;</span><br><span class="line">  <span class="comment">// cb</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="ref属性"><a href="#ref属性" class="headerlink" title="ref属性"></a>ref属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面的tar就指向了ref所在的DOM元素，将其赋值给this.input，这样this.input就等价于e.target。</span></span><br><span class="line"><span class="comment">// this.input一旦被定义之后，在整个render方法中都可以获取到。这个属性不推荐使用，因为直接操作DOM不符合React的面向数据的思想。</span></span><br><span class="line">&lt;input ref=&#123;(tar) =&gt; &#123;<span class="keyword">this</span>.input = tar&#125;&#125; onChange=&#123;<span class="keyword">this</span>.handleInputChange&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">handleInputChange() &#123;</span><br><span class="line">  <span class="keyword">this</span>.setState(<span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">    value: <span class="keyword">this</span>.input.value</span><br><span class="line">  &#125;))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="LifeCycle"><a href="#LifeCycle" class="headerlink" title="LifeCycle"></a>LifeCycle</h4><ul>
+<li>Mounting<br>getDefaultProps =&gt; getInitialState =&gt; componentWillMount() =&gt; render=&gt; componentDidMount()</li>
+<li>Updating<br>componentWillReceiveProps(nextProps) =&gt; shouldComponentUpdate(nextProps, nextState) =&gt; componentWillUpdate(nextProps, nextState) =&gt; render =&gt; componentDidUpdate(prevProps, prevState)</li>
+<li>Unmounting<br>componentWillUnmount()</li>
+</ul>
+<p>其中，shouldComponentUpdate 比较特殊<br>shouldComponentUpdate(nextProps, nextState) {  //两个参数分别表示：传进来的props和state<br>  if (nextProps.content !== this.props.content) {<br>    return true;<br>  } else {<br>    return false;<br>  }<br>}</p>
+<h2 id="正式开发流程和主要依赖"><a href="#正式开发流程和主要依赖" class="headerlink" title="正式开发流程和主要依赖"></a>正式开发流程和主要依赖</h2><h3 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h3><p>npm i –save styled-components</p>
+<h3 id="normalize-js"><a href="#normalize-js" class="headerlink" title="normalize.js"></a>normalize.js</h3><p>使用 styled-components 变成全局样式导入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// normalize.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createGlobalStyle &#125; <span class="keyword">from</span> <span class="string">'styled-components'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> GlobalStyle = createGlobalStyle<span class="string">`</span></span><br><span class="line"><span class="string">  body &#123;</span></span><br><span class="line"><span class="string">    margin: 0;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="keyword">export</span> &#123; GlobalStyle &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/App.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; GlobalStyle &#125;</span><br><span class="line"></span><br><span class="line">&lt;GlobalStyle /&gt;</span><br><span class="line">&lt;Header /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="iconfont-js"><a href="#iconfont-js" class="headerlink" title="iconfont.js"></a>iconfont.js</h3><p>使用 styled-components 变成 GlobalIconfontStyle 全局样式导入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;GlobalStyle /&gt;</span><br><span class="line">&lt;GlobalIconfontStyle /&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="react-transition-group"><a href="#react-transition-group" class="headerlink" title="react-transition-group"></a>react-transition-group</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/common/header/index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; CSSTransition&#125; <span class="keyword">from</span> <span class="string">'react-transition-group'</span></span><br><span class="line"></span><br><span class="line">&lt;CSSTransition <span class="keyword">in</span>=&#123;<span class="keyword">this</span>.state.focus&#125; timeout=&#123;<span class="number">200</span>&#125; classNames=<span class="string">'slide'</span>&gt;</span><br><span class="line">  &lt;NavSearch&gt;<span class="xml"><span class="tag">&lt;/<span class="name">NavSearch</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/CSSTransition&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="antd"><a href="#antd" class="headerlink" title="antd"></a>antd</h3><p>npm i antd –save</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'antd/dist/antd.css'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Input &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line">&lt;Input placeholder=<span class="string">'antd input'</span> /&gt;  <span class="comment">//注意UI组件首字母大写</span></span><br></pre></td></tr></table></figure>
+<h3 id="redux"><a href="#redux" class="headerlink" title="redux"></a>redux</h3><p>npm i redux<br><img src="/images/redux-flow.jpg" alt="redux 数据流动关系"></p>
+<p>store提供的三种方法：<br>store.dispatch()  组件向store传递action的唯一方法<br>store.subscribe() 监听store中的数据，一旦数据变化，就执行这个函数<br>store.getState()  获取store中的最新的数据。 数据被更新了，那么页面自然也就被更新了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建store</span></span><br><span class="line"><span class="comment">// src/store/index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducer'</span>;  <span class="comment">//笔记本</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Redux设计思想：Web 应用是一个状态机，视图与状态是一一对应的；所有的状态，保存在一个对象里面</span></span><br><span class="line"><span class="keyword">const</span> store = createStore(  <span class="comment">//创建仓库</span></span><br><span class="line">  reducer,  <span class="comment">//将笔记本传递给仓库</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建reducer</span></span><br><span class="line"><span class="comment">// src/store/reducer.js</span></span><br><span class="line"><span class="keyword">const</span> defaultState = &#123;</span><br><span class="line">  inputVal: <span class="string">''</span>,</span><br><span class="line">  list: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state=defaultState, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> CHANGE_INPUT_VALUE:</span><br><span class="line">      <span class="keyword">const</span> newState = &#123;...prevState, ...action.value&#125;</span><br><span class="line">      newState.inputVal = action.value</span><br><span class="line">      <span class="keyword">return</span> newState</span><br><span class="line">    <span class="keyword">case</span> INIT_TODO_LIST:</span><br><span class="line">      <span class="keyword">const</span> newState = &#123;...prevState,...&#123; <span class="attr">list</span>: action.list &#125;&#125;</span><br><span class="line">      <span class="keyword">return</span> newState</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/Todolist</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store/index'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">    <span class="keyword">this</span>.state = store.getState()</span><br><span class="line">    <span class="keyword">this</span>.handleInputChange = <span class="keyword">this</span>.handleInputChange.bind(<span class="keyword">this</span>)</span><br><span class="line">    <span class="comment">//subscribe用来监听store，一旦store中存储的数据发生变化，就自动执行这个函数</span></span><br><span class="line">    store.subscribe(<span class="keyword">this</span>.handleStoreChange)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   handleInputChange(e) &#123;</span><br><span class="line">     <span class="keyword">const</span> action = &#123;          </span><br><span class="line">      type: CHANGE_INPUT_VALUE,</span><br><span class="line">      value: e.target.value</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     <span class="comment">//将这个数据变更的信息传递给store。 dispatch是组件向store发送action的唯一方法</span></span><br><span class="line">    store.dispatch(action)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleStoreChange() &#123;</span><br><span class="line">    <span class="comment">//store.getState() 用来获取store中最新的数据</span></span><br><span class="line">    <span class="keyword">this</span>.setState(store.getState())</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// redux发送异步请求获取数据的代码放在componentDidMount函数里</span></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="keyword">const</span> action = &#123;</span><br><span class="line">      type: INIT_TODO_LIST</span><br><span class="line">    &#125;</span><br><span class="line">    store.dispatch(action)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在实际项目中，需要将action的type名提取出来，并将每个action封装。分别创建 actionTypes.js 和 actionCreators.js</p>
+<h3 id="在容器组件中拆分出UI组件"><a href="#在容器组件中拆分出UI组件" class="headerlink" title="在容器组件中拆分出UI组件"></a>在容器组件中拆分出UI组件</h3><p>Todolist就是容器组件，它的render方法中返回了很多的UI组件，所以有必要把他们拆分一下。<br>拆分后，UI组件里面的this.state都无法获取到了，这时就需要父组件（即容器组件）将this.state和方法作为参数，传递给UI组件。<br>UI组件中，需要将原先所有的this.state换成this.props，将原先的this.方法名换成this.props.方法名。</p>
+<p>若此时仍需要向方法传递一个参数，就不能直接写成这种形式<br>onClick={this.props.handleDeleteClick(index)}<br>替换为<br>onClick={() =&gt; { this.props.handleDeleteClick(index) }}<br>onClick={() =&gt; { this.props.handleDeleteClick.bind(this, index) }}</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/Todolist</span></span><br><span class="line">render() &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">//将this.state、方法都作为参数传递给UI组件</span></span><br><span class="line">    &lt;TodolistUI</span><br><span class="line">      inputValue=&#123;<span class="keyword">this</span>.state.inputValue&#125;</span><br><span class="line">      list=&#123;<span class="keyword">this</span>.state.list&#125;</span><br><span class="line">      handleInputChange=&#123;<span class="keyword">this</span>.handleInputChange&#125;</span><br><span class="line">      handleBtnClick=&#123;<span class="keyword">this</span>.handleBtnClick&#125;</span><br><span class="line">      handleDeleteClick=&#123;<span class="keyword">this</span>.handleDeleteClick&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/TodolistUI</span></span><br><span class="line"><span class="keyword">import</span> React, &#123; Component, Fragment &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Input, Button, List &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无状态组件(没有state的组件，只有一个render方法)改写成函数，提高性能</span></span><br><span class="line"><span class="keyword">const</span> TodoListUI = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="comment">// 改写后的函数接收一个参数props,可以将this.props.x 换成props.x</span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者不用赋值式函数字面量，写成函数声明</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoListUI</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;Fragment&gt;</span><br><span class="line">      &lt;Input </span><br><span class="line">        value=&#123;props.inputVal&#125;</span><br><span class="line">        onChange=&#123;props.handleInputChange&#125; </span><br><span class="line">        placeholder=<span class="string">"input here"</span> </span><br><span class="line">        style=&#123;&#123;<span class="attr">width</span>: <span class="string">"300px"</span>, <span class="attr">marginRight</span>: <span class="string">"15px"</span>&#125;&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">      &lt;Button onClick=&#123;props.handleBtnClick&#125; type=<span class="string">"primary"</span>&gt;Submit&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;List </span></span><br><span class="line"><span class="regexp">        bordered</span></span><br><span class="line"><span class="regexp">        dataSource=&#123;props.list&#125;</span></span><br><span class="line"><span class="regexp">        renderItem=&#123;(item, index) =&gt; (&lt;List.Item onClick=&#123;() =&gt; &#123;props.handleItemDel(index)&#125;&#125;&gt;&#123;item&#125;&lt;/</span>List.Item&gt;)&#125;&gt;</span><br><span class="line">      &lt;<span class="regexp">/List&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Fragment&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> TodoListUI</span><br></pre></td></tr></table></figure>
+<h3 id="使用-react-redux-中间件-处理异步请求"><a href="#使用-react-redux-中间件-处理异步请求" class="headerlink" title="使用 react-redux 中间件, 处理异步请求"></a>使用 react-redux 中间件, 处理异步请求</h3><p>npm i redux-thunk –save</p>
+<p>如果将redux发送异步请求获取数据的代码都放在componentDidMount钩子函数中，随着业务逻辑的增加，这个钩子函数可能会变的越来越臃肿。<br>可以利用redux-thunk将redux发送异步请求获取数据的代码放在其他函数中。<br>不使用redux-thunk时，action只能是一个对象，有了redux-thunk之后，action就可以是一个函数了。<br>如果不使用redux-thunk，并且让action是一个函数的话，就会报以下错误 Error: Actions must be plain objects. Use custom middleware for async actions。就是说：action必须是一个对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/store/index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducer'</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enhancer = compose(</span><br><span class="line">  applyMiddleware(thunk), </span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, enhancer)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br><span class="line"><span class="comment">// src/store/actionCreators.js</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getListItem = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;  <span class="comment">//store的dispatch方法可以作为一个参数被接收</span></span><br><span class="line">    axios.get(<span class="string">'http://api/get_list'</span>)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> data = res.data</span><br><span class="line">        <span class="keyword">const</span> action = getInitialListItemAction(data)</span><br><span class="line">        dispatch(action)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// src/Todolist.js</span></span><br><span class="line"><span class="keyword">import</span> getListItem  <span class="keyword">from</span> <span class="string">'./store/actionCreators'</span>;</span><br><span class="line"></span><br><span class="line">componentDidMount() &#123;</span><br><span class="line">  <span class="keyword">const</span> action = getListItem()</span><br><span class="line">  store.dispatch(action)  <span class="comment">//当dispatch接收到一个函数参数时，会自动执行这个函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码原理 就是把异步请求数据的代码放在其它函数中，然后在componentDidMount中用dispatch方法执行这个函数即可</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="使用-react-saga-中间件-处理异步请求"><a href="#使用-react-saga-中间件-处理异步请求" class="headerlink" title="使用 react-saga 中间件, 处理异步请求"></a>使用 react-saga 中间件, 处理异步请求</h3><p>npm i redux-saga –save</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/store/index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">'./reducer'</span></span><br><span class="line"><span class="keyword">import</span> createSagaMiddleware <span class="keyword">from</span> <span class="string">'redux-saga'</span></span><br><span class="line"><span class="keyword">import</span> sagas <span class="keyword">from</span> <span class="string">'./sagas'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sagaMiddleware = createSagaMiddleware()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enhancer = compose(</span><br><span class="line">  applyMiddleware(sagaMiddleware),</span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer, enhancer)</span><br><span class="line"></span><br><span class="line">sagaMiddleware.run(sagas)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// src/store/sagas.js</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">import</span> &#123; call, put, takeEvery, takeLatest &#125; <span class="keyword">from</span> <span class="string">'redux-saga/effects'</span></span><br><span class="line"><span class="keyword">import</span> &#123; GET_INIT_TODO_LIST &#125; <span class="keyword">from</span> <span class="string">'./actionTypes'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initTodoListAction &#125; <span class="keyword">from</span> <span class="string">'./actionCreators'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">getInitTodoList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">yield</span>  axios.get(<span class="string">'https://easy-mock.com/mock/5ca47d2fac5abe5a8d89b977/react/api/todolist'</span>)</span><br><span class="line">    <span class="keyword">const</span> list = res.data.list</span><br><span class="line">    <span class="keyword">const</span> action = initTodoListAction(list)</span><br><span class="line">    <span class="keyword">yield</span> put(action)</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">mySaga</span>(<span class="params">params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> takeEvery(GET_INIT_TODO_LIST, getInitTodoList)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mySaga</span><br></pre></td></tr></table></figure>
+<h3 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h3><p>npm i react-redux –save</p>
+<p>react-redux就是用来将react和redux连接起来。<br>通过react-redux中的connect方法，将组件Todolist中的state，dispatch映射到props。mapStateToProps和mapDispatchToProps分别实现映射。之后，Todolist组件中所有的 this.state 和 this.方法名，都直接替换成：this.props 和 this.props.方法名。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/index.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></span><br><span class="line"><span class="keyword">import</span> TodoList <span class="keyword">from</span> <span class="string">'./TodoList'</span></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> App = (</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;TodoList /&gt;</span><br><span class="line">  &lt;<span class="regexp">/Provider&gt;</span></span><br><span class="line"><span class="regexp">)</span></span><br><span class="line"><span class="regexp">const rootElement = document.getElementById('root')</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(App, rootElement)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ src/</span>TodoList.js</span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoList</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    inputVal: state.inputVal,</span><br><span class="line">    list: state.list</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchTpProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    changeInputVal(e) &#123;</span><br><span class="line">      <span class="keyword">const</span> action = changeInputValAction(e.target.value)</span><br><span class="line">      dispatch(action)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// TodoList是个UI组件，最终导出的是 用connect集成 TodoList UI组件、数据和业务逻辑 而 包装成的容器组件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps, mapDispatchTpProps)(TodoList)</span><br></pre></td></tr></table></figure></p>
+<h3 id="immutable、redux-immutable"><a href="#immutable、redux-immutable" class="headerlink" title="immutable、redux-immutable"></a>immutable、redux-immutable</h3><p>npm i immutable<br>npm i redux-immutable</p>
+<p>用于将对象设置为不可更改。可用于保护state，state是不允许修改的，为了防止误修改，可以借助immutable库。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/pages/home/store/reducer.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; fromJS &#125; <span class="keyword">from</span> <span class="string">'immutable'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> defaultState = fromJS(&#123;</span><br><span class="line">  topicList: [],</span><br><span class="line">  articleList: [],</span><br><span class="line">  recommendList: [],</span><br><span class="line">  articlePage: <span class="number">1</span>,</span><br><span class="line">  showScroll: <span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> changeHomeData = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> state.merge(&#123;</span><br><span class="line">    topicList: fromJS(action.topicList),</span><br><span class="line">    articleList: fromJS(action.articleList),</span><br><span class="line">    recommendList: fromJS(action.recommendList)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getMoreArticleList = <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> newArticleList = [...state.get(<span class="string">'articleList'</span>), ...fromJS(action.list)]</span><br><span class="line">  <span class="keyword">const</span> nextPage = action.nextPage</span><br><span class="line">  <span class="keyword">return</span> state.merge(&#123;</span><br><span class="line">    articleList: newArticleList,</span><br><span class="line">    articlePage: nextPage</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reducer = <span class="function">(<span class="params">state=defaultState, action</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span>(action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> CHANGE_HOME_DATA:</span><br><span class="line">      <span class="keyword">return</span> changeHomeData(state, action)</span><br><span class="line">    <span class="keyword">case</span> GET_MORE_ARTICLE_LIST:</span><br><span class="line">      <span class="keyword">return</span> getMoreArticleList(state, action)</span><br><span class="line">    <span class="keyword">case</span> CHANGE_SCROLLTOP_SHOW:</span><br><span class="line">      <span class="keyword">return</span> state.set(<span class="string">'showScroll'</span>, action.flag)</span><br><span class="line">    <span class="keyword">default</span>:  </span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer</span><br></pre></td></tr></table></figure></p>
+<p>使用，redux-immutable<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/store/reducer.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span></span><br><span class="line"><span class="comment">// 替换为</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux-immutable'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用redux-immutable之后, 就不能使用类似</span></span><br><span class="line"><span class="keyword">this</span>.state.header.inputVal</span><br><span class="line"><span class="comment">// 替换为</span></span><br><span class="line"><span class="keyword">this</span>.state.get(<span class="string">'header'</span>).get(<span class="string">'inputVal'</span>)</span><br><span class="line"><span class="keyword">this</span>.state.getIn([<span class="string">'header'</span>, <span class="string">'inputVal'</span>])  <span class="comment">// 简写</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="redux-模块划分，拆分reducer"><a href="#redux-模块划分，拆分reducer" class="headerlink" title="redux 模块划分，拆分reducer"></a>redux 模块划分，拆分reducer</h3><p>随着业务逻辑的增加，代码会变的愈来愈多，reducer会变得越来越大，所以最好将其拆分成不同的块，每个块对应一个reducer.js文件。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/store/reducer.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux-immutable'</span></span><br><span class="line"><span class="keyword">import</span> &#123; reducer <span class="keyword">as</span> headerReducer &#125; <span class="keyword">from</span> <span class="string">'../common/header/store'</span></span><br><span class="line"><span class="keyword">import</span> &#123; reducer <span class="keyword">as</span> loginReducer &#125; <span class="keyword">from</span> <span class="string">'../pages/login/store'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reducer = combineReducers(&#123;</span><br><span class="line">  header: headerReducer,</span><br><span class="line">  login: loginReducer</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// src/pages/login/index.js</span></span><br><span class="line"><span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> (&#123;</span><br><span class="line">  isLogin: state.getIn([<span class="string">'login'</span>, <span class="string">'login'</span>])</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="react-router"><a href="#react-router" class="headerlink" title="react-router"></a>react-router</h3><p>npm install react-router-dom</p>
+<p>作用就是根据不同的url，显示不同的页面信息<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; BrowserRouter <span class="keyword">as</span> Router, Route, Link &#125; <span class="keyword">from</span> <span class="string">'react-router-dom'</span></span><br><span class="line"></span><br><span class="line">&lt;Router&gt;</span><br><span class="line">  &lt;Route path=<span class="string">'/'</span> exact cmponent=&#123;Home&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">  &lt;Route path=<span class="string">'/about/'</span> exact cmponent=&#123;About&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Route</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/Router&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;Link to='/</span><span class="string">'&gt;Jump to&lt;/Link&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h3><p>使用 PureComponent 代替 Component，需要immutable， 可提升性能。</p>
+<h3 id="异步组件和withRouter"><a href="#异步组件和withRouter" class="headerlink" title="异步组件和withRouter"></a>异步组件和withRouter</h3><p>npm i react-loadable </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /pages/detail/loadable.js</span></span><br><span class="line"><span class="keyword">import</span> Loadable <span class="keyword">from</span> <span class="string">'react-loadable'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> LoadableComponent = Loadable(&#123;</span><br><span class="line">  loader: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./index'</span>),</span><br><span class="line">  loading: Loading  <span class="comment">// loading 效果</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Loading = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; <span class="xml"><span class="tag">&lt;<span class="name">LoadableComponent</span> /&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// /pages/detail/index.js</span></span><br><span class="line"><span class="xml">import &#123; withRouter &#125; from 'react-router-dom'</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">export default connent(null, null)(withRouter(Detail))</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">// App.js</span></span><br><span class="line"><span class="xml">// import Home from './pages/detail', 替换为</span></span><br><span class="line"><span class="xml">import Detail from './pages/detail/loadable'</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/12/JS/JavaScript-疑难杂症-专治各种不服/" rel="next" title="JavaScript 疑难杂症,专治各种不服">
+                <i class="fa fa-chevron-left"></i> JavaScript 疑难杂症,专治各种不服
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/07/React/React-共享单车开发实战总结/" rel="prev" title="React 共享单车开发实战总结">
+                React 共享单车开发实战总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#起步，准备工作"><span class="nav-number">1.</span> <span class="nav-text">起步，准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目、安装脚手架"><span class="nav-number">1.1.</span> <span class="nav-text">新建项目、安装脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定git远程仓库"><span class="nav-number">1.2.</span> <span class="nav-text">绑定git远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要技术点"><span class="nav-number">1.3.</span> <span class="nav-text">主要技术点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#index-js"><span class="nav-number">1.3.1.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#state"><span class="nav-number">1.3.2.</span> <span class="nav-text">state</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ref属性"><span class="nav-number">1.3.3.</span> <span class="nav-text">ref属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LifeCycle"><span class="nav-number">1.3.4.</span> <span class="nav-text">LifeCycle</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正式开发流程和主要依赖"><span class="nav-number">2.</span> <span class="nav-text">正式开发流程和主要依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#styled-components"><span class="nav-number">2.1.</span> <span class="nav-text">styled-components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalize-js"><span class="nav-number">2.2.</span> <span class="nav-text">normalize.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iconfont-js"><span class="nav-number">2.3.</span> <span class="nav-text">iconfont.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-transition-group"><span class="nav-number">2.4.</span> <span class="nav-text">react-transition-group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#antd"><span class="nav-number">2.5.</span> <span class="nav-text">antd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux"><span class="nav-number">2.6.</span> <span class="nav-text">redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在容器组件中拆分出UI组件"><span class="nav-number">2.7.</span> <span class="nav-text">在容器组件中拆分出UI组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-react-redux-中间件-处理异步请求"><span class="nav-number">2.8.</span> <span class="nav-text">使用 react-redux 中间件, 处理异步请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-react-saga-中间件-处理异步请求"><span class="nav-number">2.9.</span> <span class="nav-text">使用 react-saga 中间件, 处理异步请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-redux"><span class="nav-number">2.10.</span> <span class="nav-text">react-redux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#immutable、redux-immutable"><span class="nav-number">2.11.</span> <span class="nav-text">immutable、redux-immutable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redux-模块划分，拆分reducer"><span class="nav-number">2.12.</span> <span class="nav-text">redux 模块划分，拆分reducer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#react-router"><span class="nav-number">2.13.</span> <span class="nav-text">react-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PureComponent"><span class="nav-number">2.14.</span> <span class="nav-text">PureComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步组件和withRouter"><span class="nav-number">2.15.</span> <span class="nav-text">异步组件和withRouter</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+

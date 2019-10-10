@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="JS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端是最贴近用户的一层，随着产品的日益完善，越来越注重用户体验，前端异常就显得非常必要。  为什么要处理异常？异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。1.增强用户体验；2.远程定位问题；3.未雨绸缪，及早发现问题；4.无法复现问题，尤其是移动端，机型，系统都是问题；5.完善的前端方案，前端监控系统；6.提升找错效率，提升前端代码安全性。 对于 JS 而言，我们面">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何优雅地处理前端异常">
+<meta property="og:url" content="https://supremeyh.github.io/2019/08/11/如何优雅地处理前端异常/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="前端是最贴近用户的一层，随着产品的日益完善，越来越注重用户体验，前端异常就显得非常必要。  为什么要处理异常？异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。1.增强用户体验；2.远程定位问题；3.未雨绸缪，及早发现问题；4.无法复现问题，尤其是移动端，机型，系统都是问题；5.完善的前端方案，前端监控系统；6.提升找错效率，提升前端代码安全性。 对于 JS 而言，我们面">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-08-11T14:59:56.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何优雅地处理前端异常">
+<meta name="twitter:description" content="前端是最贴近用户的一层，随着产品的日益完善，越来越注重用户体验，前端异常就显得非常必要。  为什么要处理异常？异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。1.增强用户体验；2.远程定位问题；3.未雨绸缪，及早发现问题；4.无法复现问题，尤其是移动端，机型，系统都是问题；5.完善的前端方案，前端监控系统；6.提升找错效率，提升前端代码安全性。 对于 JS 而言，我们面">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/08/11/如何优雅地处理前端异常/">
+
+
+
+
+
+  <title>如何优雅地处理前端异常 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/08/11/如何优雅地处理前端异常/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何优雅地处理前端异常</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-11T18:00:00+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>前端是最贴近用户的一层，随着产品的日益完善，越来越注重用户体验，前端异常就显得非常必要。</p>
+</blockquote>
+<h3 id="为什么要处理异常？"><a href="#为什么要处理异常？" class="headerlink" title="为什么要处理异常？"></a>为什么要处理异常？</h3><p>异常是不可控的，会影响最终的呈现结果，但是我们有充分的理由去做这样的事情。<br>1.增强用户体验；<br>2.远程定位问题；<br>3.未雨绸缪，及早发现问题；<br>4.无法复现问题，尤其是移动端，机型，系统都是问题；<br>5.完善的前端方案，前端监控系统；<br>6.提升找错效率，提升前端代码安全性。</p>
+<p>对于 JS 而言，我们面对的仅仅只是异常，异常的出现不会直接导致 JS 引擎崩溃，最多只会使当前执行的任务终止。</p>
+<h3 id="前端异常捕获与错误上报"><a href="#前端异常捕获与错误上报" class="headerlink" title="前端异常捕获与错误上报"></a>前端异常捕获与错误上报</h3><p>前端监控包括行为监控、异常监控、性能监控等。一个监控系统，可以分为四个阶段：日志采集、日志存储、统计与分析、报告和警告。<br>异常采集内容 4W: WHO did WHAT and get WHICH exception in WHICH environment?<br>浏览器信息 navigator.userAgent获取，device设备、browser浏览器、version浏览器版本、engine内核、os操作系统、Version操作系统版本、language语言</p>
+<h3 id="前端需要处理哪些异常？"><a href="#前端需要处理哪些异常？" class="headerlink" title="前端需要处理哪些异常？"></a>前端需要处理哪些异常？</h3><ul>
+<li><p>JS 错误<br>SyntaxError    语法错误 - 解析代码时发生的语法错误。<br>ReferenceError 引用错误 - 引用一个不存在的变量时发生的错误。<br>RangeError     范围错误 - 当一个值超出有效范围时发生的错误。<br>TypeError      类型错误 - 是变量或参数不是预期类型时发生的错误。</p>
+</li>
+<li><p>Ajax 请求异常</p>
+</li>
+<li>静态资源加载异常</li>
+<li>Promise 异常</li>
+<li>Iframe 异常</li>
+<li>跨域 script error</li>
+<li>崩溃和卡顿</li>
+</ul>
+<h4 id="异常捕获方法"><a href="#异常捕获方法" class="headerlink" title="异常捕获方法"></a>异常捕获方法</h4><ul>
+<li><p>try catch<br>在可预见情况下监控特定的错误。只能捕获到同步的运行时错误，对语法和异步错误却无能为力</p>
+</li>
+<li><p>window.onerror<br>捕获预料之外的错误，全局监听异常，但不能捕获语法错误和promise的异常错误信息。最好写在所有 JS 脚本的前面，否则有可能捕获不到错误。</p>
+</li>
+</ul>
+<p>script error跨域时 script 加上属性crossorigin，并且服务器添加 Access-Control-Allow-Origin。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* @param &#123;String&#125;  message    错误信息</span></span><br><span class="line"><span class="comment">* @param &#123;String&#125;  source    出错文件</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125;  lineno    行号</span></span><br><span class="line"><span class="comment">* @param &#123;Number&#125;  colno    列号</span></span><br><span class="line"><span class="comment">* @param &#123;Object&#125;  error  Error对象（对象）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">message, source, lineno, colno, error</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'捕获到异常：'</span>,&#123;message, source, lineno, colno, error&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>window.addEventListener 的 error 事件<br>当资源（如图片或脚本）加载失败，加载资源的元素会触发一个 Event 接口的 error 事件，并执行该元素上的onerror() 处理函数。这些 error 事件不会向上冒泡到 window。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>, (error) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'捕获到异常：'</span>, error);</span><br><span class="line">&#125;, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<p>由于网络请求异常不会事件冒泡，因此必须在捕获阶段将其捕捉到才行，但是这种方式虽然可以捕捉到网络请求的异常，但是无法判断 HTTP 的状态是 404 还是其他比如 500 等等，所以还需要配合服务端日志进行排查分析。</p>
+<ul>
+<li>Promise Catch<br>在 promise 中使用 catch 可以非常方便的捕获到异步 error</li>
+</ul>
+<ul>
+<li>window.addEventListener 的 unhandledrejection、handledrejection 事件<br>捕获到未处理的Promise错误。<br>没有写 catch 的 Promise 中抛出的错误无法被 onerror 或 try-catch 捕获到，为了防止有漏掉的 Promise 异常，在全局增加一个对 unhandledrejection 的监听，用来全局监听 Uncaught Promise Error。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"unhandledrejection"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  e.preventDefault()  <span class="comment">// 有这行时，会去掉控制台的异常显示</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'捕获到异常：'</span>, e);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">Promise</span>.reject(<span class="string">'promise error'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>aixos 进行拦截<br>aixos 中使用 interceptor 进行拦截</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// http request 拦截器</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//loading</span></span><br><span class="line">    <span class="keyword">if</span> (store.state.user.token) &#123;</span><br><span class="line">        config.headers[<span class="string">'Authorization'</span>] = store.state.user.token <span class="comment">//每个请求都带上token</span></span><br><span class="line">        <span class="comment">// config.headers['Cookie'] = myCookie //自定义Cookie</span></span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">return</span> config</span><br><span class="line">    &#125;, err =&gt; &#123;</span><br><span class="line">      Message.error(&#123;<span class="attr">message</span>: <span class="string">'请求超时!'</span>&#125;);</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//http response 拦截器</span></span><br><span class="line">axios.interceptors.response.use(</span><br><span class="line">    response =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (response.data.code === <span class="number">5555</span>) &#123;</span><br><span class="line">            Message.error(&#123;</span><br><span class="line">                message: <span class="string">'出现非法信息: '</span> + response.data.illegal</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(response.data.description)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, </span><br><span class="line">    err =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (err.response) &#123;</span><br><span class="line">            <span class="keyword">switch</span> (err.response.status) &#123;</span><br><span class="line">              <span class="comment">// 401 清除token信息并跳转到登录页面</span></span><br><span class="line">              <span class="keyword">case</span> <span class="number">401</span>:</span><br><span class="line">                  err.message = <span class="string">'Unauthorized 未授权，请重新登录'</span></span><br><span class="line">                  store.commit(<span class="string">'LogOut'</span>)</span><br><span class="line">                  router.replace(&#123; <span class="attr">path</span>: <span class="string">'/login'</span>&#125;)</span><br><span class="line">                  <span class="keyword">break</span></span><br><span class="line">              <span class="keyword">case</span> <span class="number">403</span>:</span><br><span class="line">                  err.message = <span class="string">'Forbidden 服务器拒绝访问'</span></span><br><span class="line">                  <span class="keyword">break</span></span><br><span class="line">              <span class="keyword">default</span>:</span><br><span class="line">                  err.message = <span class="string">`连接错误<span class="subst">$&#123;err.response.status&#125;</span>`</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(err)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>VUE errorHandler<br>vue 使用 Vue.config.errorHandler 捕获全局异常</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Vue.config.errorHandler = <span class="function">(<span class="params">err, vm, info</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'通过vue errorHandler捕获的错误'</span>);</span><br><span class="line">  <span class="built_in">console</span>.error(err);</span><br><span class="line">  <span class="built_in">console</span>.error(vm);</span><br><span class="line">  <span class="built_in">console</span>.error(info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>React 异常捕获<br>React 16 提供了一个内置函数 componentDidCatch，使用它可以非常简单的获取到 react 下的错误信息</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error, info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此外，UI 的某部分引起的 JS 错误不应该破坏整个程序，React16 提出了错误边界（error boundary)的新观念。但不会捕捉 事件处理器、异步代码、服务端的渲染代码、在 error boundaries 区域内的错误。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ErrorBoundary</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">hasError</span>: <span class="literal">false</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  componentDidCatch(error, info) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">hasError</span>: <span class="literal">true</span> &#125;);  <span class="comment">// Display fallback UI</span></span><br><span class="line"></span><br><span class="line">    logErrorToMyService(error, info);   <span class="comment">// 将异常信息上报给服务器</span></span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.hasError) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Something went wrong.<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 像使用普通组件那样使用</span></span><br><span class="line">&lt;ErrorBoundary&gt;</span><br><span class="line">  &lt;MyWidget /&gt;</span><br><span class="line">&lt;<span class="regexp">/ErrorBoundary&gt;</span></span><br></pre></td></tr></table></figure>
+<p>componentDidCatch() 方法像 JS 的 catch{} 模块一样工作，但是对于组件，只有 class 类型的组件(class component )可以成为一个 error boundaries。实际上，大多数情况下我们可以在整个程序中定义一个 error boundary 组件，之后就可以一直使用它了！</p>
+<ul>
+<li><p>iframe 异常<br>对于 iframe 的异常捕获，我们还得借力 window.onerror</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"./iframe.html"</span> <span class="attr">frameborder</span>=<span class="string">"0"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="built_in">window</span>.frames[<span class="number">0</span>].onerror = <span class="function"><span class="keyword">function</span> (<span class="params">message, source, lineno, colno, error</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">'捕获到 iframe 异常：'</span>,&#123;message, source, lineno, colno, error&#125;);</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> <span class="literal">true</span>;</span></span><br><span class="line"><span class="undefined">  &#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>script error<br>script error跨域时 script 加上属性crossorigin=’anonymous’，并且服务器添加 Access-Control-Allow-Origin。</p>
+</li>
+</ul>
+<ul>
+<li><p>sourceMap<br>将代码压缩发布的代码，无法找到原始报错位置。在webpack中的devtool开启sourceMap功能追踪错误，将异常信息提交到 node 中间层处理分析，解析map文件后将数据传给后台服务器。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 中间层代码</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> router = express.Router();</span><br><span class="line"><span class="keyword">const</span> fetch = <span class="built_in">require</span>(<span class="string">'node-fetch'</span>);</span><br><span class="line"><span class="keyword">const</span> sourceMap = <span class="built_in">require</span>(<span class="string">'source-map'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> resolve = <span class="function"><span class="params">file</span> =&gt;</span> path.resolve(__dirname, file);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义post接口</span></span><br><span class="line">router.post(<span class="string">'/errorMsg/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> error = req.body; <span class="comment">// 获取前端传过来的报错对象</span></span><br><span class="line">    <span class="keyword">let</span> url = error.scriptURI; <span class="comment">// 压缩文件路径</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (url) &#123;</span><br><span class="line">        <span class="keyword">let</span> fileUrl = url.slice(url.indexOf(<span class="string">'client/'</span>)) + <span class="string">'.map'</span>; <span class="comment">// map文件路径</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 解析sourceMap</span></span><br><span class="line">        <span class="keyword">let</span> smc = <span class="keyword">new</span> sourceMap.SourceMapConsumer(fs.readFileSync(resolve(<span class="string">'../'</span> + fileUrl), <span class="string">'utf8'</span>)); <span class="comment">// 返回一个promise对象</span></span><br><span class="line">        </span><br><span class="line">        smc.then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 解析原始报错数据</span></span><br><span class="line">            <span class="keyword">let</span> ret = result.originalPositionFor(&#123;</span><br><span class="line">                line: error.lineNo, <span class="comment">// 压缩后的行号</span></span><br><span class="line">                column: error.columnNo <span class="comment">// 压缩后的列号</span></span><br><span class="line">            &#125;);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">let</span> url = <span class="string">''</span>; <span class="comment">// 上报地址</span></span><br><span class="line">        </span><br><span class="line">            <span class="comment">// 将异常上报至后台</span></span><br><span class="line">            fetch(url, &#123;</span><br><span class="line">                method: <span class="string">'POST'</span>,</span><br><span class="line">                headers: &#123;</span><br><span class="line">                    <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></span><br><span class="line">                &#125;,</span><br><span class="line">                body: <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">                    errorMessage: error.errorMessage, <span class="comment">// 报错信息</span></span><br><span class="line">                    source: ret.source, <span class="comment">// 报错文件路径</span></span><br><span class="line">                    line: ret.line, <span class="comment">// 报错文件行号</span></span><br><span class="line">                    column: ret.column, <span class="comment">// 报错文件列号</span></span><br><span class="line">                    stack: error.stack <span class="comment">// 报错堆栈</span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> response.json();</span><br><span class="line">            &#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">                res.json(json);         </span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>崩溃和卡顿<br>利用 window 对象的 load 和 beforeunload 事件实现了网页崩溃的监控。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    sessionStorage.setItem(<span class="string">'good_exit'</span>, <span class="string">'pending'</span>);</span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        sessionStorage.setItem(<span class="string">'time_before_crash'</span>, <span class="keyword">new</span> <span class="built_in">Date</span>().toString());</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">window</span>.addEventListener(<span class="string">'beforeunload'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    sessionStorage.setItem(<span class="string">'good_exit'</span>, <span class="string">'true'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(sessionStorage.getItem(<span class="string">'good_exit'</span>) &amp;&amp;</span><br><span class="line">    sessionStorage.getItem(<span class="string">'good_exit'</span>) !== <span class="string">'true'</span>) &#123;</span><br><span class="line">    <span class="comment">// insert crash logging code here ...</span></span><br><span class="line">    alert(<span class="string">'Hey, welcome back from your crash, looks like you crashed on: '</span> + sessionStorage.getItem(<span class="string">'time_before_crash'</span>));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Service Worker<br>可以使用 Service Worker 来实现网页崩溃的监控。</p>
+</li>
+</ul>
+<p>Service Worker 有自己独立的工作线程，与网页区分开，网页崩溃了，Service Worker 一般情况下不会崩溃；<br>Service Worker 生命周期一般要比网页还要长，可以用来监控网页的状态；<br>网页可以通过 navigator.serviceWorker.controller.postMessage API 向掌管自己的 SW 发送消息。</p>
+<p>基于以上几点，可以实现一种基于心跳检测的监控方案。</p>
+<h3 id="错误上报"><a href="#错误上报" class="headerlink" title="错误上报"></a>错误上报</h3><ul>
+<li>ajax传递给接口<br>因为 Ajax 请求本身也有可能会发生异常，而且有可能会引发跨域问题，一般情况下更推荐使用动态创建 img 标签的形式进行上报。</li>
+</ul>
+<ul>
+<li>动态创建 img 标签<br>new Image().src=reportUrl?logs=error 的方式进行上报<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">report</span>(<span class="params">error</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> reportUrl = <span class="string">'http://supremeyh/web/report'</span>;</span><br><span class="line">  <span class="keyword">new</span> Image().src = <span class="string">`<span class="subst">$&#123;reportUrl&#125;</span>?logs=<span class="subst">$&#123;error&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Reporter.send = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 设置采集率，减缓服务器的压力</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">Math</span>.random() &lt; <span class="number">0.3</span>) &#123;</span><br><span class="line">    send(data)      <span class="comment">// 上报错误信息</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h3><p>当数据量变大的时候，当一个异常一段时间内不断触发，那么上报的日志会造成数据冗余，也造成流量浪费。所以，对于错误信息的上报，从上报内容和上报频率上，应该加以限制。<br>1、限制上报：不是所有的错误都上报。设置采集率，添加黑白名单，或者添加过滤条件，满足条件的的才上报。<br>2、合并上报：一段时间内统一的错误汇总上报，减少请求。<br>3、服务端限制：客户端的东西总是可以绕开，服务端需要做限制，防止被攻击，或者负载过高。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/04/Review/你问我答-真题/" rel="next" title="你问我答 真题">
+                <i class="fa fa-chevron-left"></i> 你问我答 真题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/08/CS/计算机基础/" rel="prev" title="计算机基础">
+                计算机基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要处理异常？"><span class="nav-number">1.</span> <span class="nav-text">为什么要处理异常？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端异常捕获与错误上报"><span class="nav-number">2.</span> <span class="nav-text">前端异常捕获与错误上报</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端需要处理哪些异常？"><span class="nav-number">3.</span> <span class="nav-text">前端需要处理哪些异常？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#异常捕获方法"><span class="nav-number">3.1.</span> <span class="nav-text">异常捕获方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误上报"><span class="nav-number">4.</span> <span class="nav-text">错误上报</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节流"><span class="nav-number">5.</span> <span class="nav-text">节流</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+

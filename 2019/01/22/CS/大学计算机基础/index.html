@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="CS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="大学计算机基础 主要学什么： 基础原理概念、支撑系统平台、信息处理、计算文化 计算机与问题求解：基于计算机软件、程序、系统工程（多平台、多软件、多资源） 抽象和建模：抽象，是从众多的事物中抽取出共同的、本质性的特征，而舍弃其非本质的特征。抽象是人们求解问题时的认知过程和思维方法从个别在把握一般，从现象中把握本质。抽象是形成概念的必要手段，通过抽象建立客观事物的描述模型。 建模，是为了理解事物而对其">
+<meta name="keywords" content="CS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大学计算机基础">
+<meta property="og:url" content="https://supremeyh.github.io/2019/01/22/CS/大学计算机基础/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="大学计算机基础 主要学什么： 基础原理概念、支撑系统平台、信息处理、计算文化 计算机与问题求解：基于计算机软件、程序、系统工程（多平台、多软件、多资源） 抽象和建模：抽象，是从众多的事物中抽取出共同的、本质性的特征，而舍弃其非本质的特征。抽象是人们求解问题时的认知过程和思维方法从个别在把握一般，从现象中把握本质。抽象是形成概念的必要手段，通过抽象建立客观事物的描述模型。 建模，是为了理解事物而对其">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-07-23T01:25:36.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大学计算机基础">
+<meta name="twitter:description" content="大学计算机基础 主要学什么： 基础原理概念、支撑系统平台、信息处理、计算文化 计算机与问题求解：基于计算机软件、程序、系统工程（多平台、多软件、多资源） 抽象和建模：抽象，是从众多的事物中抽取出共同的、本质性的特征，而舍弃其非本质的特征。抽象是人们求解问题时的认知过程和思维方法从个别在把握一般，从现象中把握本质。抽象是形成概念的必要手段，通过抽象建立客观事物的描述模型。 建模，是为了理解事物而对其">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/01/22/CS/大学计算机基础/">
+
+
+
+
+
+  <title>大学计算机基础 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/01/22/CS/大学计算机基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大学计算机基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T20:48:06+08:00">
+                2019-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="大学计算机基础"><a href="#大学计算机基础" class="headerlink" title="大学计算机基础"></a>大学计算机基础</h3><ul>
+<li>主要学什么： 基础原理概念、支撑系统平台、信息处理、计算文化</li>
+<li>计算机与问题求解：基于计算机软件、程序、系统工程（多平台、多软件、多资源）</li>
+<li><p>抽象和建模：抽象，是从众多的事物中抽取出共同的、本质性的特征，而舍弃其非本质的特征。抽象是人们求解问题时的认知过程和思维方法从个别在把握一般，从现象中把握本质。抽象是形成概念的必要手段，通过抽象建立客观事物的描述模型。 建模，是为了理解事物而对其做出的一种抽象，是对事物的一种无歧义书面描述，是研究系统的重要手段和前提。凡是用模型描述系统的因果关系或相互关系的过程都属于建模。  抽象是把具体问题简化描述，建模是问题求解的精确描述，是计算的依据。</p>
+</li>
+<li><p>进制：<br>（1001)₂ = 1001B 二进制 Binary<br>（1001)₈ = 1001O = 1001Q 八进制 Octal<br>（1001)₁₀ = 1001D 十进制 Decimal<br>（1001)₁₆ = 1001D 十六进制 Hexadecimal</p>
+</li>
+<li><p>原码，反码，补码<br>原码：一个n位的二进制数，其中最高位为符号位：正数为0，负数为1。剩下的n-1位表示该数的绝对值。<br>反码：正数的反码是其本身。负数的反码，除符号位，按位取反(就是0变1，1变0)<br>补码：正数的补码就是其本身。负数的反码，除符号位，按位取反，然后最后一位+1，即【取反+1】<br>例如，X=-10 1011 , [X]原= 1010 1011 ，[X]反=1101 0100， [X]补=1101 0101<br>使用补码不仅仅修复了0的符号以及存在两个编码的问题，还能够多表示一个最低数，所以对于编程中常用到的32位int类型可以表示范围是  [-2^31, 2^31-1] ，因为第一位表示的是符号位，而使用补码表示时又可以多保存一个最小值。</p>
+</li>
+<li><p>ASCII 美国信息交换标准代码American Standard Code for Information Interchange<br>用7位编码，8位表示，最高位为0<br>0 - 0 011 0000 - 30H<br>9 - 0 011 1001 - 39H<br>A - 0 100 0001 - 41H<br>a - 0 110 0001 - 61H<br>Z - 0 101 1010 - 5AH<br>z - 0 111 1010 - 7AH</p>
+</li>
+<li><p>计算机工作原理与硬件结构<br>CPU = ALU(算数逻辑单元 Arithmetic Logic Unit) + 寄存器(临时存储单元Cache， 分为通用寄存器和累加器)<br>1byte 字节 = 8bit 位<br>1 字 = 16 位<br>1KB = 1024 B (2^10 B)<br>1MB = 1024 KB (2^20 B)<br>1GB = 1024 MB (2^30 B)<br>1TB = 1024 GB (2^40 B)</p>
+</li>
+<li><p>机器指令<br>CPU能直接识别并执行的指令，表现形式是二进制编码。机器指令 = 操作码（指令所要完成的操作，即指令的功能）+ 操作数（参与运算的对象，以及运算结果所存放的位置等）</p>
+</li>
+</ul>
+<p>指令系统是指计算机所能执行的全部指令的集合，它描述了计算机内全部的控制信息和“逻辑判断”能力。一般均包含算术运算型、逻辑运算型、数据传送型、判定和控制型、移位操作型、位（位串）操作型、输入和输出型等指令。指令系统是表征一台计算机性能的重要因素，它的格式与功能不仅直接影响到机器的硬件结构，而且也直接影响到系统软件，影响到机器的适用范围.</p>
+<ul>
+<li>冯诺依曼体系 John Von· Neumann 1946年美籍匈牙利科学<br>核心思想: 数字计算机的数制采用二进制；计算机应该按照程序顺序执行</li>
+</ul>
+<p>必须具有如下功能：<br>把需要的程序和数据送至计算机中。<br>必须具有长期记忆程序、数据、中间结果及最终运算结果的能力。<br>能够完成各种算术运算、逻辑运算和数据传送等数据加工处理的能力。<br>能够根据需要控制程序走向，并能根据指令控制机器的各部件协调操作。<br>能够按照要求将处理结果输出给用户。</p>
+<p>五大基本组成部件：<br>运算器：用于完成各种算术运算、逻辑运算和数据传送等数据加工处理。<br>控制器：用于控制程序的执行，是计算机的大脑。运算器和控制器组成计算机的中央处理器（CPU）。控制器根据存放在存储器中的指令序列（程序）进行工作，并由一个程序计数器控制指令的执行。控制器具有判断能力，能根据计算结果选择不同的工作流程。<br>存储器：用于记忆程序和数据，例如：内存。程序和数据以二进制代码形式不加区别地存放在存储器中，存放位置由地址确定。<br>输入设备：用于将数据或程序输入到计算机中，例如：鼠标、键盘。<br>输出设备：将数据或程序的处理结果展示给用户，例如：显示器、打印机。</p>
+<ul>
+<li><p>图灵机 艾伦·麦席森·图灵（Alan Mathison Turing) 1912年 英国数学家<br>所谓的图灵机就是指一个抽象的机器<br>逻辑结构上图灵机有四个部分组成：<br>一个无限长的存储带，带子有一个个连续的存储格子组成，每个格子可以存储一个数字或符号。<br>一个读写头，读写头可以在存储带上左右移动，并可以读、修改存储格上的数字或符号。<br>内部状态存储器，该存储器可以记录图灵机的当前状态，并且有一种特殊状态为停机状态。<br>控制程序指令，指令可以根据当前状态以及当前读写头所指的格子上的符号来确定读写头下一步的动作（左移还是右移），并改变状态存储器的值，令机器进入一个新的状态或保持状态不变。</p>
+</li>
+<li><p>操作系统 OS  operating system（计算机管理控制程序）<br>管理计算机硬件与软件资源的计算机程序，同时也是计算机系统的内核与基石。操作系统需要处理如管理与配置内存、决定系统资源供需的优先次序、控制输入与输出设备、操作网络与管理文件系统等基本事务。操作系统也提供一个让用户与系统交互的操作界面。<br>分类：多道批处理系统、分时系统、实时系统<br>特征：并发、共享、虚拟（把一个物理上的实体变为若干个逻辑上的对应物）、异步<br>一个标准PC的操作系统应该提供以下的功能：<br>进程管理（Processing management):进程是指一个具有独立功能的程序对某个数据集在处理机上的执行过程和分配资源的基本单位。程序+数据集合+进程控制块PCB<br>内存管理（Memory management）<br>文件系统（File system）<br>网络通信（Networking）<br>安全机制（Security）<br>用户界面（User interface）<br>驱动程序（Device drivers）</p>
+</li>
+</ul>
+<ul>
+<li>计算机网络<br>网络：由节点和连线构成，表示诸多对象及其相互联系。<br>特点：多点性、连结性、交互性、快速性<br>基本功能：数据通信、资源共享、分布式处理<br>逻辑构成：通信子网（通信控制处理机、通信线路、通信设备）+ 资源子网（主机终端附属设备、网络软件、数据资源）<br>物理构成：硬件（主机、终端网络主体、网络通信介质、调制调解器和网络适配器和中继器 集线器和 网桥 交换机和 路由器 三层交换机 网关等网络连接设备） 、软件（网络操作系统）、网络通信协议<br>分类：分布范围（局域网LAN、广域网WAN）；拓扑结构（总线型、星型、环形）；数据交换技术（线路交换、报文交换、分组交换）</li>
+</ul>
+<p>OSI（Open System Interconnect），即开放式系统互联七层模型（一个理想的模型）：<br>物理层Physical Layer： 比特流的传输。通过媒介传输比特,确定机械及电气规范（比特Bit）<br>数据链路层Data Link Layer: 介质访问接入。将比特组装成帧和点到点的传递（帧Frame）<br>网络层Network Layer，即IP协议层：路由寻址。负责数据包从源到宿的传递和网际互连（包PackeT）<br>传输层Transport Layer：端到端的连接。提供端到端的可靠报文传递和错误恢复（段Segment）<br>会话层Session Layer：主机间的通信。建立、管理和终止会话（会话协议数据单元SPDU）<br>表示层Presentation Layer：数据的表示。对数据进行翻译、加密和压缩（表示协议数据单元PPDU）<br>应用层Application Layer：处理网络应用。允许访问OSI环境的手段（应用协议数据单元APDU）</p>
+<p>TCP/IP五层模型<br>物理层、数据链路层、网络层、传输层、应用层(对应OSI的会话层、表示层和应用层)</p>
+<p>TCP和UDP区别<br>TCP协议在传送数据段的时候要给段标号；UDP协议不用<br>TCP协议可靠，无差错，不丢失，不重复，且按序到达；UDP协议，尽最大努力交付，即不保证可靠交付<br>TCP协议是面向连接(发送数据之前要建立连接)；UDP协议采用无连接<br>TCP协议负载较高，采用虚电路；UDP采用无连接<br>TCP协议的发送方要确认接收方是否收到数据段（3次握手协议）<br>TCP协议采用窗口技术和流控制；UDP采用数据报模式<br>TCP保证数据顺序；UDP不保证 </p>
+<ul>
+<li>Internet地址<br>IP地址 = 网络地址+主机地址<br>IPv4的地址长度为32位，共4个字节，但实际中我们用点分十进制记法。<br>分类：分为A、B、C三类及特殊地址D、E。 全0（当前主机）和全1（广播地址,同时向同一子网所有主机发送报文）的都保留不用。不能以127（回送地址，网络软件测试以及本地机进程间通信）为开头。<br>A类：第1位必须是0，网络号范围：1~126（0000 0001 ~ 0111 1110）， 地址范围：1.0.0.0-126.255.255.255, 默认子网掩码255.0.0.0。 一般用于大型网络。<br>B类：前2位必须是10，网络号范围：128.1 ~ 191.255， 地址范围：128.1.0.1-191.255.255.254, 默认的子网掩码是255.255.0.0。 一般用于中等规模网络。<br>C类：前2位必须是110，网络号范围：192.0.1 ~ 223.255.255， 地址范围：192.0.1.1-223.255.255.254, 默认的子网掩码是255.255.255.0。 一般用于小型网络。</li>
+</ul>
+<p>网关:要实现两个网络之间的通信，则必须通过网关。<br>网关设备可以是 交互机（三层及以上才能跨网络）、路由器、启用了路由协议的服务器、代理服务器、防火墙等<br>网关地址就是网关设备的IP地址。</p>
+<ul>
+<li>云计算 Cloud Computing<br>一种按使用量付费的模式，这种模式提供可用的、便捷的、按需的网络访问， 进入可配置的计算资源共享池（资源包括网络，服务器，存储，应用软件，服务），这些资源能够被快速提供，只需投入很少的管理工作，或与服务供应商进行很少的交互。<br>体系架构：云用户端、服务目录、管理系统和部署工具、资源监控、服务器集群<br>服务形式：IaaS：基础设施即服务，PaaS：平台即服务，SaaS：软件即服务</li>
+</ul>
+<ul>
+<li>物联网 Internet of things（IoT）<br>物物相连的互联网。这有两层意思：其一，物联网的核心和基础仍然是互联网，是在互联网基础上的延伸和扩展的网络；其二，其用户端延伸和扩展到了任何物品与物品之间，进行信息交换和通信，也就是物物相息。</li>
+</ul>
+<ul>
+<li>数据处理与数据库<br>最小的基本单位是bit，按顺序给出所有单位：bit比特、Byte字节、KB、MB、GB、TB、PB、EB、ZB、YB、BB、NB、DB。</li>
+<li><p>大数据 Big data<br>指无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产。<br>5V特点（IBM提出）：Volume（大量）、Velocity（高速）、Variety（多样）、Value（低价值密度）、Veracity（真实性）<br>主要技术点：云计算、分布式处理技术、存储技术和感知技术的发展来说明大数据从采集、处理、存储到形成结果的整个过程</p>
+</li>
+<li><p>数据中心和数据空间<br>数据中心datacenter 一整套复杂的设施。它不仅仅包括计算机系统和其它与之配套的设备（例如通信和存储系统），还包含冗余的数据通信连接、环境控制设备、监控设备以及各种安全装置<br>数据空间dataspace 是与主体相关的数据及其关系的集合，数据空间中的所有数据对于主体来说都是可以控制的。主体相关性和可控性是数据空间中数据项的基本属性。</p>
+</li>
+</ul>
+<ul>
+<li>多媒体<br>媒体：承载信息的载体。分为两类：存储信息的实体（磁带、磁盘）和信息载体（数字、文本、文字、声音、图形、图像、动画、视频）。</li>
+</ul>
+<ul>
+<li>数据库<br>按照一定的结构来存放数据的”仓库”<br>表：由行和列构成，若干记录的集合，是若干数据项构成的，一种关系表示一张表<br>字段：表格的列表示实体的某个属性<br>记录：表格的一行包含多个字段，也称为元祖<br>域：属性的取值范围<br>关键字：凡在表中能唯一确定不同记录的字段或字段组合</li>
+</ul>
+<p>笛卡尔积：设A、B为集合，用A中元素为第一元素，B中元素为第二元素，构成有序对，所有这样的有序对组成的集合叫做A与B的笛卡尔积</p>
+<ul>
+<li>SQL  Structured Query Language<br>是用于访问和处理数据库的标准的计算机语言。<br>一定要记住，SQL 对大小写不敏感！</li>
+</ul>
+<p>SELECT DISTINCT 列名称 FROM 表名称<br>SELECT DISTINCT Company FROM Orders </p>
+<p>SELECT 列名称 FROM 表名称 WHERE 列 运算符 值<br>SELECT * FROM Persons WHERE FirstName=’Bush’</p>
+<p>INSERT INTO 表名称 VALUES (值1, 值2,….)<br>INSERT INTO table_name (列1, 列2,…) VALUES (值1, 值2,….)<br>INSERT INTO Persons (LastName, Address) VALUES (‘Wilson’, ‘Champs-Elysees’)</p>
+<p>UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值<br>UPDATE Person SET Address = ‘Zhongshan 23’, City = ‘Nanjing’ WHERE LastName = ‘Wilson’</p>
+<p>DELETE FROM 表名称 WHERE 列名称 = 值<br>DELETE FROM Person WHERE LastName = ‘Wilson’ </p>
+<ul>
+<li>计算科学<br>三大科学思维：<br>理论思维（推理思维），以推理和演绎为特征，如数学<br>实验思维（实证思维），观察和总结客观规律，如化学<br>计算思维（构造思维），设计和构造，如计算机科学</li>
+</ul>
+<p>可计算性：当且仅当它在图灵机上经过有限步骤之后可以得到正确的结果<br>计算复杂度：时间复杂度（计算所需步数或指令条数）和空间复杂度（存储空间大小）</p>
+<p>不可计算问题：停机问题，理发师悖论</p>
+<p>并行计算：或称平行计算是相对于串行计算来说的。它是一种一次可执行多个指令的算法，目的是提高计算速度，及通过扩大问题求解规模，解决大型而复杂的计算问题。所谓并行计算可分为时间上的并行和空间上的并行。 时间上的并行就是指流水线技术，而空间上的并行则是指用多个处理器并发的执行计算。</p>
+<p>云计算是一种按使用量付费的模式，这种模式提供可用的、便捷的、按需的网络访问， 进入可配置的计算资源共享池（资源包括网络，服务器，存储，应用软件，服务），这些资源能够被快速提供，只需投入很少的管理工作，或与服务供应商进行很少的交互。</p>
+<ul>
+<li>算法与程序设计<br>算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。<br>特征：有穷性、确切性、输入项（0个或多个）、输出项（一个或多个）、有效性</li>
+</ul>
+<p>程序(一组计算机能识别与执行的指令) = 算法(对运算操作的描述) + 数据结构(对数据的描述)</p>
+<p>任何简单或复杂的算法都可以由顺序结构、选择结构和循环结构这三种结构组合而成。</p>
+<ul>
+<li>摩尔定律 Moore’s Law<br>当价格不变时，集成电路上可容纳的元器件的数目，约每隔18-24个月便会增加一倍，性能也将提升一倍。换言之，每一美元所能买到的电脑性能，将每隔18-24个月翻一倍以上。</li>
+</ul>
+<ul>
+<li>编译和解释<br>编译：将源代码一次性由编译器编译转换成机器语言,并保存成二进制文件（静态语言）<br>解释：只在执行程序时，由解释器逐条转换成机器语言给计算机来执行 （脚本语言）</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CS/" rel="tag"># CS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/18/welcome/" rel="next" title="Welcome to Supremeyh's blog">
+                <i class="fa fa-chevron-left"></i> Welcome to Supremeyh's blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/23/Vue/vue基础/" rel="prev" title="Vue基础">
+                Vue基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#大学计算机基础"><span class="nav-number">1.</span> <span class="nav-text">大学计算机基础</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+

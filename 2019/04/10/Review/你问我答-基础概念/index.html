@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="English">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="JS,Review,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS有哪些数据类型   分类原始数据类型：Boolean、Number、String、Null、Undefined、Symbol、BigInt , 共七种引用数据类型：Object 区别：内存：基本数据类型，保存在栈内存。 引用数据类型，实际上是一个指针，这个指针也保存在栈中，但是这个指针指向的对象则保存在堆内存中  访问方式：基本数据类型，按值访问，读写的是它们实际保存的值。 引用数据类型，按">
+<meta name="keywords" content="JS,Review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你问我答 基础概念">
+<meta property="og:url" content="https://supremeyh.github.io/2019/04/10/Review/你问我答-基础概念/index.html">
+<meta property="og:site_name" content="Supremeyh">
+<meta property="og:description" content="JS有哪些数据类型   分类原始数据类型：Boolean、Number、String、Null、Undefined、Symbol、BigInt , 共七种引用数据类型：Object 区别：内存：基本数据类型，保存在栈内存。 引用数据类型，实际上是一个指针，这个指针也保存在栈中，但是这个指针指向的对象则保存在堆内存中  访问方式：基本数据类型，按值访问，读写的是它们实际保存的值。 引用数据类型，按">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-08-22T04:18:37.341Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你问我答 基础概念">
+<meta name="twitter:description" content="JS有哪些数据类型   分类原始数据类型：Boolean、Number、String、Null、Undefined、Symbol、BigInt , 共七种引用数据类型：Object 区别：内存：基本数据类型，保存在栈内存。 引用数据类型，实际上是一个指针，这个指针也保存在栈中，但是这个指针指向的对象则保存在堆内存中  访问方式：基本数据类型，按值访问，读写的是它们实际保存的值。 引用数据类型，按">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://supremeyh.github.io/2019/04/10/Review/你问我答-基础概念/">
+
+
+
+
+
+  <title>你问我答 基础概念 | Supremeyh</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Supremeyh</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">a paradise for sharing knowledge and ideas</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://supremeyh.github.io/2019/04/10/Review/你问我答-基础概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Supremeyh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Supremeyh">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你问我答 基础概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-10T18:00:00+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Review/" itemprop="url" rel="index">
+                    <span itemprop="name">Review</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li>JS有哪些数据类型</li>
+</ol>
+<ul>
+<li>分类<br>原始数据类型：Boolean、Number、String、Null、Undefined、Symbol、BigInt , 共七种<br>引用数据类型：Object</li>
+<li>区别：<br>内存：基本数据类型，保存在栈内存。 引用数据类型，实际上是一个指针，这个指针也保存在栈中，但是这个指针指向的对象则保存在堆内存中</li>
+</ul>
+<p>访问方式：基本数据类型，按值访问，读写的是它们实际保存的值。 引用数据类型，按引用访问，读写它们时需要先从栈中读取堆内存地址，然后找到保存在堆内存中的值。</p>
+<p>复制：基本数据类型，从一个变量向另一个变量复制时，会在栈中创建一个新值，然后把值复制到为新变量分配的空间中。 引用数据类型，复制的是存储在栈中的指针，将指针复制到栈中为新变量分配的空间中，而这个指针副本和原指针指向的是同一个堆内存中的对象；复制操作后两个变量实际上将引用同一个对象，因此改变其中一个将影响到另外一个</p>
+<ol start="6">
+<li><p>什么是闭包，为什么要用它<br>简单来说，闭包就是能够读取其他函数内部变量的函数<br>由于 JavaScript 特殊的作用域，函数外部无法直接读取内部的变量，内部可以直接读取外部的变量，从而就产生了闭包的概念<br>最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中<br>由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露</p>
+</li>
+<li><p>内存泄露<br>当创建对象和字符串等时，JavaScript就会分配内存，并在不再使用时自动释放内存，这种机制被称为垃圾收集GC。回收机制有标记清除和引用计数。</p>
+</li>
+</ol>
+<p>内存泄露是指一块被分配的内存既不能使用，又不能回收，直到浏览器进程结束。一般是堆区内存泄漏，栈区不会泄漏。</p>
+<p>四种常见的JavaScript内存泄漏<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.意外的全局变量。当引用未声明的变量时，会在全局对象中创建一个新变量。在浏览器中，全局对象将是window</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">leak</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;  <span class="comment">// 解决方法一，开始处添加'use strict'启用严格模式</span></span><br><span class="line">  a = <span class="number">233</span>; <span class="comment">// 报错</span></span><br><span class="line">  <span class="keyword">this</span>.b  =  <span class="string">'bbb'</span>; <span class="comment">// 默认绑定this指向全局, 严格模式下this指向undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 解决方法二，也可以手动释放全局变量的内存</span></span><br><span class="line"><span class="built_in">window</span>.a = <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.b </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.被遗忘的定时器或回调。当不需要setInterval或者setTimeout时，定时器没有被clear，定时器的回调函数以及内部依赖的变量都不能被回收，造成内存泄漏。</span></span><br><span class="line"><span class="keyword">var</span> someResource = getData()</span><br><span class="line"><span class="keyword">var</span> timer = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'Node'</span>)</span><br><span class="line">  <span class="keyword">if</span>(node) &#123;</span><br><span class="line">      node.innerHTML = <span class="built_in">JSON</span>.stringify(someResource))</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// node、someResource 存储了大量数据 无法回收</span></span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br><span class="line">clearInterval(timer)  <span class="comment">// 在定时器完成工作的时候，手动清除定时器。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 闭包。闭包可以维持函数内局部变量，使其得不到释放。</span></span><br><span class="line"><span class="comment">// 将事件处理函数定义在外部，解除闭包,或者在定义事件处理函数的外部函数中，删除对dom的引用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="keyword">var</span> ele = <span class="built_in">document</span>.createElement(<span class="string">'app'</span>)</span><br><span class="line">  ele.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// 这个函数中 可以访问外部的变量ele 所以它引用了ele,而ele又引用了它，因此这个事件绑定将会造成内存泄露</span></span><br><span class="line">  &#125; </span><br><span class="line">  ele = <span class="literal">null</span>  <span class="comment">// 解决方法一</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决方法二，把onclick的函数写在bindEvent外</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="keyword">var</span> ele = <span class="built_in">document</span>.createElement(<span class="string">"app"</span>); </span><br><span class="line">  ele.onclick = onclickHandler</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onclickHandler</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.循环引用。函数将间接引用所有它能访问的对象。一个DOM对象被一个JS对象引用，同时又引用同一个或其它的JS对象。</span></span><br><span class="line"><span class="comment">// 要想破坏循环引用，引用DOM元素的对象或DOM对象的引用需要被赋值为null。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 5.没有清理DOM元素引用</span></span><br><span class="line"><span class="comment">// 有时，保存 DOM 节点内部数据结构很有用。假如你想快速更新表格的几行内容，把每一行 DOM 存成字典（JSON 键值对）或者数组很有意义。此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。将来你决定删除这些行时，需要把两个引用都清除。</span></span><br><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">  button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">  image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">  text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">  button.click();</span><br><span class="line">  <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line">  <span class="comment">// 此时，仍旧存在一个全局的 #button 的引用elements 字典。button 元素仍旧在内存中，不能被 GC 回收。</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 6. 子元素存在引用引起的内存泄漏</span></span><br><span class="line"><span class="comment">// 此外还要考虑 DOM 树内部或子节点的引用问题。假如你的 JavaScript 代码中保存了表格某一个 &lt;td&gt; 的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的 &lt;td&gt; 以外的其它节点。实际情况并非如此：此 &lt;td&gt; 是表格的子节点，子元素与父元素是引用关系。由于代码保留了 &lt;td&gt; 的引用，导致整个表格仍待在内存中。保存 DOM 元素引用的时候，要小心谨慎。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 7.console 控制台日志。过多的console，比如定时器的console会导致浏览器卡死。</span></span><br><span class="line"><span class="comment">// 解决：合理利用console，线上项目尽量少的使用console</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'233'</span>);</span><br></pre></td></tr></table></figure></p>
+<ol start="7">
+<li>介绍一下 JavaScript 原型，原型链<br>每一个构造函数都拥有一个prototype属性，这个属性指向一个对象，也就是原型对象prototype；原型对象默认拥有一个constructor属性，指向它的那个构造函数；每个对象(实例)都拥有一个隐藏的属性<strong>prototype</strong>，指向它的原型对象。Person.prototype构造函数的原型属性与p.<strong>proto</strong> 实例对象的原型对象是一个东西，只是从不同的角度访问原型。</li>
+</ol>
+<p>JavaScript中所有的对象都是由它的原型对象继承而来。而原型对象自身也是一个对象，它也有自己的原型对象，这样层层上溯，就形成了一个类似链表的结构，这就是原型链<br>所有原型链的终点都是Object函数的prototype属性。Objec.prototype指向的原型对象同样拥有原型，不过它的原型是null，而null则没有原型。</p>
+<ol start="8">
+<li>use strict严格模式 和 sloppy mode 稀松模式<br>严格模式将问题直接转化为错误（如语法错误或运行时错误）, 简化了如何为给定名称的特定变量计算，简化了 eval 以及 arguments, 将写”安全“JavaScript的步骤变得更简单，以及改变了预测未来ECMAScript行为的方式。主要涉及一下几点：</li>
+</ol>
+<p>严格模式中意外创建全局变量被抛出错误替代<br>严格模式会使引起静默失败的赋值操作(给不可写属性赋值、给只读属性赋值、给不可扩展对象的新属性赋值)抛出异常.<br>严格模式下, 试图删除不可删除的属性时会抛出异常(之前这种操作不会产生任何效果)<br>严格模式要求一个对象内的所有属性名在对象内必须唯一，重名属性被认为是语法错误<br>严格模式要求函数的参数名唯一，重名参数被认为是语法错误<br>严格模式禁止八进制数字语法(零(0)开头的八进制语法,如0644)在ES6中支持为一个数字加”0o”的前缀来表示八进制数.<br>严格模式禁止设置primitive值的属性，如(false.true = “”)将抛出TypeError错误<br>严格模式禁用 with.<br>严格模式下的 eval 不再为上层范围(包围eval代码块的范围)引入新变量，仅为被运行的代码创建变量, 不会使得名称映射到外部变量或者其他局部变量<br>严格模式禁止删除声明变量<br>严格模式让eval和arguments变的简单。名称 eval 和 arguments 不能通过程序语法被绑定或赋值；<br>参数的值不会随 arguments 对象的值的改变而变化；不再支持 arguments.callee<br>在严格模式下通过this传递给一个函数的值不会被强制转换为一个对象<br>为未来的ECMAScript版本铺平道路。新增保留的关键字 implements, interface, let, package, private, protected, public, static和yield</p>
+<p>优点：<br>(1)使调试更加容易。那些被忽略或默默失败了的代码错误，会产生错误或抛出异常，因此尽早提醒你代码中的问题，你才能更快地指引到它们的源代码。<br>(2)防止意外的全局变量。如果没有严格模式，将值分配给一个未声明的变量会自动创建该名称的全局变量。这是JavaScript中最常见的错误之一。在严格模式下，这样做的话会抛出错误。<br>(3)消除 this 强制。如果没有严格模式，引用null或未定义的值到 this 值会自动强制到全局变量。在严格模式下，引用 null或未定义的 this 值会抛出错误。<br>(4)不允许重复的属性名称或参数值。当检测到对象中重复命名的属性或检测到函数中重复命名的参数时,严格模式会抛出错误，因此捕捉几乎可以肯定是代码中的bug可以避免浪费大量的跟踪时间。<br>(5)使 eval() 更安全。在严格模式和非严格模式下， eval() 的行为方式有所不同。最显而易见的是，在严格模式下，变量和声明在 eval() 语句内部的函数不会在包含范围内创建（它们会在非严格模式下的包含范围中被创建，这也是一个常见的问题源）。<br>(6)在 delete 使用无效时抛出错误。 delete 操作符（用于从对象中删除属性）不能用在对象不可配置的属性上。当试图删除一个不可配置的属性时，非严格代码将默默地失败，而严格模式将在这样的情况下抛出异常。</p>
+<ol start="9">
+<li><p>活动对象与变量对象什么区别<br>变量对象Variable object: JS执行上下文中都有个对象，函数内部标示符、形参、变量声明等都保存在一个叫做变量对象中，但它是引擎实现上的，不可在JS环境中访问到。<br>活动对象Activation Objec: 就是作用域链上正在被执行和引用的变量对象</p>
+</li>
+<li><p>命名式函数表达式<br>声明提升: 包括变量和函数在内的所有声明都会在任何代码被执行前首先被处理。<br>函数声明的提升优先于变量声明的提升；重复的var声明会被忽略掉，但是重复的function声明会覆盖掉前面的声明。</p>
+</li>
+</ol>
+<p>函数表达式, 因只有解析器读取到函数表达式所在行的时候才会执行，函数只有在var语句声明之后才能被调用<br>函数声明, 因函数声明提升，函数可以在function声明之前被调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">12</span> &#125;</span><br><span class="line"><span class="keyword">typeof</span> bar()  <span class="comment">//  bar is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可改为</span></span><br><span class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">12</span>; &#125;</span><br><span class="line"><span class="keyword">typeof</span> bar()  <span class="comment">// number</span></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="number">12</span>; &#125;</span><br><span class="line"><span class="keyword">typeof</span> bar()  <span class="comment">// number</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 明确说明这个下问题</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">// foo is visible here </span></span><br><span class="line">    <span class="comment">// bar is visible here</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> bar) <span class="comment">// Work here</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// foo is visible here</span></span><br><span class="line"><span class="comment">// bar is not defined here</span></span><br></pre></td></tr></table></figure></p>
+<ol start="11">
+<li><p>函数实例name属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="keyword">var</span> oldName = foo.name</span><br><span class="line">foo.name = <span class="string">"bar"</span></span><br><span class="line">[oldName, foo.name]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数实例会有一个内置的name属性，这个属性是只读的，writable为false, 所以不管怎么赋值都是无效的。</span></span><br><span class="line"><span class="comment">// ["foo","foo"]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>TDD (Test Driven Development) 测试驱动开发，即在写任何功能代码之前，先写它的测试代码<br>根据需要编写一个测试用例<br>编写功能代码，以让刚才的测试用例通过<br>逐步补充测试用例<br>修改功能代码使新增的测试用例和原来的都通过<br>重构，包括功能代码和测试用例</p>
+</li>
+</ol>
+<p>BDD(Behaviour Driven Development) 行为驱动开发，TDD 的分支，但 BDD 强调的是写测试的风格，更容易理解，更加语义化。即测试要写得像自然语言，运用一些比如expect、should等跟自然语言相近的断言，让项目的各个成员甚至产品都能看懂测试，甚至编写测试<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = <span class="built_in">require</span>(<span class="string">'../src/add.js'</span>);</span><br><span class="line"><span class="keyword">var</span> expect = <span class="built_in">require</span>(<span class="string">'chai'</span>).expect;</span><br><span class="line"></span><br><span class="line">describe(<span class="string">'加法函数的测试'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  it(<span class="string">'1 加 1 应该等于 2'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    expect(add(<span class="number">1</span>, <span class="number">1</span>)).to.be.equal(<span class="number">2</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  it(<span class="string">'任何数加0应该等于自身'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    expect(add(<span class="number">1</span>, <span class="number">0</span>)).to.be.equal(<span class="number">1</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">mocha --recursive</span><br></pre></td></tr></table></figure></p>
+<ol start="13">
+<li>px、dp、dpr、ppi、viewport<br>1、dp (device pixel 设备像素）,设备中使用的物理像素,单位pt。一个固定的尺寸，1pt = 1/72(inch),inch 英寸，而1英寸等于2.54厘米</li>
+</ol>
+<p>2、px (CSS pixels 逻辑像素)，Web编程的概念，指的是CSS样式代码中使用的逻辑像素。px是一个相对单位，相对的是设备像素</p>
+<p>3、dpr(Device Pixel Ratio) 设备像素比, 表示1个CSS像素（宽度）等于几个物理像素（宽度） dpr = 物理像素数 / 逻辑像素数</p>
+<p>4、ppi (pixel per inch）每英寸的像素数，像素密度 </p>
+<p>5、viewport 视窗。在桌面浏览器中，viewport就是浏览器窗口的宽度高度。但移动设备的屏幕比桌面屏幕要小得多，为了要让网页在小尺寸的屏幕上显示正确，就需要对viewport做些处理。需要把viewport分成两部分：visual viewport和layout viewport。把layout viewport想像成为一张大图。现在用一个比较小的框，通过它来看这张大图。在框内看到的部分就是visual viewport。框中的度量单位是CSS像素。可以把这个框靠近一些（放大看局部）或靠远一些（缩小看整体）。也可以改变框的方向，但是大图layout viewport的大小和形状永远不会变。</p>
+<p>6、idea viewport 理想窗口尺寸, 用户刚进入页面时不再需要缩放 width=device-width或者initial-scale=1.0  </p>
+<p>7、viewport meta标签，为了不让浏览器自动缩小，引入了viewport元标签。通过这个元标签控制layout viewport的宽度。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这行代码就是告诉浏览器，layout viewport 布局视口的 width 宽度应该与 idea viewport 理想视口的宽度一致 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>说明:<br>iPhone 6使用的是Retina视网膜屏幕，使用2px x 2px的 device pixel 代表 1px x 1px 的 css pixel，所以设备像素数为750 x 1334px，而CSS逻辑像素数为375 x 667px。</p>
+<p>比如dpr=2时，1个CSS像素宽度等于2个物理像素宽度。1css像素由2 * 2个物理像素点组成。DPR不是单位，而是一个属性名，比如在浏览器中通过window.devicePixelRatio获取屏幕的DPR</p>
+<p>通过 document.documentElement.clientWidth 获取 layout viewport 的宽度；通过 window.innerWidth 获取 visual viewport 的宽度。</p>
+<ol start="14">
+<li>移动端 1px 像素问题<br>实现边框的方法都是设置 border: 1px solid #ccc ，但是在 retina 屏上因为设备像素比(dpr)的不同，边框在移动设备上的表现也不相同： 1px 可能会被渲染成 2px, 3px… 也就是说逻辑像素1px会被用不同大小的物理像素来表示。</li>
+</ol>
+<p>几种常用的方式<br>1、rem + viewport， 根据dpr不同来进行缩放。设置网页根字体 font-size 为 37.5 * dpr，这样根据 rem 产出的网页就会被放大 dpr 倍，此时css里面写的还是1px，然后再通过 initial-scale= 1 / dpr 来对网页进行缩小dpr倍。这样 1px 就会显示成 1 / dpr px。</p>
+<p>2、border-image 实现。 缺点是，需要制作图片，圆角的时候会出现模糊。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-image-1px</span> &#123;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">1px</span> <span class="number">0px</span>;</span><br><span class="line">  <span class="attribute">-webkit-border-image</span>: <span class="built_in">url</span>(<span class="string">"border.png"</span>) <span class="number">2</span> <span class="number">0</span> stretch;</span><br><span class="line">  <span class="attribute">border-image</span>: <span class="built_in">url</span>(<span class="string">"border.png"</span>) <span class="number">2</span> <span class="number">0</span> stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3、background-image 渐变实现。纯粹的css就不能实现，缺点是不能实现圆角</p>
+<p>4、box-shadow 实现。优点是圆角不是问题，缺点是颜色不好控制<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;</span><br><span class="line">  <span class="attribute">-webkit-box-shadow</span>:<span class="number">0</span> <span class="number">1px</span> <span class="number">1px</span> -<span class="number">1px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>5、伪类 + transform 实现<br>原理是把原先元素的 border 去掉，然后利用 :before 或者 :after 重做 border ，并 transform 的 scale 缩小一半，原先的元素相对定位，新做的 border 绝对定位。优点可以实现圆角，缺点是按钮添加active比较麻烦，对于已经使用伪类的元素(例如clearfix)，可能需要多层嵌套。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.scale-1px</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">border</span>:none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.scale-1px</span><span class="selector-pseudo">:after</span>&#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#000</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(0.5);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(0.5);</span><br><span class="line">  <span class="attribute">-webkit-transform-origin</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">transform-origin</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;margin: 50px auto 0;">------------- Article Ends <i class="fa fa-paw"></i> Thanks For Reading -------------</div>
+    
+</div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"># JS</a>
+          
+            <a href="/tags/Review/" rel="tag"># Review</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/Review/你问我答-HTML和CSS/" rel="next" title="你问我答 HTML和CSS">
+                <i class="fa fa-chevron-left"></i> 你问我答 HTML和CSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/10/Review/你问我答-强制类型转及运算/" rel="prev" title="你问我答 强制类型转及运算">
+                你问我答 强制类型转及运算 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Supremeyh">
+            
+              <p class="site-author-name" itemprop="name">Supremeyh</p>
+              <p class="site-description motion-element" itemprop="description">Amicus Plato,Amicus Aristotle,Sed Magis Amicus VERITAS.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Supremeyh_" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/supremeyh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://hexo.io/zh-cn/" title="Hexo" target="_blank">Hexo</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://theme-next.iissnan.com/getting-started.html" title="NexT" target="_blank">NexT</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Supremeyh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  <!-- 页面点击出现小红心 -->
+  
+    <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+  <!-- 页面点击爆炸效果 -->
+  
+
+</body>
+</html>
+
