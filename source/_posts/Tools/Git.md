@@ -158,6 +158,11 @@ The branch 'master' has no upstream branch.Would you like to publish this branch
 方法二（推荐）
 * git push -u origin master  即使远程没有你要关联的分支，它也会自动创建一个出来，以实现关联
 
+#### fatal: refusing to merge unrelated histories
+你可能会在git pull或者git push中都有可能会遇到，这是因为两个分支没有取得关系。在你操作命令后面加 --allow-unrelated-histories
+* git merge master --allow-unrelated-histories
+* git pull origin master --allow-unrelated-histories
+
 
 ### 插件
 * Octotree 侧栏目录树形
